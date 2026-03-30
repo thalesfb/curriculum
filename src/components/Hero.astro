@@ -31,6 +31,11 @@ const roles: Record<string, Record<string, string>> = {
     en: 'Tech Lead | Project Management | Kanban & Scrum',
     es: 'Tech Lead | Gestión de Proyectos | Kanban y Scrum',
   },
+  'frontend': {
+    pt: 'Desenvolvedor Frontend | React & Astro | Design Systems',
+    en: 'Frontend Developer | React & Astro | Design Systems',
+    es: 'Desarrollador Frontend | React & Astro | Design Systems',
+  },
 };
 
 const roleLabels: Record<string, string> = {
@@ -38,6 +43,7 @@ const roleLabels: Record<string, string> = {
   'backend': 'Backend',
   'devops': 'DevOps',
   'management': 'Management',
+  'frontend': 'Frontend',
 };
 ---
 
@@ -72,7 +78,7 @@ const roleLabels: Record<string, string> = {
         {t('cta.portfolio')}
       </a>
       <a href={cvLinks[lang]} download class="inline-flex items-center gap-2 rounded-full border border-brand-green px-6 py-3 text-sm font-bold uppercase tracking-wider text-text-primary hover:bg-brand-green hover:text-white transition-all">
-        <img src="/img/download_icon.svg" alt="" width="20" height="20" class="dark:invert">
+        <img src="/img/download_icon.svg" alt="" width="20" height="20" class="">
         {t('cta.download')}
       </a>
     </div>

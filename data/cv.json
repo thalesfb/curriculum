@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "lastUpdated": "2026-03-28",
     "languages": ["pt", "en", "es"],
-    "roles": ["data-engineer", "backend", "devops", "management"]
+    "roles": ["data-engineer", "backend", "devops", "management", "frontend"]
   },
   "personal": {
     "name": "Thales Ferreira",
@@ -36,6 +36,11 @@
         "pt": "Lider Tecnico & Consultor | Gestao de Tecnologia e Dados",
         "en": "Tech Lead & Consultant | Technology & Data Management",
         "es": "Lider Tecnico y Consultor | Gestion de Tecnologia y Datos"
+      },
+      "frontend": {
+        "pt": "Desenvolvedor Frontend | React & Astro | TypeScript & Design Systems",
+        "en": "Frontend Developer | React & Astro | TypeScript & Design Systems",
+        "es": "Desarrollador Frontend | React & Astro | TypeScript & Design Systems"
       }
     }
   },
@@ -59,6 +64,11 @@
       "pt": "Lider tecnico e Founder com experiencia em consultoria B2B e gestao de projetos de tecnologia. Especializado em alinhar solucoes tecnologicas com necessidades de negocio, utilizando ciclos iterativos curtos e metodologias ageis. Historico de lideranca de equipes multidisciplinares, reducao de custos operacionais em ate 70% e entrega de dashboards executivos que transformaram a tomada de decisao estrategica.",
       "en": "Technical leader and Founder with experience in B2B consulting and technology project management. Specialized in aligning technology solutions with business needs using short iterative cycles and agile methodologies. Track record of leading multidisciplinary teams, reducing operational costs by up to 70%, and delivering executive dashboards that transformed strategic decision-making.",
       "es": "Lider tecnico y Founder con experiencia en consultoria B2B y gestion de proyectos de tecnologia. Especializado en alinear soluciones tecnologicas con necesidades del negocio utilizando ciclos iterativos cortos y metodologias agiles. Historial de liderazgo de equipos multidisciplinarios, reduccion de costos operativos en hasta un 70% y entrega de dashboards ejecutivos que transformaron la toma de decisiones estrategicas."
+    },
+    "frontend": {
+      "pt": "Desenvolvedor Frontend com experiencia em React, Astro e TypeScript, focado na construcao de interfaces responsivas e acessiveis. Especializado em Design Systems com Tailwind CSS e Figma, seguindo padroes WCAG para acessibilidade. Experiencia em otimizacao de performance web, SEO tecnico e arquitetura de componentes reutilizaveis.",
+      "en": "Frontend Developer with experience in React, Astro and TypeScript, focused on building responsive and accessible interfaces. Specialized in Design Systems with Tailwind CSS and Figma, following WCAG accessibility standards. Experienced in web performance optimization, technical SEO and reusable component architecture.",
+      "es": "Desarrollador Frontend con experiencia en React, Astro y TypeScript, enfocado en la construccion de interfaces responsivas y accesibles. Especializado en Design Systems con Tailwind CSS y Figma, siguiendo estandares WCAG de accesibilidad. Experiencia en optimizacion de rendimiento web, SEO tecnico y arquitectura de componentes reutilizables."
     }
   },
   "skills": {
@@ -115,6 +125,15 @@
       },
       "items": ["Consultoria B2B", "Kanban/Scrum", "Gestao de Equipes", "Otimizacao de Processos", "Tomada de Decisao Baseada em Dados"],
       "roles": ["management"]
+    },
+    "frontend": {
+      "label": {
+        "pt": "Frontend & Design",
+        "en": "Frontend & Design",
+        "es": "Frontend & Diseno"
+      },
+      "items": ["React", "Astro", "TypeScript", "JavaScript", "Tailwind CSS", "Figma", "Design Systems", "WCAG & Accessibility", "HTML5", "CSS3"],
+      "roles": ["frontend"]
     }
   },
   "experience": [

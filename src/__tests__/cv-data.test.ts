@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import cvData from '../../data/cv.json';
 
 const LANGUAGES = ['pt', 'en', 'es'];
-const ROLES = ['data-engineer', 'backend', 'devops', 'management'];
+const ROLES = ['data-engineer', 'backend', 'devops', 'management', 'frontend'];
 
 describe('cv.json schema validation', () => {
   it('has meta section with required fields', () => {
