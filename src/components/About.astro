@@ -32,7 +32,7 @@ const education = [
 <section class="mx-auto max-w-[1440px] bg-bg-card px-20 py-20 max-xl:px-12 max-md:px-6 max-md:py-12" id="about">
   <h2 class="mb-12 text-center font-display text-4xl font-semibold text-text-primary max-md:text-3xl max-md:mb-8">{t('section.about')}</h2>
 
-  <div class="grid grid-cols-3 gap-12 items-start max-xl:grid-cols-2 max-xl:gap-8 max-md:grid-cols-1">
+  <div class="grid grid-cols-3 gap-x-16 gap-y-12 items-start max-xl:grid-cols-2 max-xl:gap-x-10 max-xl:gap-y-8 max-md:grid-cols-1">
     <div class="text-text-secondary leading-relaxed max-xl:col-span-2 max-md:col-span-1">
       {bio[lang].map(p => <p class="mb-4">{p}</p>)}
     </div>
@@ -61,7 +61,7 @@ const education = [
         {education.map(edu => (
           <li class="flex items-center gap-3 text-text-secondary">
             <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
-              <img src={edu.logo} alt={edu.alt} width={edu.w} height={edu.h} class="max-h-8 max-w-8 object-contain" loading="lazy">
+              <img src={edu.logo} alt={edu.alt} width={edu.w} height={edu.h} class="max-h-8 max-w-8 object-contain">
             </div>
             <span>{edu.name}</span>
           </li>

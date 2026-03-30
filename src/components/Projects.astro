@@ -60,23 +60,23 @@ const projects = [
   <h2 class="mb-12 px-20 text-center font-display text-4xl font-semibold text-text-primary max-xl:px-12 max-md:px-6 max-md:text-3xl max-md:mb-8">{t('section.projects')}</h2>
 
   <div class="flex justify-end gap-3 px-20 mb-8 max-xl:px-12 max-md:hidden">
-    <button class="carousel-prev h-[50px] w-[50px] rounded-full border border-border-line bg-bg-card text-text-secondary opacity-40 flex items-center justify-center" disabled aria-label="Previous">
+    <button class="carousel-prev h-[50px] w-[50px] rounded-full border border-border-line bg-bg-card text-text-secondary opacity-40 flex items-center justify-center" disabled>
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 5L7 10L12 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
-    <button class="carousel-next h-[50px] w-[50px] rounded-full border border-brand-green bg-bg-card text-text-primary flex items-center justify-center hover:bg-brand-green hover:text-white transition-all" aria-label="Next">
+    <button class="carousel-next h-[50px] w-[50px] rounded-full border border-brand-green bg-bg-card text-text-primary flex items-center justify-center hover:bg-brand-green hover:text-white transition-all">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 5L13 10L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
   </div>
 
-  <div class="carousel-track flex gap-6 overflow-x-auto snap-x snap-mandatory px-20 pb-4 max-xl:px-12 max-md:gap-4 max-md:px-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]" style="scroll-padding-left: 80px;">
+  <div class="carousel-track flex gap-6 overflow-x-auto scroll-snap-x-mandatory px-20 pb-4 max-xl:px-12 max-md:gap-4 max-md:px-6 scrollbar-none" style="scroll-padding-left: 80px;">
     {projects.map(p => (
-      <article class="flex-none w-[380px] snap-start rounded-xl border border-brand-green bg-bg-card p-8 flex flex-col gap-4 max-md:w-[280px] max-md:p-6">
+      <article class="flex-none w-[380px] scroll-snap-start rounded-xl border border-brand-green bg-bg-card p-8 flex flex-col gap-4 max-md:w-[280px] max-md:p-6">
         <h3 class="font-display text-xl font-semibold text-text-primary">{p.title}</h3>
         <p class="flex-1 text-text-secondary leading-relaxed">{p.desc[lang]}</p>
         <div class="flex flex-wrap gap-2">
           {p.tags.map(tag => (
             <span class="inline-flex items-center gap-1.5 rounded-md border border-text-primary bg-bg-section-alt px-3 py-1.5 font-code text-xs font-medium uppercase tracking-wider text-text-primary">
-              <img src={tag.icon} alt="" width="14" height="14" loading="lazy">
+              <img src={tag.icon} alt="" width="14" height="14">
               {tag.name}
             </span>
           ))}
