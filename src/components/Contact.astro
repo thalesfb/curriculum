@@ -36,11 +36,26 @@ const t = useTranslations(lang);
     </div>
   </div>
   <form class="flex flex-col gap-4" id="contact-form">
-    <input type="text" name="name" placeholder={t('contact.name')} required class="w-full rounded-xl border border-border-line bg-bg-input px-4 py-3.5 text-text-primary outline-none placeholder:text-text-placeholder focus:border-brand-green transition-colors">
-    <input type="email" name="email" placeholder={t('contact.email')} required class="w-full rounded-xl border border-border-line bg-bg-input px-4 py-3.5 text-text-primary outline-none placeholder:text-text-placeholder focus:border-brand-green transition-colors">
-    <textarea name="message" placeholder={t('contact.message')} rows="5" required class="w-full resize-y rounded-xl border border-border-line bg-bg-input px-4 py-3.5 text-text-primary outline-none placeholder:text-text-placeholder focus:border-brand-green transition-colors min-h-30"></textarea>
-    <button type="submit" class="w-full rounded-full bg-brand-green px-6 py-3 text-sm font-bold uppercase tracking-wider text-white hover:opacity-90 transition-opacity">
+    <input type="text" name="name" placeholder={t('contact.name')} required aria-label={t('contact.name')} class="w-full rounded-xl border border-border-line bg-bg-input px-4 py-3.5 text-text-primary placeholder:text-text-placeholder focus:border-brand-green focus-visible:ring-2 focus-visible:ring-brand-green transition-colors">
+    <input type="email" name="email" placeholder={t('contact.email')} required aria-label={t('contact.email')} class="w-full rounded-xl border border-border-line bg-bg-input px-4 py-3.5 text-text-primary placeholder:text-text-placeholder focus:border-brand-green focus-visible:ring-2 focus-visible:ring-brand-green transition-colors">
+    <textarea name="message" placeholder={t('contact.message')} rows="5" required aria-label={t('contact.message')} class="w-full resize-y rounded-xl border border-border-line bg-bg-input px-4 py-3.5 text-text-primary placeholder:text-text-placeholder focus:border-brand-green focus-visible:ring-2 focus-visible:ring-brand-green transition-colors min-h-30"></textarea>
+    <button type="submit" class="w-full rounded-full bg-brand-green px-6 py-3 text-sm font-bold uppercase tracking-wider text-white hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:ring-offset-2">
       {t('cta.send')}
     </button>
   </form>
 </section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = (form.elements.namedItem('name') as HTMLInputElement).value;
+      const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+      const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value;
+      const subject = encodeURIComponent(`Contact from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+      window.location.href = `mailto:thalesfb15@gmail.com?subject=${subject}&body=${body}`;
+    });
+  }
+</script>
