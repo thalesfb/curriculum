@@ -8,6 +8,12 @@ interface Props {
 }
 
 const { title, description = 'Portfolio profissional de Thales Ferreira. Full Stack Data Engineer especializado em Python, ML, DevOps e automação.', lang = 'pt-BR' } = Astro.props;
+
+const siteUrl = 'https://thalesfb.curriculum.optimizr.site';
+const currentPath = Astro.url.pathname;
+const canonicalUrl = `${siteUrl}${currentPath}`;
+const shortLang = lang.split('-')[0];
+const ogLocaleMap: Record<string, string> = { pt: 'pt_BR', en: 'en_US', es: 'es_ES' };
 ---
 
 <!DOCTYPE html>
@@ -17,6 +23,49 @@ const { title, description = 'Portfolio profissional de Thales Ferreira. Full St
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <meta name="description" content={description}>
+  <meta name="author" content="Thales Ferreira">
+  <meta name="theme-color" content="#059669">
+  <link rel="canonical" href={canonicalUrl}>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- hreflang -->
+  <link rel="alternate" hreflang="pt" href={`${siteUrl}/pt/`}>
+  <link rel="alternate" hreflang="en" href={`${siteUrl}/en/`}>
+  <link rel="alternate" hreflang="es" href={`${siteUrl}/es/`}>
+  <link rel="alternate" hreflang="x-default" href={`${siteUrl}/pt/`}>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonicalUrl}>
+  <meta property="og:image" content={`${siteUrl}/img/profile_hero.png`}>
+  <meta property="og:locale" content={ogLocaleMap[shortLang] || 'pt_BR'}>
+  {Object.entries(ogLocaleMap).filter(([k]) => k !== shortLang).map(([_, v]) => (
+    <meta property="og:locale:alternate" content={v}>
+  ))}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={`${siteUrl}/img/profile_hero.png`}>
+
+  <!-- JSON-LD Person Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Thales Ferreira",
+    "jobTitle": "Full Stack Data Engineer",
+    "url": siteUrl,
+    "image": `${siteUrl}/img/profile_hero.png`,
+    "email": "thalesfb15@gmail.com",
+    "sameAs": [
+      "https://github.com/thalesfb",
+      "https://linkedin.com/in/thalesfb"
+    ]
+  })} />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=Montserrat:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -31,6 +80,9 @@ const { title, description = 'Portfolio profissional de Thales Ferreira. Full St
   </script>
 </head>
 <body>
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:rounded-lg focus:bg-brand-green focus:px-4 focus:py-2 focus:text-white">
+    Skip to main content
+  </a>
   <slot />
 </body>
 </html>
