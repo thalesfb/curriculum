@@ -1,16 +1,14 @@
-name: Build & Deploy
+name: Deploy
 
 on:
   push:
-    branches: [main]
-  pull_request:
     branches: [main]
 
 permissions:
   contents: read
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,19 +19,17 @@ jobs:
           cache: npm
 
       - run: npm ci
-
+      - run: npm run test
       - run: npm run build
 
       - uses: actions/upload-artifact@v4
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         with:
           name: dist
           path: dist/
           retention-days: 7
 
   deploy:
-    needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: test
     runs-on: ubuntu-latest
     environment: production
     steps:
