@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "serve": "npx -y serve dist/ -l 4321",
     "test": "vitest run",
     "test:watch": "vitest",
     "astro": "astro"

@@ -18,6 +18,7 @@ export default defineConfig({
       prefixDefaultLocale: true,
     },
   },
+  server: { host: true },
   vite: {
     plugins: [tailwindcss()],
   },
