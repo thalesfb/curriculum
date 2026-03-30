@@ -61,7 +61,7 @@ const education = [
         {education.map(edu => (
           <li class="flex items-center gap-3 text-text-secondary">
             <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
-              <img src={edu.logo} alt={edu.alt} width={edu.w} height={edu.h} class="max-h-8 max-w-8 object-contain">
+              <img src={edu.logo} alt={edu.alt} width={edu.w} height={edu.h} class="max-h-8 max-w-8 object-contain" loading="lazy">
             </div>
             <span>{edu.name}</span>
           </li>

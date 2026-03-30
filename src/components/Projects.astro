@@ -60,10 +60,10 @@ const projects = [
   <h2 class="mb-12 px-20 text-center font-display text-4xl font-semibold text-text-primary max-xl:px-12 max-md:px-6 max-md:text-3xl max-md:mb-8">{t('section.projects')}</h2>
 
   <div class="flex justify-end gap-3 px-20 mb-8 max-xl:px-12 max-md:hidden">
-    <button class="carousel-prev h-[50px] w-[50px] rounded-full border border-border-line bg-bg-card text-text-secondary opacity-40 flex items-center justify-center" disabled>
+    <button class="carousel-prev h-[50px] w-[50px] rounded-full border border-border-line bg-bg-card text-text-secondary opacity-40 flex items-center justify-center" disabled aria-label="Previous">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 5L7 10L12 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
-    <button class="carousel-next h-[50px] w-[50px] rounded-full border border-brand-green bg-bg-card text-text-primary flex items-center justify-center hover:bg-brand-green hover:text-white transition-all">
+    <button class="carousel-next h-[50px] w-[50px] rounded-full border border-brand-green bg-bg-card text-text-primary flex items-center justify-center hover:bg-brand-green hover:text-white transition-all" aria-label="Next">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 5L13 10L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
   </div>
@@ -76,7 +76,7 @@ const projects = [
         <div class="flex flex-wrap gap-2">
           {p.tags.map(tag => (
             <span class="inline-flex items-center gap-1.5 rounded-md border border-text-primary bg-bg-section-alt px-3 py-1.5 font-code text-xs font-medium uppercase tracking-wider text-text-primary">
-              <img src={tag.icon} alt="" width="14" height="14">
+              <img src={tag.icon} alt="" width="14" height="14" loading="lazy">
               {tag.name}
             </span>
           ))}

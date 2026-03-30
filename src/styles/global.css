@@ -29,7 +29,7 @@
   --color-text-secondary: #94A3B8;
   --color-text-inverse: #F1F5F9;
   --color-text-placeholder: #94A3B8;
-  --color-brand-green: #34D399;
+  --color-brand-green: #059669;
   --color-border-line: #334155;
 }
 
@@ -38,4 +38,15 @@ body {
   font-family: var(--font-body);
   color: var(--color-text-primary);
   background: var(--color-bg-page);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
