@@ -15,10 +15,6 @@ const t = useTranslations(lang);
         <a href="mailto:thalesfb15@gmail.com" class="hover:text-brand-green transition-colors">thalesfb15@gmail.com</a>
       </li>
       <li class="flex items-center gap-3 text-text-secondary">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="shrink-0"><path d="M3 5C3 3.9 3.9 3 5 3H7L9 7L7.5 8.5C8.6 10.7 9.3 11.4 11.5 12.5L13 11L17 13V15C17 16.1 16.1 17 15 17C8 17 3 12 3 5Z" stroke="var(--color-brand-green)" stroke-width="1.5"/></svg>
-        <a href="tel:+5549998048695" class="hover:text-brand-green transition-colors">+55 (49) 9 9804-8695</a>
-      </li>
-      <li class="flex items-center gap-3 text-text-secondary">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="shrink-0"><path d="M10 2C6.13 2 3 5.13 3 9C3 14.25 10 20 10 20C10 20 17 14.25 17 9C17 5.13 13.87 2 10 2Z" stroke="var(--color-brand-green)" stroke-width="1.5"/><circle cx="10" cy="9" r="2" stroke="var(--color-brand-green)" stroke-width="1.5"/></svg>
         <span>Santa Catarina, Brasil</span>
       </li>
@@ -37,7 +33,6 @@ const t = useTranslations(lang);
   </div>
   <form class="flex flex-col gap-4" id="contact-form">
     <input type="text" name="name" id="cf-name" placeholder={t('contact.name')} required class="w-full rounded-xl border border-border-line bg-bg-input px-4 py-3.5 text-text-primary outline-none placeholder:text-text-placeholder focus:border-brand-green transition-colors">
-    <input type="email" name="email" id="cf-email" placeholder={t('contact.email')} required class="w-full rounded-xl border border-border-line bg-bg-input px-4 py-3.5 text-text-primary outline-none placeholder:text-text-placeholder focus:border-brand-green transition-colors">
     <textarea name="message" id="cf-message" placeholder={t('contact.message')} rows="5" required class="w-full resize-y rounded-xl border border-border-line bg-bg-input px-4 py-3.5 text-text-primary outline-none placeholder:text-text-placeholder focus:border-brand-green transition-colors min-h-30"></textarea>
     <button type="submit" id="cf-submit" class="w-full rounded-full bg-brand-green px-6 py-3 text-sm font-bold uppercase tracking-wider text-white hover:opacity-90 transition-opacity">
       {t('cta.send')}
@@ -53,12 +48,11 @@ const t = useTranslations(lang);
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
       const name = (document.getElementById('cf-name') as HTMLInputElement).value;
-      const email = (document.getElementById('cf-email') as HTMLInputElement).value;
       const message = (document.getElementById('cf-message') as HTMLTextAreaElement).value;
 
       // Build mailto link with form data
       const subject = encodeURIComponent(`Contato Portfolio - ${name}`);
-      const body = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`);
+      const body = encodeURIComponent(`Nome: ${name}\n\nMensagem:\n${message}`);
       const mailto = `mailto:thalesfb15@gmail.com?subject=${subject}&body=${body}`;
 
       // Open mail client
