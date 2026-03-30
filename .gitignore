@@ -1,17 +1,17 @@
 # Build outputs & generated files
 node_modules/
 dist/
-.astro/           # Astro build cache (regenerated on every build)
-output/            # Generated CVs in markdown (4 roles × 3 langs = 12 files)
+# Astro build cache (regenerated on every build)
+.astro/
+# Generated CVs in markdown (4 roles × 3 langs = 12 files)
+output/
 
 # Environment & secrets
 .env
 .env.*
 !.env.example
-.claude/          # Local Claude IDE settings (developer-specific, not project-wide)
-
-# Generated PDFs (source of truth in data/cv.json, output in refs/ only)
-cv_thales_ferreira_ats_2026_*.pdf
+# Local Claude IDE settings (developer-specific, not project-wide)
+.claude/
 
 # Local/temporary
 *.log
