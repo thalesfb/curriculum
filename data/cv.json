@@ -1,0 +1,399 @@
+{
+  "meta": {
+    "version": "2.0.0",
+    "lastUpdated": "2026-03-28",
+    "languages": ["pt", "en", "es"],
+    "roles": ["data-engineer", "backend", "devops", "management"]
+  },
+  "personal": {
+    "name": "Thales Ferreira",
+    "email": "thalesfb15@gmail.com",
+    "phone": "+55 (49) 9 9804-8695",
+    "location": {
+      "pt": "Videira, SC, Brasil",
+      "en": "Videira, SC, Brazil",
+      "es": "Videira, SC, Brasil"
+    },
+    "linkedin": "linkedin.com/in/thalesfb",
+    "github": "github.com/thalesfb",
+    "titles": {
+      "data-engineer": {
+        "pt": "Full Stack Data Engineer | Machine Learning & DevOps",
+        "en": "Full Stack Data Engineer | Machine Learning & DevOps",
+        "es": "Full Stack Data Engineer | Machine Learning & DevOps"
+      },
+      "backend": {
+        "pt": "Desenvolvedor Backend | Python & Java | APIs REST",
+        "en": "Backend Developer | Python & Java | REST APIs",
+        "es": "Desarrollador Backend | Python & Java | APIs REST"
+      },
+      "devops": {
+        "pt": "Engenheiro DevOps & Infraestrutura | Linux & Automacao",
+        "en": "DevOps & Infrastructure Engineer | Linux & Automation",
+        "es": "Ingeniero DevOps e Infraestructura | Linux y Automatizacion"
+      },
+      "management": {
+        "pt": "Lider Tecnico & Consultor | Gestao de Tecnologia e Dados",
+        "en": "Tech Lead & Consultant | Technology & Data Management",
+        "es": "Lider Tecnico y Consultor | Gestion de Tecnologia y Datos"
+      }
+    }
+  },
+  "summary": {
+    "data-engineer": {
+      "pt": "Full Stack Data Engineer e Founder com historico de entrega de solucoes tecnologicas end-to-end. Especialista em unir engenharia de software (Python, Django, NGINX), automacao DevOps e inteligencia de dados para resolver gargalos de negocios. Historicamente, reduzi custos operacionais da industria em ate 70% arquitetando sistemas de controle. Possuo forte atuacao na construcao de pipelines de Machine Learning reprodutiveis, alavancando minha visao de negocios para criar arquiteturas escalaveis que geram impacto financeiro e operacional direto.",
+      "en": "Full Stack Data Engineer and Founder with a track record of delivering end-to-end technology solutions. Specialized in combining software engineering (Python, Django, NGINX), DevOps automation, and data intelligence to solve business bottlenecks. Reduced industrial operational costs by up to 70% by architecting automated control systems. Strong background in building reproducible Machine Learning pipelines, leveraging business acumen to create scalable architectures that drive direct financial and operational impact.",
+      "es": "Full Stack Data Engineer y Founder con historial de entrega de soluciones tecnologicas de punta a punta. Especialista en combinar ingenieria de software (Python, Django, NGINX), automatizacion DevOps e inteligencia de datos para resolver cuellos de botella del negocio. Redujo costos operativos industriales en hasta un 70% arquitectando sistemas de control automatizados. Solida trayectoria construyendo pipelines de Machine Learning reproducibles, aprovechando la vision de negocio para crear arquitecturas escalables con impacto financiero y operativo directo."
+    },
+    "backend": {
+      "pt": "Desenvolvedor Backend com experiencia solida em Python e Java, especializado na construcao de APIs RESTful robustas com Django REST Framework e Spring Boot. Praticante de TDD e arquitetura modular, com historico comprovado de reducao de custos operacionais em ate 70% atraves de sistemas automatizados. Experiencia em modelagem de dados, integracao de servicos e deploy conteinerizado.",
+      "en": "Backend Developer with solid experience in Python and Java, specialized in building robust RESTful APIs with Django REST Framework and Spring Boot. TDD practitioner with modular architecture expertise, with a proven track record of reducing operational costs by up to 70% through automated systems. Experienced in data modeling, service integration, and containerized deployment.",
+      "es": "Desarrollador Backend con experiencia solida en Python y Java, especializado en la construccion de APIs RESTful robustas con Django REST Framework y Spring Boot. Practicante de TDD y arquitectura modular, con historial comprobado de reduccion de costos operativos en hasta un 70% a traves de sistemas automatizados. Experiencia en modelado de datos, integracion de servicios y despliegue en contenedores."
+    },
+    "devops": {
+      "pt": "Engenheiro DevOps e Infraestrutura com experiencia em automacao de servidores, conteinerizacao e CI/CD. Especializado em Linux, Docker, NGINX (Reverse Proxy/API Gateway) e Ansible. Historico de reducao de custos operacionais em ate 70% atraves de automacao industrial e otimizacao de processos. Certificado Red Hat em automacao com Ansible e containers com Podman/OpenShift.",
+      "en": "DevOps and Infrastructure Engineer with experience in server automation, containerization, and CI/CD. Specialized in Linux, Docker, NGINX (Reverse Proxy/API Gateway), and Ansible. Track record of reducing operational costs by up to 70% through industrial automation and process optimization. Red Hat certified in Ansible automation and Podman/OpenShift containers.",
+      "es": "Ingeniero DevOps e Infraestructura con experiencia en automatizacion de servidores, contenedorizacion y CI/CD. Especializado en Linux, Docker, NGINX (Reverse Proxy/API Gateway) y Ansible. Historial de reduccion de costos operativos en hasta un 70% a traves de automatizacion industrial y optimizacion de procesos. Certificado Red Hat en automatizacion con Ansible y contenedores con Podman/OpenShift."
+    },
+    "management": {
+      "pt": "Lider tecnico e Founder com experiencia em consultoria B2B e gestao de projetos de tecnologia. Especializado em alinhar solucoes tecnologicas com necessidades de negocio, utilizando ciclos iterativos curtos e metodologias ageis. Historico de lideranca de equipes multidisciplinares, reducao de custos operacionais em ate 70% e entrega de dashboards executivos que transformaram a tomada de decisao estrategica.",
+      "en": "Technical leader and Founder with experience in B2B consulting and technology project management. Specialized in aligning technology solutions with business needs using short iterative cycles and agile methodologies. Track record of leading multidisciplinary teams, reducing operational costs by up to 70%, and delivering executive dashboards that transformed strategic decision-making.",
+      "es": "Lider tecnico y Founder con experiencia en consultoria B2B y gestion de proyectos de tecnologia. Especializado en alinear soluciones tecnologicas con necesidades del negocio utilizando ciclos iterativos cortos y metodologias agiles. Historial de liderazgo de equipos multidisciplinarios, reduccion de costos operativos en hasta un 70% y entrega de dashboards ejecutivos que transformaron la toma de decisiones estrategicas."
+    }
+  },
+  "skills": {
+    "languages-backend": {
+      "label": {
+        "pt": "Linguagens & Backend",
+        "en": "Languages & Backend",
+        "es": "Lenguajes & Backend"
+      },
+      "items": ["Python", "C", "Java", "Django REST Framework", "Spring Boot", "SQL", "VBA"],
+      "roles": ["data-engineer", "backend", "devops", "management"]
+    },
+    "ml-data": {
+      "label": {
+        "pt": "Machine Learning & Dados",
+        "en": "Machine Learning & Data",
+        "es": "Machine Learning & Datos"
+      },
+      "items": ["Scikit-learn", "TensorFlow", "XGBoost", "Pandas", "Power BI (DAX/M)", "Modelagem de Dados", "Pipelines de Treinamento"],
+      "roles": ["data-engineer", "management"]
+    },
+    "devops-infra": {
+      "label": {
+        "pt": "DevOps & Infraestrutura",
+        "en": "DevOps & Infrastructure",
+        "es": "DevOps e Infraestructura"
+      },
+      "items": ["Docker", "NGINX (Reverse Proxy/API Gateway)", "Ansible", "GitHub Actions", "Linux"],
+      "roles": ["data-engineer", "backend", "devops", "management"]
+    },
+    "software-eng": {
+      "label": {
+        "pt": "Engenharia de Software",
+        "en": "Software Engineering",
+        "es": "Ingenieria de Software"
+      },
+      "items": ["RESTful APIs", "TDD (Test-Driven Development)", "Git", "Arquitetura de microsservicos"],
+      "roles": ["data-engineer", "backend", "devops"]
+    },
+    "networking": {
+      "label": {
+        "pt": "Redes & Infraestrutura",
+        "en": "Networking & Infrastructure",
+        "es": "Redes e Infraestructura"
+      },
+      "items": ["TCP/IP", "NGINX", "Proxy Reverso", "API Gateway", "HTTPS/TLS", "Analise de Trafego"],
+      "roles": ["devops"]
+    },
+    "leadership": {
+      "label": {
+        "pt": "Gestao & Lideranca",
+        "en": "Management & Leadership",
+        "es": "Gestion y Liderazgo"
+      },
+      "items": ["Consultoria B2B", "Kanban/Scrum", "Gestao de Equipes", "Otimizacao de Processos", "Tomada de Decisao Baseada em Dados"],
+      "roles": ["management"]
+    }
+  },
+  "experience": [
+    {
+      "company": "OPTIMIZR",
+      "role": {
+        "pt": "Founder & CEO",
+        "en": "Founder & CEO",
+        "es": "Fundador & CEO"
+      },
+      "period": { "start": "2025-06", "end": null },
+      "location": {
+        "pt": "Videira, SC",
+        "en": "Videira, SC, Brazil",
+        "es": "Videira, SC, Brasil"
+      },
+      "roles": ["data-engineer", "backend", "devops", "management"],
+      "bullets": [
+        {
+          "pt": "Escalei as operacoes de consultoria B2B atendendo diretamente a 4 clientes corporativos, zerando o tempo de espera na geracao de relatorios atraves do desenvolvimento de solucoes de dados integradas.",
+          "en": "Scaled B2B consulting operations serving 4 corporate clients directly, eliminating report generation wait time by developing integrated data solutions.",
+          "es": "Escale las operaciones de consultoria B2B atendiendo directamente a 4 clientes corporativos, eliminando el tiempo de espera en la generacion de reportes mediante el desarrollo de soluciones de datos integradas.",
+          "roles": ["data-engineer", "backend", "management"]
+        },
+        {
+          "pt": "Elevei os padroes de tomada de decisao executiva desenvolvendo paineis avancados em Power BI (M/DAX) e sistemas de automacao que otimizaram multiplos processos operacionais dos clientes.",
+          "en": "Elevated executive decision-making standards by developing advanced Power BI dashboards (M/DAX) and automation systems that optimized multiple client operational processes.",
+          "es": "Eleve los estandares de toma de decisiones ejecutivas desarrollando paneles avanzados en Power BI (M/DAX) y sistemas de automatizacion que optimizaron multiples procesos operativos de los clientes.",
+          "roles": ["data-engineer", "management"]
+        },
+        {
+          "pt": "Implementei infraestrutura de servidores e servicos web para clientes, configurando ambientes Linux com Docker e NGINX.",
+          "en": "Implemented server infrastructure and web services for clients, configuring Linux environments with Docker and NGINX.",
+          "es": "Implemente infraestructura de servidores y servicios web para clientes, configurando entornos Linux con Docker y NGINX.",
+          "roles": ["devops", "backend"]
+        }
+      ]
+    },
+    {
+      "company": "CPEL",
+      "role": {
+        "pt": "Full Stack Data Engineer (Software & DevOps)",
+        "en": "Full Stack Data Engineer (Software & DevOps)",
+        "es": "Full Stack Data Engineer (Software & DevOps)"
+      },
+      "period": { "start": "2022-05", "end": "2025-10" },
+      "location": {
+        "pt": "Pinheiro Preto, SC",
+        "en": "Pinheiro Preto, SC, Brazil",
+        "es": "Pinheiro Preto, SC, Brasil"
+      },
+      "roles": ["data-engineer", "backend", "devops", "management"],
+      "bullets": [
+        {
+          "pt": "Reduzi o custo quimico direto em 67% e o custo de produtos da ETE em 70% (2023), arquitetando e desenvolvendo um sistema automatizado de controle de producao integrado com Excel VBA, Power Query (DAX) e Power BI (M).",
+          "en": "Reduced direct chemical costs by 67% and WTP product costs by 70% (2023) by architecting and developing an automated production control system integrated with Excel VBA, Power Query (DAX), and Power BI (M).",
+          "es": "Redujo los costos quimicos directos en un 67% y los costos de productos de la ETE en un 70% (2023), arquitectando y desarrollando un sistema automatizado de control de produccion integrado con Excel VBA, Power Query (DAX) y Power BI (M).",
+          "roles": ["data-engineer", "backend", "management"]
+        },
+        {
+          "pt": "Otimizei os fluxos de trabalho entre departamentos projetando um software de gestao integrado do zero, utilizando conhecimento em negocios para alinhar tecnologia as necessidades da operacao.",
+          "en": "Optimized cross-departmental workflows by designing an integrated management software from scratch, leveraging business knowledge to align technology with operational needs.",
+          "es": "Optimice los flujos de trabajo entre departamentos disenando un software de gestion integrado desde cero, aprovechando el conocimiento del negocio para alinear la tecnologia con las necesidades operativas.",
+          "roles": ["backend", "management", "data-engineer"]
+        },
+        {
+          "pt": "Suportei a estrategia da diretoria implementando processos analiticos complexos para o monitoramento de energia gerada pela usina hidreletrica.",
+          "en": "Supported executive strategy by implementing complex analytical processes for monitoring energy generated by the hydroelectric plant.",
+          "es": "Soporte la estrategia de la direccion implementando procesos analiticos complejos para el monitoreo de energia generada por la central hidroelectrica.",
+          "roles": ["data-engineer", "management"]
+        },
+        {
+          "pt": "Configurei e mantive servidores Linux, implementando NGINX como proxy reverso e automacao de deploy com Docker para aplicacoes internas.",
+          "en": "Configured and maintained Linux servers, implementing NGINX as reverse proxy and Docker deployment automation for internal applications.",
+          "es": "Configure y mantuve servidores Linux, implementando NGINX como proxy reverso y automatizacion de despliegue con Docker para aplicaciones internas.",
+          "roles": ["devops"]
+        }
+      ]
+    },
+    {
+      "company": "CMAQ",
+      "role": {
+        "pt": "Auxiliar Administrativo",
+        "en": "Administrative Assistant",
+        "es": "Asistente Administrativo"
+      },
+      "period": { "start": "2022-01", "end": "2022-04" },
+      "location": {
+        "pt": "Tangara, SC",
+        "en": "Tangara, SC, Brazil",
+        "es": "Tangara, SC, Brasil"
+      },
+      "roles": ["management"],
+      "bullets": [
+        {
+          "pt": "Gerenciei estoque e controle de mercadorias, implementando melhorias nos processos de cadastro e atendimento ao cliente que aumentaram a eficiencia operacional do setor.",
+          "en": "Managed inventory and merchandise control, implementing improvements in registration and customer service processes that increased operational efficiency.",
+          "es": "Gestione inventario y control de mercancias, implementando mejoras en los procesos de registro y atencion al cliente que aumentaron la eficiencia operativa del sector.",
+          "roles": ["management"]
+        }
+      ]
+    },
+    {
+      "company": "TBC Network EIRELI",
+      "role": {
+        "pt": "Tecnico em Suporte",
+        "en": "Technical Support Technician",
+        "es": "Tecnico de Soporte"
+      },
+      "period": { "start": "2018-11", "end": "2019-02" },
+      "location": {
+        "pt": "Videira, SC",
+        "en": "Videira, SC, Brazil",
+        "es": "Videira, SC, Brasil"
+      },
+      "roles": ["devops"],
+      "bullets": [
+        {
+          "pt": "Realizei manutencao de equipamentos de redes e analise de trafego, garantindo infraestrutura eficiente e reduzindo o tempo de inatividade da rede.",
+          "en": "Performed network equipment maintenance and traffic analysis, ensuring efficient infrastructure and reducing network downtime.",
+          "es": "Realice mantenimiento de equipos de redes y analisis de trafico, garantizando infraestructura eficiente y reduciendo el tiempo de inactividad de la red.",
+          "roles": ["devops"]
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Pipelines de ML & Deep Learning",
+      "repo": "github.com/thalesfb/machine_learning",
+      "roles": ["data-engineer", "backend"],
+      "technologies": ["Python", "Scikit-learn", "TensorFlow", "XGBoost"],
+      "description": {
+        "pt": "Pipelines completos de ML e DL (ANN, CNN, RNN, PINNs, SVM, XGBoost) com 100% de reprodutibilidade via requirements.txt e environment.yml.",
+        "en": "Complete ML and DL pipelines (ANN, CNN, RNN, PINNs, SVM, XGBoost) with 100% reproducibility via requirements.txt and environment.yml.",
+        "es": "Pipelines completos de ML y DL (ANN, CNN, RNN, PINNs, SVM, XGBoost) con 100% de reproducibilidad via requirements.txt y environment.yml."
+      }
+    },
+    {
+      "name": "Personalized Math Learning",
+      "repo": "github.com/thalesfb/personalized-math-learning",
+      "roles": ["data-engineer"],
+      "technologies": ["Python", "Data Analysis", "PRISMA", "CLI"],
+      "description": {
+        "pt": "Pipeline automatizado de revisao sistematica (PRISMA) para analise de dados educacionais e identificacao de competencias.",
+        "en": "Automated systematic review pipeline (PRISMA) for educational data analysis and competency identification.",
+        "es": "Pipeline automatizado de revision sistematica (PRISMA) para analisis de datos educativos e identificacion de competencias."
+      }
+    },
+    {
+      "name": "Library Management System",
+      "repo": "github.com/thalesfb/library-management-system",
+      "roles": ["backend"],
+      "technologies": ["Java", "Spring Boot", "MySQL", "JPA/Hibernate"],
+      "description": {
+        "pt": "Aplicacao back-end em Java (Spring Boot) com padrao Observer para notificacoes por e-mail. Principios SOLID e injecao de dependencia.",
+        "en": "Java back-end application (Spring Boot) with Observer pattern for email notifications. SOLID principles and dependency injection.",
+        "es": "Aplicacion back-end en Java (Spring Boot) con patron Observer para notificaciones por correo. Principios SOLID e inyeccion de dependencias."
+      }
+    },
+    {
+      "name": "Infrastructure & Web Services",
+      "repo": "github.com/thalesfb",
+      "roles": ["devops"],
+      "technologies": ["Shell", "Linux", "NGINX", "Docker", "Ansible"],
+      "description": {
+        "pt": "Automacao de provisionamento de servidores com Shell/Ansible, NGINX como Reverse Proxy/API Gateway, deploy conteinerizado com zero downtime.",
+        "en": "Server provisioning automation with Shell/Ansible, NGINX as Reverse Proxy/API Gateway, containerized deployment with zero downtime.",
+        "es": "Automatizacion de aprovisionamiento de servidores con Shell/Ansible, NGINX como Reverse Proxy/API Gateway, despliegue en contenedores con cero downtime."
+      }
+    },
+    {
+      "name": "Data Structures",
+      "repo": "github.com/thalesfb",
+      "roles": ["backend"],
+      "technologies": ["C", "Algorithms"],
+      "description": {
+        "pt": "Implementacao de algoritmos complexos e estruturas de dados fundamentais em C.",
+        "en": "Implementation of complex algorithms and fundamental data structures in C.",
+        "es": "Implementacion de algoritmos complejos y estructuras de datos fundamentales en C."
+      }
+    }
+  ],
+  "education": [
+    {
+      "degree": {
+        "pt": "Bacharelado em Ciencia da Computacao",
+        "en": "Bachelor's Degree in Computer Science",
+        "es": "Licenciatura en Ciencias de la Computacion"
+      },
+      "institution": "Instituto Federal Catarinense",
+      "location": "Videira",
+      "period": { "start": "2021-02", "end": null },
+      "status": { "pt": "Em andamento", "en": "In Progress", "es": "En curso" },
+      "roles": ["data-engineer", "backend", "devops", "management"]
+    },
+    {
+      "degree": {
+        "pt": "Tecnico em Comercio",
+        "en": "Technical Diploma in Commerce",
+        "es": "Tecnico en Comercio"
+      },
+      "institution": "Escola de Educacao Basica Mater Salvatoris",
+      "location": "Tangara",
+      "period": { "start": "2011-02", "end": "2013-12" },
+      "roles": ["management"]
+    }
+  ],
+  "certifications": [
+    {
+      "name": { "pt": "Data Science & Machine Learning (198h)", "en": "Data Science & Machine Learning (198h)", "es": "Data Science & Machine Learning (198h)" },
+      "provider": "Alura",
+      "details": "SKLearn, XGBoost, Pandas, Pipelines",
+      "roles": ["data-engineer"]
+    },
+    {
+      "name": { "pt": "Python & Django REST Framework (157h)", "en": "Python & Django REST Framework (157h)", "es": "Python & Django REST Framework (157h)" },
+      "provider": "Alura",
+      "details": "TDD, Validacoes, Deploy AWS",
+      "roles": ["data-engineer", "backend"]
+    },
+    {
+      "name": { "pt": "Red Hat OpenShift (Containers/Podman) DO188", "en": "Red Hat OpenShift (Containers/Podman) DO188", "es": "Red Hat OpenShift (Containers/Podman) DO188" },
+      "provider": "Red Hat",
+      "roles": ["devops", "backend"]
+    },
+    {
+      "name": { "pt": "Red Hat Enterprise Linux Automation with Ansible RH294", "en": "Red Hat Enterprise Linux Automation with Ansible RH294", "es": "Red Hat Enterprise Linux Automation with Ansible RH294" },
+      "provider": "Red Hat",
+      "roles": ["devops"]
+    },
+    {
+      "name": { "pt": "NGINX Web Server, Reverse Proxy e API Gateway", "en": "NGINX Web Server, Reverse Proxy and API Gateway", "es": "NGINX Web Server, Reverse Proxy y API Gateway" },
+      "provider": "Alura",
+      "roles": ["devops", "backend"]
+    },
+    {
+      "name": { "pt": "Modelagem de Banco de Dados", "en": "Database Modeling", "es": "Modelado de Bases de Datos" },
+      "provider": "Alura",
+      "roles": ["data-engineer", "backend"]
+    },
+    {
+      "name": { "pt": "Excel e VBA Avancado", "en": "Advanced Excel & VBA", "es": "Excel y VBA Avanzado" },
+      "provider": "Alura",
+      "roles": ["data-engineer", "management"]
+    },
+    {
+      "name": { "pt": "Power BI (Dashboards, Analise de Tendencias)", "en": "Power BI (Dashboards, Trend Analysis)", "es": "Power BI (Dashboards, Analisis de Tendencias)" },
+      "provider": "Alura",
+      "roles": ["data-engineer", "management"]
+    },
+    {
+      "name": { "pt": "GitHub Copilot & ChatGPT para automacao", "en": "GitHub Copilot & ChatGPT for automation", "es": "GitHub Copilot & ChatGPT para automatizacion" },
+      "provider": "Alura",
+      "roles": ["data-engineer", "backend", "devops", "management"]
+    }
+  ],
+  "languages": [
+    {
+      "language": { "pt": "Portugues", "en": "Portuguese", "es": "Portugues" },
+      "level": { "pt": "Nativo", "en": "Native", "es": "Nativo" }
+    },
+    {
+      "language": { "pt": "Ingles", "en": "English", "es": "Ingles" },
+      "level": { "pt": "Intermediario", "en": "Intermediate", "es": "Intermedio" },
+      "detail": {
+        "pt": "Leitura tecnica e conversacao basica",
+        "en": "Technical reading and basic conversation",
+        "es": "Lectura tecnica y conversacion basica"
+      }
+    },
+    {
+      "language": { "pt": "Espanhol", "en": "Spanish", "es": "Espanol" },
+      "level": { "pt": "Intermediario", "en": "Intermediate", "es": "Intermedio" },
+      "detail": {
+        "pt": "Leitura fluente e conversacao pratica",
+        "en": "Fluent reading and practical conversation",
+        "es": "Lectura fluida y conversacion practica"
+      }
+    }
+  ]
+}

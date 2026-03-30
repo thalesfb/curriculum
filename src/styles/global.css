@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+/* ===== Design Tokens (Figma → CSS Custom Properties) ===== */
+@theme {
+  --color-bg-page: #F8FAFC;
+  --color-bg-card: #FFFFFF;
+  --color-bg-section-alt: #F8FAFC;
+  --color-bg-dark: #334155;
+  --color-bg-input: #F8FAFC;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #64748B;
+  --color-text-inverse: #F1F5F9;
+  --color-text-placeholder: #64748B;
+  --color-brand-green: #059669;
+  --color-border-line: #E2E8F0;
+  --font-display: 'Montserrat', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+  --font-code: 'Fira Code', monospace;
+}
+
+/* Dark mode overrides */
+.dark {
+  --color-bg-page: #0F172A;
+  --color-bg-card: #1E293B;
+  --color-bg-section-alt: #142032;
+  --color-bg-dark: #081020;
+  --color-bg-input: #1E293B;
+  --color-text-primary: #F1F5F9;
+  --color-text-secondary: #94A3B8;
+  --color-text-inverse: #F1F5F9;
+  --color-text-placeholder: #94A3B8;
+  --color-brand-green: #34D399;
+  --color-border-line: #334155;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  background: var(--color-bg-page);
+}

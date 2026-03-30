@@ -1,0 +1,87 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const projects = [
+  {
+    title: 'Personalized Math Learning',
+    desc: { pt: 'Projeto acadêmico focado em análise de dados educacionais, incluindo um pipeline automatizado de revisão sistemática (PRISMA) e um fluxo de trabalho experimental para identificação de competências.', en: 'Academic project focused on educational data analysis, including an automated systematic review pipeline (PRISMA) and an experimental workflow for competency identification.', es: 'Proyecto académico enfocado en análisis de datos educacionales.' },
+    tags: [
+      { name: 'PYTHON', icon: '/icons/python.svg' },
+      { name: 'AUTOMAÇÃO DE PESQUISA', icon: '/icons/research.svg' },
+      { name: 'ANÁLISE DE DADOS', icon: '/icons/data-analysis.svg' },
+      { name: 'CLI', icon: '/icons/cli.svg' },
+    ],
+  },
+  {
+    title: 'Library Management System',
+    desc: { pt: 'Aplicação back-end em Java (Spring Boot) para gestão de livros e usuários, utilizando Spring Data JPA/Hibernate e MySQL. Implementa o padrão Observer para notificações por e-mail.', en: 'Back-end Java application (Spring Boot) for book and user management, using Spring Data JPA/Hibernate and MySQL. Implements the Observer pattern for email notifications.', es: 'Aplicación back-end en Java (Spring Boot) para gestión de libros y usuarios.' },
+    tags: [
+      { name: 'JAVA', icon: '/icons/java.svg' },
+      { name: 'MYSQL', icon: '/icons/mysql.svg' },
+      { name: 'BACKEND', icon: '/icons/backend.svg' },
+    ],
+  },
+  {
+    title: 'ML & DL Experiments',
+    desc: { pt: 'Coleção de notebooks e experimentos organizados, utilizando ML tradicional e deep learning (ANN, CNN, RNN, PINNs, SVM, XGBoost). Focado em pipelines de treinamento e ambientes reprodutíveis.', en: 'Collection of organized notebooks and experiments, using traditional ML and deep learning (ANN, CNN, RNN, PINNs, SVM, XGBoost). Focused on training pipelines and reproducible environments.', es: 'Colección de notebooks y experimentos organizados.' },
+    tags: [
+      { name: 'PYTHON', icon: '/icons/python.svg' },
+      { name: 'SCIKITLEARN', icon: '/icons/scikitlearn.svg' },
+      { name: 'TENSORFLOW', icon: '/icons/tensorflow.svg' },
+      { name: 'DL/ML', icon: '/icons/dlml.svg' },
+    ],
+  },
+  {
+    title: 'Infrastructure and Web Services',
+    desc: { pt: 'Automação, provisionamento, configurações de servidor (NGINX) e padrões de deployment conteinerizado, demonstrando práticas DevOps.', en: 'Automation, provisioning, server configuration (NGINX) and containerized deployment patterns, demonstrating DevOps practices.', es: 'Automatización, provisionamiento, configuraciones de servidor (NGINX).' },
+    tags: [
+      { name: 'SHELL', icon: '/icons/shell.svg' },
+      { name: 'LINUX', icon: '/icons/linux.svg' },
+      { name: 'NGINX', icon: '/icons/nginx.svg' },
+      { name: 'DOCKER', icon: '/icons/docker.svg' },
+      { name: 'DEVOPS', icon: '/icons/devops.svg' },
+    ],
+  },
+  {
+    title: 'Data Structures',
+    desc: { pt: 'Implementação de algoritmos complexos e estruturas de dados fundamentais utilizando a linguagem C.', en: 'Implementation of complex algorithms and fundamental data structures using the C language.', es: 'Implementación de algoritmos complejos y estructuras de datos fundamentales.' },
+    tags: [
+      { name: 'C', icon: '/icons/c-lang.svg' },
+      { name: 'ALGORITHMS', icon: '/icons/algorithms.svg' },
+    ],
+  },
+];
+---
+
+<section class="bg-bg-card py-20 max-md:py-12" id="projects">
+  <h2 class="mb-12 px-20 text-center font-display text-4xl font-semibold text-text-primary max-xl:px-12 max-md:px-6 max-md:text-3xl max-md:mb-8">{t('section.projects')}</h2>
+
+  <div class="flex justify-end gap-3 px-20 mb-8 max-xl:px-12 max-md:hidden">
+    <button class="carousel-prev h-[50px] w-[50px] rounded-full border border-border-line bg-bg-card text-text-secondary opacity-40 flex items-center justify-center" disabled>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 5L7 10L12 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="carousel-next h-[50px] w-[50px] rounded-full border border-brand-green bg-bg-card text-text-primary flex items-center justify-center hover:bg-brand-green hover:text-white transition-all">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 5L13 10L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="carousel-track flex gap-6 overflow-x-auto scroll-snap-x-mandatory px-20 pb-4 max-xl:px-12 max-md:gap-4 max-md:px-6 scrollbar-none" style="scroll-padding-left: 80px;">
+    {projects.map(p => (
+      <article class="flex-none w-[380px] scroll-snap-start rounded-xl border border-brand-green bg-bg-card p-8 flex flex-col gap-4 max-md:w-[280px] max-md:p-6">
+        <h3 class="font-display text-xl font-semibold text-text-primary">{p.title}</h3>
+        <p class="flex-1 text-text-secondary leading-relaxed">{p.desc[lang]}</p>
+        <div class="flex flex-wrap gap-2">
+          {p.tags.map(tag => (
+            <span class="inline-flex items-center gap-1.5 rounded-md border border-text-primary bg-bg-section-alt px-3 py-1.5 font-code text-xs font-medium uppercase tracking-wider text-text-primary">
+              <img src={tag.icon} alt="" width="14" height="14">
+              {tag.name}
+            </span>
+          ))}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

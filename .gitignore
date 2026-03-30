@@ -1,0 +1,31 @@
+# Build outputs & generated files
+node_modules/
+dist/
+.astro/           # Astro build cache (regenerated on every build)
+output/            # Generated CVs in markdown (4 roles × 3 langs = 12 files)
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+.claude/          # Local Claude IDE settings (developer-specific, not project-wide)
+
+# Generated PDFs (source of truth in data/cv.json, output in refs/ only)
+cv_thales_ferreira_ats_2026_*.pdf
+
+# Local/temporary
+*.log
+.DS_Store
+Thumbs.db
+/tmp/
+
+# IDE & dev tools (local to each developer)
+.vscode/
+.idea/
+
+# Root refs/ only (not public/refs/ which has downloadable PDFs)
+/refs/
+
+# Internal context files (not for public repo)
+CONTEXT.md
+QUICKSTART.md

@@ -1,0 +1,47 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const services = [
+  {
+    icon: '/img/icon-database.svg',
+    title: { pt: 'Engenharia de Dados, BI e Machine Learning', en: 'Data Engineering, BI & Machine Learning', es: 'Ingeniería de Datos, BI y Machine Learning' },
+    desc: { pt: 'Desenvolvimento de soluções de Business Intelligence, incluindo modelagem de dados, tratamento de dados no Power Query, e criação de dashboards avançados para análise de tendências e suporte executivo. Implementação de pipelines analíticos para Machine Learning (ML) e Deep Learning (DL) em ambientes reprodutíveis.', en: 'Development of Business Intelligence solutions, including data modeling, data processing in Power Query, and creation of advanced dashboards for trend analysis and executive support. Implementation of analytical pipelines for Machine Learning (ML) and Deep Learning (DL) in reproducible environments.', es: 'Desarrollo de soluciones de Business Intelligence, incluyendo modelado de datos, tratamiento de datos en Power Query, y creación de dashboards avanzados para análisis de tendencias y soporte ejecutivo.' },
+  },
+  {
+    icon: '/img/icon-stack.svg',
+    title: { pt: 'Engenharia de Software (Python/Java) e APIs Confiáveis', en: 'Software Engineering (Python/Java) & Reliable APIs', es: 'Ingeniería de Software (Python/Java) y APIs Confiables' },
+    desc: { pt: 'Construção de APIs RESTful utilizando Python (Django REST Framework), com foco em Desenvolvimento Orientado a Testes (TDD) e testes unitários/de integração. Experiência em arquitetura back-end modular, incluindo Spring Boot/Java para sistemas de gestão.', en: 'Building RESTful APIs using Python (Django REST Framework), focused on Test-Driven Development (TDD) and unit/integration testing. Experience in modular back-end architecture, including Spring Boot/Java for management systems.', es: 'Construcción de APIs RESTful utilizando Python (Django REST Framework), con enfoque en Desarrollo Orientado a Tests (TDD) y tests unitarios/de integración.' },
+  },
+  {
+    icon: '/img/icon-gear.svg',
+    title: { pt: 'DevOps, Automação e Otimização Operacional', en: 'DevOps, Automation & Operational Optimization', es: 'DevOps, Automatización y Optimización Operacional' },
+    desc: { pt: 'Implementação de práticas de automação com Docker/Podman e configuração de servidores web (NGINX) como Proxy Reverso e API Gateway. Entrega de pipelines CI/CD e setup de observabilidade para redução de riscos técnicos e aceleração da entrega. Aplicação de automação industrial e otimização de processos.', en: 'Implementation of automation practices with Docker/Podman and web server configuration (NGINX) as Reverse Proxy and API Gateway. Delivery of CI/CD pipelines and observability setup for reducing technical risks and accelerating delivery.', es: 'Implementación de prácticas de automatización con Docker/Podman y configuración de servidores web (NGINX) como Proxy Reverso y API Gateway.' },
+  },
+];
+---
+
+<section class="bg-bg-section-alt py-20 max-md:py-12" id="services">
+  <h2 class="mb-12 px-20 text-center font-display text-4xl font-semibold text-text-primary max-xl:px-12 max-md:px-6 max-md:text-3xl max-md:mb-8">{t('section.services')}</h2>
+
+  <div class="flex justify-end gap-3 px-20 mb-8 max-xl:px-12 max-md:hidden">
+    <button class="carousel-prev h-[50px] w-[50px] rounded-full border border-border-line bg-bg-card text-text-secondary opacity-40 flex items-center justify-center" disabled>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 5L7 10L12 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="carousel-next h-[50px] w-[50px] rounded-full border border-brand-green bg-bg-card text-text-primary flex items-center justify-center hover:bg-brand-green hover:text-white transition-all">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 5L13 10L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="carousel-track flex gap-6 overflow-x-auto scroll-snap-x-mandatory px-20 pb-4 max-xl:px-12 max-md:gap-4 max-md:px-6 scrollbar-none" style="scroll-padding-left: 80px;">
+    {services.map(s => (
+      <article class="flex-none w-[364px] scroll-snap-start rounded-xl border border-brand-green bg-bg-card p-12 flex flex-col gap-3 max-md:w-[290px] max-md:p-8">
+        <img src={s.icon} alt="" width="48" height="48" class="mb-2">
+        <h3 class="font-display text-xl font-semibold text-text-primary leading-snug">{s.title[lang]}</h3>
+        <p class="text-text-secondary leading-relaxed">{s.desc[lang]}</p>
+      </article>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,75 @@
+---
+import { languages } from '../i18n/ui';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<header class="sticky top-0 z-100 border-b border-border-line bg-bg-card/90 backdrop-blur-sm">
+  <nav class="mx-auto flex max-w-[1440px] items-center gap-6 px-20 py-4 max-xl:px-10 max-md:px-6">
+    <a href={translatePath('/')} class="flex shrink-0 items-center gap-2.5">
+      <img src="/logos/logo.svg" alt=">_" width="28" height="24">
+      <span class="font-display text-4xl font-semibold leading-none whitespace-nowrap max-md:text-base">{' '}ThalesFB</span>
+    </a>
+
+    <div class="flex items-center gap-8 max-md:hidden" id="menu-links">
+      <a href="#hero" class="text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.home')}</a>
+      <a href="#about" class="text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.about')}</a>
+      <a href="#services" class="text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.services')}</a>
+      <a href="#projects" class="text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.portfolio')}</a>
+      <a href="#contact" class="text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.contact')}</a>
+    </div>
+
+    <div class="ml-auto flex shrink-0 items-center gap-6 max-md:hidden">
+      <div class="flex min-w-40 max-w-70 flex-1 items-center gap-3 rounded-full border border-border-line bg-bg-input px-4 py-2.5">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" class="text-text-secondary" stroke-width="2"/><path d="M14 14L18 18" stroke="currentColor" class="text-text-secondary" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="text" placeholder={t('search.placeholder')} class="w-full border-none bg-transparent text-text-secondary outline-none placeholder:text-text-placeholder">
+      </div>
+
+      <button class="shrink-0" id="theme-toggle" aria-label="Toggle theme">
+        <span class="block relative h-6 w-12 rounded-full bg-border-line transition-colors dark:bg-brand-green">
+          <span class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform dark:translate-x-6"></span>
+        </span>
+      </button>
+
+      <div class="flex shrink-0 items-center gap-1.5 text-sm font-medium text-text-secondary">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.5"/><ellipse cx="9" cy="9" rx="3.5" ry="7.5" stroke="currentColor" stroke-width="1.5"/><line x1="1.5" y1="9" x2="16.5" y2="9" stroke="currentColor" stroke-width="1.5"/></svg>
+        <select class="bg-transparent text-text-secondary outline-none cursor-pointer" id="lang-selector">
+          {Object.entries(languages).map(([code, label]) => (
+            <option value={code} selected={code === lang}>{code.toUpperCase()}</option>
+          ))}
+        </select>
+      </div>
+
+      <a href="#contact" class="rounded-full bg-brand-green px-6 py-2.5 text-sm font-bold uppercase tracking-wider text-text-inverse whitespace-nowrap hover:opacity-90 transition-opacity">
+        {t('cta.hire')}
+      </a>
+    </div>
+
+    <button class="ml-auto flex flex-col gap-1.5 p-1 md:hidden" id="hamburger" aria-label="Open menu">
+      <span class="block h-0.5 w-5 rounded bg-text-secondary"></span>
+      <span class="block h-0.5 w-5 rounded bg-text-secondary"></span>
+      <span class="block h-0.5 w-5 rounded bg-text-secondary"></span>
+    </button>
+  </nav>
+</header>
+
+<script>
+  // Theme toggle
+  document.querySelectorAll('#theme-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    });
+  });
+
+  // Language selector
+  document.querySelectorAll('#lang-selector').forEach(select => {
+    select.addEventListener('change', (e) => {
+      const lang = (e.target as HTMLSelectElement).value;
+      window.location.href = `/${lang}/`;
+    });
+  });
+</script>

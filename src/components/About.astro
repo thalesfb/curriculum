@@ -1,0 +1,72 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const bio: Record<string, string[]> = {
+  pt: [
+    'Profissional com vasta experiência em análise de dados, engenharia de software e automação industrial. Sou especializado em Python, Power BI, SQL, Django, NGINX e práticas DevOps, com foco em otimização de processos, eficiência operacional e entrega de soluções estratégicas.',
+    'Busco atuar como parceiro de tecnologia e dados, com foco em escalabilidade, previsibilidade operacional e geração de valor mensurável, utilizando ciclos iterativos curtos e comprometimento com qualidade e prazos definidos.',
+  ],
+  en: [
+    'Professional with extensive experience in data analysis, software engineering and industrial automation. Specialized in Python, Power BI, SQL, Django, NGINX and DevOps practices, focused on process optimization, operational efficiency and strategic solution delivery.',
+    'I seek to act as a technology and data partner, focused on scalability, operational predictability and measurable value generation, using short iterative cycles and commitment to quality and defined deadlines.',
+  ],
+  es: [
+    'Profesional con amplia experiencia en análisis de datos, ingeniería de software y automatización industrial. Especializado en Python, Power BI, SQL, Django, NGINX y prácticas DevOps, enfocado en optimización de procesos, eficiencia operacional y entrega de soluciones estratégicas.',
+    'Busco actuar como socio de tecnología y datos, enfocado en escalabilidad, previsibilidad operacional y generación de valor mensurable, utilizando ciclos iterativos cortos y compromiso con calidad y plazos definidos.',
+  ],
+};
+
+const education = [
+  { logo: '/logos/ifc.svg', alt: 'IFC', w: 32, h: 43, name: 'Bacharelado Ciência da Computação' },
+  { logo: '/logos/senai.svg', alt: 'SENAI', w: 36, h: 10, name: 'Aprendizagem em Manutenção de Microcomputadores e Redes Locais' },
+  { logo: '/logos/senai.svg', alt: 'SENAI', w: 36, h: 10, name: 'Operador de Computador' },
+  { logo: '/logos/alura.svg', alt: 'Alura', w: 38, h: 17, name: 'Alura Cursos' },
+  { logo: '/logos/redhat.svg', alt: 'Red Hat', w: 32, h: 24, name: 'Red Hat Enterprise Linux' },
+  { logo: '/logos/aws.svg', alt: 'AWS', w: 32, h: 32, name: 'AWS Academy Cloud Architecting' },
+];
+---
+
+<section class="mx-auto max-w-[1440px] bg-bg-card px-20 py-20 max-xl:px-12 max-md:px-6 max-md:py-12" id="about">
+  <h2 class="mb-12 text-center font-display text-4xl font-semibold text-text-primary max-md:text-3xl max-md:mb-8">{t('section.about')}</h2>
+
+  <div class="grid grid-cols-3 gap-12 items-start max-xl:grid-cols-2 max-xl:gap-8 max-md:grid-cols-1">
+    <div class="text-text-secondary leading-relaxed max-xl:col-span-2 max-md:col-span-1">
+      {bio[lang].map(p => <p class="mb-4">{p}</p>)}
+    </div>
+
+    <div>
+      <h3 class="mb-6 font-display text-xl font-semibold text-text-primary">{t('about.quickdata')}</h3>
+      <dl class="flex flex-col gap-5">
+        <div>
+          <dt class="font-bold text-text-primary">Foco Operacional:</dt>
+          <dd class="text-text-secondary">Escalabilidade e Previsibilidade</dd>
+        </div>
+        <div>
+          <dt class="font-bold text-text-primary">Metodologia:</dt>
+          <dd class="text-text-secondary">Ciclos Iterativos Curtos (Kanban/Scrum)</dd>
+        </div>
+        <div>
+          <dt class="font-bold text-text-primary">Status:</dt>
+          <dd class="font-medium text-brand-green">Disponível para Freelance</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div>
+      <h3 class="mb-6 font-display text-xl font-semibold text-text-primary">{t('about.education')}</h3>
+      <ul class="flex flex-col gap-4">
+        {education.map(edu => (
+          <li class="flex items-center gap-3 text-text-secondary">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+              <img src={edu.logo} alt={edu.alt} width={edu.w} height={edu.h} class="max-h-8 max-w-8 object-contain">
+            </div>
+            <span>{edu.name}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
