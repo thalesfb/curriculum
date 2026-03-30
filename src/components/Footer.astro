@@ -28,13 +28,36 @@ const waMsg = encodeURIComponent(whatsappMessages[lang]);
 </a>
 
 <script>
-  // Carousel arrows
-  document.querySelectorAll('.carousel-prev, .carousel-next').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const track = btn.closest('section')?.querySelector('.carousel-track');
-      if (!track) return;
-      const dir = btn.classList.contains('carousel-next') ? 400 : -400;
-      track.scrollBy({ left: dir, behavior: 'smooth' });
+  // Carousel arrows with dynamic active/inactive state
+  document.querySelectorAll('#services, #projects').forEach(section => {
+    const track = section.querySelector('.carousel-track') as HTMLElement;
+    const prevBtn = section.querySelector('.carousel-prev') as HTMLButtonElement;
+    const nextBtn = section.querySelector('.carousel-next') as HTMLButtonElement;
+    if (!track || !prevBtn || !nextBtn) return;
+
+    function updateArrows() {
+      const atStart = track.scrollLeft <= 10;
+      const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 10;
+
+      prevBtn.disabled = atStart;
+      prevBtn.classList.toggle('opacity-40', atStart);
+      prevBtn.classList.toggle('border-border-line', atStart);
+      prevBtn.classList.toggle('border-brand-green', !atStart);
+
+      nextBtn.disabled = atEnd;
+      nextBtn.classList.toggle('opacity-40', atEnd);
+      nextBtn.classList.toggle('border-brand-green', !atEnd);
+      nextBtn.classList.toggle('border-border-line', atEnd);
+    }
+
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -400, behavior: 'smooth' });
     });
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: 400, behavior: 'smooth' });
+    });
+
+    track.addEventListener('scroll', updateArrows);
+    updateArrows();
   });
 </script>
