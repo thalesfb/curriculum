@@ -1,4 +1,14 @@
-<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Vector">
-</g>
+<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="2" y="1" width="10" height="4" rx="1" stroke="url(#g)" stroke-width="1.2"/>
+<rect x="2" y="5" width="10" height="4" rx="1" stroke="url(#g)" stroke-width="1.2"/>
+<rect x="2" y="9" width="10" height="4" rx="1" stroke="url(#g)" stroke-width="1.2"/>
+<circle cx="4.5" cy="3" r="0.7" fill="url(#g)"/>
+<circle cx="4.5" cy="7" r="0.7" fill="url(#g)"/>
+<circle cx="4.5" cy="11" r="0.7" fill="url(#g)"/>
+<defs>
+<linearGradient id="g" x1="2" y1="7" x2="12" y2="7" gradientUnits="userSpaceOnUse">
+<stop stop-color="#06B6D4"/>
+<stop offset="1" stop-color="#10B981"/>
+</linearGradient>
+</defs>
 </svg>
