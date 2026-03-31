@@ -71,6 +71,33 @@
       "es": "Desarrollador Frontend con experiencia en React, Astro y TypeScript, enfocado en la construccion de interfaces responsivas y accesibles. Especializado en Design Systems con Tailwind CSS y Figma, siguiendo estandares WCAG de accesibilidad. Experiencia en optimizacion de rendimiento web, SEO tecnico y arquitectura de componentes reutilizables."
     }
   },
+  "heroSubtitle": {
+    "data-engineer": {
+      "pt": "Engenharia de dados end-to-end com foco em automação e impacto nos negócios.",
+      "en": "End-to-end data engineering focused on automation and business impact.",
+      "es": "Ingeniería de datos end-to-end con foco en automatización e impacto en negocios."
+    },
+    "backend": {
+      "pt": "APIs robustas e microsserviços escaláveis com Python, Java e boas práticas.",
+      "en": "Robust APIs and scalable microservices with Python, Java and best practices.",
+      "es": "APIs robustas y microservicios escalables con Python, Java y buenas prácticas."
+    },
+    "devops": {
+      "pt": "Infraestrutura automatizada, CI/CD e deploy containerizado com zero downtime.",
+      "en": "Automated infrastructure, CI/CD and containerized deploy with zero downtime.",
+      "es": "Infraestructura automatizada, CI/CD y deploy en contenedores con zero downtime."
+    },
+    "management": {
+      "pt": "Liderança técnica e gestão ágil com foco em entrega de valor.",
+      "en": "Technical leadership and agile management focused on value delivery.",
+      "es": "Liderazgo técnico y gestión ágil con foco en entrega de valor."
+    },
+    "frontend": {
+      "pt": "Interfaces modernas com React, Astro e Design Systems acessíveis.",
+      "en": "Modern interfaces with React, Astro and accessible Design Systems.",
+      "es": "Interfaces modernas con React, Astro y Design Systems accesibles."
+    }
+  },
   "skills": {
     "languages-backend": {
       "label": {
