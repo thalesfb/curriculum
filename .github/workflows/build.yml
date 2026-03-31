@@ -49,11 +49,3 @@ jobs:
           target: ${{ secrets.VPS_PATH }}
           strip_components: 1
 
-      - name: Reload NGINX
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_KEY }}
-          port: ${{ secrets.VPS_PORT }}
-          script: sudo systemctl reload nginx
