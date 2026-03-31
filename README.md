@@ -1,6 +1,9 @@
-# thales.optimizr.site
+# thalesfb.curriculum.optimizr.site
 
 Portfolio profissional de **Thales Ferreira** — Full Stack Data Engineer | Python & ML | DevOps Specialist.
+
+**Live:** [thalesfb.curriculum.optimizr.site](https://thalesfb.curriculum.optimizr.site)
+**Design:** [Figma](https://www.figma.com/design/UXq2erOANKQqaWegZQ9nk1/CV)
 
 ## Stack
 
