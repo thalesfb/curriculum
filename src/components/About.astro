@@ -20,12 +20,13 @@ const bio: Record<string, string[]> = {
 };
 
 const education = [
-  { logo: '/logos/ifc.svg', alt: 'IFC', w: 32, h: 43, name: 'Bacharelado Ciência da Computação' },
-  { logo: '/logos/senai.svg', alt: 'SENAI', w: 36, h: 10, name: 'Aprendizagem em Manutenção de Microcomputadores e Redes Locais' },
+  { logo: '/logos/ifc.svg', alt: 'IFC', w: 32, h: 43, name: 'Bacharelado Ciência da Computação', pending: true },
+  { logo: '/logos/senai.svg', alt: 'SENAI', w: 36, h: 10, name: 'Manutenção de Microcomputadores e Redes' },
   { logo: '/logos/senai.svg', alt: 'SENAI', w: 36, h: 10, name: 'Operador de Computador' },
   { logo: '/logos/alura.svg', alt: 'Alura', w: 38, h: 17, name: 'Alura Cursos' },
   { logo: '/logos/redhat.svg', alt: 'Red Hat', w: 32, h: 24, name: 'Red Hat Enterprise Linux' },
-  { logo: '/logos/aws.svg', alt: 'AWS', w: 32, h: 32, name: 'AWS Academy Cloud Architecting' },
+  { logo: '/logos/aws.svg', alt: 'AWS', w: 32, h: 32, name: 'AWS Academy Cloud Architecting', pending: true },
+  { logo: '/logos/cisco.svg', alt: 'Cisco', w: 32, h: 32, name: 'CCNA: Introduction to Networks', pending: true },
 ];
 ---
 
@@ -61,9 +62,10 @@ const education = [
         {education.map(edu => (
           <li class="flex items-center gap-3 text-text-secondary">
             <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
-              <img src={edu.logo} alt={edu.alt} width={edu.w} height={edu.h} class="max-h-8 max-w-8 object-contain">
+              <img src={edu.logo} alt={edu.alt} width={edu.w} height={edu.h} class="max-h-8 max-w-8 object-contain" loading="lazy">
             </div>
             <span>{edu.name}</span>
+            {edu.pending && <span class="shrink-0 whitespace-nowrap rounded-full bg-brand-green/15 px-2 py-0.5 text-xs font-medium text-brand-green">{lang === 'en' ? 'In progress' : lang === 'es' ? 'En curso' : 'Em curso'}</span>}
           </li>
         ))}
       </ul>
