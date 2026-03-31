@@ -1,0 +1,17 @@
+<svg viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cisco bridge bars -->
+  <rect x="4" y="14" width="3" height="10" rx="1.5" fill="#049fd9"/>
+  <rect x="12" y="8" width="3" height="16" rx="1.5" fill="#049fd9"/>
+  <rect x="20" y="4" width="3" height="24" rx="1.5" fill="#049fd9"/>
+  <rect x="28" y="2" width="3" height="28" rx="1.5" fill="#049fd9"/>
+  <rect x="36" y="4" width="3" height="24" rx="1.5" fill="#049fd9"/>
+  <rect x="44" y="8" width="3" height="16" rx="1.5" fill="#049fd9"/>
+  <rect x="52" y="14" width="3" height="10" rx="1.5" fill="#049fd9"/>
+  <!-- Dots on top -->
+  <circle cx="5.5" cy="11" r="2" fill="#049fd9"/>
+  <circle cx="13.5" cy="5" r="2" fill="#049fd9"/>
+  <circle cx="21.5" cy="1" r="2" fill="#049fd9"/>
+  <circle cx="37.5" cy="1" r="2" fill="#049fd9"/>
+  <circle cx="45.5" cy="5" r="2" fill="#049fd9"/>
+  <circle cx="53.5" cy="11" r="2" fill="#049fd9"/>
+</svg>
