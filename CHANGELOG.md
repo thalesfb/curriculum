@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/thalesfb/curriculum/compare/v1.0.0...v1.0.1) (2026-03-31)
+
+
+### Bug Fixes
+
+* update npm audit level to critical for enhanced security ([edc2ec9](https://github.com/thalesfb/curriculum/commit/edc2ec9c1b8fc78c668d4b888f030e8306963121))
+
 # 1.0.0 (2026-03-31)
 
 
