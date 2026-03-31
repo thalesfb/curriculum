@@ -1,6 +1,6 @@
-# 🎯 Curriculum — Portfolio Profissional
+# 🎯 Curriculum — Professional Portfolio
 
-**Portfolio e CV multilíngue de Thales Ferreira** — Full Stack Data Engineer | Python & ML | DevOps Specialist. Site estático de alta performance com design system integrado ao Figma.
+**Multilingual portfolio and CV for Thales Ferreira** — Full Stack Data Engineer | Python & ML | DevOps Specialist. High-performance static site with Figma-integrated design system.
 
 [![CI/CD](https://img.shields.io/github/actions/workflow/status/thalesfb/curriculum/ci.yml?branch=main&label=CI%2FCD&style=flat-square)](https://github.com/thalesfb/curriculum/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/actions/workflow/status/thalesfb/curriculum/release.yml?branch=main&label=Release&style=flat-square)](https://github.com/thalesfb/curriculum/actions/workflows/release.yml)
@@ -40,14 +40,14 @@
 
 ## ✨ Features
 
-- 🌍 **Multilíngue** — PT, EN, ES com routing automático e i18n completo
-- 🎨 **Design System** — Figma → CSS Custom Properties → Tailwind (nunca hardcoded)
-- 🌙 **Dark Mode** — Toggle manual, class-based (Tailwind CSS 4)
-- 🔍 **Search** — Filtro em tempo real de projetos e serviços
-- 👔 **5 Roles** — Data Engineer, Backend, DevOps, Management, Frontend (auto-rotação)
+- 🌍 **Multilingual** — PT, EN, ES with automatic routing and full i18n
+- 🎨 **Design System** — Figma → CSS Custom Properties → Tailwind (never hardcoded)
+- 🌙 **Dark Mode** — Manual toggle, class-based (Tailwind CSS 4)
+- 🔍 **Search** — Real-time filtering of projects and services
+- 👔 **5 Roles** — Data Engineer, Backend, DevOps, Management, Frontend (auto-rotation)
 - 📱 **Responsive** — Desktop (1440px), Tablet (1024px), Mobile (375px)
-- ♿ **Acessível** — ARIA labels, skip-to-content, focus-visible, prefers-reduced-motion
-- 🔒 **Seguro** — CSP, HSTS, X-Content-Type-Options, Referrer-Policy
+- ♿ **Accessible** — ARIA labels, skip-to-content, focus-visible, prefers-reduced-motion
+- 🔒 **Secure** — CSP, HSTS, X-Content-Type-Options, Referrer-Policy
 - 📊 **SEO** — Open Graph, hreflang, JSON-LD, sitemap, canonical URLs
 - ⚡ **Performance** — Zero JS default, lazy loading, optimized images
 
