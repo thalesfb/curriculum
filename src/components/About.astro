@@ -42,16 +42,16 @@ const education = [
       <h3 class="mb-6 font-display text-xl font-semibold text-text-primary">{t('about.quickdata')}</h3>
       <dl class="flex flex-col gap-5">
         <div>
-          <dt class="font-bold text-text-primary">Foco Operacional:</dt>
-          <dd class="text-text-secondary">Escalabilidade e Previsibilidade</dd>
+          <dt class="font-bold text-text-primary">{t('about.focus')}</dt>
+          <dd class="text-text-secondary">{t('about.focus.value')}</dd>
         </div>
         <div>
-          <dt class="font-bold text-text-primary">Metodologia:</dt>
-          <dd class="text-text-secondary">Ciclos Iterativos Curtos (Kanban/Scrum)</dd>
+          <dt class="font-bold text-text-primary">{t('about.methodology')}</dt>
+          <dd class="text-text-secondary">{t('about.methodology.value')}</dd>
         </div>
         <div>
-          <dt class="font-bold text-text-primary">Status:</dt>
-          <dd class="font-medium text-brand-green">Disponível para Freelance</dd>
+          <dt class="font-bold text-text-primary">{t('about.status')}</dt>
+          <dd class="font-medium text-brand-green">{t('about.status.value')}</dd>
         </div>
       </dl>
     </div>
@@ -65,7 +65,7 @@ const education = [
               <img src={edu.logo} alt={edu.alt} width={edu.w} height={edu.h} class="max-h-8 max-w-8 object-contain" loading="lazy">
             </div>
             <span>{edu.name}</span>
-            {edu.pending && <span class="shrink-0 whitespace-nowrap rounded-full bg-brand-green/15 px-2 py-0.5 text-xs font-medium text-brand-green">{lang === 'en' ? 'In progress' : lang === 'es' ? 'En curso' : 'Em curso'}</span>}
+            {edu.pending && <span class="shrink-0 whitespace-nowrap rounded-full bg-brand-green/15 px-2 py-0.5 text-xs font-medium text-brand-green">{t('about.pending')}</span>}
           </li>
         ))}
       </ul>
