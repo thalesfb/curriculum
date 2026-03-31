@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/thalesfb/curriculum/compare/v1.0.4...v1.0.5) (2026-03-31)
+
+
+### Bug Fixes
+
+* **README:** update deployment badge to release badge for accurate CI/CD representation ([daba6a0](https://github.com/thalesfb/curriculum/commit/daba6a012df96d09427ac71709025aeae68f34c3))
+
 ## [1.0.4](https://github.com/thalesfb/curriculum/compare/v1.0.3...v1.0.4) (2026-03-31)
 
 ## [1.0.3](https://github.com/thalesfb/curriculum/compare/v1.0.2...v1.0.3) (2026-03-31)
