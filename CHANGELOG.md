@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/thalesfb/curriculum/compare/v1.0.1...v1.0.2) (2026-03-31)
+
+
+### Bug Fixes
+
+* **i18n:** translate Quick Data, status and education badges ([e649627](https://github.com/thalesfb/curriculum/commit/e64962775fc91477630fa7e25dcbc17f561ea3b9))
+
 ## [1.0.1](https://github.com/thalesfb/curriculum/compare/v1.0.0...v1.0.1) (2026-03-31)
 
 
