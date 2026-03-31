@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import cvData from '../../data/cv.json';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -9,6 +10,9 @@ const cvLinks: Record<string, string> = {
   en: '/refs/resume_thales_ferreira_en.pdf',
   es: '/refs/curriculo_thales_ferreira_es.pdf',
 };
+
+// Hero subtitles from cv.json (single source of truth)
+const roleDescriptions = cvData.heroSubtitle as Record<string, Record<string, string>>;
 
 const roles: Record<string, Record<string, string>> = {
   'data-engineer': {
@@ -70,15 +74,16 @@ const roleLabels: Record<string, string> = {
       </select>
     </div>
 
-    <p class="mb-8 font-display text-xl font-semibold leading-relaxed text-text-secondary max-md:text-base max-md:font-normal">
-      {t('hero.subtitle')}
+    <p id="hero-description" class="mb-8 font-display text-xl font-semibold leading-relaxed text-text-secondary max-md:text-base max-md:font-normal"
+       data-descriptions={JSON.stringify(Object.fromEntries(Object.entries(roleDescriptions).map(([k, v]) => [k, (v as any)[lang]])))}>
+      {roleDescriptions['data-engineer'][lang as keyof typeof roleDescriptions['data-engineer']]}
     </p>
     <div class="flex gap-4 flex-wrap max-md:justify-center">
       <a href="#projects" class="inline-flex items-center gap-2 rounded-full bg-brand-green px-6 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-md hover:opacity-90 transition-opacity">
         {t('cta.portfolio')}
       </a>
       <a href={cvLinks[lang]} download class="inline-flex items-center gap-2 rounded-full border border-brand-green px-6 py-3 text-sm font-bold uppercase tracking-wider text-text-primary hover:bg-brand-green hover:text-white transition-all">
-        <img src="/img/download_icon.svg" alt="" width="20" height="20" class="">
+        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" class="shrink-0"><path d="M31 16C31.006 18.382 30.234 20.7 28.8 22.601C28.721 22.706 28.622 22.795 28.509 22.862C28.396 22.928 28.271 22.972 28.14 22.991C28.01 23.009 27.878 23.002 27.751 22.969C27.623 22.936 27.504 22.879 27.399 22.8C27.294 22.721 27.205 22.622 27.138 22.509C27.072 22.396 27.028 22.271 27.009 22.14C26.991 22.01 26.998 21.878 27.031 21.751C27.064 21.623 27.121 21.504 27.2 21.399C28.374 19.844 29.006 17.948 29 16C29 13.613 28.052 11.324 26.364 9.636C24.676 7.948 22.387 7 20 7C17.613 7 15.324 7.948 13.636 9.636C11.948 11.324 11 13.613 11 16C11 16.265 10.895 16.52 10.707 16.707C10.52 16.895 10.265 17 10 17C9.735 17 9.48 16.895 9.293 16.707C9.105 16.52 9 16.265 9 16C9 14.991 9.138 13.986 9.411 13.015C9.275 13 9.138 13 9 13C7.409 13 5.883 13.632 4.757 14.757C3.632 15.883 3 17.409 3 19C3 20.591 3.632 22.117 4.757 23.243C5.883 24.368 7.409 25 9 25H12C12.265 25 12.52 25.105 12.707 25.293C12.895 25.48 13 25.735 13 26C13 26.265 12.895 26.52 12.707 26.707C12.52 26.895 12.265 27 12 27H9C7.9 27 6.812 26.774 5.804 26.335C4.796 25.895 3.889 25.253 3.14 24.448C2.391 23.642 1.816 22.691 1.451 21.654C1.086 20.616 0.939 19.515 1.019 18.418C1.099 17.321 1.405 16.252 1.916 15.279C2.428 14.305 3.135 13.448 3.993 12.76C4.85 12.071 5.841 11.568 6.902 11.279C7.964 10.991 9.073 10.925 10.161 11.085C11.269 8.869 13.093 7.092 15.337 6.042C17.581 4.991 20.114 4.729 22.525 5.298C24.937 5.867 27.085 7.233 28.624 9.175C30.162 11.118 30.999 13.522 31 16ZM22.293 21.293L20 23.586V16C20 15.735 19.895 15.48 19.707 15.293C19.52 15.105 19.265 15 19 15C18.735 15 18.48 15.105 18.293 15.293C18.105 15.48 18 15.735 18 16V23.586L15.708 21.293C15.52 21.105 15.265 21 15 21C14.735 21 14.48 21.105 14.293 21.293C14.105 21.48 14 21.735 14 22C14 22.265 14.105 22.52 14.293 22.708L18.293 26.708C18.385 26.8 18.496 26.874 18.617 26.925C18.739 26.975 18.869 27.001 19 27.001C19.131 27.001 19.262 26.975 19.383 26.925C19.504 26.874 19.615 26.8 19.708 26.708L23.708 22.708C23.895 22.52 24.001 22.265 24.001 22C24.001 21.735 23.895 21.48 23.708 21.293C23.52 21.105 23.265 21 23 21C22.735 21 22.48 21.105 22.293 21.293Z" fill="currentColor"/></svg>
         {t('cta.download')}
       </a>
     </div>
@@ -92,25 +97,41 @@ const roleLabels: Record<string, string> = {
 
 <script>
   const titleEl = document.getElementById('hero-title');
+  const descEl = document.getElementById('hero-description');
   const roleSelector = document.getElementById('role-selector') as HTMLSelectElement;
 
-  if (titleEl && roleSelector) {
+  if (titleEl && descEl && roleSelector) {
     const rolesData = JSON.parse(titleEl.dataset.roles || '{}');
+    const descsData = JSON.parse(descEl.dataset.descriptions || '{}');
     const roleKeys = Object.keys(rolesData);
 
-    // Manual change
+    function updateRole(key: string) {
+      titleEl.textContent = rolesData[key];
+      descEl.textContent = descsData[key];
+      roleSelector.value = key;
+    }
+
+    // Auto-rotate: 10s default, 20s after manual selection
+    let idx = 0;
+    let delay = 10000;
+    let timer: ReturnType<typeof setTimeout>;
+
+    function rotateRole() {
+      idx = (idx + 1) % roleKeys.length;
+      updateRole(roleKeys[idx]);
+      timer = setTimeout(rotateRole, delay);
+    }
+
+    timer = setTimeout(rotateRole, delay);
+
     roleSelector.addEventListener('change', () => {
       if (rolesData[roleSelector.value]) {
-        titleEl.textContent = rolesData[roleSelector.value];
+        updateRole(roleSelector.value);
+        idx = roleKeys.indexOf(roleSelector.value);
+        clearTimeout(timer);
+        delay = 20000;
+        timer = setTimeout(rotateRole, delay);
       }
     });
-
-    // Auto-rotate every 4s
-    let idx = 0;
-    setInterval(() => {
-      idx = (idx + 1) % roleKeys.length;
-      roleSelector.value = roleKeys[idx];
-      titleEl.textContent = rolesData[roleKeys[idx]];
-    }, 4000);
   }
 </script>
