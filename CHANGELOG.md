@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/thalesfb/curriculum/compare/v1.0.2...v1.0.3) (2026-03-31)
+
+
+### Bug Fixes
+
+* **i18n:** update professional bio descriptions for clarity and impact ([d25eb6c](https://github.com/thalesfb/curriculum/commit/d25eb6c78c9fb2633cff19065acb810b25b1232d))
+
 ## [1.0.2](https://github.com/thalesfb/curriculum/compare/v1.0.1...v1.0.2) (2026-03-31)
 
 
