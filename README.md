@@ -3,7 +3,7 @@
 **Portfolio e CV multilíngue de Thales Ferreira** — Full Stack Data Engineer | Python & ML | DevOps Specialist. Site estático de alta performance com design system integrado ao Figma.
 
 [![CI/CD](https://img.shields.io/github/actions/workflow/status/thalesfb/curriculum/ci.yml?branch=main&label=CI%2FCD&style=flat-square)](https://github.com/thalesfb/curriculum/actions/workflows/ci.yml)
-[![Deploy](https://img.shields.io/github/actions/workflow/status/thalesfb/curriculum/build.yml?branch=main&label=Deploy&style=flat-square)](https://github.com/thalesfb/curriculum/actions/workflows/build.yml)
+[![Release](https://img.shields.io/github/actions/workflow/status/thalesfb/curriculum/release.yml?branch=main&label=Release&style=flat-square)](https://github.com/thalesfb/curriculum/actions/workflows/release.yml)
 [![Astro](https://img.shields.io/badge/Astro-6.1.1-ff5d01?style=flat-square&logo=astro)](https://astro.build)
 [![Tailwind](https://img.shields.io/badge/Tailwind_CSS-4.2-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com)
 
