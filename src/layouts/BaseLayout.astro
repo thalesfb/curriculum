@@ -21,6 +21,7 @@ const ogLocaleMap: Record<string, string> = { pt: 'pt_BR', en: 'en_US', es: 'es_
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="only light">
   <title>{title}</title>
   <meta name="description" content={description}>
   <meta name="author" content="Thales Ferreira">
@@ -70,12 +71,11 @@ const ogLocaleMap: Record<string, string> = { pt: 'pt_BR', en: 'en_US', es: 'es_
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=Montserrat:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <script is:inline>
-    // Theme init - must run before paint to prevent FOUC
+    // Theme init — always light unless user explicitly chose dark via toggle
     (function() {
-      var saved = localStorage.getItem('theme');
-      if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-      }
+      var isDark = localStorage.getItem('theme') === 'dark';
+      document.documentElement.classList.toggle('dark', isDark);
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
     })();
   </script>
 </head>

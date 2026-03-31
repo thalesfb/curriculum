@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+/* Force class-based dark mode (not prefers-color-scheme) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Dark mode controlled exclusively by .dark class via JS toggle */
+
 /* ===== Design Tokens — synced from Figma variable collections ===== */
 @theme {
   /* Backgrounds */
@@ -50,7 +55,8 @@
 }
 
 /* Base */
-html { scroll-behavior: smooth; scroll-padding-top: 80px; overflow-x: hidden; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; overflow-x: hidden; color-scheme: light; }
+html.dark { color-scheme: dark; }
 body {
   font-family: var(--font-body);
   color: var(--color-text-primary);
