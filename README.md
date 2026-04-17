@@ -49,6 +49,7 @@
 - ♿ **Accessible** — ARIA labels, skip-to-content, focus-visible, prefers-reduced-motion
 - 🔒 **Secure** — CSP, HSTS, X-Content-Type-Options, Referrer-Policy
 - 📊 **SEO** — Open Graph, hreflang, JSON-LD, sitemap, canonical URLs
+- 📈 **Analytics** — Google Analytics 4 (production only, CSP-protected)
 - ⚡ **Performance** — Zero JS default, lazy loading, optimized images
 
 ---
@@ -132,7 +133,7 @@ curriculum/
 ├── .github/workflows/     CI/CD pipelines (ci, build, release)
 ├── data/cv.json           Single source of truth for CV content
 ├── docs/
-│   ├── adr/               9 Architecture Decision Records
+│   ├── adr/               10 Architecture Decision Records
 │   ├── guides/            Figma design system guide
 │   ├── DEPLOYMENT.md      Deploy & NGINX docs
 │   ├── DEVELOPMENT.md     Dev setup & workflows
@@ -162,7 +163,7 @@ curriculum/
 | Doc | Content |
 | --- | ------- |
 | [AGENTS.md](AGENTS.md) | AI agent governance & project rules |
-| [docs/adr/](docs/adr/) | 9 Architecture Decision Records |
+| [docs/adr/](docs/adr/) | 10 Architecture Decision Records |
 | [docs/guides/figma-design-system.md](docs/guides/figma-design-system.md) | Figma design system guide |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Dev setup & workflows |
 | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | CI/CD & NGINX config |
