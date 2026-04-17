@@ -14,12 +14,24 @@ const currentPath = Astro.url.pathname;
 const canonicalUrl = `${siteUrl}${currentPath}`;
 const shortLang = lang.split('-')[0];
 const ogLocaleMap: Record<string, string> = { pt: 'pt_BR', en: 'en_US', es: 'es_ES' };
+const isProd = import.meta.env.PROD;
 ---
 
 <!DOCTYPE html>
 <html lang={lang}>
 <head>
   <meta charset="UTF-8">
+  {isProd && (
+    <>
+      <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-EF4YKB3P5F"></script>
+      <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-EF4YKB3P5F');
+      </script>
+    </>
+  )}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="only light">
   <title>{title}</title>

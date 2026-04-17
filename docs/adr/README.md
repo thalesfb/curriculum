@@ -15,6 +15,7 @@ Registro de decisões arquiteturais do projeto **Portfolio Thales Ferreira** (th
 | 0007 | [Ambiente dev: Devcontainer, Worktrees e MCPs](0007-ambiente-dev-devcontainer-mcps.md) | Accepted | 2026-03-28 |
 | 0008 | [Botão flutuante de WhatsApp](0008-whatsapp-floating-button.md) | Accepted | 2026-03-28 |
 | 0009 | [Princípios: Clean Code, YAGNI, DRY](0009-principios-clean-code-yagni-dry.md) | Accepted | 2026-03-28 |
+| 0010 | [Google Analytics 4](0010-google-analytics.md) | Accepted | 2026-04-17 |
 
 ## Criando uma nova ADR
 
