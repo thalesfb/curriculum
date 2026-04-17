@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/thalesfb/curriculum/compare/v1.0.6...v1.1.0) (2026-04-17)
+
+
+### Features
+
+* **analytics:** add Google Analytics 4 (GA4) ([#2](https://github.com/thalesfb/curriculum/issues/2)) ([18497b4](https://github.com/thalesfb/curriculum/commit/18497b483839fd0b10bb7b9caf5c90d1b0ce21ab)), closes [#1](https://github.com/thalesfb/curriculum/issues/1)
+
 ## [1.0.6](https://github.com/thalesfb/curriculum/compare/v1.0.5...v1.0.6) (2026-03-31)
 
 ## [1.0.5](https://github.com/thalesfb/curriculum/compare/v1.0.4...v1.0.5) (2026-03-31)
