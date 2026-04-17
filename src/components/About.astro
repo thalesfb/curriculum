@@ -30,45 +30,47 @@ const education = [
 ];
 ---
 
-<section class="mx-auto max-w-[1440px] bg-bg-card px-20 py-20 max-xl:px-12 max-md:px-6 max-md:py-12" id="about">
-  <h2 class="mb-12 text-center font-display text-4xl font-semibold text-text-primary max-md:text-3xl max-md:mb-8">{t('section.about')}</h2>
+<section class="bg-bg-card py-20 max-md:py-12" id="about">
+  <div class="mx-auto max-w-[1440px] px-20 max-xl:px-12 max-md:px-6">
+    <h2 class="mb-12 text-center font-display text-4xl font-semibold text-text-primary max-md:text-3xl max-md:mb-8">{t('section.about')}</h2>
 
-  <div class="grid grid-cols-3 gap-x-16 gap-y-12 items-start max-xl:grid-cols-2 max-xl:gap-x-10 max-xl:gap-y-8 max-md:grid-cols-1 max-md:gap-y-10">
-    <div class="text-text-secondary leading-relaxed max-xl:col-span-2 max-md:col-span-1">
-      {bio[lang].map(p => <p class="mb-4">{p}</p>)}
-    </div>
+    <div class="grid grid-cols-3 gap-x-16 gap-y-12 items-start max-xl:grid-cols-2 max-xl:gap-x-10 max-xl:gap-y-8 max-md:grid-cols-1 max-md:gap-y-10">
+      <div class="text-text-secondary leading-relaxed max-xl:col-span-2 max-md:col-span-1">
+        {bio[lang].map(p => <p class="mb-4">{p}</p>)}
+      </div>
 
-    <div>
-      <h3 class="mb-6 font-display text-xl font-semibold text-text-primary">{t('about.quickdata')}</h3>
-      <dl class="flex flex-col gap-5">
-        <div>
-          <dt class="font-bold text-text-primary">{t('about.focus')}</dt>
-          <dd class="text-text-secondary">{t('about.focus.value')}</dd>
-        </div>
-        <div>
-          <dt class="font-bold text-text-primary">{t('about.methodology')}</dt>
-          <dd class="text-text-secondary">{t('about.methodology.value')}</dd>
-        </div>
-        <div>
-          <dt class="font-bold text-text-primary">{t('about.status')}</dt>
-          <dd class="font-medium text-brand-green">{t('about.status.value')}</dd>
-        </div>
-      </dl>
-    </div>
+      <div>
+        <h3 class="mb-6 font-display text-xl font-semibold text-text-primary">{t('about.quickdata')}</h3>
+        <dl class="flex flex-col gap-5">
+          <div>
+            <dt class="font-bold text-text-primary">{t('about.focus')}</dt>
+            <dd class="text-text-secondary">{t('about.focus.value')}</dd>
+          </div>
+          <div>
+            <dt class="font-bold text-text-primary">{t('about.methodology')}</dt>
+            <dd class="text-text-secondary">{t('about.methodology.value')}</dd>
+          </div>
+          <div>
+            <dt class="font-bold text-text-primary">{t('about.status')}</dt>
+            <dd class="font-medium text-brand-green">{t('about.status.value')}</dd>
+          </div>
+        </dl>
+      </div>
 
-    <div>
-      <h3 class="mb-6 font-display text-xl font-semibold text-text-primary">{t('about.education')}</h3>
-      <ul class="flex flex-col gap-4">
-        {education.map(edu => (
-          <li class="flex items-center gap-3 text-text-secondary">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
-              <img src={edu.logo} alt={edu.alt} width={edu.w} height={edu.h} class="max-h-8 max-w-8 object-contain" loading="lazy">
-            </div>
-            <span>{edu.name}</span>
-            {edu.pending && <span class="shrink-0 whitespace-nowrap rounded-full bg-brand-green/15 px-2 py-0.5 text-xs font-medium text-brand-green">{t('about.pending')}</span>}
-          </li>
-        ))}
-      </ul>
+      <div>
+        <h3 class="mb-6 font-display text-xl font-semibold text-text-primary">{t('about.education')}</h3>
+        <ul class="flex flex-col gap-4">
+          {education.map(edu => (
+            <li class="flex items-center gap-3 text-text-secondary">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+                <img src={edu.logo} alt={edu.alt} width={edu.w} height={edu.h} class="max-h-8 max-w-8 object-contain" loading="lazy">
+              </div>
+              <span>{edu.name}</span>
+              {edu.pending && <span class="shrink-0 whitespace-nowrap rounded-full bg-brand-green/15 px-2 py-0.5 text-xs font-medium text-brand-green">{t('about.pending')}</span>}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </div>
 </section>
