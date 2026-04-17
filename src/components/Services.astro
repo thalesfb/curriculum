@@ -35,7 +35,7 @@ const services = [
     </button>
   </div>
 
-  <div class="carousel-track flex gap-6 overflow-x-auto scroll-snap-x-mandatory px-20 pb-4 max-xl:px-12 max-md:gap-4 max-md:px-6 scrollbar-none" style="scroll-padding-left: 80px;">
+  <div class="carousel-track flex gap-6 overflow-x-auto scroll-snap-x-mandatory px-20 pb-4 max-xl:px-12 max-md:gap-4 max-md:px-6 scrollbar-none [justify-content:safe_center]" style="scroll-padding-left: 80px;">
     {services.map(s => (
       <article class="flex-none w-[364px] scroll-snap-start rounded-xl border border-brand-green bg-bg-card p-12 flex flex-col items-center text-center gap-3 max-md:w-[290px] max-md:p-8">
         <img src={s.icon} alt="" width="48" height="48" class="mb-2">
