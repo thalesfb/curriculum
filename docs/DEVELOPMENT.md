@@ -3,7 +3,8 @@
 ## Pré-requisitos
 
 - Node.js 22+
-- Python 3.12+ (para gerar rascunhos locais de PDF)
+- Python 3.10+ e Typst 0.15.1 (para gerar PDFs)
+- Poppler (`pdfinfo`, `pdffonts`, `pdftotext`) para validar PDFs localmente
 - Docker (para devcontainer)
 - GitHub CLI (`gh`)
 
@@ -27,11 +28,11 @@ npm run build
 # Preview do build
 npm run preview
 
-# Gerar rascunhos locais de PDF (Word no Windows)
-npm run generate:pdfs
+# Gerar rascunhos locais de PDF (saída temporária por padrão)
+npm run cv:pdf
 
 # Publicar explicitamente PDFs revisados em public/refs
-npm run generate:pdfs -- --output-dir public/refs --publish-public-refs
+npm run cv:pdf -- --publish-public-refs
 ```
 
 ## Devcontainer
@@ -69,9 +70,9 @@ git worktree remove ../curriculum-feat-dark-mode
 | `npm run preview` | Preview local do build |
 | `npm run lint` | ESLint |
 | `npm run format` | Prettier |
-| `npm run generate:pdfs` | Gera rascunhos PDF em pasta temporária; não substitui `public/refs` |
+| `npm run cv:pdf` | Gera rascunhos PDF em pasta temporária; não substitui `public/refs` |
 
-O gerador usa `data/cv.json` e o DOCX como entradas de rascunho. Os PDFs publicados são artefatos aprovados e seu conteúdo não é regenerado no build nem na CI. Substituir `public/refs` exige revisão do conteúdo e as flags `--output-dir public/refs --publish-public-refs`. Não há gerador de CV Markdown neste repositório.
+O gerador usa `data/cv.json` e `cv/clean.typ`; os arquivos DOCX são referências históricas. A saída padrão é temporária e os PDFs públicos não são regenerados no build nem publicados pela CI. Substituir `public/refs` exige revisão visual e a flag `--publish-public-refs`. Veja a [ADR-0011](adr/0011-geracao-pdf-cv-typst.md) e a [proposta do PDF](proposals/0001-cv-pdf.md).
 
 ## Conventional Commits
 

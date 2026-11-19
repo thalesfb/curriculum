@@ -54,7 +54,7 @@ Every operation falls into one of three levels:
 - Create/modify Astro components following ADR-0004 (Figma -> CSS -> Tailwind)
 - Update Figma design system (variables, components, bindings) via Figma MCP
 - Fix CSS using custom properties (never hardcode colors)
-- Generate PDF previews explicitly with `npm run generate:pdfs`; publishing to `public/refs` requires `--publish-public-refs`
+- Generate PDF previews explicitly with `npm run cv:pdf`; publishing to `public/refs` requires `--publish-public-refs`
 - Refactor code for KISS/YAGNI/DRY compliance (ADR-0006, ADR-0009)
 - Update documentation (docs/, AGENTS.md)
 - Create git commits with conventional commit format

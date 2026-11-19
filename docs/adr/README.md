@@ -16,6 +16,7 @@ Registro de decisões arquiteturais do projeto **Portfolio Thales Ferreira** (th
 | 0008 | [Botão flutuante de WhatsApp](0008-whatsapp-floating-button.md) | Accepted | 2026-03-28 |
 | 0009 | [Princípios: Clean Code, YAGNI, DRY](0009-principios-clean-code-yagni-dry.md) | Accepted | 2026-03-28 |
 | 0010 | [Google Analytics 4](0010-google-analytics.md) | Accepted | 2026-04-17 |
+| 0011 | [Geração dos PDFs do CV com Typst](0011-geracao-pdf-cv-typst.md) | Accepted | 2026-11-19 |
 
 ## Criando uma nova ADR
 
