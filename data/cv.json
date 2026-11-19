@@ -115,6 +115,10 @@
         "es": "Machine Learning & Datos"
       },
       "items": ["Scikit-learn", "TensorFlow", "XGBoost", "Pandas", "Power BI (DAX/M)", "Modelagem de Dados", "Pipelines de Treinamento"],
+      "itemTranslations": {
+        "Modelagem de Dados": { "en": "Data Modeling", "es": "Modelado de Datos" },
+        "Pipelines de Treinamento": { "en": "Training Pipelines", "es": "Pipelines de Entrenamiento" }
+      },
       "roles": ["data-engineer", "management"]
     },
     "devops-infra": {
@@ -133,6 +137,9 @@
         "es": "Ingenieria de Software"
       },
       "items": ["RESTful APIs", "TDD (Test-Driven Development)", "Git", "Arquitetura de microsservicos"],
+      "itemTranslations": {
+        "Arquitetura de microsservicos": { "en": "Microservices Architecture", "es": "Arquitectura de microservicios" }
+      },
       "roles": ["data-engineer", "backend", "devops"]
     },
     "networking": {
@@ -380,6 +387,10 @@
       "name": { "pt": "Python & Django REST Framework (157h)", "en": "Python & Django REST Framework (157h)", "es": "Python & Django REST Framework (157h)" },
       "provider": "Alura",
       "details": "TDD, Validacoes, Deploy AWS",
+      "detailsByLanguage": {
+        "en": "TDD, Validations, AWS Deployment",
+        "es": "TDD, Validaciones, Despliegue en AWS"
+      },
       "roles": ["data-engineer", "backend"]
     },
     {
