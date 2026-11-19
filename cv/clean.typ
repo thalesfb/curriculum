@@ -12,6 +12,10 @@
 #let date(d) = if d == none { L("Atual", "Present", "Actualidad") } else { month(d) + (if lang == "en" { " " } else { " de " }) + d.slice(0, 4) }
 #let period(p) = date(p.start) + " – " + date(p.end)
 #let localized(x) = if type(x) == dictionary { x.at(lang, default: x.at("pt", default: "")) } else { x }
+#let cert-provider(item) = {
+  let value = item.at("providerByLanguage", default: (:)).at(lang, default: item.at("provider", default: none))
+  if value == none or ("Não informado", "Not specified", "No especificado").contains(value) { none } else { value }
+}
 #let has-role(x) = x.roles.contains(role)
 #let filtered(xs) = xs.filter(x => has-role(x))
 #let green = rgb("238459")
@@ -54,12 +58,15 @@
   #block(breakable: false)[
     #text(localized(item.at("nameByLanguage", default: item.name)), weight: "semibold", fill: heading)
     #if item.at("repo", default: none) != none [#h(4pt)#link("https://" + item.repo)[#text(item.repo, size: 9pt)]]
-    #linebreak()
-    #if item.at("institution", default: none) != none [#text(item.institution, size: 9pt, fill: muted)]
-    #if item.at("period", default: none) != none [#text(" · " + localized(item.period), size: 9pt, fill: muted)]
-    #if item.at("participation", default: none) != none [#text(" · " + localized(item.participation), size: 9pt, fill: muted)]
-    #if item.at("coordinator", default: none) != none [#text(" · " + item.coordinator, size: 9pt, fill: muted)]
-    #linebreak()
+    #v(1pt)
+    #let metadata = (
+      item.at("institution", default: none),
+      if item.at("period", default: none) != none { localized(item.period) } else { none },
+      if item.at("participation", default: none) != none { localized(item.participation) } else { none },
+      item.at("coordinator", default: none),
+    ).filter(value => value != none)
+    #if metadata.len() > 0 [#text(metadata.join(" · "), size: 9pt, fill: muted)]
+    #v(2pt)
     #text(localized(item.description))
     #if item.at("supervision", default: none) != none [#linebreak()#text(localized(item.supervision), size: 9pt, fill: muted)]
     #if item.at("technologies", default: ()).len() > 0 [#linebreak()#text(item.technologies.join(" · "), size: 9pt, fill: muted)]
@@ -74,13 +81,19 @@
 
 #section(L("FORMAÇÃO", "EDUCATION", "FORMACIÓN"))
 #for item in filtered(cv.education) [
-  #text(localized(item.degree), weight: "semibold", fill: heading)#text(" | " + item.institution + ", " + localized(item.location), size: 10pt)
-  #h(8pt)#text(period(item.period), size: 10pt, fill: muted)#linebreak()
+  #grid(
+    columns: (1fr, auto),
+    column-gutter: 8pt,
+    align: (left + top, right + top),
+    [#text(localized(item.degree), weight: "semibold", fill: heading)#text(" | " + item.institution + ", " + localized(item.location), size: 10pt)],
+    box[#text(period(item.period), size: 10pt, fill: muted)],
+  )
+  #v(2pt)
 ]
 
 #section(L("CERTIFICAÇÕES", "CERTIFICATIONS", "CERTIFICACIONES"))
 #for item in filtered(cv.certifications) [
-  #bullet[#text(localized(item.name), weight: "semibold")#if item.at("provider", default: none) != none [#text(" · " + item.at("providerByLanguage", default: (:)).at(lang, default: item.provider), fill: muted)]#if item.at("date", default: none) != none [#text(" · " + date(item.date), fill: muted)]#if item.at("details", default: none) != none [#linebreak()#text("— " + item.at("detailsByLanguage", default: (:)).at(lang, default: item.details), size: 10pt)]]
+  #bullet[#text(localized(item.name), weight: "semibold")#if cert-provider(item) != none [#text(" · " + cert-provider(item), fill: muted)]#if item.at("date", default: none) != none [#text(" · " + date(item.date), fill: muted)]#if item.at("details", default: none) != none [#linebreak()#text("— " + item.at("detailsByLanguage", default: (:)).at(lang, default: item.details), size: 10pt)]]
   #v(1pt)
 ]
 

@@ -43,13 +43,15 @@ def source_texts(language):
         texts += item.get("technologies", [])
     for item in DATA["education"]:
         if ROLE in item.get("roles", []):
-            texts += [localized(item["degree"], language), item["institution"], localized(item["location"], language)]
+            for value in (localized(item["degree"], language), item["institution"], localized(item["location"], language)):
+                texts.extend(tokens(value))
     for item in DATA["certifications"]:
         if ROLE not in item.get("roles", []):
             continue
         texts.append(localized(item["name"], language))
-        if item.get("provider"):
-            texts.append(item.get("providerByLanguage", {}).get(language, item["provider"]))
+        provider = item.get("providerByLanguage", {}).get(language, item.get("provider"))
+        if provider and provider not in ("Não informado", "Not specified", "No especificado"):
+            texts.append(provider)
         if item.get("details"):
             texts.append(item.get("detailsByLanguage", {}).get(language, item["details"]))
     for skill in DATA["skills"].values():
@@ -191,6 +193,41 @@ class GeneratedPdfTests(unittest.TestCase):
                 ).stdout
                 for url in expected_urls:
                     self.assertIn(url, urls)
+
+    def test_certification_provider_placeholders_are_not_published(self):
+        placeholders = ("Não informado", "Not specified", "No especificado")
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                extracted = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", str(self.output_dir / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout
+                for placeholder in placeholders:
+                    self.assertNotIn(placeholder, extracted)
+
+    def test_education_periods_are_kept_unbroken(self):
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                extracted = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", "-raw", str(self.output_dir / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout
+                normalized_lines = [" ".join(tokens(line)) for line in extracted.splitlines()]
+                for item in DATA["education"]:
+                    if ROLE not in item.get("roles", []):
+                        continue
+                    expected_period = " ".join(tokens(
+                        format_date(item["period"]["start"], language)
+                        + " " + format_date(item["period"]["end"], language)
+                    ))
+                    matching_lines = [line for line in normalized_lines if expected_period in line]
+                    self.assertTrue(matching_lines, f"Wrapped education period for {language}: {item['degree']}")
 
 
 class OutputProtectionTests(unittest.TestCase):
