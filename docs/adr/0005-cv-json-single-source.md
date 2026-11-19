@@ -40,13 +40,13 @@ Usar `data/cv.json` como fonte de conteúdo do site e entrada do gerador explíc
 ### Consumidores
 
 1. **Astro Content Collections** — `file()` loader lê cv.json com validação Zod
-2. **`cv/clean.typ`** — Formata o JSON em um currículo clean, multilíngue e filtrado pela role
+2. **`cv/cv.typ`** — Formata o JSON com imprecv, multilíngue e filtrado pela role
 3. **`scripts/build_cv_pdf.py`** — Chama Typst para gerar rascunhos e protege `public/refs` por padrão
 4. **Figma i18n variables** — Textos do design espelham o JSON
 
 ### Geração dos PDFs
 
-`cv/clean.typ` consome `data/cv.json` por caminho recebido via `sys.inputs`, e usa Inter 400, 400 itálico, 600 e 700 com licença SIL Open Font License. O script Python usa Typst 0.15.1 com fontes locais e sistema de fontes desabilitado. O padrão grava em pasta temporária; publicar exige `--publish-public-refs`. A CI valida a geração em diretório temporário, sem publicar nem commitar PDFs. Os DOCX em `refs/template/` permanecem como referências históricas e não são entradas do gerador.
+`cv/cv.typ` consome `data/cv.json` por caminho recebido via `sys.inputs`, usando o template imprecv 1.0.1 vendorizado sob Apache-2.0 e Libertinus Serif sob SIL Open Font License. O script Python usa Typst 0.15.1 com fontes locais e sistema de fontes desabilitado. O padrão grava em pasta temporária; publicar exige `--publish-public-refs`. A CI valida a geração em diretório temporário, sem publicar nem commitar PDFs. Os DOCX em `refs/template/` permanecem como referências históricas e não são entradas do gerador.
 
 ### Implementação atual (2026-11-19)
 
@@ -74,6 +74,6 @@ Usar `data/cv.json` como fonte de conteúdo do site e entrada do gerador explíc
 ## Referências
 
 - `data/cv.json` — Arquivo de dados
-- `cv/clean.typ` — template Typst dos PDFs PT/EN/ES
+- `cv/cv.typ` — template imprecv localizado dos PDFs PT/EN/ES
 - `scripts/build_cv_pdf.py` — geração explícita e validada dos PDFs
 - `refs/template/*.docx` — referências históricas, fora do pipeline atual

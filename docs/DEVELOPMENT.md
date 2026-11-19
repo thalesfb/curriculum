@@ -3,7 +3,7 @@
 ## Pré-requisitos
 
 - Node.js 22+
-- Python 3.10+ e Typst 0.15.1 (para gerar PDFs)
+- Python 3.12+ e Typst 0.15.1 (para gerar PDFs)
 - Poppler (`pdfinfo`, `pdffonts`, `pdftotext`) para validar PDFs localmente
 - Docker (para devcontainer)
 - GitHub CLI (`gh`)
@@ -72,7 +72,7 @@ git worktree remove ../curriculum-feat-dark-mode
 | `npm run format` | Prettier |
 | `npm run cv:pdf` | Gera rascunhos PDF em pasta temporária; não substitui `public/refs` |
 
-O gerador usa `data/cv.json` e `cv/clean.typ`; os arquivos DOCX são referências históricas. A saída padrão é temporária e os PDFs públicos não são regenerados no build nem publicados pela CI. Substituir `public/refs` exige revisão visual e a flag `--publish-public-refs`. Veja a [ADR-0011](adr/0011-geracao-pdf-cv-typst.md) e a [proposta do PDF](proposals/0001-cv-pdf.md).
+O gerador usa `data/cv.json` e `cv/cv.typ`; os arquivos DOCX são referências históricas. A saída padrão é temporária e os PDFs públicos não são regenerados no build nem publicados pela CI. Substituir `public/refs` exige revisão visual e a flag `--publish-public-refs`. Veja a [ADR-0011](adr/0011-geracao-pdf-cv-typst.md) e a [proposta do PDF](proposals/0001-cv-pdf.md).
 
 ## Conventional Commits
 

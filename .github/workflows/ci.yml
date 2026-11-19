@@ -18,7 +18,7 @@ on:
       - 'tsconfig.json'
       - '.github/workflows/ci.yml'
   pull_request:
-    branches: [main, feat/s1-cv-content]
+    branches: [main]
   workflow_dispatch:
 
 jobs:

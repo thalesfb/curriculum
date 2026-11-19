@@ -60,7 +60,7 @@
 
 - Node.js `^22.23.4 || >=24.10.0`
 - npm
-- Python 3.10+ and Typst 0.15.1 (only when regenerating the downloadable PDFs)
+- Python 3.12+ and Typst 0.15.1 (only when regenerating the downloadable PDFs)
 - Poppler tools (`pdfinfo`, `pdffonts`, `pdftotext`) for local PDF validation
 
 ### Development
@@ -83,7 +83,7 @@ npm run dev        # http://localhost:4321
 | `npm run test:watch` | Tests in watch mode |
 | `npm run cv:pdf` | Generate three local PDF drafts from `data/cv.json` |
 
-The Typst generator writes to a temporary folder by default. After reviewing all three two-page PDFs, replace `public/refs` only with `npm run cv:pdf -- --publish-public-refs`. The site build and CI never publish or commit generated PDFs. See [ADR-0011](docs/adr/0011-geracao-pdf-cv-typst.md) for fidelity criteria and the [PDF proposal](docs/proposals/0001-cv-pdf.md) for the decision rationale. Historical DOCX templates remain in `refs/template/` but are not used by the generator.
+The Typst generator writes to a temporary folder by default. After reviewing all three PDFs (two pages each in the current release), replace `public/refs` only with `npm run cv:pdf -- --publish-public-refs`. The site build and CI never publish or commit generated PDFs. See [ADR-0011](docs/adr/0011-geracao-pdf-cv-typst.md) for fidelity criteria and the [PDF proposal](docs/proposals/0001-cv-pdf.md) for the decision rationale. Historical DOCX templates remain in `refs/template/` but are not used by the generator.
 
 ---
 
@@ -142,7 +142,7 @@ curriculum/
 │   ├── DEPLOYMENT.md      Deploy & NGINX docs
 │   ├── DEVELOPMENT.md     Dev setup & workflows
 │   └── SECURITY.md        Security practices
-├── cv/                    Typst CV template and licensed Inter fonts
+├── cv/                    Typst CV template, vendored imprecv, and Libertinus Serif fonts
 ├── public/
 │   ├── icons/             Tech skill icons (SVG)
 │   ├── img/               UI icons + profile photo
@@ -185,7 +185,7 @@ npm run test:watch   # Watch mode
 python -m unittest discover -s scripts/tests -v
 ```
 
-The Python PDF tests validate two-page output, embedded Inter fonts, extracted content, accents, and active links in all three languages. Install Typst 0.15.1 and Poppler locally to run the PDF checks; CI installs both automatically. Without those tools, only the integration tests skip with an explicit reason.
+The Python PDF tests validate two-page output, embedded Libertinus Serif fonts, extracted content, accents, and active links in all three languages. Install Typst 0.15.1 and Poppler locally to run the PDF checks; CI installs both automatically. Without those tools, only the integration tests skip with an explicit reason.
 
 ---
 
@@ -202,3 +202,5 @@ The Python PDF tests validate two-page output, embedded Inter fonts, extracted c
 ## 📄 License
 
 Copyright 2026 Thales Ferreira. All rights reserved.
+
+The vendored CV template is licensed under Apache-2.0 (see `cv/vendor/imprecv/LICENSE` and `NOTICE`). Libertinus Serif is licensed under SIL OFL 1.1 (see `cv/fonts/OFL.txt`).
