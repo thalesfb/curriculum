@@ -109,6 +109,7 @@ const roleLabels: Record<string, string> = {
       titleEl.textContent = rolesData[key];
       descEl.textContent = descsData[key];
       roleSelector.value = key;
+      document.dispatchEvent(new CustomEvent('cv:role-change', { detail: { role: key } }));
     }
 
     // Auto-rotate: 10s default, 20s after manual selection

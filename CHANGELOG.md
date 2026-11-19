@@ -76,7 +76,7 @@
 
 ### Features
 
-* **about:** add CCNA and pending badges for education ([2021c81](https://github.com/thalesfb/curriculum/commit/2021c81fdcbdb529f19a0c77d0705908ccad663f))
+* **about:** add pending education badges ([2021c81](https://github.com/thalesfb/curriculum/commit/2021c81fdcbdb529f19a0c77d0705908ccad663f))
 * **hero:** add Frontend role and fix UI regressions ([579aeb8](https://github.com/thalesfb/curriculum/commit/579aeb81cf962c4b944897adb55440b56b7640ed)), closes [#0F172A](https://github.com/thalesfb/curriculum/issues/0F172A)
 * **data:** add heroSubtitle field for concise role descriptions ([7a182d5](https://github.com/thalesfb/curriculum/commit/7a182d5995eaf30e38b18fd0a92533efdaf032f4))
 * implement CI/CD workflow with testing, building, and deployment steps ([178c92c](https://github.com/thalesfb/curriculum/commit/178c92cac413d0766f994867abef40749fb23050))
