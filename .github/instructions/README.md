@@ -1,6 +1,6 @@
 # AI Agent Instructions
 
-Categorized instructions for AI agents (Claude Code, GitHub Copilot).
+Categorized instructions for AI agents.
 
 | File | Category | Purpose |
 | ---- | -------- | ------- |

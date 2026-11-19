@@ -2,7 +2,7 @@
 
 **Projeto:** Portfolio Thales Ferreira — thales.optimizr.site
 **Figma:** `UXq2erOANKQqaWegZQ9nk1`
-**Autor:** Thales Ferreira | Assistido por Claude Code
+**Autor:** Thales Ferreira
 
 ---
 
