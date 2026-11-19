@@ -4,7 +4,7 @@
 
 [![CI/CD](https://img.shields.io/github/actions/workflow/status/thalesfb/curriculum/ci.yml?branch=main&label=CI%2FCD&style=flat-square)](https://github.com/thalesfb/curriculum/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/actions/workflow/status/thalesfb/curriculum/release.yml?branch=main&label=Release&style=flat-square)](https://github.com/thalesfb/curriculum/actions/workflows/release.yml)
-[![Astro](https://img.shields.io/badge/Astro-6.1.1-ff5d01?style=flat-square&logo=astro)](https://astro.build)
+[![Astro](https://img.shields.io/badge/Astro-7.4.13-ff5d01?style=flat-square&logo=astro)](https://astro.build)
 [![Tailwind](https://img.shields.io/badge/Tailwind_CSS-4.2-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com)
 
 > 🔗 **Quick Navigation**: [Live](#-links) • [Quick Start](#-quick-start) • [Architecture](#️-architecture) • [Documentation](#-documentation)
@@ -26,7 +26,7 @@
 
 | Layer | Technology | Details |
 | ----- | ---------- | ------- |
-| Framework | **Astro 6.1** | Zero JS default, static output |
+| Framework | **Astro 7.4** | Zero JS default, static output |
 | Styling | **Tailwind CSS 4** | CSS custom properties, class-based dark mode |
 | Interactivity | **Vanilla JS** | CSS-first, JS only when needed |
 | i18n | **Astro Routing** | PT / EN / ES with prefix routing |
@@ -58,7 +58,7 @@
 
 ### Prerequisites
 
-- Node.js 22+
+- Node.js `^22.23.4 || >=24.10.0`
 - npm
 
 ### Development
