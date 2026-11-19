@@ -353,7 +353,7 @@
       },
       "institution": "Instituto Federal Catarinense",
       "location": "Videira",
-      "period": { "start": "2021-02", "end": null },
+      "period": { "start": "2023-02", "end": null },
       "status": { "pt": "Em andamento", "en": "In Progress", "es": "En curso" },
       "roles": ["data-engineer", "backend", "devops", "management"]
     },

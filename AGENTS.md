@@ -10,7 +10,7 @@ Governance and instructions for AI agents (Claude Code, GitHub Copilot) working 
 
 **Project:** Portfolio & CV website for Thales Ferreira
 **Domain:** thales.optimizr.site
-**Stack:** Astro 5/6 + Tailwind CSS 4 + Vanilla JS
+**Stack:** Astro 7 + Tailwind CSS 4 + Vanilla JS
 **Owner:** Thales Ferreira (Full Stack Data Engineer | Python & ML | DevOps)
 **Language:** Brazilian Portuguese (pt-BR). Respond in Portuguese unless asked otherwise.
 
@@ -116,7 +116,7 @@ curriculum/
 
 | Layer | Technology | ADR |
 |-------|-----------|-----|
-| Framework | Astro 5/6 (zero JS default) | ADR-0001 |
+| Framework | Astro 7 (zero JS default) | ADR-0001 |
 | Styling | Tailwind CSS 4 (`darkMode: "selector"`) | ADR-0001 |
 | Interactivity | Vanilla JS (CSS-first) | ADR-0006 |
 | i18n | Astro routing `/pt/`, `/en/`, `/es/` | ADR-0003 |
