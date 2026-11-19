@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "data" / "cv.json"
-TEMPLATE_PATH = ROOT / "cv" / "clean.typ"
+TEMPLATE_PATH = ROOT / "cv" / "cv.typ"
 FONT_PATH = ROOT / "cv" / "fonts"
 PUBLIC_REFS = (ROOT / "public" / "refs").resolve()
 TYPST_VERSION = "0.15.1"
@@ -71,7 +71,7 @@ def compile_pdf(typst: str, language: str, role: str, destination: Path) -> None
         "--input",
         f"role={role}",
         "--input",
-        "cv-data=../data/cv.json",
+        "path=../data/cv.json",
         str(TEMPLATE_PATH),
         str(destination),
     ]

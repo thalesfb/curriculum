@@ -121,12 +121,14 @@ class GeneratedPdfTests(unittest.TestCase):
     def tearDownClass(cls):
         cls.temp_dir.cleanup()
 
-    def test_each_language_has_two_pages_and_only_embedded_inter_fonts(self):
+    def test_each_language_uses_embedded_libertinus_and_fits_in_two_pages(self):
         for language, filename in OUTPUTS.items():
             with self.subTest(language=language):
                 pdf = self.output_dir / filename
                 info = subprocess.run(["pdfinfo", str(pdf)], check=True, capture_output=True, text=True).stdout
-                self.assertRegex(info, r"(?m)^Pages:\s+2$")
+                page_match = re.search(r"(?m)^Pages:\s+(\d+)$", info)
+                self.assertIsNotNone(page_match, info)
+                self.assertEqual(int(page_match.group(1)), 2, info)
 
                 fonts = subprocess.run(["pdffonts", str(pdf)], check=True, capture_output=True, text=True).stdout
                 font_rows = [
@@ -137,9 +139,28 @@ class GeneratedPdfTests(unittest.TestCase):
                 self.assertTrue(font_rows, fonts)
                 for row in font_rows:
                     columns = row.split()
-                    self.assertGreaterEqual(len(columns), 7, row)
-                    self.assertIn("inter", columns[0].casefold(), row)
-                    self.assertEqual(columns[4].casefold(), "yes", row)
+                    self.assertGreaterEqual(len(columns), 8, row)
+                    self.assertIn("libertinusserif", columns[0].casefold(), row)
+                    self.assertRegex(row, r"\byes\s+yes\s+yes\s+\d+\s+\d+$", row)
+
+    def test_sections_follow_summary_education_experience_order(self):
+        section_order = {
+            "pt": ("SUMÁRIO", "FORMAÇÃO", "EXPERIÊNCIA", "PROJETOS", "COMPETÊNCIAS TÉCNICAS", "CERTIFICAÇÕES", "IDIOMAS"),
+            "en": ("SUMMARY", "EDUCATION", "EXPERIENCE", "PROJECTS", "TECHNICAL SKILLS", "CERTIFICATIONS", "LANGUAGES"),
+            "es": ("RESUMEN", "FORMACIÓN", "EXPERIENCIA", "PROYECTOS", "COMPETENCIAS TÉCNICAS", "CERTIFICACIONES", "IDIOMAS"),
+        }
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                extracted = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", str(self.output_dir / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout
+                lines = [line.strip() for line in extracted.splitlines()]
+                positions = [lines.index(section) for section in section_order[language]]
+                self.assertEqual(positions, sorted(positions), extracted)
 
     def test_each_language_contains_all_selected_content_without_invented_text(self):
         section_labels = {
