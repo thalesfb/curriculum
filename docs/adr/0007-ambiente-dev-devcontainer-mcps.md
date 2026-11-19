@@ -41,7 +41,7 @@ Usar **Dev Containers** (VS Code) para padronizar o ambiente de desenvolvimento.
 }
 ```
 
-**Racional:** Qualquer pessoa (ou CI) clona o repo e tem o mesmo ambiente. Node 22, Python (para `generate_cvs.py`), GitHub CLI, extensões do Astro e Tailwind.
+**Racional:** Qualquer pessoa (ou CI) clona o repo e tem o mesmo ambiente. Node 22, Python para rascunhos PDF locais, GitHub CLI, extensões do Astro e Tailwind.
 
 ### 2. Git Worktrees
 

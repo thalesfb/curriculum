@@ -1,4 +1,4 @@
-# ADR-0005: Dados do CV como JSON (Single Source of Truth)
+# ADR-0005: Dados do site e rascunhos de CV em JSON
 
 ## Status
 
@@ -10,11 +10,11 @@ Accepted
 
 ## Contexto
 
-O portfolio exibe dados profissionais (experiência, projetos, skills, educação) que também alimentam CVs em três idiomas. Precisamos de uma fonte única de dados para o site e os CVs, mantendo a apresentação visual existente dos PDFs.
+O portfolio exibe dados profissionais (experiência, projetos, skills, educação). O site e os PDFs publicados precisam manter fontes de conteúdo aprovadas e a apresentação visual existente.
 
 ## Decisão
 
-Usar `data/cv.json` como **single source of truth** para todo conteúdo profissional.
+Usar `data/cv.json` como fonte de conteúdo do site e como entrada de rascunhos de PDF. Os PDFs publicados são artefatos aprovados e não são automaticamente regenerados a partir do JSON.
 
 ### Estrutura do JSON
 
@@ -40,21 +40,26 @@ Usar `data/cv.json` como **single source of truth** para todo conteúdo profissi
 ### Consumidores
 
 1. **Astro Content Collections** — `file()` loader lê cv.json com validação Zod
-2. **`generate_cvs.py`** — Script Python gera as variantes Markdown para ATS
-3. **`scripts/generate_cv_pdfs.py`** — Preenche o DOCX aprovado com os dados localizados e exporta os três PDFs via Microsoft Word no Windows
-4. **Figma i18n variables** — Textos do design espelham o JSON
+2. **`scripts/generate_cv_pdfs.py`** — Gera rascunhos de PDF a partir do JSON e do DOCX via Microsoft Word no Windows
+3. **Figma i18n variables** — Textos do design espelham o JSON
 
 ### PDFs com layout fixo
 
-O arquivo `refs/template/curriculo_thales_ferreira_pt.docx` é o modelo visual editável e `data/cv.json` é a fonte do conteúdo. O gerador modifica somente os textos nos parágrafos existentes e mantém estilos, fontes, espaçamento e estrutura do DOCX. O Microsoft Word exporta as variantes PT, EN e ES. A geração falha antes de atualizar `public/refs` se a paginação sair das três páginas ou um parágrafo de experiência se separar do primeiro bullet; não reduz fonte, margens ou espaçamento para acomodar conteúdo. A geração e a conferência visual são locais em Windows; a CI Linux não executa Word.
+O arquivo `refs/template/curriculo_thales_ferreira_pt.docx` é apenas a entrada do gerador atual; não reproduz o conteúdo aprovado dos PDFs publicados. A geração é uma operação local explícita: o padrão grava em pasta temporária. Substituir `public/refs` exige `--output-dir public/refs --publish-public-refs`, revisão humana e aprovação do conteúdo. A CI Linux e o build Astro não executam o gerador.
+
+### Implementação atual (2026-11-19)
+
+- `data/cv.json` alimenta o site e pode alimentar rascunhos do gerador; ainda não está alinhado ao conteúdo aprovado dos PDFs.
+- Os PDFs em `public/refs` são a fonte aprovada do conteúdo publicado do currículo.
+- Não há gerador de variantes Markdown nem diretório `output/` versionado neste repositório.
 
 ## Consequências
 
 ### Positivas
 
-- Atualizar dados em um lugar atualiza site + CVs + Figma
+- Atualizar `data/cv.json` atualiza os consumidores que o leem; os PDFs aprovados exigem revisão separada
 - Validação de schema com Zod em build time
-- Scripts Python geram variantes Markdown e os três PDFs visuais a partir da mesma fonte
+- O gerador de PDF permite produzir rascunhos locais a partir do DOCX
 - Formato JSON é versionável (git diff legível)
 
 ### Negativas
@@ -65,7 +70,5 @@ O arquivo `refs/template/curriculo_thales_ferreira_pt.docx` é o modelo visual e
 ## Referências
 
 - `data/cv.json` — Arquivo de dados
-- `generate_cvs.py` — Script gerador de CVs
-- `output/` — 12 CVs gerados
-- `refs/template/curriculo_thales_ferreira_pt.docx` — modelo dos PDFs
+- `refs/template/curriculo_thales_ferreira_pt.docx` — entrada do gerador de rascunhos, não fonte aprovada dos PDFs
 - `scripts/generate_cv_pdfs.py` — gerador dos PDFs PT/EN/ES
