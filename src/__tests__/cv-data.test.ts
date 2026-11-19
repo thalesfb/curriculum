@@ -161,8 +161,8 @@ describe('cv.json schema validation', () => {
   it('every project has required fields in all languages', () => {
     for (const proj of cvData.projects) {
       expect(proj.name).toBeTruthy();
-      expect(proj.repo).toBeTruthy();
-      expect(proj.technologies.length).toBeGreaterThan(0);
+      if (proj.repo) expect(proj.repo).toBeTruthy();
+      expect(Array.isArray(proj.technologies)).toBe(true);
       for (const lang of LANGUAGES) {
         expect((proj.description as Record<string, string>)[lang], `Missing description ${lang} for ${proj.name}`).toBeTruthy();
       }
@@ -180,6 +180,43 @@ describe('cv.json schema validation', () => {
       en: 'Personalized Mathematics Teaching: Opportunities and Computational Techniques',
       es: 'Enseñanza Personalizada de Matemáticas: Oportunidades y Técnicas Computacionales',
     });
+    expect(project?.supervision).toEqual({
+      pt: 'Orientador: Rafael Zanin; coorientador: Manassés Ribeiro.',
+      en: 'Advisor: Rafael Zanin; co-advisor: Manassés Ribeiro.',
+      es: 'Tutor: Rafael Zanin; cotutor: Manassés Ribeiro.',
+    });
+  });
+
+  it('includes both Lattes research projects with localized metadata and sourced activities', () => {
+    const infrastructure = cvData.projects.find(project => project.name === 'Infraestrutura de comunicação industrial: implantação e integração de redes e protocolos para automação de processos');
+    const platform = cvData.projects.find(project => project.name === 'Plataforma de Decisão Compartilhada Humano-Máquina para Processos Industriais');
+    expect(infrastructure?.nameByLanguage).toEqual({
+      pt: 'Infraestrutura de comunicação industrial: implantação e integração de redes e protocolos para automação de processos',
+      en: 'Industrial Communication Infrastructure: Deployment and Integration of Networks and Protocols for Process Automation',
+      es: 'Infraestructura de comunicación industrial: implementación e integración de redes y protocolos para la automatización de procesos',
+    });
+    expect(platform?.nameByLanguage).toEqual({
+      pt: 'Plataforma de Decisão Compartilhada Humano-Máquina para Processos Industriais',
+      en: 'Human-Machine Shared Decision Platform for Industrial Processes',
+      es: 'Plataforma de Decisión Compartida Humano-Máquina para Procesos Industriales',
+    });
+    for (const project of [infrastructure, platform]) {
+      expect(project?.period).toEqual({ pt: '2026–atual', en: '2026–present', es: '2026–actualidad' });
+      expect(project?.participation).toEqual({ pt: 'Estudante voluntário', en: 'Volunteer student', es: 'Estudiante voluntario' });
+      expect(project?.coordinator).toBe('Frederico de Oliveira Santos');
+      expect(project?.institution).toBe('IFC Campus Videira');
+      expect(project?.sourceUrl).toBe('http://lattes.cnpq.br/9042504768658064');
+      expect(project?.technologies).toEqual([]);
+      for (const lang of LANGUAGES) expect(project?.description[lang]).toBeTruthy();
+    }
+    expect(infrastructure?.roles).toEqual(['devops', 'data-engineer']);
+    expect(infrastructure?.description.pt).toContain('cabeamento e equipamentos');
+    expect(infrastructure?.description.en).toContain('cabling and equipment');
+    expect(infrastructure?.description.es).toContain('cableado y equipos');
+    expect(platform?.roles).toEqual(['data-engineer', 'backend']);
+    expect(platform?.description.pt).toContain('deliberação multiagente');
+    expect(platform?.description.en).toContain('multi-agent deliberation');
+    expect(platform?.description.es).toContain('deliberación multiagente');
   });
 
   it('keeps English text free of unsupported zero-downtime claims', () => {

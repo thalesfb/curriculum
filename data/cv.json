@@ -565,6 +565,11 @@
         "pt": "Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais",
         "en": "Personalized Mathematics Teaching: Opportunities and Computational Techniques",
         "es": "Enseñanza Personalizada de Matemáticas: Oportunidades y Técnicas Computacionales"
+      },
+      "supervision": {
+        "pt": "Orientador: Rafael Zanin; coorientador: Manassés Ribeiro.",
+        "en": "Advisor: Rafael Zanin; co-advisor: Manassés Ribeiro.",
+        "es": "Tutor: Rafael Zanin; cotutor: Manassés Ribeiro."
       }
     },
     {
@@ -618,6 +623,68 @@
         "pt": "Implementação de algoritmos e estruturas de dados fundamentais em C.",
         "en": "Implementation of algorithms and fundamental data structures in C.",
         "es": "Implementación de algoritmos y estructuras de datos fundamentales en C."
+      }
+    },
+    {
+      "name": "Infraestrutura de comunicação industrial: implantação e integração de redes e protocolos para automação de processos",
+      "nameByLanguage": {
+        "pt": "Infraestrutura de comunicação industrial: implantação e integração de redes e protocolos para automação de processos",
+        "en": "Industrial Communication Infrastructure: Deployment and Integration of Networks and Protocols for Process Automation",
+        "es": "Infraestructura de comunicación industrial: implementación e integración de redes y protocolos para la automatización de procesos"
+      },
+      "sourceUrl": "http://lattes.cnpq.br/9042504768658064",
+      "period": {
+        "pt": "2026–atual",
+        "en": "2026–present",
+        "es": "2026–actualidad"
+      },
+      "participation": {
+        "pt": "Estudante voluntário",
+        "en": "Volunteer student",
+        "es": "Estudiante voluntario"
+      },
+      "coordinator": "Frederico de Oliveira Santos",
+      "institution": "IFC Campus Videira",
+      "roles": [
+        "devops",
+        "data-engineer"
+      ],
+      "technologies": [],
+      "description": {
+        "pt": "Atividades: arquitetura de software, especificação de hardware, cabeamento e equipamentos, redes industriais locais, programação e integração, validação e documentação.",
+        "en": "Activities: software architecture, hardware specification, cabling and equipment, local industrial networks, programming and integration, validation, and documentation.",
+        "es": "Actividades: arquitectura de software, especificación de hardware, cableado y equipos, redes industriales locales, programación e integración, validación y documentación."
+      }
+    },
+    {
+      "name": "Plataforma de Decisão Compartilhada Humano-Máquina para Processos Industriais",
+      "nameByLanguage": {
+        "pt": "Plataforma de Decisão Compartilhada Humano-Máquina para Processos Industriais",
+        "en": "Human-Machine Shared Decision Platform for Industrial Processes",
+        "es": "Plataforma de Decisión Compartida Humano-Máquina para Procesos Industriales"
+      },
+      "sourceUrl": "http://lattes.cnpq.br/9042504768658064",
+      "period": {
+        "pt": "2026–atual",
+        "en": "2026–present",
+        "es": "2026–actualidad"
+      },
+      "participation": {
+        "pt": "Estudante voluntário",
+        "en": "Volunteer student",
+        "es": "Estudiante voluntario"
+      },
+      "coordinator": "Frederico de Oliveira Santos",
+      "institution": "IFC Campus Videira",
+      "roles": [
+        "data-engineer",
+        "backend"
+      ],
+      "technologies": [],
+      "description": {
+        "pt": "Atividades: requisitos e bancada piloto, controle local e borda semântica, barramento semântico, segurança e observabilidade, deliberação multiagente, interação humano-agente e modelo do operador, gêmeo digital em modo sombra e avaliação experimental.",
+        "en": "Activities: requirements and pilot bench, local control and semantic edge, semantic bus, security and observability, multi-agent deliberation, human-agent interaction and operator model, digital twin in shadow mode, and experimental evaluation.",
+        "es": "Actividades: requisitos y banco piloto, control local y borde semántico, bus semántico, seguridad y observabilidad, deliberación multiagente, interacción humano-agente y modelo del operador, gemelo digital en modo sombra y evaluación experimental."
       }
     }
   ],
