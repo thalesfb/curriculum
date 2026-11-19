@@ -89,7 +89,7 @@
     },
     "backend": {
       "pt": "APIs robustas e microsserviços escaláveis com Python, Java e boas práticas.",
-      "en": "Robust APIs and scalable microservices with Python, Java, and good practices.",
+      "en": "Robust APIs and scalable microservices with Python, Java, and best practices.",
       "es": "APIs robustas y microservicios escalables con Python, Java y buenas prácticas."
     },
     "devops": {
@@ -100,7 +100,7 @@
     "management": {
       "pt": "Liderança técnica e gestão ágil com foco em entrega de valor.",
       "en": "Technical leadership and agile management focused on value delivery.",
-      "es": "liderazgo técnico y gestión ágil con foco en la entrega de valor."
+      "es": "Liderazgo técnico y gestión ágil con foco en la entrega de valor."
     },
     "frontend": {
       "pt": "Interfaces modernas com React, Astro e sistemas de design acessíveis.",
@@ -228,7 +228,7 @@
       "label": {
         "pt": "Gestão & Liderança",
         "en": "Management & Leadership",
-        "es": "Gestión y liderazgo"
+        "es": "Gestión y Liderazgo"
       },
       "items": [
         "Consultoria B2B",
@@ -557,9 +557,9 @@
         "BNCC"
       ],
       "description": {
-        "pt": "Projeto de Trabalho de Conclusão de Curso apresentado no IFC Videira sobre ensino personalizado de matemática. Propõe um MVP para apoiar professores com Machine Learning e Learning Analytics, revisão sistemática PRISMA 2020 e análise de lacunas em XAI e alinhamento à BNCC.",
-        "en": "Computer Science capstone project presented at IFC Videira on personalized mathematics teaching. It proposes an MVP to support teachers with Machine Learning and Learning Analytics, a PRISMA 2020 systematic review, and analysis of gaps in XAI and alignment with BNCC.",
-        "es": "Proyecto de Trabajo de Conclusión de Curso presentado en IFC Videira sobre enseñanza personalizada de matemáticas. Propone un MVP para apoyar a docentes con Machine Learning y Learning Analytics, una revisión sistemática PRISMA 2020 y un análisis de brechas en XAI y alineación con la BNCC."
+        "pt": "Projeto de TCC (PTC) apresentado no IFC Videira; TCC em desenvolvimento, conclusão prevista em DEZ 2026. Propõe um MVP para apoiar professores com Machine Learning e Learning Analytics, revisão sistemática PRISMA 2020 e análise de lacunas em XAI e alinhamento à BNCC.",
+        "en": "Capstone project (PTC) presented at IFC Videira; TCC in development, expected completion in DEC 2026. It proposes an MVP to support teachers with Machine Learning and Learning Analytics, a PRISMA 2020 systematic review, and analysis of gaps in XAI and alignment with BNCC.",
+        "es": "Proyecto de TCC (PTC) presentado en IFC Videira; TCC en desarrollo, conclusión prevista para DIC 2026. Propone un MVP para apoyar a docentes con Machine Learning y Learning Analytics, una revisión sistemática PRISMA 2020 y un análisis de brechas en XAI y alineación con la BNCC."
       },
       "nameByLanguage": {
         "pt": "Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais",
@@ -600,7 +600,7 @@
       ],
       "description": {
         "pt": "Automação de provisionamento de servidores com Shell/Ansible, NGINX como proxy reverso/API Gateway e implantação conteinerizada.",
-        "en": "Server provisioning automation with Shell/Ansible, NGINX as Reverse Proxy/API Gateway, containerized deployment with zero downtime.",
+        "en": "Server provisioning automation with Shell/Ansible, NGINX as Reverse Proxy/API Gateway, and containerized deployment.",
         "es": "Automatización del aprovisionamiento de servidores con Shell/Ansible, NGINX como proxy inverso/API Gateway y despliegue en contenedores."
       }
     },
@@ -616,7 +616,7 @@
       ],
       "description": {
         "pt": "Implementação de algoritmos e estruturas de dados fundamentais em C.",
-        "en": "Implementation of complex algorithms and fundamental data structures in C.",
+        "en": "Implementation of algorithms and fundamental data structures in C.",
         "es": "Implementación de algoritmos y estructuras de datos fundamentales en C."
       }
     }
@@ -726,7 +726,7 @@
       "details": "TDD, validações, implantação na AWS",
       "detailsByLanguage": {
         "en": "TDD, validations, AWS deployment",
-        "es": "TDD, Validaciones, despliegue en AWS"
+        "es": "TDD, validaciones, despliegue en AWS"
       },
       "roles": [
         "data-engineer",
@@ -836,6 +836,10 @@
       "detailsByLanguage": {
         "en": "Applying AI in Excel to optimize processes.",
         "es": "Aplicación de IA en Excel para optimizar procesos."
+      },
+      "providerByLanguage": {
+        "en": "Not specified",
+        "es": "No especificado"
       }
     },
     {
