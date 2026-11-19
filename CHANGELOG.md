@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/thalesfb/curriculum/compare/v1.1.3...v1.1.4) (2026-11-19)
+
+
+### Bug Fixes
+
+* **cv:** correct IFC course start date ([#8](https://github.com/thalesfb/curriculum/issues/8)) ([5dbdcaf](https://github.com/thalesfb/curriculum/commit/5dbdcaf7b8890c3e1719d63b05b584009ac427af))
+
 ## [1.1.3](https://github.com/thalesfb/curriculum/compare/v1.1.2...v1.1.3) (2026-04-17)
 
 ## [1.1.2](https://github.com/thalesfb/curriculum/compare/v1.1.1...v1.1.2) (2026-04-17)
