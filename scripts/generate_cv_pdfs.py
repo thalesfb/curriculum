@@ -65,6 +65,14 @@ def localized(value: object, language: str) -> str:
     return result
 
 
+def localized_provider(certification: dict, language: str) -> str:
+    """Use optional provider translations while retaining the string field."""
+    translations = certification.get("providerByLanguage", {})
+    if language in translations:
+        return translations[language]
+    return certification["provider"]
+
+
 def load_section_labels(ui_path: Path, language: str) -> list[str]:
     source = ui_path.read_text(encoding="utf-8")
     language_blocks = list(re.finditer(r"(?m)^  (pt|en|es): \{\n", source))
@@ -321,7 +329,7 @@ def build_document_xml(source_xml: bytes, data: dict, language: str) -> bytes:
         raise ValueError(f"Template expects nine certifications, got {len(certifications)}")
     providers: list[str] = []
     for certification in certifications:
-        provider = certification["provider"]
+        provider = localized_provider(certification, lang)
         if not providers or providers[-1] != provider:
             providers.append(provider)
     if len(providers) > len(certification_headings):
