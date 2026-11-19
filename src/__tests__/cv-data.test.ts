@@ -65,10 +65,24 @@ describe('cv.json schema validation', () => {
     expect(cvData.summary['data-engineer'].pt).toContain('atuação de ponta a ponta');
   });
 
-  it('has the approved IFC period without a status label', () => {
+  it('has the approved IFC period', () => {
     const ifc = cvData.education.find(entry => entry.institution === 'Instituto Federal Catarinense');
     expect(ifc?.period).toEqual({ start: '2023-02', end: '2026-12' });
-    expect(ifc).not.toHaveProperty('status');
+  });
+
+  it('marks AWS Academy Cloud Architecting as in progress', () => {
+    const architecting = cvData.certifications.find(certification => certification.name.pt === 'AWS Academy Cloud Architecting');
+    expect(architecting?.provider).toBe('AWS Academy');
+    expect(architecting?.status).toBe('in-progress');
+  });
+
+  it('keeps both Latinoware events and the confirmed 2025 provider', () => {
+    const latinoware2025 = cvData.certifications.find(certification => certification.name.pt === 'Latinoware 2025 (28h)');
+    const latinoware2014 = cvData.certifications.find(certification => certification.name.pt === 'Latinoware 2014');
+    expect(latinoware2025?.provider).toBe('Itaipu Parquetec');
+    expect(latinoware2014).toBeDefined();
+    expect(latinoware2014).not.toHaveProperty('provider');
+    expect(latinoware2014).not.toHaveProperty('hours');
   });
 
   it('includes both approved SENAI courses', () => {
