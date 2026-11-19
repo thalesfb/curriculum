@@ -69,7 +69,7 @@ Servidores MCP (Model Context Protocol) integrados ao Claude Code:
 
 | MCP Server | Propósito | Uso no projeto |
 |------------|-----------|---------------|
-| **Context7** | Documentação atualizada de libs em tempo real | Consultar docs do Astro 5/6, Tailwind CSS 4, APIs |
+| **Context7** | Documentação atualizada de libs em tempo real | Consultar docs do Astro 7, Tailwind CSS 4, APIs |
 | **Figma** | Leitura/escrita no Figma via Plugin API | Extrair tokens, criar componentes, auditar design |
 
 #### Context7 MCP
@@ -77,7 +77,7 @@ Servidores MCP (Model Context Protocol) integrados ao Claude Code:
 ```
 Tools: resolve-library-id, get-library-docs
 Uso: Antes de implementar qualquer feature, consultar docs atualizadas
-Exemplo: "astro i18n routing" → retorna docs mais recentes do Astro 5/6
+Exemplo: "astro i18n routing" → retorna docs mais recentes do Astro 7
 ```
 
 #### Figma MCP

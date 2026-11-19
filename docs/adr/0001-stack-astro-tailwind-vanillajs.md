@@ -8,6 +8,10 @@ Accepted
 
 2026-03-28
 
+## Última atualização
+
+2026-11-18
+
 ## Contexto
 
 Precisamos escolher a stack de desenvolvimento para o portfolio profissional de Thales Ferreira (thales.optimizr.site). O site é um portfolio/CV com:
@@ -33,7 +37,7 @@ Prioridades: **performance**, **SEO**, **simplicidade**, **manutenibilidade**.
 
 ## Opções Consideradas
 
-### Opção 1: Astro 5/6 + Tailwind CSS 4 + Vanilla JS
+### Opção 1: Astro 7 + Tailwind CSS 4 + Vanilla JS
 
 - **Prós**: Zero JS por padrão (ships HTML), Content Collections para JSON, i18n routing nativo, Tailwind mapeia 1:1 com tokens Figma, islands architecture para interatividade seletiva, Cloudflare adquiriu Astro em jan/2026
 - **Contras**: Menos familiar que Next.js para quem vem de React
@@ -55,7 +59,13 @@ Prioridades: **performance**, **SEO**, **simplicidade**, **manutenibilidade**.
 
 ## Decisão
 
-Adotar **Astro 5/6** como framework, **Tailwind CSS 4** para estilização, e **Vanilla JS** (sem framework reativo) para interatividade mínima.
+Adotar **Astro 7** como framework, **Tailwind CSS 4** para estilização, e **Vanilla JS** (sem framework reativo) para interatividade mínima.
+
+### Atualização de versão — 2026-11-18
+
+Atualizamos Astro para 7.4.13 para corrigir vulnerabilidades críticas detectadas nas dependências do projeto. A mudança mantém a arquitetura estática e a renderização sem JavaScript por padrão. Astro 7 usa Vite 8; a integração instalada `@tailwindcss/vite` 4.2.2 declara compatibilidade com Vite 8.
+
+O requisito de Node passou a `^22.23.4 || >=24.10.0`, refletindo os requisitos de Astro 7 e semantic-release 25. A instalação reproduzível, os 37 testes e o build estático de quatro rotas foram validados localmente.
 
 ## Racional
 
@@ -90,6 +100,9 @@ O overhead de Next.js não se justifica para um site sem estado de aplicação. 
 
 ## Referências
 
+- [Guia oficial de atualização para Astro 7](https://docs.astro.build/en/guides/upgrade-to/v7/)
+- [Metadados e requisito de Node de Astro 7.4.13](https://www.npmjs.com/package/astro/v/7.4.13)
+- [Metadados da integração Tailwind Vite 4.2.2](https://www.npmjs.com/package/@tailwindcss/vite/v/4.2.2)
 - [Astro 5 vs Next.js 15 Comparison 2026](https://wppoland.com/en/astro-5-vs-nextjs-15-comparison-2026/)
 - [Astro Content Collections Guide](https://inhaq.com/blog/getting-started-with-astro-content-collections.html)
 - [Cloudflare adquiriu Astro (jan/2026)](https://dev.to/polliog/astro-in-2026)
