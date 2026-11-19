@@ -81,10 +81,11 @@ npm run dev        # http://localhost:4321
 | `npm run preview` | Preview production build |
 | `npm test` | Run 37 Vitest tests |
 | `npm run test:watch` | Tests in watch mode |
-| `python generate_cvs.py` | Generate 12 CV markdowns (5 roles × 3 langs) |
-| `npm run generate:pdfs` | Update the three DOCX-based PDFs from `data/cv.json` |
+| `npm run generate:pdfs` | Generate three local PDF drafts from `data/cv.json` |
 
-The PDF generator fills the checked-in DOCX template and exports it through Microsoft Word to preserve its fonts and layout. It checks that each PDF stays at three pages and refuses to overwrite `public/refs` when content overflows. To review an overflowing draft without changing the published PDFs, run `python scripts/generate_cv_pdfs.py --preview --output-dir <folder>`; the preview prints layout warnings. The DOCX export is a local Windows step and is not part of the Linux CI build.
+The PDF generator fills the DOCX template and exports through Microsoft Word on Windows. It writes to a temporary folder by default and is not run by CI or the site build. The published PDFs are the approved artifacts; the DOCX and `data/cv.json` do not currently reproduce their approved content. To intentionally replace `public/refs`, pass both `--output-dir public/refs` and `--publish-public-refs` after content review. To inspect an overflow preview without changing published PDFs, run `npm run generate:pdfs -- --preview --output-dir <folder>`.
+
+There is no Markdown CV generator in the current repository.
 
 ---
 

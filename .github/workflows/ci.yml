@@ -46,6 +46,9 @@ jobs:
       - name: Run tests
         run: npm run test
 
+      - name: Run Python tests
+        run: python -m unittest discover -s scripts/tests -v
+
       - name: Build
         run: npm run build
 
@@ -76,7 +79,7 @@ jobs:
           path: dist/
 
       - name: Deploy dist/ to VPS
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/scp-action@917f8b81dfc1ccd331fef9e2d61bdc6c8be94634 # v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}

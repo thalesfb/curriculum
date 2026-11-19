@@ -12,6 +12,7 @@ from scripts.generate_cv_pdfs import (
     localized,
     localized_items,
     paragraph_text,
+    resolve_output_dir,
     select_for_role,
     set_paragraph_text,
     validate_page_count,
@@ -19,6 +20,36 @@ from scripts.generate_cv_pdfs import (
 
 
 class GenerateCvPdfsTests(unittest.TestCase):
+    def test_default_generation_output_is_not_public_refs(self):
+        output = resolve_output_dir(None, preview=False, publish_public_refs=False)
+        self.assertNotEqual(output, (ROOT / "public" / "refs").resolve())
+
+    def test_public_refs_requires_explicit_publish_flag(self):
+        with self.assertRaisesRegex(ValueError, "--publish-public-refs"):
+            resolve_output_dir(ROOT / "public" / "refs", preview=False, publish_public_refs=False)
+
+    def test_public_subdirectories_are_never_generation_targets(self):
+        with self.assertRaisesRegex(ValueError, "inside public/ is disabled"):
+            resolve_output_dir(ROOT / "public" / "refs" / "preview", preview=True, publish_public_refs=False)
+
+    def test_publish_flag_requires_public_refs_output(self):
+        with self.assertRaisesRegex(ValueError, "only valid with .*public/refs"):
+            resolve_output_dir(ROOT / "tmp-cv-output", preview=False, publish_public_refs=True)
+
+    def test_publish_flag_allows_public_refs_output(self):
+        output = resolve_output_dir(ROOT / "public" / "refs", preview=False, publish_public_refs=True)
+        self.assertEqual(output, (ROOT / "public" / "refs").resolve())
+
+    def test_automated_build_workflows_do_not_run_pdf_generator(self):
+        package = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))
+        workflows = ROOT / ".github" / "workflows"
+        automated_commands = "\n".join(
+            [str(value) for key, value in package["scripts"].items() if key != "generate:pdfs"]
+            + [path.read_text(encoding="utf-8") for path in workflows.glob("*.yml")]
+        )
+        self.assertNotIn("generate:pdfs", automated_commands)
+        self.assertNotIn("generate_cv_pdfs.py", automated_commands)
+
     def test_formats_current_education_start_in_all_languages(self):
         expected = {
             "pt": "FEV DE 2023 - Atual",

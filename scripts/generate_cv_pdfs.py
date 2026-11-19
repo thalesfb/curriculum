@@ -428,28 +428,51 @@ def generate(output_dir: Path, allow_overflow_preview: bool = False) -> list[Pat
     return [destination for _, destination in staged]
 
 
+def resolve_output_dir(
+    output_dir: Path | None,
+    preview: bool,
+    publish_public_refs: bool,
+) -> Path:
+    public_root = (ROOT / "public").resolve()
+    public_refs = (ROOT / "public" / "refs").resolve()
+    if output_dir is None:
+        folder = "cv-generation-preview" if preview else "cv-generation"
+        output_dir = Path(tempfile.gettempdir()) / folder
+
+    resolved = output_dir.resolve()
+    is_public_path = resolved == public_root or public_root in resolved.parents
+    if is_public_path and resolved != public_refs:
+        raise ValueError("PDF output inside public/ is disabled; use a temporary or external folder")
+    if resolved == public_refs and not publish_public_refs:
+        raise ValueError("Writing to public/refs requires --publish-public-refs")
+    if publish_public_refs and resolved != public_refs:
+        raise ValueError("--publish-public-refs is only valid with --output-dir public/refs")
+    if preview and publish_public_refs:
+        raise ValueError("--preview cannot be combined with --publish-public-refs")
+    return resolved
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--output-dir",
         type=Path,
         default=None,
-        help="output directory (default: public/refs, or a temp folder with --preview)",
+        help="output directory (default: a temporary folder; public/refs requires an explicit flag)",
     )
     parser.add_argument(
         "--preview",
         action="store_true",
         help="export review-only PDFs even when overflow checks fail; never write to public/refs",
     )
+    parser.add_argument(
+        "--publish-public-refs",
+        action="store_true",
+        help="explicitly allow replacing public/refs; requires --output-dir public/refs",
+    )
     args = parser.parse_args()
     try:
-        output_dir = args.output_dir
-        if output_dir is None:
-            output_dir = Path(tempfile.gettempdir()) / "cv-generation-preview" if args.preview else ROOT / "public" / "refs"
-        output_dir = output_dir.resolve()
-        public_refs = (ROOT / "public" / "refs").resolve()
-        if args.preview and output_dir == public_refs:
-            raise ValueError("--preview cannot write to public/refs")
+        output_dir = resolve_output_dir(args.output_dir, args.preview, args.publish_public_refs)
         for path in generate(output_dir, args.preview):
             print(f"Generated {path}")
     except (OSError, ValueError, subprocess.CalledProcessError, zipfile.BadZipFile) as error:

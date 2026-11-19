@@ -45,7 +45,7 @@ Aplicação no projeto:
 
 | Dado | Source of Truth | Consumidores |
 |------|----------------|--------------|
-| Conteúdo profissional | `data/cv.json` | Astro, `generate_cvs.py`, Figma |
+| Conteúdo profissional do site | `data/cv.json` | Astro, rascunhos locais de PDF |
 | Labels da UI | `src/i18n/ui.ts` | Todos os componentes Astro |
 | Tokens de cor | CSS Custom Properties | Tailwind config, componentes |
 | Layout de seção | Componente `Section.astro` | Todas as seções da página |

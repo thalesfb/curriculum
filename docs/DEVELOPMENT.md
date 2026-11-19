@@ -3,7 +3,7 @@
 ## Pré-requisitos
 
 - Node.js 22+
-- Python 3.12+ (para `generate_cvs.py`)
+- Python 3.12+ (para gerar rascunhos locais de PDF)
 - Docker (para devcontainer)
 - GitHub CLI (`gh`)
 
@@ -27,8 +27,11 @@ npm run build
 # Preview do build
 npm run preview
 
-# Gerar CVs (12 variantes)
-py generate_cvs.py
+# Gerar rascunhos locais de PDF (Word no Windows)
+npm run generate:pdfs
+
+# Publicar explicitamente PDFs revisados em public/refs
+npm run generate:pdfs -- --output-dir public/refs --publish-public-refs
 ```
 
 ## Devcontainer
@@ -66,7 +69,9 @@ git worktree remove ../curriculum-feat-dark-mode
 | `npm run preview` | Preview local do build |
 | `npm run lint` | ESLint |
 | `npm run format` | Prettier |
-| `py generate_cvs.py` | Gera 12 CVs markdown |
+| `npm run generate:pdfs` | Gera rascunhos PDF em pasta temporária; não substitui `public/refs` |
+
+O gerador usa `data/cv.json` e o DOCX como entradas de rascunho. Os PDFs publicados são artefatos aprovados e seu conteúdo não é regenerado no build nem na CI. Substituir `public/refs` exige revisão do conteúdo e as flags `--output-dir public/refs --publish-public-refs`. Não há gerador de CV Markdown neste repositório.
 
 ## Conventional Commits
 
