@@ -205,6 +205,12 @@ def _set_date_line(paragraph: ET.Element, prefix: str, period: dict, language: s
     set_run_text(paragraph, 1, format_period(period["start"], period.get("end"), language))
 
 
+def set_education_line(paragraph: ET.Element, degree: dict, period: dict, language: str) -> None:
+    """Write an education degree and its dates without a status label."""
+    set_run_text(paragraph, 0, localized(degree, language) + " | ")
+    set_run_text(paragraph, 1, format_period(period["start"], period.get("end"), language))
+
+
 def _ensure_paragraph_anchors(paragraphs: list[ET.Element]) -> None:
     anchors = {
         0: "Thales Ferreira",
@@ -303,12 +309,7 @@ def build_document_xml(source_xml: bytes, data: dict, language: str) -> bytes:
         raise ValueError(f"Template expects two education entries, got {len(education)}")
     first, second = education
     set_paragraph_text(paragraphs[38], f"{first['institution']}, {first['location']}")
-    set_run_text(
-        paragraphs[39],
-        0,
-        f"{localized(first['degree'], lang)} | {localized(first['status'], lang)} | ",
-    )
-    set_run_text(paragraphs[39], 1, format_period(first["period"]["start"], first["period"].get("end"), lang))
+    set_education_line(paragraphs[39], first["degree"], first["period"], lang)
     set_paragraph_text(paragraphs[41], f"{second['institution']}, {second['location']}")
     set_run_text(paragraphs[42], 0, localized(second["degree"], lang) + " | ")
     set_run_text(paragraphs[42], 1, format_period(second["period"]["start"], second["period"].get("end"), lang))
@@ -345,7 +346,7 @@ def build_document_xml(source_xml: bytes, data: dict, language: str) -> bytes:
         set_run_text(paragraphs[index], 1, f" {level}" + (f" – {detail}." if detail else ""))
     removed.extend(paragraphs[index] for index in language_slots[len(languages):])
 
-    # The JSON has no SENAI/technical education records; remove those stale template paragraphs.
+    # The existing template has no dedicated rows for SENAI records.
     removed.extend(paragraphs[index] for index in (43, 44, 45, 61))
     for paragraph in removed:
         if paragraph in list(body):

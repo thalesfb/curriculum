@@ -14,6 +14,7 @@ from scripts.generate_cv_pdfs import (
     paragraph_text,
     resolve_output_dir,
     select_for_role,
+    set_education_line,
     set_paragraph_text,
     validate_page_count,
 )
@@ -101,20 +102,30 @@ class GenerateCvPdfsTests(unittest.TestCase):
         ]
         self.assertEqual(select_for_role(entries, "data-engineer"), [entries[0]])
 
-    def test_template_generation_uses_current_json_and_removes_unmapped_content(self):
+    def test_template_rejects_s1_content_until_layout_supports_it(self):
         data = json.loads((ROOT / "data" / "cv.json").read_text(encoding="utf-8"))
         template = ROOT / "refs" / "template" / "curriculo_thales_ferreira_pt.docx"
         with zipfile.ZipFile(template) as archive:
             source_xml = archive.read("word/document.xml")
 
-        generated = build_document_xml(source_xml, data, "pt")
-        root = ET.fromstring(generated)
-        ns = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
-        text = "\n".join(paragraph_text(paragraph) for paragraph in root.findall(".//w:body/w:p", ns))
-        self.assertIn("FEV DE 2023 - Atual", text)
-        self.assertNotIn("Incompleto", text)
-        self.assertNotIn("SENAI", text)
-        self.assertNotIn("Inteligência Artificial", text)
+        with self.assertRaisesRegex(ValueError, "OPTIMIZR has more JSON bullets than the template can hold"):
+            build_document_xml(source_xml, data, "pt")
+
+    def test_education_line_omits_optional_status_label(self):
+        namespace = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+        ET.register_namespace("w", namespace)
+        paragraph = ET.fromstring(
+            f'<w:p xmlns:w="{namespace}">'
+            '<w:r><w:t>old degree and status</w:t></w:r>'
+            '<w:r><w:t>old period</w:t></w:r></w:p>'
+        )
+        degree = {"pt": "Bacharelado em Ciência da Computação", "en": "Bachelor's Degree in Computer Science", "es": "Grado en Ciencias de la Computación"}
+
+        set_education_line(paragraph, degree, {"start": "2023-02", "end": "2026-12"}, "pt")
+
+        text = paragraph_text(paragraph)
+        self.assertEqual(text, "Bacharelado em Ciência da Computação | FEV DE 2023 - DEZ DE 2026")
+        self.assertNotIn("status", text.lower())
 
     def test_replacing_paragraph_text_keeps_run_formatting(self):
         namespace = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
