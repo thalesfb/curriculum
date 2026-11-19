@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/thalesfb/curriculum/compare/v1.1.4...v1.2.0) (2026-11-19)
+
+
+### Features
+
+* **cv:** generate PDFs from the DOCX template ([#9](https://github.com/thalesfb/curriculum/issues/9)) ([c980ccb](https://github.com/thalesfb/curriculum/commit/c980ccb70cf5849c87c1e11982f612806cf518a5))
+
 ## [1.1.4](https://github.com/thalesfb/curriculum/compare/v1.1.3...v1.1.4) (2026-11-19)
 
 
