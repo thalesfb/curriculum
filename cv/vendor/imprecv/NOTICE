@@ -1,5 +1,5 @@
 # imprecv vendoring notice
 
-This directory vendors the core Typst source from imprecv 1.0.1 by Je Sian Keith Herman, licensed under Apache License 2.0. The upstream package source is available in the local Typst package cache; no remote import is used at build time.
+This directory vendors the core Typst source from imprecv 1.0.1 by Je Sian Keith Herman, licensed under Apache License 2.0. Upstream project: https://github.com/jskherman/imprecv. The build uses this local copy and does not import the package from the network.
 
 The vendored `cv.typ` retains the style rules and heading/contact/work/education/project helpers. The unused endnote function was omitted because it adds generated text outside `data/cv.json` and is not part of this CV output. The CV template composes its own sections to put Education before Experience.

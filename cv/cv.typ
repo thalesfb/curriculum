@@ -127,5 +127,3 @@
 #for item in data.languages [
   *#localized(item.language):* #localized(item.level)#if item.at("detail", default: none) != none [ — #localized(item.detail)] \
 ]
-
-
