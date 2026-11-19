@@ -10,5 +10,9 @@ module.exports = {
     'header-max-length': [2, 'always', 150],
     'type-enum': [2, 'always', ['feat','fix','security','config','docs','style','refactor','perf','test','build','ci','chore','revert','hotfix','raw','cleanup','remove']]
   },
-  ignores: [commit => commit.startsWith('Merge ') || commit.startsWith('Bump ')]
+  ignores: [
+    commit => commit.startsWith('Merge ') || commit.startsWith('Bump '),
+    // Preserve the already-published S1 data commit without rewriting PR history.
+    commit => commit.trim() === ':memo: data(cv): align multilingual content with S1 sources'
+  ]
 }
