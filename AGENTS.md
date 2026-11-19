@@ -1,8 +1,6 @@
 # AGENTS.md
 
-Governance and instructions for AI agents (Claude Code, GitHub Copilot) working on this repository.
-
-> **CLAUDE.md** is a symlink to this file.
+Governance and instructions for AI agents working on this repository.
 
 ---
 
@@ -82,7 +80,7 @@ Every operation falls into one of three levels:
 
 ```text
 curriculum/
-├── AGENTS.md / CLAUDE.md        <- Agent governance (this file, symlinked)
+├── AGENTS.md                   <- Agent governance
 ├── README.md                    <- Project overview & quick start
 ├── CHANGELOG.md                 <- Version history (conventional commits)
 ├── .prettierrc                  <- Code formatting (Tailwind plugin)

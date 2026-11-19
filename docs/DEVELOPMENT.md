@@ -53,7 +53,7 @@ git worktree list
 git worktree remove ../curriculum-feat-dark-mode
 ```
 
-## MCP Servers (Claude Code)
+## MCP Servers
 
 | MCP | Comando |
 | --- | --- |

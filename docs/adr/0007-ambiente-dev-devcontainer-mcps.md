@@ -10,7 +10,7 @@ Accepted
 
 ## Contexto
 
-Precisamos definir o ambiente de desenvolvimento padronizado para garantir reprodutibilidade, produtividade e integração com ferramentas de IA. O projeto usa Astro + Tailwind e será desenvolvido com assistência de Claude Code.
+Precisamos definir o ambiente de desenvolvimento padronizado para garantir reprodutibilidade, produtividade e integração com ferramentas de IA. O projeto usa Astro + Tailwind e será desenvolvido com assistência de agentes de IA.
 
 ## Decisão
 
@@ -61,11 +61,11 @@ git worktree list
 git worktree remove ../curriculum-feat-i18n
 ```
 
-**Racional:** Permite desenvolver features em paralelo sem conflitos de estado. Agentes Claude Code podem trabalhar em worktrees isolados via `isolation: "worktree"`.
+**Racional:** Permite desenvolver features em paralelo sem conflitos de estado. Agentes de IA podem trabalhar em worktrees isolados via `isolation: "worktree"`.
 
 ### 3. MCP Servers
 
-Servidores MCP (Model Context Protocol) integrados ao Claude Code:
+Servidores MCP (Model Context Protocol) integrados ao ambiente de desenvolvimento assistido por agentes de IA:
 
 | MCP Server | Propósito | Uso no projeto |
 |------------|-----------|---------------|
@@ -95,7 +95,7 @@ Exemplo: get_design_context(nodeId) → retorna código + screenshot do componen
 - Ambiente 100% reprodutível via devcontainer
 - Worktrees permitem desenvolvimento paralelo sem conflitos
 - MCPs fornecem documentação atualizada e acesso direto ao Figma
-- Claude Code pode trabalhar em branches isolados
+- Agentes de IA podem trabalhar em branches isolados
 
 ### Negativas
 
@@ -107,4 +107,4 @@ Exemplo: get_design_context(nodeId) → retorna código + screenshot do componen
 - [Dev Containers Specification](https://containers.dev/)
 - [Git Worktrees](https://git-scm.com/docs/git-worktree)
 - [Context7 MCP](https://github.com/upstash/context7)
-- [Figma MCP](https://github.com/anthropics/claude-figma-mcp)
+- [Figma MCP server — Figma Learn](https://help.figma.com/hc/en-us/articles/39216419318551-Get-started-with-the-Figma-MCP-server)

@@ -1,3 +1,5 @@
+> **Nota:** Este changelog está congelado; novas notas de versão são publicadas nas [GitHub Releases](https://github.com/thalesfb/curriculum/releases).
+
 # [1.2.0](https://github.com/thalesfb/curriculum/compare/v1.1.4...v1.2.0) (2026-11-19)
 
 
