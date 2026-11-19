@@ -181,4 +181,38 @@ describe('cv.json schema validation', () => {
       es: 'Enseñanza Personalizada de Matemáticas: Oportunidades y Técnicas Computacionales',
     });
   });
+
+  it('keeps English text free of unsupported zero-downtime claims', () => {
+    expect(JSON.stringify(cvData).toLowerCase()).not.toContain('zero downtime');
+  });
+
+  it('keeps approved project descriptions aligned across languages', () => {
+    const infrastructure = cvData.projects.find(project => project.name === 'Infrastructure & Web Services');
+    const structures = cvData.projects.find(project => project.name === 'Data Structures');
+    expect(infrastructure?.description.en.toLowerCase()).not.toContain('zero downtime');
+    expect(structures?.description.en).toBe('Implementation of algorithms and fundamental data structures in C.');
+    expect(structures?.description.es).toBe('Implementación de algoritmos y estructuras de datos fundamentales en C.');
+  });
+
+  it('uses idiomatic and consistently capitalized English and Spanish labels', () => {
+    expect(cvData.heroSubtitle.backend.en).toContain('best practices');
+    expect(cvData.heroSubtitle.management.es.startsWith('Liderazgo')).toBe(true);
+    expect(cvData.skills.leadership.label.es).toBe('Gestión y Liderazgo');
+    expect(cvData.certifications[1].detailsByLanguage.es).toBe('TDD, validaciones, despliegue en AWS');
+  });
+
+  it('localizes the unspecified Excel AI certification provider', () => {
+    const excelAi = cvData.certifications.find(certification => certification.name.pt === 'Excel com IA');
+    expect(excelAi?.provider).toBe('Não informado');
+    expect(excelAi?.providerByLanguage).toEqual({ en: 'Not specified', es: 'No especificado' });
+    expect(excelAi?.providerByLanguage?.en).not.toContain('Não informado');
+    expect(excelAi?.providerByLanguage?.es).not.toContain('Não informado');
+  });
+
+  it('describes the IFC TCC as in progress with expected completion in December 2026', () => {
+    const tcc = cvData.projects.find(project => project.name === 'Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais');
+    expect(tcc?.description.pt).toContain('Projeto de TCC (PTC) apresentado no IFC Videira; TCC em desenvolvimento, conclusão prevista em DEZ 2026.');
+    expect(tcc?.description.en).toContain('Capstone project (PTC) presented at IFC Videira; TCC in development, expected completion in DEC 2026.');
+    expect(tcc?.description.es).toContain('Proyecto de TCC (PTC) presentado en IFC Videira; TCC en desarrollo, conclusión prevista para DIC 2026.');
+  });
 });

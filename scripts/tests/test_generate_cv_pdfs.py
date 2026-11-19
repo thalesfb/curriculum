@@ -11,6 +11,7 @@ from scripts.generate_cv_pdfs import (
     load_section_labels,
     localized,
     localized_items,
+    localized_provider,
     paragraph_text,
     resolve_output_dir,
     select_for_role,
@@ -94,6 +95,16 @@ class GenerateCvPdfsTests(unittest.TestCase):
         }
         self.assertEqual(localized_items(skill, "en"), ["Python", "Data Modeling"])
         self.assertEqual(localized_items(skill, "pt"), ["Python", "Modelagem de Dados"])
+
+    def test_certification_provider_uses_optional_locale_translation(self):
+        certification = {
+            "provider": "Não informado",
+            "providerByLanguage": {"en": "Not specified", "es": "No especificado"},
+        }
+        self.assertEqual(localized_provider(certification, "pt"), "Não informado")
+        self.assertEqual(localized_provider(certification, "en"), "Not specified")
+        self.assertEqual(localized_provider(certification, "es"), "No especificado")
+        self.assertEqual(localized_provider({"provider": "Alura"}, "es"), "Alura")
 
     def test_skill_categories_follow_the_pdf_profile_role(self):
         entries = [
