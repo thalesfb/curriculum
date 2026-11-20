@@ -46,14 +46,10 @@ def source_texts(language):
             for value in (localized(item["degree"], language), item["institution"], localized(item["location"], language)):
                 texts.extend(tokens(value))
     for item in DATA["certifications"]:
-        if ROLE not in item.get("roles", []):
-            continue
         texts.append(localized(item["name"], language))
         provider = item.get("providerByLanguage", {}).get(language, item.get("provider"))
         if provider and provider not in ("Não informado", "Not specified", "No especificado"):
             texts.append(provider)
-        if item.get("details"):
-            texts.append(item.get("detailsByLanguage", {}).get(language, item["details"]))
     for skill in DATA["skills"].values():
         if ROLE not in skill.get("roles", []):
             continue
@@ -87,7 +83,7 @@ def formatted_dates(language):
             if ROLE in item.get("roles", []):
                 values.extend(format_date(item["period"][key], language) for key in ("start", "end"))
     for item in DATA["certifications"]:
-        if ROLE in item.get("roles", []) and item.get("date"):
+        if item.get("date"):
             values.append(format_date(item["date"], language))
     return values
 
@@ -228,6 +224,68 @@ class GeneratedPdfTests(unittest.TestCase):
                 ).stdout
                 for placeholder in placeholders:
                     self.assertNotIn(placeholder, extracted)
+
+    def test_certifications_include_items_from_all_roles(self):
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                extracted = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", str(self.output_dir / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout
+                for item in DATA["certifications"]:
+                    expected = localized(item["name"], language)
+                    self.assertIn(expected, extracted)
+
+    def test_certification_dates_share_their_item_line(self):
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                lines = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", "-raw", str(self.output_dir / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout.splitlines()
+                for item in DATA["certifications"]:
+                    if not item.get("date"):
+                        continue
+                    name = localized(item["name"], language)
+                    expected_date = " ".join(tokens(format_date(item["date"], language)))
+                    matching = [" ".join(tokens(line)) for line in lines if name in line]
+                    self.assertTrue(matching, f"Missing certification line: {name}")
+                    self.assertTrue(any(expected_date in line for line in matching), f"Date not on item line: {name}")
+
+    def test_senai_courses_share_one_institution_heading(self):
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                extracted = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", str(self.output_dir / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout
+                self.assertEqual(extracted.count("SENAI"), 1, extracted)
+                for item in DATA["education"]:
+                    if item["institution"] == "SENAI":
+                        self.assertIn(localized(item["degree"], language), extracted)
+
+    def test_first_project_description_follows_title_without_blank_line(self):
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                lines = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", "-raw", str(self.output_dir / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout.splitlines()
+                first_project = localized(DATA["projects"][0].get("nameByLanguage", DATA["projects"][0]["name"]), language)
+                title_index = next(i for i, line in enumerate(lines) if first_project in line)
+                self.assertTrue(lines[title_index + 1].strip(), "Unexpected blank line after first project title")
 
     def test_education_periods_are_kept_unbroken(self):
         for language, filename in OUTPUTS.items():

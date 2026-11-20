@@ -66,22 +66,29 @@
 #localized(data.summary.at(role))
 
 == #section("education")
-#for item in selected(data.education) [
+#let education-items = selected(data.education)
+#let institutions = education-items.map(item => item.institution).dedup()
+#for institution in institutions [
+  #let items = education-items.filter(item => item.institution == institution)
   #block(width: 100%, above: 0.6em, breakable: false)[
-    *#item.institution* #h(1fr) #text(localized(item.location), style: "italic") \
-    #text(localized(item.degree), style: "italic") #h(1fr) #date-range(item.period) \
+    *#institution* #h(1fr) *#localized(items.at(0).location)* \
+    #for item in items [
+      #text(localized(item.degree), style: "italic") #h(1fr) #date-range(item.period) \
+      #v(1pt)
+    ]
   ]
 ]
 
 == #section("experience")
 #for item in selected(data.experience) [
-  #block(width: 100%, above: 0.6em, breakable: false)[
+  #block(width: 100%, above: 0.8em, breakable: false)[
     *#item.company* #h(1fr) *#localized(item.location)* \
     #text(localized(item.role), style: "italic") #h(1fr) #date-range(item.period) \
     #for bullet in item.bullets.filter(bullet => has-role(bullet)) [
       - #localized(bullet)
     ]
   ]
+  #v(0.45em)
 ]
 
 == #section("projects")
@@ -99,8 +106,10 @@
       if item.at("participation", default: none) != none { localized(item.participation) } else { none },
       item.at("coordinator", default: none),
     ).filter(value => value != none)
-    #if metadata.len() > 0 [#text(metadata.join(" · "), style: "italic")]
-    #linebreak()
+    #if metadata.len() > 0 [
+      #text(metadata.join(" · "), style: "italic")
+      #linebreak()
+    ]
     #localized(item.description)
     #if item.at("supervision", default: none) != none [#linebreak() #localized(item.supervision)]
     #if item.at("technologies", default: ()).len() > 0 [#linebreak() #item.technologies.join(" · ")]
@@ -113,13 +122,17 @@
 ]
 
 == #section("certifications")
-#for item in selected(data.certifications) [
+#for item in data.certifications [
   #let provider = item.at("providerByLanguage", default: (:)).at(lang, default: item.at("provider", default: none))
   #let provider = if (provider == none or ("Não informado", "Not specified", "No especificado").contains(provider)) { none } else { provider }
-  #let details = item.at("detailsByLanguage", default: (:)).at(lang, default: item.at("details", default: none))
-  #block(width: 100%, above: 0.35em)[
-    *#localized(item.name)* #if item.at("date", default: none) != none [#h(1fr) #date(item.date)] \
-    #if provider != none or details != none [#text((if provider != none { provider } else { "" }) + (if provider != none and details != none { " · " } else { "" }) + (if details != none { details } else { "" }), style: "italic")]
+  #block(width: 100%, above: 0.65em, breakable: false)[
+    #grid(
+      columns: (1fr, auto),
+      column-gutter: 8pt,
+      align: (left + top, right + top),
+      [*#localized(item.name)*#if provider != none [#text(" · " + provider)]],
+      [#if item.at("date", default: none) != none [#date(item.date)]],
+    )
   ]
 ]
 
