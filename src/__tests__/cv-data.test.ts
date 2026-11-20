@@ -143,9 +143,9 @@ describe('cv.json schema validation', () => {
     expect(cpel?.role.pt).toBe('Full Stack Data Engineer with Software and DevOps Expertise');
   });
 
-  it('uses the approved remote Optimizr location and six bullets in all languages', () => {
+  it('omits the Optimizr location and keeps six bullets in all languages', () => {
     const opt = cvData.experience.find(entry => entry.company === 'OPTIMIZR');
-    expect(opt?.location).toEqual({ pt: 'Remoto', en: 'Remote', es: 'Remoto' });
+    expect(opt).not.toHaveProperty('location');
     expect(opt?.bullets.map(bullet => bullet.pt)).toEqual([
       'Fundei e lidero a Optimizr, consultoria de automação, dados e software sob medida, do diagnóstico de processos ao MVP em produção.',
       'Mapeio processos (AS-IS/TO-BE) e priorizo automações pelo retorno, com arquitetura adaptada aos sistemas que o cliente já usa.',
@@ -203,7 +203,9 @@ describe('cv.json schema validation', () => {
       expect(exp.period.start).toMatch(/^\d{4}-\d{2}$/);
       for (const lang of LANGUAGES) {
         expect((exp.role as Record<string, string>)[lang], `Missing role ${lang} for ${exp.company}`).toBeTruthy();
-        expect((exp.location as Record<string, string>)[lang], `Missing location ${lang} for ${exp.company}`).toBeTruthy();
+        if (exp.location) {
+          expect((exp.location as Record<string, string>)[lang], `Missing location ${lang} for ${exp.company}`).toBeTruthy();
+        }
       }
     }
   });

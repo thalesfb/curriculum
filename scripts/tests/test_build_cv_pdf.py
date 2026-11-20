@@ -33,7 +33,9 @@ def source_texts(language):
     for item in DATA["experience"]:
         if ROLE not in item.get("roles", []):
             continue
-        texts += [localized(item["role"], language), item["company"], localized(item["location"], language)]
+        texts += [localized(item["role"], language), item["company"]]
+        if item.get("location") is not None:
+            texts.append(localized(item["location"], language))
         texts += [localized(bullet, language) for bullet in item["bullets"] if ROLE in bullet.get("roles", [])]
     for item in DATA["projects"]:
         if ROLE not in item.get("roles", []):
@@ -158,6 +160,23 @@ class GeneratedPdfTests(unittest.TestCase):
                 lines = [line.strip() for line in extracted.splitlines()]
                 positions = [lines.index(section) for section in section_order[language]]
                 self.assertEqual(positions, sorted(positions), extracted)
+
+    def test_optimizr_location_is_absent_from_cv_json(self):
+        optimizr = next(item for item in DATA["experience"] if item["company"] == "OPTIMIZR")
+        self.assertNotIn("location", optimizr)
+
+    def test_optimizr_company_line_has_no_remote_location(self):
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                extracted = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", "-layout", str(self.output_dir / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout
+                company_line = next(line for line in extracted.splitlines() if "OPTIMIZR" in line)
+                self.assertNotRegex(company_line, r"\b(?:Remoto|Remote)\b", company_line)
 
     def test_published_pdfs_match_current_cv_json_text(self):
         for language, filename in OUTPUTS.items():
@@ -353,6 +372,13 @@ class GeneratedPdfTests(unittest.TestCase):
 
 
 class OutputProtectionTests(unittest.TestCase):
+    def test_experience_location_cell_is_only_rendered_when_present(self):
+        template = (ROOT / "cv" / "cv.typ").read_text(encoding="utf-8")
+        experience = template[template.index('== #section("experience")'):template.index('== #section("projects")')]
+        self.assertIn('item.at("location", default: none)', experience)
+        self.assertIn('if location != "" [#h(1fr) *#location*]', experience)
+        self.assertNotIn("item.location", experience)
+
     def test_major_cv_entries_share_one_vertical_spacing_constant(self):
         template = (ROOT / "cv" / "cv.typ").read_text(encoding="utf-8")
         self.assertIn("#let item-spacing = 1.25em", template)

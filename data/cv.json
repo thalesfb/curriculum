@@ -271,11 +271,6 @@
         "start": "2025-06",
         "end": null
       },
-      "location": {
-        "pt": "Remoto",
-        "en": "Remote",
-        "es": "Remoto"
-      },
       "roles": [
         "data-engineer",
         "backend",
