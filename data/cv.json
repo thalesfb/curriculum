@@ -272,9 +272,9 @@
         "end": null
       },
       "location": {
-        "pt": "Videira, SC",
-        "en": "Videira, SC, Brazil",
-        "es": "Videira, SC, Brasil"
+        "pt": "Remoto",
+        "en": "Remote",
+        "es": "Remoto"
       },
       "roles": [
         "data-engineer",
@@ -284,9 +284,9 @@
       ],
       "bullets": [
         {
-          "pt": "Liderei a consultoria em TI, abrangendo o desenvolvimento de programas de computador customizáveis e sob encomenda, web design, suporte técnico e tratamento de dados.",
-          "en": "Led IT consulting operations encompassing the development of customizable and custom software, web design, technical support, and data processing.",
-          "es": "Lideré la consultoría de TI, abarcando el desarrollo de programas informáticos personalizables y a medida, diseño web, soporte técnico y tratamiento de datos.",
+          "pt": "Fundei e lidero a Optimizr, consultoria de automação, dados e software sob medida, do diagnóstico de processos ao MVP em produção.",
+          "en": "I founded and lead Optimizr, a consulting firm for automation, data, and custom software, from process diagnosis through an MVP in production.",
+          "es": "Fundé y lidero Optimizr, una consultoría de automatización, datos y software a medida, desde el diagnóstico de procesos hasta un MVP en producción.",
           "roles": [
             "data-engineer",
             "backend",
@@ -295,76 +295,58 @@
           ]
         },
         {
-          "pt": "Criei relatórios digitais que integraram métricas de qualidade, elevando significativamente os padrões de produção.",
-          "en": "Created digital reports integrating quality metrics, significantly raising production standards.",
-          "es": "Creé informes digitales que integraron métricas de calidad y elevaron significativamente los estándares de producción.",
-          "roles": [
-            "data-engineer",
-            "management"
-          ]
-        },
-        {
-          "pt": "Elaborei dashboards avançados em Power BI para análise de tendências e suporte à alta gestão.",
-          "en": "Developed advanced Power BI dashboards for trend analysis and executive management support.",
-          "es": "Elaboré dashboards avanzados en Power BI para el análisis de tendencias y el apoyo a la alta dirección.",
-          "roles": [
-            "data-engineer",
-            "management"
-          ]
-        },
-        {
-          "pt": "Atuei na preparação de documentos e serviços especializados de apoio administrativo, e ofereci treinamento em informática.",
-          "en": "Prepared documents and specialized administrative support services, and provided computer training.",
-          "es": "Preparé documentos y presté servicios especializados de apoyo administrativo, además de ofrecer capacitación informática.",
-          "roles": [
-            "management"
-          ]
-        },
-        {
-          "pt": "Atendi diretamente clientes corporativos e zerei o tempo de espera na geração de relatórios por meio do desenvolvimento de soluções de dados integradas.",
-          "en": "Served corporate clients directly and eliminated report generation wait time by developing integrated data solutions.",
-          "es": "Atendí directamente a clientes corporativos y eliminé el tiempo de espera en la generación de informes mediante el desarrollo de soluciones de datos integradas.",
+          "pt": "Mapeio processos (AS-IS/TO-BE) e priorizo automações pelo retorno, com arquitetura adaptada aos sistemas que o cliente já usa.",
+          "en": "I map processes (AS-IS/TO-BE) and prioritize automations by return, with architecture adapted to the systems the client already uses.",
+          "es": "Mapeo procesos (AS-IS/TO-BE) y priorizo automatizaciones según su retorno, con una arquitectura adaptada a los sistemas que el cliente ya utiliza.",
           "roles": [
             "data-engineer",
             "backend",
-            "management"
-          ]
-        },
-        {
-          "pt": "Desenvolvi e coloquei em produção uma plataforma de delivery para um cliente do varejo de conveniência, com catálogo de mais de 200 produtos, ofertas e mapa de entrega.",
-          "en": "Developed and launched a delivery platform for a convenience retail client, with a catalog of more than 200 products, offers, and a delivery map.",
-          "es": "Desarrollé y puse en producción una plataforma de delivery para un cliente del comercio minorista de conveniencia, con un catálogo de más de 200 productos, ofertas y mapa de entrega.",
-          "roles": [
-            "data-engineer",
-            "backend"
-          ]
-        },
-        {
-          "pt": "Unifiquei vendas, pedidos, produção, pagamentos e indicadores em uma plataforma para um cliente do setor de alimentação, com acompanhamento em tempo real pelos gestores.",
-          "en": "Unified sales, orders, production, payments, and indicators on one platform for a food-sector client, with real-time monitoring by managers.",
-          "es": "Unifiqué ventas, pedidos, producción, pagos e indicadores en una plataforma para un cliente del sector alimentario, con seguimiento en tiempo real por parte de los gestores.",
-          "roles": [
-            "data-engineer",
-            "backend",
-            "management"
-          ]
-        },
-        {
-          "pt": "Centralizei informações financeiras, operacionais e gerenciais de um cliente do comércio em uma plataforma, reduzindo retrabalho.",
-          "en": "Centralized financial, operational, and management information for a retail client on one platform, reducing rework.",
-          "es": "Centralicé la información financiera, operativa y de gestión de un cliente comercial en una plataforma, reduciendo el retrabajo.",
-          "roles": [
-            "data-engineer",
-            "management"
-          ]
-        },
-        {
-          "pt": "Implementei infraestrutura de servidores para clientes com Linux, Docker e NGINX com SSL/TLS.",
-          "en": "Implemented server infrastructure for clients using Linux, Docker, and NGINX with SSL/TLS.",
-          "es": "Implementé infraestructura de servidores para clientes con Linux, Docker y NGINX con SSL/TLS.",
-          "roles": [
             "devops",
-            "backend"
+            "management"
+          ]
+        },
+        {
+          "pt": "Desenvolvo aplicações full-stack (Django, TypeScript/React) com CI/CD, integrações via APIs e automações em Python que eliminam tarefas manuais.",
+          "en": "I develop full-stack applications (Django, TypeScript/React) with CI/CD, API integrations, and Python automations that eliminate manual tasks.",
+          "es": "Desarrollo aplicaciones full-stack (Django, TypeScript/React) con CI/CD, integraciones mediante API y automatizaciones en Python que eliminan tareas manuales.",
+          "roles": [
+            "data-engineer",
+            "backend",
+            "devops",
+            "management"
+          ]
+        },
+        {
+          "pt": "Construo pipelines de dados e dashboards em Power BI; para clientes corporativos, zerei o tempo de espera na geração de relatórios.",
+          "en": "I build data pipelines and Power BI dashboards; for corporate clients, I eliminated wait time for report generation.",
+          "es": "Construyo pipelines de datos y dashboards en Power BI; para clientes corporativos, eliminé el tiempo de espera en la generación de informes.",
+          "roles": [
+            "data-engineer",
+            "backend",
+            "devops",
+            "management"
+          ]
+        },
+        {
+          "pt": "Entreguei plataformas para varejo, alimentação e comércio: delivery com catálogo de 200+ produtos, gestão unificada de vendas, pedidos, produção e pagamentos, e centralização financeira e operacional.",
+          "en": "I delivered platforms for retail, food service, and commerce: delivery with a catalog of 200+ products, unified management of sales, orders, production, and payments, and financial and operational centralization.",
+          "es": "Entregué plataformas para comercio minorista, alimentación y comercio: delivery con un catálogo de más de 200 productos, gestión unificada de ventas, pedidos, producción y pagos, y centralización financiera y operativa.",
+          "roles": [
+            "data-engineer",
+            "backend",
+            "devops",
+            "management"
+          ]
+        },
+        {
+          "pt": "Opero a infraestrutura dos clientes em Linux, Docker e NGINX (SSL/TLS), com suporte contínuo e treinamento das equipes.",
+          "en": "I operate clients’ infrastructure on Linux, Docker, and NGINX (SSL/TLS), with ongoing support and team training.",
+          "es": "Opero la infraestructura de los clientes en Linux, Docker y NGINX (SSL/TLS), con soporte continuo y capacitación de los equipos.",
+          "roles": [
+            "data-engineer",
+            "backend",
+            "devops",
+            "management"
           ]
         }
       ]

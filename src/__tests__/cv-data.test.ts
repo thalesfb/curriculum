@@ -143,15 +143,43 @@ describe('cv.json schema validation', () => {
     expect(cpel?.role.pt).toBe('Full Stack Data Engineer with Software and DevOps Expertise');
   });
 
-  it('retains every approved PDF bullet for Optimizr and CPEL', () => {
+  it('uses the approved remote Optimizr location and six bullets in all languages', () => {
     const opt = cvData.experience.find(entry => entry.company === 'OPTIMIZR');
+    expect(opt?.location).toEqual({ pt: 'Remoto', en: 'Remote', es: 'Remoto' });
+    expect(opt?.bullets.map(bullet => bullet.pt)).toEqual([
+      'Fundei e lidero a Optimizr, consultoria de automação, dados e software sob medida, do diagnóstico de processos ao MVP em produção.',
+      'Mapeio processos (AS-IS/TO-BE) e priorizo automações pelo retorno, com arquitetura adaptada aos sistemas que o cliente já usa.',
+      'Desenvolvo aplicações full-stack (Django, TypeScript/React) com CI/CD, integrações via APIs e automações em Python que eliminam tarefas manuais.',
+      'Construo pipelines de dados e dashboards em Power BI; para clientes corporativos, zerei o tempo de espera na geração de relatórios.',
+      'Entreguei plataformas para varejo, alimentação e comércio: delivery com catálogo de 200+ produtos, gestão unificada de vendas, pedidos, produção e pagamentos, e centralização financeira e operacional.',
+      'Opero a infraestrutura dos clientes em Linux, Docker e NGINX (SSL/TLS), com suporte contínuo e treinamento das equipes.',
+    ]);
+    expect(opt?.bullets.map(bullet => bullet.en)).toEqual([
+      'I founded and lead Optimizr, a consulting firm for automation, data, and custom software, from process diagnosis through an MVP in production.',
+      'I map processes (AS-IS/TO-BE) and prioritize automations by return, with architecture adapted to the systems the client already uses.',
+      'I develop full-stack applications (Django, TypeScript/React) with CI/CD, API integrations, and Python automations that eliminate manual tasks.',
+      'I build data pipelines and Power BI dashboards; for corporate clients, I eliminated wait time for report generation.',
+      'I delivered platforms for retail, food service, and commerce: delivery with a catalog of 200+ products, unified management of sales, orders, production, and payments, and financial and operational centralization.',
+      'I operate clients’ infrastructure on Linux, Docker, and NGINX (SSL/TLS), with ongoing support and team training.',
+    ]);
+    expect(opt?.bullets.map(bullet => bullet.es)).toEqual([
+      'Fundé y lidero Optimizr, una consultoría de automatización, datos y software a medida, desde el diagnóstico de procesos hasta un MVP en producción.',
+      'Mapeo procesos (AS-IS/TO-BE) y priorizo automatizaciones según su retorno, con una arquitectura adaptada a los sistemas que el cliente ya utiliza.',
+      'Desarrollo aplicaciones full-stack (Django, TypeScript/React) con CI/CD, integraciones mediante API y automatizaciones en Python que eliminan tareas manuales.',
+      'Construyo pipelines de datos y dashboards en Power BI; para clientes corporativos, eliminé el tiempo de espera en la generación de informes.',
+      'Entregué plataformas para comercio minorista, alimentación y comercio: delivery con un catálogo de más de 200 productos, gestión unificada de ventas, pedidos, producción y pagos, y centralización financiera y operativa.',
+      'Opero la infraestructura de los clientes en Linux, Docker y NGINX (SSL/TLS), con soporte continuo y capacitación de los equipos.',
+    ]);
+    expect(opt?.bullets).toHaveLength(6);
+    for (const bullet of opt?.bullets ?? []) {
+      expect(bullet.en).toBeTruthy();
+      expect(bullet.es).toBeTruthy();
+      expect(bullet.roles).toEqual(opt?.roles);
+    }
+  });
+
+  it('retains the approved CPEL bullets', () => {
     const cpel = cvData.experience.find(entry => entry.company === 'CPEL');
-    expect(opt?.bullets.map(bullet => bullet.pt)).toEqual(expect.arrayContaining([
-      'Liderei a consultoria em TI, abrangendo o desenvolvimento de programas de computador customizáveis e sob encomenda, web design, suporte técnico e tratamento de dados.',
-      'Criei relatórios digitais que integraram métricas de qualidade, elevando significativamente os padrões de produção.',
-      'Elaborei dashboards avançados em Power BI para análise de tendências e suporte à alta gestão.',
-      'Atuei na preparação de documentos e serviços especializados de apoio administrativo, e ofereci treinamento em informática.',
-    ]));
     expect(cpel?.bullets.map(bullet => bullet.pt)).toEqual(expect.arrayContaining([
       'Desenvolvi um sistema de controle de produção que otimizou a eficiência operacional e reduziu desperdícios.',
       'Criei relatórios digitais que integraram métricas de qualidade, aumentando significativamente os padrões de produção.',
