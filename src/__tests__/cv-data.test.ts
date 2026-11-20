@@ -189,20 +189,14 @@ describe('cv.json schema validation', () => {
       en: 'Artificial Intelligence Implementations',
       es: 'Implementaciones de Inteligencia Artificial',
     });
-    expect(aiImplementations?.technologies).toEqual(expect.arrayContaining(['HTML', 'BFS', 'UCS', 'DFS']));
+    expect(aiImplementations?.technologies).toEqual(['BFS', 'UCS', 'DFS']);
+    expect(aiImplementations?.roles).toEqual(['data-engineer', 'backend']);
     expect(aiImplementations?.description.pt).toContain('buscas BFS, UCS e DFS');
     expect(aiImplementations?.description.en).toContain('BFS, UCS, and DFS searches');
     expect(aiImplementations?.description.es).toContain('búsquedas BFS, UCS y DFS');
 
-    expect(cursorAgents?.nameByLanguage).toEqual({
-      pt: 'Sistema de Agentes Inteligentes para Cursor',
-      en: 'Intelligent Agent System for Cursor',
-      es: 'Sistema de Agentes Inteligentes para Cursor',
-    });
-    expect(cursorAgents?.technologies).toEqual(expect.arrayContaining(['Cursor IDE', 'JSON', 'PowerShell']));
-    expect(cursorAgents?.description.pt).toContain('agentes especializados e seleção automática');
-    expect(cursorAgents?.description.en).toContain('specialized agents and automatic selection');
-    expect(cursorAgents?.description.es).toContain('agentes especializados y selección automática');
+    expect(cursorAgents).toBeUndefined();
+    expect(JSON.stringify(cvData)).not.toContain('cursor-agents');
   });
 
   it('keeps the IFC capstone project title and translations', () => {

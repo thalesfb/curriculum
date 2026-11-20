@@ -553,10 +553,9 @@
       "repo": "github.com/thalesfb/AI",
       "roles": [
         "data-engineer",
-        "frontend"
+        "backend"
       ],
       "technologies": [
-        "HTML",
         "BFS",
         "UCS",
         "DFS"
@@ -565,29 +564,6 @@
         "pt": "Esboços e implementações didáticas de IA no IFC Videira, com buscas BFS, UCS e DFS e jogos como o puzzle de 8 e jogo da velha.",
         "en": "Educational AI sketches and implementations for IFC Videira, with BFS, UCS, and DFS searches and games such as the 8-puzzle and tic-tac-toe.",
         "es": "Bocetos e implementaciones didácticas de IA en IFC Videira, con búsquedas BFS, UCS y DFS y juegos como el puzzle de 8 y el tres en raya."
-      }
-    },
-    {
-      "name": "Sistema de Agentes Inteligentes para Cursor",
-      "nameByLanguage": {
-        "pt": "Sistema de Agentes Inteligentes para Cursor",
-        "en": "Intelligent Agent System for Cursor",
-        "es": "Sistema de Agentes Inteligentes para Cursor"
-      },
-      "repo": "github.com/thalesfb/cursor-agents",
-      "roles": [
-        "devops",
-        "management"
-      ],
-      "technologies": [
-        "Cursor IDE",
-        "JSON",
-        "PowerShell"
-      ],
-      "description": {
-        "pt": "Sistema de agentes customizados para o Cursor IDE, com agentes especializados e seleção automática do especialista para cada tarefa.",
-        "en": "Custom agents for Cursor IDE, with specialized agents and automatic selection of the best specialist for each task.",
-        "es": "Sistema de agentes personalizados para Cursor IDE, con agentes especializados y selección automática del mejor especialista para cada tarea."
       }
     },
     {
