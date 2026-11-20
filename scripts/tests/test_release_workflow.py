@@ -37,10 +37,22 @@ class ReleaseWorkflowTests(unittest.TestCase):
             WORKFLOW,
         )
 
+    def test_backfilled_release_is_latest_only_for_highest_semver_tag(self):
+        recovery_step = WORKFLOW.split(
+            "- name: Publish GitHub Releases missing for existing tags", 1
+        )[1].split("- name:", 1)[0]
+        self.assertIn("sort -V", recovery_step)
+        self.assertIn("highest_version_tag", recovery_step)
+        self.assertIn('if [[ "$tag" != "$highest_version_tag" ]]; then', recovery_step)
+        self.assertIn("latest_option+=(--latest=false)", recovery_step)
+        self.assertIn('"${latest_option[@]}"', recovery_step)
+
     def test_release_recovery_is_documented(self):
         self.assertIn("### Release", DEPLOYMENT)
         self.assertIn("refs/notes", DEPLOYMENT)
         self.assertIn("--generate-notes", DEPLOYMENT)
+        self.assertIn("sort -V", DEPLOYMENT)
+        self.assertIn("--latest=false", DEPLOYMENT)
 
 
 if __name__ == "__main__":
