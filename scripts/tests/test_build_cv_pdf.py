@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from scripts.build_cv_pdf import OUTPUTS, ROOT, resolve_output_dir
@@ -109,6 +110,47 @@ def formatted_dates(language):
 
 def tokens(text):
     return re.findall(r"[^\W_]+", text.casefold(), flags=re.UNICODE)
+
+
+def bbox_lines(pdf, page_number):
+    result = subprocess.run(
+        ["pdftotext", "-bbox-layout", "-f", str(page_number), "-l", str(page_number), str(pdf), "-"],
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+    )
+    root = ET.fromstring(result.stdout)
+    page = root.find(".//{http://www.w3.org/1999/xhtml}page")
+    if page is None:
+        raise AssertionError(f"Missing page {page_number} in bbox output for {pdf}")
+    lines = []
+    for element in page.findall(".//{http://www.w3.org/1999/xhtml}line"):
+        text = " ".join("".join(element.itertext()).split())
+        if text:
+            lines.append({
+                "text": text,
+                "xMin": float(element.attrib["xMin"]),
+                "xMax": float(element.attrib["xMax"]),
+                "yMin": float(element.attrib["yMin"]),
+                "yMax": float(element.attrib["yMax"]),
+            })
+    return float(page.attrib["width"]), lines
+
+
+def visual_rows(lines, baseline_tolerance=0.5):
+    rows = []
+    for line in sorted(lines, key=lambda item: (item["yMin"], item["xMin"])):
+        if rows and line["yMin"] - rows[-1]["yMin"] <= baseline_tolerance:
+            row = rows[-1]
+            row["xMin"] = min(row["xMin"], line["xMin"])
+            row["xMax"] = max(row["xMax"], line["xMax"])
+            row["yMin"] = min(row["yMin"], line["yMin"])
+            row["yMax"] = max(row["yMax"], line["yMax"])
+            row["text"] += " | " + line["text"]
+        else:
+            rows.append(dict(line))
+    return rows
 
 
 @unittest.skipUnless(not MISSING_TOOLS, PDF_TEST_SKIP)
@@ -440,6 +482,41 @@ class GeneratedPdfTests(unittest.TestCase):
                 ).stdout
                 self.assertIn(target, urls)
 
+    def test_contact_and_certification_lines_do_not_overlap_vertically(self):
+        section_labels = {
+            "pt": ("CERTIFICAÇÕES", "IDIOMAS"),
+            "en": ("CERTIFICATIONS", "LANGUAGES"),
+            "es": ("CERTIFICACIONES", "IDIOMAS"),
+        }
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                pdf = self.output_dir / filename
+                page_width, first_page = bbox_lines(pdf, 1)
+                contact_rows = visual_rows(first_page)
+                email_line = next(line for line in contact_rows if DATA["personal"]["email"] in line["text"])
+                lattes_line = next(line for line in contact_rows if "lattes.cnpq.br/9042504768658064" in line["text"])
+                self.assertIn(DATA["personal"]["phone"], email_line["text"])
+                for profile in (DATA["personal"]["linkedin"], DATA["personal"]["github"]):
+                    self.assertIn(profile, lattes_line["text"])
+                self.assertGreaterEqual(lattes_line["yMin"], email_line["yMax"], "Contact rows overlap")
+                self.assertAlmostEqual((lattes_line["xMin"] + lattes_line["xMax"]) / 2, page_width / 2, delta=5)
+
+                _, second_page = bbox_lines(pdf, 2)
+                heading, next_heading = section_labels[language]
+                certification_heading = next(line for line in second_page if line["text"] == heading)
+                next_section = next(line for line in second_page if line["text"] == next_heading and line["yMin"] > certification_heading["yMin"])
+                section_lines = [
+                    line for line in second_page
+                    if certification_heading["yMax"] <= line["yMin"] < next_section["yMin"]
+                ]
+                rows = visual_rows(section_lines)
+                self.assertTrue(any("Alura" in row["text"] for row in rows), rows)
+                for previous, following in zip(rows, rows[1:]):
+                    self.assertGreaterEqual(
+                        following["yMin"], previous["yMax"],
+                        f"{language} certification rows overlap: {previous['text']} / {following['text']}",
+                    )
+
     def test_senai_courses_share_one_institution_heading(self):
         for language, filename in OUTPUTS.items():
             with self.subTest(language=language):
@@ -511,6 +588,13 @@ class OutputProtectionTests(unittest.TestCase):
             self.assertIn("above: item-spacing", segment, section)
         self.assertIn("#let course-spacing = 0.25em", template)
         self.assertIn("#v(course-spacing)", template)
+
+    def test_alura_groups_use_regular_certification_spacing_and_indent(self):
+        template = (ROOT / "cv" / "cv.typ").read_text(encoding="utf-8")
+        certifications = template[template.index('== #section("certifications")'):template.index('== #section("languages")')]
+        self.assertIn("#let certification-spacing = 0.65em", template)
+        self.assertEqual(certifications.count("above: certification-spacing"), 3)
+        self.assertIn("#h(0.6em) *#localized(item.name)*", certifications)
 
     def test_default_output_is_outside_public_refs(self):
         output = resolve_output_dir(None, publish_public_refs=False)

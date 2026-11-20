@@ -19,6 +19,7 @@
 )
 #let item-spacing = 1.25em
 #let course-spacing = 0.25em
+#let certification-spacing = 0.65em
 #let month-name(number) = {
   let pt = ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
   let en = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
@@ -140,17 +141,17 @@
 ]
 
 == #section("certifications")
- #block(width: 100%, above: 0.65em, breakable: false)[
+ #block(width: 100%, above: certification-spacing, breakable: false)[
   #link(alura-items.at(0).credentialUrl)[*Alura · #str(alura-hours)h*] \
   #for item in alura-items [
     #let hours = item.at("hours", default: none)
     #let period = item.at("period", default: none)
-    #block(width: 100%, above: 0.15em, breakable: false)[
+    #block(width: 100%, above: certification-spacing, breakable: false)[
       #grid(
         columns: (1fr, auto),
         column-gutter: 8pt,
         align: (left + top, right + top),
-        [*#localized(item.name)*#if hours != none [#text(" · " + str(hours) + "h")]],
+        [#h(0.6em) *#localized(item.name)*#if hours != none [#text(" · " + str(hours) + "h")]],
         [#if period != none [#date-range(period)] else if item.at("date", default: none) != none [#date(item.date)]],
       )
     ]
@@ -165,7 +166,7 @@
   #let editions = localized(item.at("editions", default: none))
   #let credential = item.at("credentialUrl", default: none)
   #let period = item.at("period", default: none)
-  #block(width: 100%, above: 0.65em, breakable: false)[
+  #block(width: 100%, above: certification-spacing, breakable: false)[
     #grid(
       columns: (1fr, auto),
       column-gutter: 8pt,
