@@ -29,6 +29,7 @@
   languages: (pt: "IDIOMAS", en: "LANGUAGES", es: "IDIOMAS"),
 )
 #let section(name) = section-labels.at(name).at(lang)
+#let status-labels = (pt: "Em andamento", en: "In progress", es: "En curso")
 #let uservars = (
   headingfont: "Libertinus Serif",
   bodyfont: "Libertinus Serif",
@@ -126,12 +127,13 @@
 #for item in data.certifications [
   #let provider = item.at("providerByLanguage", default: (:)).at(lang, default: item.at("provider", default: none))
   #let provider = if (provider == none or ("Não informado", "Not specified", "No especificado").contains(provider)) { none } else { provider }
+  #let status = item.at("status", default: none)
   #block(width: 100%, above: 0.65em, breakable: false)[
     #grid(
       columns: (1fr, auto),
       column-gutter: 8pt,
       align: (left + top, right + top),
-      [*#localized(item.name)*#if provider != none [#text(" · " + provider)]],
+      [*#localized(item.name)*#if provider != none [#text(" · " + provider)]#if status == "in-progress" [#text(" · " + status-labels.at(lang))]],
       [#if item.at("date", default: none) != none [#date(item.date)]],
     )
   ]

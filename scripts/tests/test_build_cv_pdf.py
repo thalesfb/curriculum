@@ -16,6 +16,7 @@ ROLE = "data-engineer"
 TOOLS = ("typst", "pdfinfo", "pdffonts", "pdftotext")
 MISSING_TOOLS = [name for name in TOOLS if shutil.which(name) is None]
 PDF_TEST_SKIP = "PDF integration checks need Typst and Poppler tools: " + ", ".join(MISSING_TOOLS)
+CERTIFICATION_STATUS_LABELS = {"pt": "Em andamento", "en": "In progress", "es": "En curso"}
 
 
 def localized(value, language):
@@ -158,6 +159,47 @@ class GeneratedPdfTests(unittest.TestCase):
                 positions = [lines.index(section) for section in section_order[language]]
                 self.assertEqual(positions, sorted(positions), extracted)
 
+    def test_published_pdfs_match_current_cv_json_text(self):
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                generated = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", "-layout", str(self.output_dir / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout
+                published = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", "-layout", str(ROOT / "public" / "refs" / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout
+                self.assertEqual(published, generated, f"Published {language} PDF is stale relative to cv.json")
+
+    def test_ongoing_aws_certification_has_localized_status_and_no_date(self):
+        aws = next(item for item in DATA["certifications"] if item["name"]["pt"] == "AWS Academy Cloud Architecting")
+        latinoware = next(item for item in DATA["certifications"] if item["name"]["pt"] == "Latinoware 2014")
+        self.assertEqual(aws["status"], "in-progress")
+        self.assertNotIn("date", aws)
+        self.assertNotIn("date", latinoware)
+
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                lines = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", "-raw", str(self.output_dir / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout.splitlines()
+                aws_line = next((" ".join(tokens(line)) for line in lines if localized(aws["name"], language) in line), "")
+                self.assertIn(" ".join(tokens(CERTIFICATION_STATUS_LABELS[language])), aws_line)
+
+                latinoware_line = next((" ".join(tokens(line)) for line in lines if "Latinoware 2014" in line), "")
+                self.assertEqual(latinoware_line, "latinoware 2014")
+
     def test_each_language_contains_all_selected_content_without_invented_text(self):
         section_labels = {
             "pt": ["SUMÁRIO", "EXPERIÊNCIA", "PROJETOS", "COMPETÊNCIAS TÉCNICAS", "FORMAÇÃO", "CERTIFICAÇÕES", "IDIOMAS"],
@@ -189,6 +231,7 @@ class GeneratedPdfTests(unittest.TestCase):
 
                 allowed = collections.Counter(token for value in source_texts(language) for token in tokens(value))
                 allowed.update(token for value in section_labels[language] for token in tokens(value))
+                allowed.update(tokens(CERTIFICATION_STATUS_LABELS[language]))
                 for value in formatted_dates(language):
                     allowed.update(tokens(value))
                 actual = collections.Counter(tokens(extracted))
