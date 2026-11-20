@@ -5,7 +5,7 @@
 - **Servidor:** VPS própria
 - **Web server:** NGINX
 - **SSL:** Let's Encrypt + certbot auto-renew
-- **Domínio:** thales.optimizr.site
+- **Domínio:** thalesfb.curriculum.optimizr.site
 - **CI/CD:** GitHub Actions
 
 ## Deploy Manual
@@ -15,10 +15,10 @@
 npm run build
 
 # Sync para VPS
-rsync -avz --delete dist/ user@vps:/var/www/thales.optimizr.site/
+rsync -avz --delete dist/ user@vps:/var/www/thalesfb.curriculum.optimizr.site/
 
 # Ou via SSH
-ssh user@vps "cd /var/www/thales.optimizr.site && git pull && npm run build"
+ssh user@vps "cd /var/www/thalesfb.curriculum.optimizr.site && git pull && npm run build"
 ```
 
 ## GitHub Actions (CI/CD)
@@ -54,11 +54,11 @@ jobs:
           key: ${{ secrets.VPS_KEY }}
           port: ${{ secrets.VPS_PORT }}
           source: "dist/*"
-          target: "/var/www/thales.optimizr.site"
+          target: "/var/www/thalesfb.curriculum.optimizr.site"
           strip_components: 1
 
       - name: Health Check
-        run: curl -f https://thales.optimizr.site || exit 1
+        run: curl -f https://thalesfb.curriculum.optimizr.site || exit 1
 ```
 
 ### Secrets necessários
@@ -75,14 +75,14 @@ jobs:
 ```nginx
 server {
     listen 443 ssl http2;
-    server_name thales.optimizr.site;
+    server_name thalesfb.curriculum.optimizr.site;
 
-    root /var/www/thales.optimizr.site;
+    root /var/www/thalesfb.curriculum.optimizr.site;
     index index.html;
 
     # SSL
-    ssl_certificate /etc/letsencrypt/live/thales.optimizr.site/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/thales.optimizr.site/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/thalesfb.curriculum.optimizr.site/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/thalesfb.curriculum.optimizr.site/privkey.pem;
 
     # Security Headers
     add_header X-Frame-Options "SAMEORIGIN" always;
@@ -115,7 +115,7 @@ server {
 # HTTP → HTTPS redirect
 server {
     listen 80;
-    server_name thales.optimizr.site;
+    server_name thalesfb.curriculum.optimizr.site;
     return 301 https://$host$request_uri;
 }
 ```

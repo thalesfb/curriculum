@@ -1,6 +1,6 @@
 # Guia Prático: Design System no Figma
 
-**Projeto:** Portfolio Thales Ferreira — thales.optimizr.site
+**Projeto:** Portfolio Thales Ferreira — thalesfb.curriculum.optimizr.site
 **Figma:** `UXq2erOANKQqaWegZQ9nk1`
 **Autor:** Thales Ferreira
 
@@ -15,7 +15,9 @@
 5. [Prototyping e Interações](#5-prototyping-e-interações)
 6. [Dark Mode com Variáveis](#6-dark-mode-com-variáveis)
 7. [i18n com Variable Modes](#7-i18n-com-variable-modes)
-8. [Lições Aprendidas](#8-lições-aprendidas)
+8. [WhatsApp Button](#8-whatsapp-button-adr-0008)
+9. [Lições Aprendidas](#9-lições-aprendidas)
+10. [S5 — Figma v2 aprovado](#s5--figma-v2-aprovado)
 
 ---
 
@@ -61,7 +63,7 @@ O projeto usa **3 coleções** de variáveis, cada uma representando uma **dimen
 | **i18n** | STRING | PT / EN / ES | Textos da interface traduzidos |
 | **Role** | STRING | Data Engineer / Backend / DevOps / Management | Variantes de cargo profissional |
 
-### Theme — Variáveis de Cor (17 variáveis)
+### Theme — Variáveis de Cor (19 variáveis após S5)
 
 #### Backgrounds
 
@@ -81,6 +83,7 @@ O projeto usa **3 coleções** de variáveis, cada uma representando uma **dimen
 | `text/secondary` | `#64748B` | `#94A3B8` | Descrições, subtextos |
 | `text/inverse` | `#F1F5F9` | `#F1F5F9` | Texto sobre fundo escuro |
 | `text/placeholder` | `#64748B` | `#94A3B8` | Placeholders de input |
+| `text/on-brand` | `#0F172A` | `#0F172A` | Texto sobre a cor de marca, aprovado no S5 |
 
 #### Marca e Acentos
 
@@ -88,6 +91,7 @@ O projeto usa **3 coleções** de variáveis, cada uma representando uma **dimen
 |----------|-------|------|-----|
 | `brand/green` | `#059669` | `#34D399` | CTAs, bordas, ícone `>_` |
 | `border/line` | `#E2E8F0` | `#334155` | Divisores, bordas de input |
+| `focus-ring` | `#1D4ED8` | `#60A5FA` | Indicador de foco visível, aprovado no S5 |
 
 ### Como aplicar variáveis
 
@@ -353,12 +357,12 @@ No código, esse seletor abrirá opções PT/EN/ES que mudam o modo da coleção
 
 | Variante | Opacidade | Quando |
 |----------|-----------|--------|
-| `State=Default` | 30% | Estado padrão — sutil, não atrapalha conteúdo |
+| `State=Default` | 100% | Estado padrão, totalmente visível |
 | `State=Hover` | 100% | Desktop: mouse hover. Mobile: ao tocar |
 
 ### Interação
 
-- **Desktop:** `ON_HOVER` → `CHANGE_TO` State=Hover (dissolve 0.3s)
+- **Desktop:** `ON_HOVER` → `CHANGE_TO` State=Hover, sem pulso ou animação contínua
 - **Mobile/Tablet:** Ao clicar redireciona direto para WhatsApp
 
 ### Especificações
@@ -383,22 +387,13 @@ No código, esse seletor abrirá opções PT/EN/ES que mudam o modo da coleção
 
 URL base: `https://wa.me/5549998048695?text=...`
 
-### Implementação CSS (pulsar)
+### Implementação CSS
 
-No código, o botão terá animação CSS de pulsar para chamar atenção periodicamente:
+O botão permanece totalmente opaco e não pulsa:
 
 ```css
 .whatsapp-fab {
-  animation: pulse 3s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.05); }
-}
-.whatsapp-fab:hover {
-  animation: none;
   opacity: 1;
-  transform: scale(1.1);
 }
 ```
 
@@ -428,3 +423,46 @@ No código, o botão terá animação CSS de pulsar para chamar atenção period
 3. Qualquer novo texto de UI vai como **variável na coleção i18n**
 4. Teste dark mode após qualquer alteração visual
 5. Verifique todos os 3 breakpoints após mudanças de layout
+
+## S5 — Figma v2 aprovado
+
+O Figma v2 aprovado parte do layout existente e aplica correções. Esta decisão substitui propostas anteriores de refazer a identidade visual. Os componentes mestres ficam na página **Components**, seção `641:71`; as instâncias e composições finais ficam na página **Design**.
+
+### Frames finais
+
+| Tema | Desktop 1440 | Tablet 1024 | Mobile 375 |
+|---|---|---|---|
+| Light | `645:334` | `649:46` | `649:423` |
+| Dark | `655:427` | `655:840` | `655:1254` |
+
+Logos PNG de Mater Salvatoris e Latinoware: `651:111` e `651:112`.
+
+### Linguagem visual e tokens
+
+- Preservar Hero com foto, cards com borda verde, ícones de serviços, tags com ícone, logos de marca, botão **Contratar**, rodapé escuro e WhatsApp FAB com 100% de opacidade, sem pulso.
+- Libertinus Serif self-hosted (SIL OFL) nos títulos H1/H2/H3: H1 Display 60, H2 Section 40 e H3 Card Title 22. Corpo em stack `system-ui`; tags em Fira Code self-hosted (SIL OFL). Não usar Google Fonts.
+- `text/on-brand: #0F172A` em Light e Dark. Contraste sobre `brand/green #059669` em Light: **4.74:1**; sobre `#34D399` em Dark: **9.29:1**.
+- `focus-ring: #1D4ED8` em Light e `#60A5FA` em Dark. Contraste em Light: **6.41:1** sobre `bg/page #F8FAFC`, **6.70:1** sobre `bg/card #FFFFFF`; em Dark: **7.02:1** sobre `bg/page #0F172A`, **5.75:1** sobre `bg/card #1E293B`.
+- Mapear os valores Figma para CSS custom properties e Tailwind conforme ADR-0004.
+
+### Navegação e seções
+
+- Navegação: Sobre, Formação, Experiência, Projetos, Serviços e Contato. Remover a busca.
+- Manter a Formação dentro de Sobre; adicionar Experiência em cards após Sobre usando o componente `S5/Entry`. A role do site é fixa em `data-engineer`; remover rotação automática e não criar seletor de role.
+- Exibir Formação com logos de IFC, SENAI 2013, Mater Salvatoris e SENAI 2012.
+- Exibir todas as certificações com logos: AWS Cloud Architecting em andamento, Alura 403h com nove grupos expansíveis em `<details>/<summary>`, AWS Cloud Foundations, Latinoware, Techstars, DO188 e RH294.
+- Projetos e Serviços ficam em grade/lista estática, sem carrossel e sem filtro por role; exibir todo o conjunto de projetos selecionado, incluindo as pesquisas do IFC. Textos de Serviços vêm de `data/cv.json` em PT/EN/ES. A decisão de não usar carrossel também se aplica às antigas recomendações gerais deste guia.
+- Lattes aparece no contato, entre os ícones sociais com o glifo “L”, e no rodapé.
+
+### Projetos e critério de ordenação
+
+Unir os projetos escolhidos no Figma anterior aos projetos presentes em `data/cv.json`. Ordenar por evidência de atividade e qualidade do README no GitHub (commits, README e CI):
+
+1. TCC `ccw` — 257 commits.
+2. `machine_learning` — 107 commits.
+3. `library` — 91 commits, Java/Spring.
+4. `digital-image-processing` — 40 commits, README detalhado e CI.
+5. `AI`.
+6. Os dois projetos de pesquisa do IFC.
+
+`infra_web` (9 commits e README vazio) e `Data-Structure` (README vazio) ficam fora da seleção. Os exemplos e textos dos frames antigos são ilustrativos; o conteúdo final vem do JSON e da evidência dos repositórios.
