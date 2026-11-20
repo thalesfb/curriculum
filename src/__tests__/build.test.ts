@@ -79,4 +79,12 @@ describe('build output validation', () => {
       }
     }
   });
+
+  it.skipIf(!hasBuild)('does not expose an Optimizr location in the built locale pages', () => {
+    for (const lang of ['pt', 'en', 'es']) {
+      const html = decodeHtml(readFileSync(resolve(distDir, lang, 'index.html'), 'utf-8'));
+      expect(html).not.toContain('OPTIMIZR');
+      expect(html).not.toMatch(/\b(?:Remoto|Remote)\b/);
+    }
+  });
 });

@@ -3,7 +3,7 @@
 #let data = json(sys.inputs.at("path", default: "../data/cv.json"))
 #let lang = sys.inputs.at("lang", default: "pt")
 #let role = sys.inputs.at("role", default: "data-engineer")
-#let localized(value) = if type(value) == dictionary { value.at(lang, default: value.at("pt", default: "")) } else { value }
+#let localized(value) = if value == none { "" } else if type(value) == dictionary { value.at(lang, default: value.at("pt", default: "")) } else { value }
 #let has-role(item) = item.roles.contains(role)
 #let selected(items) = items.filter(item => has-role(item))
 #let item-spacing = 1.25em
@@ -84,8 +84,9 @@
 
 == #section("experience")
 #for item in selected(data.experience) [
+  #let location = localized(item.at("location", default: none))
   #block(width: 100%, above: item-spacing, breakable: false)[
-    *#item.company* #h(1fr) *#localized(item.location)* \
+    *#item.company* #if location != "" [#h(1fr) *#location*] \
     #text(localized(item.role), style: "italic") #h(1fr) #date-range(item.period) \
     #for bullet in item.bullets.filter(bullet => has-role(bullet)) [
       - #localized(bullet)
