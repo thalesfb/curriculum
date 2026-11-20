@@ -6,8 +6,20 @@
 #let localized(value) = if value == none { "" } else if type(value) == dictionary { value.at(lang, default: value.at("pt", default: "")) } else { value }
 #let has-role(item) = item.roles.contains(role)
 #let selected(items) = items.filter(item => has-role(item))
+#let is-alura(item) = item.at("provider", default: none) == "Alura"
+#let alura-items = data.certifications.filter(is-alura)
+#let alura-hours = {
+  let total = 0
+  for item in alura-items { total += item.at("hours", default: 0) }
+  total
+}
+#let other-certifications = data.certifications.filter(item => not is-alura(item)).sorted(
+  key: item => (if item.at("status", default: none) == "in-progress" { "1" } else { "0" }) + (if item.at("period", default: none) != none { item.period.end } else { item.at("date", default: "") }),
+  by: (left, right) => left >= right,
+)
 #let item-spacing = 1.25em
 #let course-spacing = 0.25em
+#let certification-spacing = 0.65em
 #let month-name(number) = {
   let pt = ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
   let en = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
@@ -49,10 +61,7 @@
     url: none,
     titles: (localized(data.personal.titles.at(role)),),
     location: (city: localized(data.personal.location)),
-    profiles: (
-      (url: "https://" + data.personal.linkedin),
-      (url: "https://" + data.personal.github),
-    ),
+    profiles: (),
   ),
 )
 #let initialize(doc) = {
@@ -64,6 +73,13 @@
 #show: doc => initialize(doc)
 
 #cvheading(personal, uservars)
+#align(center)[
+  #box(link("https://" + data.personal.linkedin)[#data.personal.linkedin])
+  #sym.space.en #sym.diamond.filled #sym.space.en
+  #box(link("https://" + data.personal.github)[#data.personal.github])
+  #sym.space.en #sym.diamond.filled #sym.space.en
+  #box(link(data.personal.lattes)[#data.personal.lattes.split("//").at(1)])
+]
 
 == #section("summary")
 #localized(data.summary.at(role))
@@ -125,14 +141,33 @@
 ]
 
 == #section("certifications")
-#for item in data.certifications [
+#set text(size: 9.5pt)
+ #block(width: 100%, above: certification-spacing, breakable: false)[
+  #link(alura-items.at(0).credentialUrl)[*Alura · #str(alura-hours)h*] \
+  #for item in alura-items [
+    #let hours = item.at("hours", default: none)
+    #let period = item.at("period", default: none)
+    #block(width: 100%, above: certification-spacing, breakable: false)[
+      #grid(
+        columns: (1fr, auto),
+        column-gutter: 8pt,
+        align: (left + top, right + top),
+        [#h(0.6em) *#localized(item.name)*#if hours != none [#text(" · " + str(hours) + "h")]],
+        [#if period != none [#date-range(period)] else if item.at("date", default: none) != none [#date(item.date)]],
+      )
+    ]
+  ]
+]
+#for item in other-certifications [
   #let provider = item.at("providerByLanguage", default: (:)).at(lang, default: item.at("provider", default: none))
   #let provider = if (provider == none or ("Não informado", "Not specified", "No especificado").contains(provider)) { none } else { provider }
   #let status = item.at("status", default: none)
   #let hours = item.at("hours", default: none)
+  #let hours-year = item.at("hoursYear", default: none)
+  #let editions = localized(item.at("editions", default: none))
   #let credential = item.at("credentialUrl", default: none)
   #let period = item.at("period", default: none)
-  #block(width: 100%, above: 0.65em, breakable: false)[
+  #block(width: 100%, above: certification-spacing, breakable: false)[
     #grid(
       columns: (1fr, auto),
       column-gutter: 8pt,
@@ -142,7 +177,8 @@
         #if provider != none [
           #if credential != none [#link(credential)[#text(" · " + provider)]] else [#text(" · " + provider)]
         ]
-        #if hours != none [#text(" · " + str(hours) + "h")]
+        #if hours != none [#text(" · " + str(hours) + "h" + if hours-year != none { " (" + str(hours-year) + ")" } else { "" })]
+        #if editions != "" [#text(" · " + editions)]
         #if status == "in-progress" [#text(" · " + status-labels.at(lang))]
       ],
       [#if period != none [#date-range(period)] else if item.at("date", default: none) != none [#date(item.date)]],
@@ -150,6 +186,7 @@
   ]
 ]
 
+#set text(size: 10pt)
 == #section("languages")
 #for item in data.languages [
   *#localized(item.language):* #localized(item.level)#if item.at("detail", default: none) != none [ — #localized(item.detail)] \

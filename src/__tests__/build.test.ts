@@ -171,8 +171,12 @@ describe('build output validation', () => {
     expect(certifications).toContain('198h');
     expect(certifications).toContain('Modelagem de banco');
     expect(certifications).toContain('href="https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8"');
-    expect(certifications).toContain('Latinoware 2014');
+    expect(certifications).toContain('Latinoware');
     expect(certifications).toContain('/logos/latinoware.webp');
+    expect(certifications).toContain('data-alura-block');
+    expect(certifications).toContain('Alura · 403h');
+    expect((certifications.match(/data-alura-group(?=\s|>)/g) ?? []).length).toBe(9);
+    expect(certifications.match(/<span class="block">Latinoware<\/span>/g)).toHaveLength(1);
     const aluraCourses = cvData.certifications
       .filter(certification => certification.provider === 'Alura')
       .flatMap(group => group.courses);
@@ -184,14 +188,15 @@ describe('build output validation', () => {
         expect(certifications).toContain(`data-course-period="${course.period.start}–${course.period.end}"`);
       }
     }
-    expect(certifications.indexOf('AWS Academy Cloud Architecting')).toBeLessThan(certifications.indexOf('Imersão Engenharia de Software: Dev na Era da IA'));
-    expect(certifications.indexOf('Imersão Engenharia de Software: Dev na Era da IA')).toBeLessThan(certifications.indexOf('AWS Academy Graduate – Cloud Foundations'));
-    expect(certifications.lastIndexOf('Latinoware 2014')).toBeGreaterThan(certifications.indexOf('AWS Academy Graduate – Cloud Foundations'));
-    expect(certifications.indexOf('AWS Academy Graduate – Cloud Foundations')).toBeLessThan(certifications.indexOf('UX & Design'));
-    expect(certifications.indexOf('UX & Design')).toBeLessThan(certifications.indexOf('Latinoware 2025 (28h)'));
-    expect(certifications.indexOf('Latinoware 2025 (28h)')).toBeLessThan(certifications.indexOf('Trilha Django REST Framework'));
-    expect(certifications.indexOf('Trilha Django REST Framework')).toBeLessThan(certifications.indexOf('Dados'));
-    expect(certifications.indexOf('Dados')).toBeLessThan(certifications.indexOf('Techstars Startup Weekend Videira 2025'));
+    const aluraBlock = certifications.slice(certifications.indexOf('data-alura-block'), certifications.indexOf('AWS Academy Cloud Architecting'));
+    expect(aluraBlock).toContain('Inglês para devs');
+    expect(aluraBlock).not.toContain('English for devs');
+    expect(aluraBlock.match(/Alura · \d+h/g)).toHaveLength(1);
+    expect(certifications.indexOf('AWS Academy Cloud Architecting')).toBeLessThan(certifications.indexOf('AWS Academy Graduate – Cloud Foundations'));
+    expect(certifications.indexOf('AWS Academy Graduate – Cloud Foundations')).toBeLessThan(certifications.indexOf('Latinoware'));
+    expect(certifications.indexOf('Latinoware')).toBeLessThan(certifications.indexOf('Techstars Startup Weekend Videira 2025'));
+    expect(certifications.indexOf('Techstars Startup Weekend Videira 2025')).toBeLessThan(certifications.indexOf('Red Hat OpenShift Development I'));
+    expect(certifications.indexOf('Red Hat OpenShift Development I')).toBeLessThan(certifications.indexOf('Red Hat Enterprise Linux Automation'));
   });
 
 

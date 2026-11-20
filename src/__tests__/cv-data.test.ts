@@ -80,13 +80,37 @@ describe('cv.json schema validation', () => {
     expect(architecting?.status).toBe('in-progress');
   });
 
-  it('keeps both Latinoware events and the confirmed 2025 provider', () => {
-    const latinoware2025 = cvData.certifications.find(certification => certification.name.pt === 'Latinoware 2025 (28h)');
-    const latinoware2014 = cvData.certifications.find(certification => certification.name.pt === 'Latinoware 2014');
-    expect(latinoware2025?.provider).toBe('Itaipu Parquetec');
-    expect(latinoware2014).toBeDefined();
-    expect(latinoware2014).not.toHaveProperty('provider');
-    expect(latinoware2014).not.toHaveProperty('hours');
+  it('groups both Latinoware editions and scopes the hours to 2025', () => {
+    const latinoware = cvData.certifications.filter(certification => certification.name.pt.startsWith('Latinoware'));
+    expect(latinoware).toHaveLength(1);
+    expect(latinoware[0]).toMatchObject({
+      name: { pt: 'Latinoware', en: 'Latinoware', es: 'Latinoware' },
+      provider: 'Itaipu Parquetec',
+      hours: 28,
+      hoursYear: 2025,
+      editions: { pt: 'Edições 2014 e 2025', en: '2014 and 2025 editions', es: 'Ediciones de 2014 y 2025' },
+      date: '2025-10',
+    });
+  });
+
+  it('records the official Red Hat course names and attendance periods', () => {
+    const redHat = cvData.certifications.filter(certification => certification.provider === 'Red Hat');
+    expect(redHat.map(certification => certification.name.pt)).toEqual([
+      'Red Hat OpenShift Development I: Introduction to Containers with Podman 4.12 DO188',
+      'Red Hat Enterprise Linux Automation with Ansible 9.0 RH294',
+    ]);
+    expect(redHat.map(certification => certification.period)).toEqual([
+      { start: '2024-02', end: '2024-07' },
+      { start: '2024-04', end: '2024-07' },
+    ]);
+  });
+
+  it('groups all Alura certificates beneath one 403-hour total and localizes English', () => {
+    const alura = cvData.certifications.filter(certification => certification.provider === 'Alura');
+    expect(alura.reduce((total, group) => total + group.hours, 0)).toBe(403);
+    expect(alura.find(group => group.name.pt === 'Inglês para devs')?.name).toEqual({
+      pt: 'Inglês para devs', en: 'English for devs', es: 'Inglés para devs',
+    });
   });
 
   it('includes both approved SENAI courses', () => {
@@ -176,7 +200,7 @@ describe('cv.json schema validation', () => {
       { name: 'Front-end', hours: 2, courses: [
         ['Carreira Desenvolvedor(a) Front-end React: boas-vindas e primeiros passos', 2, '2025-10', '2025-11'],
       ] },
-      { name: 'Inglês', hours: 4, courses: [
+      { name: 'Inglês para devs', hours: 4, courses: [
         ['Inglês para devs: Meeting - Creating and embedding contact forms for a client', 4, '2022-09', '2022-10'],
       ] },
       { name: 'Imersão Engenharia de Software: Dev na Era da IA', hours: 4, date: '2026-11', courses: [
