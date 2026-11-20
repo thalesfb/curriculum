@@ -28,6 +28,8 @@ def localized(value, language):
 def source_texts(language):
     personal = DATA["personal"]
     texts = [personal["name"], personal["email"], personal["phone"], personal["linkedin"], personal["github"]]
+    if personal.get("lattes"):
+        texts.append(personal["lattes"].split("//")[-1])
     texts += [localized(personal["location"], language), localized(personal["titles"][ROLE], language)]
     texts.append(localized(DATA["summary"][ROLE], language))
     for item in DATA["experience"]:
@@ -50,11 +52,18 @@ def source_texts(language):
                 texts.extend(tokens(value))
     for item in DATA["certifications"]:
         texts.append(localized(item["name"], language))
+        if item.get("editions"):
+            texts.append(localized(item["editions"], language))
         if item.get("hours"):
-            texts.append(f'{item["hours"]}h')
+            hour_label = f'{item["hours"]}h'
+            if item.get("hoursYear"):
+                hour_label += f' ({item["hoursYear"]})'
+            texts.append(hour_label)
         provider = item.get("providerByLanguage", {}).get(language, item.get("provider"))
         if provider and provider not in ("Não informado", "Not specified", "No especificado"):
             texts.append(provider)
+    alura_total = sum(item["hours"] for item in DATA["certifications"] if item.get("provider") == "Alura")
+    texts += ["Alura", f"{alura_total}h"]
     for skill in DATA["skills"].values():
         if ROLE not in skill.get("roles", []):
             continue
@@ -206,10 +215,8 @@ class GeneratedPdfTests(unittest.TestCase):
 
     def test_ongoing_aws_certification_has_localized_status_and_no_date(self):
         aws = next(item for item in DATA["certifications"] if item["name"]["pt"] == "AWS Academy Cloud Architecting")
-        latinoware = next(item for item in DATA["certifications"] if item["name"]["pt"] == "Latinoware 2014")
         self.assertEqual(aws["status"], "in-progress")
         self.assertNotIn("date", aws)
-        self.assertNotIn("date", latinoware)
 
         for language, filename in OUTPUTS.items():
             with self.subTest(language=language):
@@ -223,8 +230,45 @@ class GeneratedPdfTests(unittest.TestCase):
                 aws_line = next((" ".join(tokens(line)) for line in lines if localized(aws["name"], language) in line), "")
                 self.assertIn(" ".join(tokens(CERTIFICATION_STATUS_LABELS[language])), aws_line)
 
-                latinoware_line = next((" ".join(tokens(line)) for line in lines if "Latinoware 2014" in line), "")
-                self.assertEqual(latinoware_line, "latinoware 2014")
+
+    def test_latinoware_is_one_entry_with_2025_hours_and_both_editions(self):
+        items = [item for item in DATA["certifications"] if item["name"]["pt"].startswith("Latinoware")]
+        self.assertEqual(len(items), 1)
+        item = items[0]
+        self.assertEqual(item["provider"], "Itaipu Parquetec")
+        self.assertEqual((item["hours"], item["hoursYear"]), (28, 2025))
+        expected_editions = {"pt": "Edições 2014 e 2025", "en": "2014 and 2025 editions", "es": "Ediciones de 2014 y 2025"}
+        self.assertEqual(item["editions"], expected_editions)
+
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                extracted = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", "-layout", str(self.output_dir / filename), "-"],
+                    check=True, capture_output=True, text=True, encoding="utf-8",
+                ).stdout
+                self.assertEqual(extracted.count(localized(item["name"], language)), 1)
+                self.assertIn(localized(item["editions"], language), extracted)
+                self.assertIn("28h (2025)", extracted)
+
+    def test_non_alura_certifications_are_sorted_pending_then_dated_descending(self):
+        expected = [
+            "AWS Academy Cloud Architecting",
+            "AWS Academy Graduate – Cloud Foundations",
+            "Latinoware",
+            "Techstars Startup Weekend Videira 2025",
+            "Red Hat OpenShift (Containers/Podman) DO188",
+            "Red Hat Enterprise Linux Automation with Ansible RH294",
+        ]
+        self.assertEqual(sum(item["hours"] for item in DATA["certifications"] if item.get("provider") == "Alura"), 403)
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                extracted = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", "-layout", str(self.output_dir / filename), "-"],
+                    check=True, capture_output=True, text=True, encoding="utf-8",
+                ).stdout
+                positions = [extracted.index(name) for name in expected]
+                self.assertEqual(positions, sorted(positions), extracted)
+                self.assertLess(extracted.index("Alura"), positions[0])
 
     def test_each_language_contains_all_selected_content_without_invented_text(self):
         section_labels = {
@@ -268,6 +312,7 @@ class GeneratedPdfTests(unittest.TestCase):
             "mailto:" + DATA["personal"]["email"],
             "https://" + DATA["personal"]["linkedin"],
             "https://" + DATA["personal"]["github"],
+            DATA["personal"]["lattes"],
             *(item["credentialUrl"] for item in DATA["certifications"] if item.get("credentialUrl")),
         )
         for language, filename in OUTPUTS.items():
@@ -331,9 +376,10 @@ class GeneratedPdfTests(unittest.TestCase):
                     self.assertTrue(matching, f"Missing certification line: {name}")
                     self.assertTrue(any(all(expected_date in line for expected_date in expected_dates) for line in matching), f"Dates not on item line: {name}")
 
-    def test_alura_groups_are_lines_with_hours_and_periods_not_course_lists(self):
+    def test_alura_groups_follow_a_single_403_hour_header_without_repeating_provider(self):
         groups = [item for item in DATA["certifications"] if item.get("provider") == "Alura"]
         self.assertEqual(len(groups), 9)
+        self.assertEqual(sum(item["hours"] for item in groups), 403)
         for language, filename in OUTPUTS.items():
             with self.subTest(language=language):
                 lines = subprocess.run(
@@ -343,11 +389,14 @@ class GeneratedPdfTests(unittest.TestCase):
                     text=True,
                     encoding="utf-8",
                 ).stdout.splitlines()
+                matching_header = [line for line in lines if "Alura" in line and "403h" in line]
+                self.assertEqual(len(matching_header), 1, lines)
                 for group in groups:
                     name = localized(group["name"], language)
                     matching = [" ".join(tokens(line)) for line in lines if name in line]
                     self.assertTrue(matching, f"Missing Alura group: {name}")
-                    self.assertTrue(any("alura" in line and f'{group["hours"]}h' in line for line in matching), f"Group provider/hours not on line: {name}")
+                    self.assertTrue(any(f'{group["hours"]}h' in line for line in matching), f"Group hours not on line: {name}")
+                    self.assertFalse(any("alura" in line for line in matching), f"Repeated provider on group line: {name}")
                 extracted = " ".join(
                     subprocess.run(
                         ["pdftotext", "-enc", "UTF-8", str(self.output_dir / filename), "-"],
@@ -364,7 +413,7 @@ class GeneratedPdfTests(unittest.TestCase):
                 ):
                     self.assertNotIn(" ".join(tokens(course)), " ".join(tokens(extracted)), course)
 
-    def test_lattes_is_omitted_from_pdf_when_it_wraps_the_contact_row(self):
+    def test_lattes_is_on_a_second_contact_line_with_social_links(self):
         target = "lattes.cnpq.br/9042504768658064"
         for language, filename in OUTPUTS.items():
             with self.subTest(language=language):
@@ -375,14 +424,21 @@ class GeneratedPdfTests(unittest.TestCase):
                     text=True,
                     encoding="utf-8",
                 ).stdout
-                self.assertNotIn(target, extracted)
+                self.assertIn(target, extracted)
+                contact_line = next(line for line in extracted.splitlines() if target in line)
+                self.assertIn(DATA["personal"]["linkedin"], contact_line)
+                self.assertIn(DATA["personal"]["github"], contact_line)
+                email_line = next(line for line in extracted.splitlines() if DATA["personal"]["email"] in line)
+                self.assertIn(DATA["personal"]["phone"], email_line)
+                self.assertNotIn(DATA["personal"]["linkedin"], email_line)
+                self.assertNotIn(DATA["personal"]["github"], email_line)
                 urls = subprocess.run(
                     ["pdfinfo", "-url", str(self.output_dir / filename)],
                     check=True,
                     capture_output=True,
                     text=True,
                 ).stdout
-                self.assertNotIn(target, urls)
+                self.assertIn(target, urls)
 
     def test_senai_courses_share_one_institution_heading(self):
         for language, filename in OUTPUTS.items():

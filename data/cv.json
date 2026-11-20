@@ -1399,9 +1399,9 @@
     },
     {
       "name": {
-        "pt": "Inglês",
-        "en": "English",
-        "es": "Inglés"
+        "pt": "Inglês para devs",
+        "en": "English for devs",
+        "es": "Inglés para devs"
       },
       "provider": "Alura",
       "hours": 4,
@@ -1497,18 +1497,25 @@
     },
     {
       "name": {
-        "pt": "Latinoware 2025 (28h)",
-        "en": "Latinoware 2025 (28h)",
-        "es": "Latinoware 2025 (28h)"
+        "pt": "Latinoware",
+        "en": "Latinoware",
+        "es": "Latinoware"
       },
       "provider": "Itaipu Parquetec",
       "date": "2025-10",
+      "hours": 28,
+      "hoursYear": 2025,
+      "editions": {
+        "pt": "Edições 2014 e 2025",
+        "en": "2014 and 2025 editions",
+        "es": "Ediciones de 2014 y 2025"
+      },
       "roles": [
-        "data-engineer",
         "backend",
+        "data-engineer",
         "devops",
-        "management",
-        "frontend"
+        "frontend",
+        "management"
       ]
     },
     {
@@ -1535,20 +1542,6 @@
       },
       "provider": "AWS Academy",
       "status": "in-progress",
-      "roles": [
-        "data-engineer",
-        "backend",
-        "devops",
-        "management",
-        "frontend"
-      ]
-    },
-    {
-      "name": {
-        "pt": "Latinoware 2014",
-        "en": "Latinoware 2014",
-        "es": "Latinoware 2014"
-      },
       "roles": [
         "data-engineer",
         "backend",
