@@ -51,18 +51,18 @@ describe('cv.json schema validation', () => {
     }
   });
 
-  it('keeps unsupported cost metrics out of every summary', () => {
-    for (const summaries of Object.values(cvData.summary)) {
-      for (const summary of Object.values(summaries)) {
-        expect(summary).not.toMatch(/70\s*%/i);
-      }
-    }
+  it('matches the approved PDF summary for the data-engineer role', () => {
+    expect(cvData.summary['data-engineer']).toEqual({
+      pt: 'Profissional com ampla experiência em análise de dados, engenharia de software e automação industrial. Especializado no uso de Python, Power BI, SQL, Django, NGINX e práticas DevOps, com foco na otimização de processos, eficiência operacional e entrega de soluções estratégicas. Proativo, com sólida capacidade de liderança e trabalho em equipe, busca contribuir para projetos inovadores e desafiadores.',
+      en: 'Professional with extensive experience in data analysis, software engineering, and industrial automation. Specialized in Python, Power BI, SQL, Django, NGINX, and DevOps practices, with a focus on process optimization, operational efficiency, and delivering strategic solutions. Proactive with solid leadership capabilities and teamwork skills, seeking to contribute to innovative and challenging projects.',
+      es: 'Full Stack Data Engineer y Founder con historial de entrega de soluciones tecnológicas end-to-end. Especialista en combinar ingeniería de software (Python, Django, NGINX), automatización DevOps e inteligencia de datos para resolver cuellos de botella de negocios. Redujo costos operacionales industriales en hasta un 70% al diseñar sistemas de control automatizados. Sólida experiencia en la construcción de pipelines de Machine Learning reproducibles, aprovechando la visión de negocios para crear arquitecturas escalables que generan impacto financiero y operacional directo.',
+    });
   });
 
   it('keeps approved Portuguese accents in education and summaries', () => {
     expect(cvData.education.map(entry => entry.degree.pt)).toContain('Bacharelado em Ciência da Computação');
     expect(ui.pt['cv.education']).toContain('FORMAÇÃO');
-    expect(cvData.summary['data-engineer'].pt).toContain('atuação de ponta a ponta');
+    expect(cvData.summary['data-engineer'].pt).toContain('Profissional com ampla experiência');
   });
 
   it('has the approved IFC period without a status label', () => {
