@@ -28,7 +28,7 @@ const translatePath = useTranslatedPath(lang);
       <!-- Search: always visible on desktop/tablet -->
       <div class="flex w-40 xl:w-56 items-center gap-2 rounded-full border border-border-line bg-bg-input px-3 py-2 xl:py-2.5">
         <svg class="shrink-0" width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" class="text-text-secondary" stroke-width="2"/><path d="M14 14L18 18" stroke="currentColor" class="text-text-secondary" stroke-width="2" stroke-linecap="round"/></svg>
-        <input type="text" id="search-input" placeholder={t('search.placeholder')} class="min-w-0 flex-1 border-none bg-transparent text-sm text-text-secondary outline-none placeholder:text-text-placeholder">
+        <input type="text" id="search-input" placeholder={t('search.placeholder')} class="min-w-0 flex-1 border-none bg-transparent text-sm text-text-secondary placeholder:text-text-placeholder">
         <button id="search-clear" class="hidden shrink-0 text-text-secondary hover:text-text-primary" aria-label="Clear search">
           <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><line x1="4" y1="4" x2="14" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="4" x2="4" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </button>
@@ -42,14 +42,14 @@ const translatePath = useTranslatedPath(lang);
 
       <div class="flex shrink-0 items-center gap-1.5 text-xs xl:text-sm font-medium text-text-secondary">
         <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.5"/><ellipse cx="9" cy="9" rx="3.5" ry="7.5" stroke="currentColor" stroke-width="1.5"/><line x1="1.5" y1="9" x2="16.5" y2="9" stroke="currentColor" stroke-width="1.5"/></svg>
-        <select class="bg-transparent text-text-secondary outline-none cursor-pointer" id="lang-selector">
+        <select class="bg-transparent text-text-secondary cursor-pointer" id="lang-selector">
           {Object.entries(languages).map(([code, label]) => (
             <option value={code} selected={code === lang}>{code.toUpperCase()}</option>
           ))}
         </select>
       </div>
 
-      <a href="#contact" class="rounded-full bg-brand-green px-4 xl:px-6 py-2 xl:py-2.5 text-xs xl:text-sm font-bold uppercase tracking-wider text-text-inverse whitespace-nowrap hover:opacity-90 transition-opacity">
+      <a href="#contact" class="rounded-full bg-brand-green px-4 xl:px-6 py-2 xl:py-2.5 text-xs xl:text-sm font-bold uppercase tracking-wider text-text-on-brand whitespace-nowrap hover:opacity-90 transition-opacity">
         {t('cta.hire')}
       </a>
     </div>
@@ -68,7 +68,7 @@ const translatePath = useTranslatedPath(lang);
         </button>
         <div class="flex items-center gap-1 text-xs font-medium text-text-secondary">
           <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.5"/><ellipse cx="9" cy="9" rx="3.5" ry="7.5" stroke="currentColor" stroke-width="1.5"/><line x1="1.5" y1="9" x2="16.5" y2="9" stroke="currentColor" stroke-width="1.5"/></svg>
-          <select class="bg-transparent text-text-secondary outline-none cursor-pointer text-xs" id="lang-selector-mobile">
+          <select class="bg-transparent text-text-secondary cursor-pointer text-xs" id="lang-selector-mobile">
             {Object.entries(languages).map(([code, label]) => (
               <option value={code} selected={code === lang}>{code.toUpperCase()}</option>
             ))}
@@ -78,7 +78,7 @@ const translatePath = useTranslatedPath(lang);
       <!-- Expanded state: search bar replaces lupa/toggle/lang -->
       <div id="mobile-search-bar" class="hidden w-44 items-center gap-2 rounded-full border border-border-line bg-bg-input px-3 py-1.5">
         <svg class="shrink-0" width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" class="text-text-secondary" stroke-width="2"/><path d="M14 14L18 18" stroke="currentColor" class="text-text-secondary" stroke-width="2" stroke-linecap="round"/></svg>
-        <input type="text" id="search-input-mobile" placeholder={t('search.placeholder')} class="flex-1 min-w-0 border-none bg-transparent text-xs text-text-secondary outline-none placeholder:text-text-placeholder">
+        <input type="text" id="search-input-mobile" placeholder={t('search.placeholder')} class="flex-1 min-w-0 border-none bg-transparent text-xs text-text-secondary placeholder:text-text-placeholder">
         <button id="search-clear-mobile" class="hidden shrink-0 text-text-secondary hover:text-text-primary" aria-label="Clear search">
           <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><line x1="4" y1="4" x2="14" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="4" x2="4" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </button>
@@ -112,7 +112,7 @@ const translatePath = useTranslatedPath(lang);
     <a href="#contact" class="mobile-link py-3 border-b border-border-line text-text-primary">{t('nav.contact')}</a>
   </nav>
   <div class="px-6 pt-4 pb-6">
-    <a href="#contact" class="mobile-link block w-full rounded-full bg-brand-green py-3 text-center text-sm font-bold uppercase tracking-wider text-white">
+    <a href="#contact" class="mobile-link block w-full rounded-full bg-brand-green py-3 text-center text-sm font-bold uppercase tracking-wider text-text-on-brand">
       {t('cta.hire')}
     </a>
   </div>
