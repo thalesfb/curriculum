@@ -321,9 +321,9 @@
           ]
         },
         {
-          "pt": "Atendi diretamente a 4 clientes corporativos e zerei o tempo de espera na geração de relatórios por meio do desenvolvimento de soluções de dados integradas.",
-          "en": "Served 4 corporate clients directly and eliminated report generation wait time by developing integrated data solutions.",
-          "es": "Atendí directamente a 4 clientes corporativos y eliminé el tiempo de espera en la generación de informes mediante el desarrollo de soluciones de datos integradas.",
+          "pt": "Atendi diretamente clientes corporativos e zerei o tempo de espera na geração de relatórios por meio do desenvolvimento de soluções de dados integradas.",
+          "en": "Served corporate clients directly and eliminated report generation wait time by developing integrated data solutions.",
+          "es": "Atendí directamente a clientes corporativos y eliminé el tiempo de espera en la generación de informes mediante el desarrollo de soluciones de datos integradas.",
           "roles": [
             "data-engineer",
             "backend",
@@ -331,9 +331,9 @@
           ]
         },
         {
-          "pt": "Desenvolvi e coloquei em produção a plataforma de delivery da Baianos Conveniência, com catálogo de mais de 200 produtos, ofertas e mapa de entrega.",
-          "en": "Developed and launched the Baianos Conveniência delivery platform, with a catalog of more than 200 products, offers, and a delivery map.",
-          "es": "Desarrollé y puse en producción la plataforma de delivery de Baianos Conveniência, con un catálogo de más de 200 productos, ofertas y mapa de entrega.",
+          "pt": "Desenvolvi e coloquei em produção uma plataforma de delivery para um cliente do varejo de conveniência, com catálogo de mais de 200 produtos, ofertas e mapa de entrega.",
+          "en": "Developed and launched a delivery platform for a convenience retail client, with a catalog of more than 200 products, offers, and a delivery map.",
+          "es": "Desarrollé y puse en producción una plataforma de delivery para un cliente del comercio minorista de conveniencia, con un catálogo de más de 200 productos, ofertas y mapa de entrega.",
           "roles": [
             "data-engineer",
             "backend"
@@ -538,9 +538,56 @@
         "XGBoost"
       ],
       "description": {
-        "pt": "Pipelines completos de ML e DL (ANN, CNN, RNN, PINNs, SVM, XGBoost), com reprodutibilidade via requirements.txt e environment.yml.",
-        "en": "Complete ML and DL pipelines (ANN, CNN, RNN, PINNs, SVM, XGBoost) with reproducibility via requirements.txt and environment.yml.",
-        "es": "Pipelines completos de ML y DL (ANN, CNN, RNN, PINNs, SVM, XGBoost), con reproducibilidad mediante requirements.txt y environment.yml."
+        "pt": "Pipelines completos de ML e DL (ANN, CNN, RNN, PINNs, SVM, XGBoost).",
+        "en": "Complete ML and DL pipelines (ANN, CNN, RNN, PINNs, SVM, XGBoost).",
+        "es": "Pipelines completos de ML y DL (ANN, CNN, RNN, PINNs, SVM, XGBoost)."
+      }
+    },
+    {
+      "name": "Implementações de Inteligência Artificial",
+      "nameByLanguage": {
+        "pt": "Implementações de Inteligência Artificial",
+        "en": "Artificial Intelligence Implementations",
+        "es": "Implementaciones de Inteligencia Artificial"
+      },
+      "repo": "github.com/thalesfb/AI",
+      "roles": [
+        "data-engineer",
+        "frontend"
+      ],
+      "technologies": [
+        "HTML",
+        "BFS",
+        "UCS",
+        "DFS"
+      ],
+      "description": {
+        "pt": "Esboços e implementações didáticas de IA no IFC Videira, com buscas BFS, UCS e DFS e jogos como o puzzle de 8 e jogo da velha.",
+        "en": "Educational AI sketches and implementations for IFC Videira, with BFS, UCS, and DFS searches and games such as the 8-puzzle and tic-tac-toe.",
+        "es": "Bocetos e implementaciones didácticas de IA en IFC Videira, con búsquedas BFS, UCS y DFS y juegos como el puzzle de 8 y el tres en raya."
+      }
+    },
+    {
+      "name": "Sistema de Agentes Inteligentes para Cursor",
+      "nameByLanguage": {
+        "pt": "Sistema de Agentes Inteligentes para Cursor",
+        "en": "Intelligent Agent System for Cursor",
+        "es": "Sistema de Agentes Inteligentes para Cursor"
+      },
+      "repo": "github.com/thalesfb/cursor-agents",
+      "roles": [
+        "devops",
+        "management"
+      ],
+      "technologies": [
+        "Cursor IDE",
+        "JSON",
+        "PowerShell"
+      ],
+      "description": {
+        "pt": "Sistema de agentes customizados para o Cursor IDE, com agentes especializados e seleção automática do especialista para cada tarefa.",
+        "en": "Custom agents for Cursor IDE, with specialized agents and automatic selection of the best specialist for each task.",
+        "es": "Sistema de agentes personalizados para Cursor IDE, con agentes especializados y selección automática del mejor especialista para cada tarea."
       }
     },
     {

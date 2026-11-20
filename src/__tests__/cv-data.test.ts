@@ -147,6 +147,14 @@ describe('cv.json schema validation', () => {
     ]));
   });
 
+  it('removes client counts and the retail client identity from CV content', () => {
+    const content = JSON.stringify(cvData).toLowerCase();
+    expect(content).not.toContain('baianos');
+    expect(content).not.toContain('4 clientes');
+    expect(content).not.toContain('4 corporate clients');
+    expect(content).not.toContain('baianosconveniencia.com');
+  });
+
   it('every experience entry has required fields', () => {
     for (const exp of cvData.experience) {
       expect(exp.company).toBeTruthy();
@@ -170,6 +178,31 @@ describe('cv.json schema validation', () => {
         for (const lang of LANGUAGES) expect(proj.nameByLanguage[lang]).toBeTruthy();
       }
     }
+  });
+
+  it('lists sourced AI projects not already represented in the CV', () => {
+    const aiImplementations = cvData.projects.find(project => project.repo === 'github.com/thalesfb/AI');
+    const cursorAgents = cvData.projects.find(project => project.repo === 'github.com/thalesfb/cursor-agents');
+
+    expect(aiImplementations?.nameByLanguage).toEqual({
+      pt: 'Implementações de Inteligência Artificial',
+      en: 'Artificial Intelligence Implementations',
+      es: 'Implementaciones de Inteligencia Artificial',
+    });
+    expect(aiImplementations?.technologies).toEqual(expect.arrayContaining(['HTML', 'BFS', 'UCS', 'DFS']));
+    expect(aiImplementations?.description.pt).toContain('buscas BFS, UCS e DFS');
+    expect(aiImplementations?.description.en).toContain('BFS, UCS, and DFS searches');
+    expect(aiImplementations?.description.es).toContain('búsquedas BFS, UCS y DFS');
+
+    expect(cursorAgents?.nameByLanguage).toEqual({
+      pt: 'Sistema de Agentes Inteligentes para Cursor',
+      en: 'Intelligent Agent System for Cursor',
+      es: 'Sistema de Agentes Inteligentes para Cursor',
+    });
+    expect(cursorAgents?.technologies).toEqual(expect.arrayContaining(['Cursor IDE', 'JSON', 'PowerShell']));
+    expect(cursorAgents?.description.pt).toContain('agentes especializados e seleção automática');
+    expect(cursorAgents?.description.en).toContain('specialized agents and automatic selection');
+    expect(cursorAgents?.description.es).toContain('agentes especializados y selección automática');
   });
 
   it('keeps the IFC capstone project title and translations', () => {
