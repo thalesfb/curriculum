@@ -1,6 +1,6 @@
 # Guia Prático: Design System no Figma
 
-**Projeto:** Portfolio Thales Ferreira — thales.optimizr.site
+**Projeto:** Portfolio Thales Ferreira — thalesfb.curriculum.optimizr.site
 **Figma:** `UXq2erOANKQqaWegZQ9nk1`
 **Autor:** Thales Ferreira
 
@@ -15,7 +15,8 @@
 5. [Prototyping e Interações](#5-prototyping-e-interações)
 6. [Dark Mode com Variáveis](#6-dark-mode-com-variáveis)
 7. [i18n com Variable Modes](#7-i18n-com-variable-modes)
-8. [Lições Aprendidas](#8-lições-aprendidas)
+9. [Lições Aprendidas](#9-lições-aprendidas)
+10. [S5 — mudanças pendentes no Figma](#s5--mudanças-pendentes-no-figma)
 
 ---
 
@@ -428,3 +429,35 @@ No código, o botão terá animação CSS de pulsar para chamar atenção period
 3. Qualquer novo texto de UI vai como **variável na coleção i18n**
 4. Teste dark mode após qualquer alteração visual
 5. Verifique todos os 3 breakpoints após mudanças de layout
+
+## S5 — mudanças pendentes no Figma
+
+Atualizar os componentes mestres na página **Components** e conferir suas instâncias na página **Design** antes da implementação visual. Os valores abaixo são candidatos para validação nos dois modos; manter o pipeline Figma → CSS custom properties → Tailwind da ADR-0004.
+
+### Theme: tokens semânticos e contraste
+
+- [ ] Adicionar `text/on-brand` e `focus-ring` à coleção **Theme**, com valores explícitos para **Light** e **Dark**.
+- [ ] Validar texto sobre a cor de marca com contraste mínimo de **4.5:1**. Candidato `text/on-brand: #0F172A` contra `brand/green: #059669` no modo Light: **4.74:1**; contra `#34D399` no modo Dark: **9.29:1**.
+- [ ] Validar o indicador de foco sobre `bg/page` e `bg/card`, com contraste mínimo de **4.5:1**. Candidatos: `focus-ring: #1D4ED8` no Light (6.41:1 sobre `#F8FAFC`; 6.70:1 sobre `#FFFFFF`) e `#60A5FA` no Dark (7.02:1 sobre `#0F172A`; 5.75:1 sobre `#1E293B`).
+- [ ] Registrar os valores aprovados e confirmar que cada par atende ao contraste calculado antes do binding aos componentes.
+
+### Tipografia
+
+- [ ] Criar estilos display com Libertinus Serif local, usando arquivos licenciados sob SIL OFL.
+- [ ] Usar `system-ui` para corpo e controles. No Figma, usar Inter apenas como fallback de pré-visualização se `system-ui` não estiver disponível.
+- [ ] Conferir títulos, pesos, entrelinha e escala nos três idiomas; não usar Google Fonts.
+
+### Componentes e interação
+
+- [ ] Atualizar **Experience Entry** para blocos editoriais com respiro e sem timeline gráfica.
+- [ ] Atualizar **Project Card** para uma grade estática, sem carrossel.
+- [ ] Criar/atualizar **Certification group details** para grupos expansíveis por teclado.
+- [ ] Atualizar **Header** sem busca.
+- [ ] Atualizar o **Role selector** para troca manual, sem rotação automática.
+- [ ] Atualizar **WhatsApp FAB** para 100% de opacidade e sem pulso.
+
+### Frames para revisão
+
+- [ ] Revisar frames **1440**, **1024** e **375 px** em modo **Light**.
+- [ ] Revisar frames **1440**, **1024** e **375 px** em modo **Dark**.
+- [ ] Conferir foco visível, textos longos em EN/ES, espaçamento entre seções e ausência de overflow em cada frame.

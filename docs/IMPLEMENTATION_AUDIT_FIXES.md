@@ -280,7 +280,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   // CORS (se necessário)
   if (context.url.pathname.startsWith('/api/')) {
-    response.headers.set('Access-Control-Allow-Origin', 'https://thales.optimizr.site');
+    response.headers.set('Access-Control-Allow-Origin', 'https://thalesfb.curriculum.optimizr.site');
   }
 
   return response;

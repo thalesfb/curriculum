@@ -7,7 +7,7 @@ Governance and instructions for AI agents working on this repository.
 ## 1. Project Identity
 
 **Project:** Portfolio & CV website for Thales Ferreira
-**Domain:** thales.optimizr.site
+**Domain:** thalesfb.curriculum.optimizr.site
 **Stack:** Astro 7 + Tailwind CSS 4 + Vanilla JS
 **Owner:** Thales Ferreira (Full Stack Data Engineer | Python & ML | DevOps)
 **Language:** Brazilian Portuguese (pt-BR). Respond in Portuguese unless asked otherwise.

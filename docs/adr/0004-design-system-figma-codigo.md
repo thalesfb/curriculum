@@ -16,6 +16,8 @@ O design system do portfolio está definido no Figma com 3 coleções de variáv
 
 Mapear variáveis Figma → CSS Custom Properties → Tailwind CSS config.
 
+O redesign editorial do site está registrado na [ADR-0012](0012-site-editorial-redesign.md). A família Libertinus Serif será usada localmente apenas em títulos/display; corpo e controles usarão `system-ui`. Os novos tokens semânticos `text/on-brand` e `focus-ring` devem ser criados e aprovados nos modos Light e Dark no Figma antes do mapeamento para CSS e Tailwind. Os valores candidatos e os cálculos de contraste estão no checklist S5 do [guia do Figma](../guides/figma-design-system.md#s5--mudanças-pendentes-no-figma).
+
 ### Pipeline
 
 ```

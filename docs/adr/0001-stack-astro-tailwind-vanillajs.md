@@ -14,7 +14,7 @@ Accepted
 
 ## Contexto
 
-Precisamos escolher a stack de desenvolvimento para o portfolio profissional de Thales Ferreira (thales.optimizr.site). O site é um portfolio/CV com:
+Precisamos escolher a stack de desenvolvimento para o portfolio profissional de Thales Ferreira (thalesfb.curriculum.optimizr.site). O site é um portfolio/CV com:
 
 - Conteúdo majoritariamente estático (seções: hero, sobre, serviços, projetos, contato)
 - Dark mode com toggle

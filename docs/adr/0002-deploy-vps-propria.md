@@ -10,7 +10,7 @@ Accepted
 
 ## Contexto
 
-O portfolio precisa de hospedagem. O domínio é `thales.optimizr.site`, já configurado. O proprietário possui VPS própria com experiência em DevOps (NGINX, Docker, CI/CD).
+O portfolio precisa de hospedagem. O domínio canônico documentado é `thalesfb.curriculum.optimizr.site`. O proprietário possui VPS própria com experiência em DevOps (NGINX, Docker, CI/CD).
 
 ## Opções Consideradas
 
@@ -38,7 +38,7 @@ Deploy na **VPS própria** com NGINX como servidor web/proxy reverso.
 1. **Demonstra competência DevOps** — o próprio portfolio é prova de skills de infraestrutura
 2. **Custo zero adicional** — VPS já está paga e em uso
 3. **Controle total** — headers de segurança, cache, compressão, redirects
-4. **Domínio próprio** configurado: thales.optimizr.site
+4. **Domínio próprio** do site: thalesfb.curriculum.optimizr.site
 
 ## Consequências
 
