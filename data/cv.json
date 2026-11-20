@@ -979,7 +979,7 @@
         "en": "Latinoware 2025 (28h)",
         "es": "Latinoware 2025 (28h)"
       },
-      "provider": "Latinoware",
+      "provider": "Itaipu Parquetec",
       "date": "2025-10",
       "roles": [
         "data-engineer",
@@ -997,6 +997,36 @@
       },
       "provider": "Techstars",
       "date": "2025-05",
+      "roles": [
+        "data-engineer",
+        "backend",
+        "devops",
+        "management",
+        "frontend"
+      ]
+    },
+    {
+      "name": {
+        "pt": "AWS Academy Cloud Architecting",
+        "en": "AWS Academy Cloud Architecting",
+        "es": "AWS Academy Cloud Architecting"
+      },
+      "provider": "AWS Academy",
+      "status": "in-progress",
+      "roles": [
+        "data-engineer",
+        "backend",
+        "devops",
+        "management",
+        "frontend"
+      ]
+    },
+    {
+      "name": {
+        "pt": "Latinoware 2014",
+        "en": "Latinoware 2014",
+        "es": "Latinoware 2014"
+      },
       "roles": [
         "data-engineer",
         "backend",

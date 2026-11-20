@@ -1,42 +1,48 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import cvData from '../../data/cv.json';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-const bio: Record<string, string[]> = {
-  pt: [
-    'Profissional com vasta experiência em análise de dados, engenharia de software e automação industrial. Especializado em Python, Power BI, SQL, Django, NGINX e práticas DevOps, com foco em otimização de processos, eficiência operacional e entrega de soluções estratégicas. Reduziu custos operacionais industriais em até 70% ao projetar sistemas de controle automatizados.',
-    'Atua como parceiro de tecnologia e dados, com foco em escalabilidade, previsibilidade operacional e geração de valor mensurável. Utiliza ciclos iterativos curtos, comprometimento com qualidade e prazos definidos para transformar desafios de negócio em soluções técnicas de impacto direto.',
-  ],
-  en: [
-    'Professional with extensive experience in data analysis, software engineering and industrial automation. Specialized in Python, Power BI, SQL, Django, NGINX and DevOps practices, focused on process optimization, operational efficiency and strategic solution delivery. Reduced industrial operational costs by up to 70% by designing automated control systems.',
-    'Acts as a technology and data partner, focused on scalability, operational predictability and measurable value generation. Uses short iterative cycles, commitment to quality and defined deadlines to transform business challenges into high-impact technical solutions.',
-  ],
-  es: [
-    'Profesional con amplia experiencia en análisis de datos, ingeniería de software y automatización industrial. Especializado en Python, Power BI, SQL, Django, NGINX y prácticas DevOps, enfocado en optimización de procesos, eficiencia operacional y entrega de soluciones estratégicas. Redujo costos operacionales industriales en hasta un 70% al diseñar sistemas de control automatizados.',
-    'Actúa como socio de tecnología y datos, con foco en escalabilidad, previsibilidad operacional y generación de valor mensurable. Utiliza ciclos iterativos cortos, compromiso con calidad y plazos definidos para transformar desafíos de negocio en soluciones técnicas de impacto directo.',
-  ],
+const localized = (value: Record<string, string> | undefined) => value?.[lang] ?? '';
+const summaries = cvData.summary as Record<string, Record<string, string>>;
+const activeRole = 'data-engineer';
+const activeSummary = summaries[activeRole]?.[lang] ?? '';
+const logoBySource: Record<string, string> = {
+  'Instituto Federal Catarinense': '/logos/ifc.svg',
+  SENAI: '/logos/senai.svg',
+  Alura: '/logos/alura.svg',
+  'Red Hat': '/logos/redhat.svg',
+  'AWS Academy': '/logos/aws.svg',
 };
-
-const education = [
-  { logo: '/logos/ifc.svg', alt: 'IFC', w: 32, h: 43, name: 'Bacharelado Ciência da Computação', pending: true },
-  { logo: '/logos/senai.svg', alt: 'SENAI', w: 36, h: 10, name: 'Manutenção de Microcomputadores e Redes' },
-  { logo: '/logos/senai.svg', alt: 'SENAI', w: 36, h: 10, name: 'Operador de Computador' },
-  { logo: '/logos/alura.svg', alt: 'Alura', w: 38, h: 17, name: 'Alura Cursos' },
-  { logo: '/logos/redhat.svg', alt: 'Red Hat', w: 32, h: 24, name: 'Red Hat Enterprise Linux' },
-  { logo: '/logos/aws.svg', alt: 'AWS', w: 32, h: 32, name: 'AWS Academy Cloud Architecting', pending: true },
-  { logo: '/logos/cisco.svg', alt: 'Cisco', w: 32, h: 32, name: 'CCNA: Introduction to Networks', pending: true },
-];
+const currentMonth = new Date().toISOString().slice(0, 7);
+const educationItems = cvData.education.map((entry) => ({
+  title: localized(entry.degree),
+  source: entry.institution,
+  logo: logoBySource[entry.institution],
+  period: entry.period ? `${entry.period.start.slice(0, 4)}–${entry.period.end.slice(0, 4)}` : '',
+  pending: Boolean(entry.period?.end && entry.period.end >= currentMonth),
+}));
+const certificationItems = cvData.certifications.map((entry) => {
+  const source = localized(entry.providerByLanguage) || entry.provider || '';
+  return {
+    title: localized(entry.name),
+    source,
+    logo: entry.provider ? logoBySource[entry.provider] : undefined,
+    period: entry.date?.slice(0, 4) ?? '',
+    pending: entry.status === 'in-progress',
+  };
+});
+const learningItems = [...educationItems, ...certificationItems];
 ---
 
-<section class="bg-bg-card py-20 max-md:py-12" id="about">
+<section class="bg-bg-card py-20 max-md:py-12" id="about" data-role-summaries={JSON.stringify(summaries)}>
   <div class="mx-auto max-w-[1440px] px-20 max-xl:px-12 max-md:px-6">
     <h2 class="mb-12 text-center font-display text-4xl font-semibold text-text-primary max-md:text-3xl max-md:mb-8">{t('section.about')}</h2>
 
     <div class="grid grid-cols-3 gap-x-16 gap-y-12 items-start max-xl:grid-cols-2 max-xl:gap-x-10 max-xl:gap-y-8 max-md:grid-cols-1 max-md:gap-y-10">
       <div class="text-text-secondary leading-relaxed max-xl:col-span-2 max-md:col-span-1">
-        {bio[lang].map(p => <p class="mb-4">{p}</p>)}
+        <p id="about-summary">{activeSummary}</p>
       </div>
 
       <div>
@@ -60,17 +66,47 @@ const education = [
       <div>
         <h3 class="mb-6 font-display text-xl font-semibold text-text-primary">{t('about.education')}</h3>
         <ul class="flex flex-col gap-4">
-          {education.map(edu => (
-            <li class="flex items-center gap-3 text-text-secondary">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
-                <img src={edu.logo} alt={edu.alt} width={edu.w} height={edu.h} class="max-h-8 max-w-8 object-contain" loading="lazy">
-              </div>
-              <span>{edu.name}</span>
-              {edu.pending && <span class="shrink-0 whitespace-nowrap rounded-full bg-brand-green/15 px-2 py-0.5 text-xs font-medium text-brand-green">{t('about.pending')}</span>}
-            </li>
-          ))}
+          {learningItems.map((item) => {
+            const fallback = (item.source || item.title).slice(0, 2).toUpperCase();
+            return (
+              <li class="flex items-center gap-3 text-text-secondary">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+                  {item.logo ? (
+                    <img src={item.logo} alt={item.source} width="32" height="32" class="max-h-8 max-w-8 object-contain" loading="lazy">
+                  ) : (
+                    <span class="text-[10px] font-bold text-text-secondary" aria-label={item.source || item.title}>{fallback}</span>
+                  )}
+                </div>
+                <span class="min-w-0 flex-1">
+                  <span class="block">{item.title}</span>
+                  {(item.source || item.period) && <span class="block text-xs text-text-secondary/80">{[item.source, item.period].filter(Boolean).join(' · ')}</span>}
+                </span>
+                {item.pending && <span class="shrink-0 whitespace-nowrap rounded-full bg-brand-green/15 px-2 py-0.5 text-xs font-medium text-brand-green">{t('about.pending')}</span>}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const about = document.getElementById('about');
+  const summary = document.getElementById('about-summary');
+  const roleSelector = document.getElementById('role-selector') as HTMLSelectElement | null;
+
+  if (about && summary) {
+    const summaries = JSON.parse(about.dataset.roleSummaries || '{}') as Record<string, Record<string, string>>;
+    const updateSummary = (role: string) => {
+      if (summaries[role]?.[document.documentElement.lang.split('-')[0]]) {
+        summary.textContent = summaries[role][document.documentElement.lang.split('-')[0]];
+      }
+    };
+    updateSummary(roleSelector?.value || 'data-engineer');
+    document.addEventListener('cv:role-change', (event) => {
+      const role = (event as CustomEvent<{ role: string }>).detail?.role;
+      if (role) updateSummary(role);
+    });
+  }
+</script>

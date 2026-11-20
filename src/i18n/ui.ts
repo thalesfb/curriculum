@@ -44,6 +44,7 @@ export const ui = {
     'about.status': 'Status:',
     'about.status.value': 'Disponível para Freelance',
     'about.pending': 'Em curso',
+    'projects.repository': 'Ver repositório',
     'footer.rights': '2026 Thales Ferreira. Todos os direitos reservados.',
   },
   en: {
@@ -82,6 +83,7 @@ export const ui = {
     'about.status': 'Status:',
     'about.status.value': 'Available for Freelance',
     'about.pending': 'In progress',
+    'projects.repository': 'View repository',
     'footer.rights': '2026 Thales Ferreira. All rights reserved.',
   },
   es: {
@@ -120,6 +122,7 @@ export const ui = {
     'about.status': 'Estado:',
     'about.status.value': 'Disponible para Freelance',
     'about.pending': 'En curso',
+    'projects.repository': 'Ver repositorio',
     'footer.rights': '2026 Thales Ferreira. Todos los derechos reservados.',
   },
 } as const;
