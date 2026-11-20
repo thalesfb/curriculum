@@ -1,4 +1,4 @@
-# ADR-0012: Redesign editorial do site
+# ADR-0012: Evolução visual do site
 
 ## Status
 
@@ -10,56 +10,56 @@ Accepted
 
 ## Contexto
 
-A auditoria do site encontrou diferenças entre as seções publicadas e o conteúdo aprovado em `data/cv.json`, controles e textos mantidos fora dessa fonte e uma hierarquia visual que não dá espaço suficiente aos blocos de conteúdo. O feedback do titular sobre a proposta anterior foi que ficou “tudo colado”. O PDF aprovado com o template imprecv (ADR-0011) oferece uma referência de hierarquia e respiro, mas precisa ser adaptado à leitura em telas.
+A direção editorial criada do zero foi rejeitada porque removia elementos que dão identidade ao site atual. A decisão aprovada é evoluir o layout existente com correções: preservar a hierarquia, a foto, os cards e os elementos de marca, ao mesmo tempo que se adicionam Experiência, dados completos e tipografia local. O conteúdo continua vindo de `data/cv.json` (ADR-0005), e o sistema visual segue Figma → CSS custom properties → Tailwind (ADR-0004).
 
-A auditoria também identificou busca no header com comportamento inconsistente, rotação automática de cargo que altera conteúdo enquanto a pessoa lê, seções sem uma fonte única de dados e um botão flutuante de WhatsApp discreto demais e com pulso contínuo. O redesign deve preservar a arquitetura Astro, o CSS-first, o conteúdo multilíngue e as decisões de privacidade já registradas.
+O PDF com imprecv (ADR-0011) é uma referência para Libertinus Serif e legibilidade, não para substituir o layout do site por blocos sem cards. A auditoria também identificou busca no header e rotação automática de cargo que distraem a leitura, além de necessidade de melhorar o contraste de texto em botões de marca.
 
 ## Opções consideradas
 
-| Opção | Direção | Vantagens | Limites |
-|---|---|---|---|
-| A | Editorial de engenharia, com serifas, entradas de experiência e timeline vertical | Aproxima o site da hierarquia editorial do PDF e destaca a trajetória | A timeline gráfica ocupa largura em telas pequenas; serifa no corpo prejudica a leitura longa |
-| B | Caderno técnico, com rótulos monospace, linhas e módulos | Comunica engenharia e organiza competências de forma explícita | Pode parecer um dashboard e aumentar a densidade visual |
-| C | Portfólio de casos, com projetos e resultados em destaque | Valoriza entregas verificáveis e links para código | Pode duplicar informações entre projetos, serviços e experiência |
-| A modificada | Editorial de engenharia, com Libertinus apenas em display, entradas arejadas sem timeline gráfica e grades estáticas | Mantém a referência imprecv, melhora a leitura em telas e respeita a ordem do PDF | Exige revisão de títulos longos nos três idiomas e nos três breakpoints |
+| Opção | Direção | Avaliação |
+|---|---|---|
+| A | Editorial do zero, inspirado no PDF | Rejeitada: retirava foto, ícones, logos, tags, CTA e rodapé escuro do layout aprovado. |
+| B | Caderno técnico com módulos, linhas e rótulos monospace | Não escolhida: alteraria a linguagem visual e aumentaria a densidade. |
+| C | Portfólio de casos com projetos como destaque principal | Não escolhida: reorganizaria o site e poderia duplicar conteúdo entre projetos, serviços e experiência. |
+| Layout atual com correções | Preservar a identidade existente, corrigir conteúdo e controles e acrescentar as seções aprovadas | Escolhida pelo titular e validada no Figma v2. |
 
 ## Decisão
 
-Adotar a opção A modificada, mantendo a implementação alinhada ao Figma (ADR-0004) antes de alterar os estilos do site:
+Manter a linguagem visual atual e aplicar as seguintes mudanças aprovadas:
 
-- Hospedar Libertinus Serif localmente sob SIL Open Font License, reutilizando a distribuição licenciada em `cv/fonts/`. Usar WOFF2 se a conversão estiver disponível sem adicionar dependência; caso contrário, usar TTF da mesma distribuição. Aplicar a fonte somente a títulos e elementos display. Corpo e controles usam `system-ui`; não carregar fontes do Google.
-- Apresentar experiência em blocos editoriais no estilo do imprecv, com cargo/organização, período e conteúdo bem espaçados. Não adicionar timeline gráfica.
-- Ordenar Formação antes de Experiência, como no PDF aprovado e na ADR-0011.
-- Manter Projetos e Serviços em grades estáticas, sem carrossel. Serviços permanecem e seus textos passam a vir de `data/cv.json` em PT/EN/ES.
-- Remover a busca do header e a rotação automática de cargo; a pessoa escolhe o cargo manualmente.
-- Manter o botão flutuante do WhatsApp totalmente opaco, sem animação de pulso.
-- Manter Google Analytics conforme a ADR-0010.
-- Propor no Figma os tokens semânticos `text/on-brand` e `focus-ring` para os temas claro e escuro. A validação visual e de contraste no Figma precede o mapeamento para CSS e Tailwind, conforme a ADR-0004.
+- Preservar o Hero com foto, cards com borda verde, ícones de serviços, tags com ícone, logos de marca, botão **Contratar**, rodapé escuro e botão flutuante do WhatsApp. O WhatsApp fica com 100% de opacidade e sem pulso.
+- Usar Libertinus Serif self-hosted sob SIL OFL nos títulos H1/H2/H3. Usar stack `system-ui` no corpo e controles. Usar Fira Code self-hosted sob SIL OFL nas tags. Não usar Google Fonts.
+- Adicionar a seção **Experiência** em cards depois de **Sobre**. Formação permanece dentro de Sobre e vem antes de Experiência.
+- Exibir Formação e Certificações completas com logos. Formação: IFC, SENAI 2013, Mater Salvatoris e SENAI 2012. Certificações: AWS Cloud Architecting em andamento, grupos Alura (403h), AWS Cloud Foundations, Latinoware, Techstars, DO188 e RH294. Alura usa `<details>/<summary>` para expandir seus nove grupos.
+- Exibir Projetos e Serviços em grades, sem carrossel e sem filtro por cargo. Os textos de Serviços permanecem em `data/cv.json` nas três línguas. O site usa a role fixa `data-engineer`; não há seletor de role.
+- Manter Google Analytics conforme ADR-0010.
+- Usar a união dos projetos selecionados no Figma anterior com os projetos de `data/cv.json`, ordenada por evidência de atividade (commits) e qualidade/completude do README no GitHub. A ordem aprovada é: (1) TCC `ccw` — 257 commits; (2) `machine_learning` — 107; (3) `library` — 91, Java/Spring; (4) `digital-image-processing` — 40, README detalhado e CI; (5) `AI`; (6–7) os dois projetos de pesquisa do IFC. `infra_web` (9 commits e README vazio) e `Data-Structure` (README vazio) ficam fora. Conteúdo e descrições publicados continuam sujeitos ao JSON e às evidências dos repositórios.
+- Incluir Lattes no contato, nos ícones sociais com o rótulo visual “L” e no rodapé.
+- Remover busca do header e rotação automática de cargo.
+- Criar os tokens Theme `text/on-brand: #0F172A` nos dois temas e `focus-ring: #1D4ED8` no tema claro / `#60A5FA` no escuro. O Figma é a fonte dos tokens; mapear para CSS e Tailwind conforme ADR-0004.
 - Usar `https://thalesfb.curriculum.optimizr.site` como domínio canônico documentado. `thales.optimizr.site` não resolve.
 
 ## Consequências
 
 ### Positivas
 
-- O site e o PDF compartilham a ordem editorial e uma identidade tipográfica coerente, sem sacrificar legibilidade de texto longo na tela.
-- Blocos com respiro, grades e controles manuais reduzem movimento e tornam a leitura previsível.
-- Serviços e demais conteúdos permanecem alinhados ao JSON localizado.
-- Tokens aprovados no Figma permitem contrastes e estados de foco consistentes entre temas.
+- O redesign preserva elementos reconhecíveis e corrige problemas de conteúdo sem recomeçar a interface.
+- A experiência profissional e os dados completos passam a compor a navegação do currículo com conteúdo centralizado em `data/cv.json`.
+- Tipografia auto-hospedada e tokens semânticos mantêm controle local e coerência entre os temas.
+- Grades estáticas e role fixa deixam todo o conteúdo visível sem carrossel, busca ou mudança automática durante a leitura.
 
 ### Negativas e riscos
 
-- Libertinus precisa ser servida localmente e sua licença deve acompanhar os arquivos redistribuídos.
-- A cópia atualmente vendorizada em `cv/fonts/` está em OTF; o primeiro PR deve confirmar uma conversão WOFF2 sem nova dependência ou obter o TTF equivalente da mesma distribuição OFL antes de configurar `@font-face`.
-- Títulos e metadados em inglês e espanhol podem alterar a altura dos blocos e devem ser validados em 1440, 1024 e 375 px.
-- A alteração do domínio canônico documentado não altera configuração de deploy; a configuração operacional deve ser verificada separadamente antes de qualquer publicação.
+- Libertinus Serif e Fira Code precisam ser servidas localmente com as licenças SIL OFL correspondentes.
+- A cópia Libertinus atualmente vendorizada em `cv/fonts/` está em OTF; a implementação deve confirmar conversão WOFF2 sem nova dependência ou usar TTF equivalente da mesma distribuição OFL.
+- A lista completa de formação, certificações e projetos aumenta o comprimento da página e precisa ser revisada em 1440, 1024 e 375 px nos dois temas.
+- Alterar documentação do domínio não altera configuração operacional de deploy; validar essa configuração separadamente antes de qualquer publicação.
 
 ## Plano de implementação
 
-1. **Tokens, tipografia e BaseLayout:** aprovar os estilos e tokens no Figma; hospedar a fonte local; mapear variáveis Figma para CSS custom properties e Tailwind; ajustar metadados e estrutura base. Testes Vitest cobrem tokens por tema, licença/arquivos locais, ausência de chamadas a fontes externas e estrutura do layout.
-2. **Shell e conteúdo:** atualizar header, hero e seletor manual; consumir os textos de Serviços do JSON; renderizar Formação antes de Experiência em blocos editoriais e manter Projetos/Serviços em grades. Testes Vitest cobrem ordem, paridade PT/EN/ES, conteúdo derivado do JSON, controles manuais e ausência de carrossel.
-3. **Acessibilidade, SEO, desempenho e documentação:** corrigir foco, contraste, labels e movimento reduzido; revisar metadados por idioma, imagens, fontes e JavaScript; atualizar as instruções e evidências visuais. Testes Vitest cobrem landmarks, links, metadados, JSON-LD e CSS de movimento reduzido; revisar build nas três rotas, temas e breakpoints.
-
-Cada bloco depende da aprovação dos frames correspondentes no Figma antes da implementação visual. Não adicionar dependências sem decisão específica.
+1. **Tokens, tipografia e shell:** aplicar no código os valores e estilos do Figma v2; preservar Hero, navegação e botões; fixar role em `data-engineer`; remover busca/rotação. Testes Vitest cobrem tokens por tema, arquivos/fontes locais, ausência de fontes externas e estrutura das três rotas.
+2. **Conteúdo e seções:** renderizar formação e certificações completas dentro de Sobre, Alura expansível, Experiência em cards e Projetos/Serviços em grade, com todos os projetos e sem filtro de role. Testes Vitest cobrem conteúdo e ordenação vindos do JSON, links/Lattes, logos, ausência de carrossel/filtro e paridade PT/EN/ES.
+3. **Acessibilidade, SEO e desempenho:** validar contraste, foco, labels, navegação por teclado, metadados, imagens e movimento reduzido. Testes Vitest cobrem landmarks, metadados por idioma, JSON-LD, foco/labels e redução de movimento; revisar build nos três breakpoints e dois temas.
 
 ## Referências
 

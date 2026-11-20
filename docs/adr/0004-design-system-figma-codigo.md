@@ -16,7 +16,7 @@ O design system do portfolio está definido no Figma com 3 coleções de variáv
 
 Mapear variáveis Figma → CSS Custom Properties → Tailwind CSS config.
 
-O redesign editorial do site está registrado na [ADR-0012](0012-site-editorial-redesign.md). A família Libertinus Serif será usada localmente apenas em títulos/display; corpo e controles usarão `system-ui`. Os novos tokens semânticos `text/on-brand` e `focus-ring` devem ser criados e aprovados nos modos Light e Dark no Figma antes do mapeamento para CSS e Tailwind. Os valores candidatos e os cálculos de contraste estão no checklist S5 do [guia do Figma](../guides/figma-design-system.md#s5--mudanças-pendentes-no-figma).
+As decisões visuais S5 estão registradas na [ADR-0012](0012-site-editorial-redesign.md). Libertinus Serif é usada localmente nos títulos; `system-ui` no corpo e controles; Fira Code nas tags. Os tokens S5 aprovados são `text/on-brand: #0F172A` nos dois temas e `focus-ring: #1D4ED8` no Light / `#60A5FA` no Dark. Frames, componentes e contrastes estão no [guia do Figma](../guides/figma-design-system.md#s5--figma-v2-aprovado).
 
 ### Pipeline
 
