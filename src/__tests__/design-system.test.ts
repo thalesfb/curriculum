@@ -6,6 +6,7 @@ const root = resolve(__dirname, '../..');
 const globalCss = readFileSync(join(root, 'src/styles/global.css'), 'utf8');
 const baseLayout = readFileSync(join(root, 'src/layouts/BaseLayout.astro'), 'utf8');
 const middleware = readFileSync(join(root, 'src/middleware.ts'), 'utf8');
+const hero = readFileSync(join(root, 'src/components/Hero.astro'), 'utf8');
 const componentDir = join(root, 'src/components');
 const componentFiles = readdirSync(componentDir)
   .filter(file => file.endsWith('.astro'))
@@ -80,6 +81,20 @@ describe('S5 design tokens and local fonts', () => {
     expect(baseLayout).toMatch(/href="\/fonts\/Libertinus[^\"]+"/);
   });
 
+  it('keeps shipped font files web-ready and under a 120 KiB budget', () => {
+    const fontsDir = join(root, 'public/fonts');
+    const shippedFiles = readdirSync(fontsDir);
+    const fontFiles = shippedFiles.filter(file => /\.(?:woff2?|otf|ttf)$/i.test(file));
+    const webFontFiles = shippedFiles.filter(file => /\.woff2?$/i.test(file));
+    const totalBytes = shippedFiles.reduce((total, file) => total + readFileSync(join(fontsDir, file)).byteLength, 0);
+
+    expect(fontFiles.length).toBeGreaterThan(0);
+    expect(fontFiles).toEqual(webFontFiles);
+    expect(totalBytes).toBeLessThanOrEqual(120 * 1024);
+    expect(globalCss).toMatch(/@font-face[\s\S]*?\.woff2?/);
+    expect(baseLayout).toMatch(/href="\/fonts\/Libertinus[^\"]+\.woff2?"/);
+  });
+
   it('does not load Google Fonts in the layout or generated pages', () => {
     expect(baseLayout).not.toMatch(/fonts\.(?:googleapis|gstatic)\.com/i);
     expect(baseLayout).not.toMatch(/Montserrat|Roboto/i);
@@ -137,5 +152,25 @@ describe('S5 design tokens and local fonts', () => {
     expect(reducedMotion).toMatch(/scroll-behavior:\s*auto/);
     expect(reducedMotion).toMatch(/animation:\s*none/);
     expect(reducedMotion).toMatch(/transition:\s*none/);
+  });
+
+  it('allows the Hero title and actions to fit within a narrow mobile viewport', () => {
+    const contentClasses = hero.match(/<div class="([^"]*)"[^>]*>\s*<div class="mb-4[\s\S]*?<\/div>/)?.[1] ?? '';
+    const titleClasses = hero.match(/<h1 id="hero-title" class="([^"]*)"/)?.[1] ?? '';
+    const actionsClasses = hero.match(/<div class="([^"]*)">\s*<a href="#projects"/)?.[1] ?? '';
+    const actionLinks = [
+      hero.match(/<a href="#projects" class="([^"]*)"/)?.[1],
+      hero.match(/<a href=\{cvLinks\[lang\]\} download class="([^"]*)"/)?.[1],
+    ].filter((classes): classes is string => Boolean(classes));
+    const mobileFixedWidths = [...hero.matchAll(/max-md:w-\[(\d+)px\]/g)].map(([, width]) => Number(width));
+
+    expect(contentClasses).toContain('min-w-0');
+    expect(contentClasses).toContain('max-md:w-full');
+    expect(titleClasses).toContain('max-md:text-2xl');
+    expect(titleClasses).toContain('max-md:break-words');
+    expect(actionsClasses).toContain('max-md:flex-col');
+    expect(actionLinks).toHaveLength(2);
+    expect(actionLinks.every(classes => classes.includes('max-md:w-full'))).toBe(true);
+    expect(mobileFixedWidths.every(width => width <= 375)).toBe(true);
   });
 });
