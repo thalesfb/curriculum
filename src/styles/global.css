@@ -7,17 +7,9 @@
 
 @font-face {
   font-family: 'Libertinus Serif';
-  src: url('/fonts/LibertinusSerif-Semibold.otf') format('opentype');
+  src: url('/fonts/LibertinusSerif-Semibold.woff2') format('woff2');
   font-style: normal;
   font-weight: 600;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Libertinus Serif';
-  src: url('/fonts/LibertinusSerif-Bold.otf') format('opentype');
-  font-style: normal;
-  font-weight: 700;
   font-display: swap;
 }
 
