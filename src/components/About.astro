@@ -33,15 +33,14 @@ const certificationItems = cvData.certifications.map((entry) => {
     pending: entry.status === 'in-progress',
   };
 });
-const learningItems = [...educationItems, ...certificationItems];
 ---
 
 <section class="bg-bg-card py-20 max-md:py-12" id="about" data-role-summaries={JSON.stringify(summaries)}>
   <div class="mx-auto max-w-[1440px] px-20 max-xl:px-12 max-md:px-6">
     <h2 class="mb-12 text-center font-display text-4xl font-semibold text-text-primary max-md:text-3xl max-md:mb-8">{t('section.about')}</h2>
 
-    <div class="grid grid-cols-3 gap-x-16 gap-y-12 items-start max-xl:grid-cols-2 max-xl:gap-x-10 max-xl:gap-y-8 max-md:grid-cols-1 max-md:gap-y-10">
-      <div class="text-text-secondary leading-relaxed max-xl:col-span-2 max-md:col-span-1">
+    <div data-about-overview class="grid grid-cols-1 items-start gap-x-16 gap-y-12 max-md:gap-y-10 xl:grid-cols-[3fr_2fr]">
+      <div class="text-text-secondary leading-relaxed">
         <p id="about-summary">{activeSummary}</p>
       </div>
 
@@ -63,14 +62,19 @@ const learningItems = [...educationItems, ...certificationItems];
         </dl>
       </div>
 
-      <div>
-        <h3 class="mb-6 font-display text-xl font-semibold text-text-primary">{t('about.education')}</h3>
-        <ul class="flex flex-col gap-4">
-          {learningItems.map((item) => {
+    </div>
+
+    <div data-about-learning class="mt-12">
+      <h3 class="mb-6 font-display text-xl font-semibold text-text-primary">{t('about.education')}</h3>
+
+      <section aria-labelledby="about-formal-education-heading">
+        <h4 id="about-formal-education-heading" class="mb-4 font-display text-lg font-semibold text-text-primary">{t('about.education.formal')}</h4>
+        <ul data-education-grid class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {educationItems.map((item) => {
             const fallback = (item.source || item.title).slice(0, 2).toUpperCase();
             return (
               <li class="flex items-center gap-3 text-text-secondary">
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg-page shadow-sm">
                   {item.logo ? (
                     <img src={item.logo} alt={item.source} width="32" height="32" class="max-h-8 max-w-8 object-contain" loading="lazy">
                   ) : (
@@ -86,7 +90,32 @@ const learningItems = [...educationItems, ...certificationItems];
             );
           })}
         </ul>
-      </div>
+      </section>
+
+      <section class="mt-8" aria-labelledby="about-certifications-heading">
+        <h4 id="about-certifications-heading" class="mb-4 font-display text-lg font-semibold text-text-primary">{t('about.certifications')}</h4>
+        <ul data-certifications-grid class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {certificationItems.map((item) => {
+            const fallback = (item.source || item.title).slice(0, 2).toUpperCase();
+            return (
+              <li class="flex items-center gap-3 text-text-secondary">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg-page shadow-sm">
+                  {item.logo ? (
+                    <img src={item.logo} alt={item.source} width="32" height="32" class="max-h-8 max-w-8 object-contain" loading="lazy">
+                  ) : (
+                    <span class="text-[10px] font-bold text-text-secondary" aria-label={item.source || item.title}>{fallback}</span>
+                  )}
+                </div>
+                <span class="min-w-0 flex-1">
+                  <span class="block">{item.title}</span>
+                  {(item.source || item.period) && <span class="block text-xs text-text-secondary/80">{[item.source, item.period].filter(Boolean).join(' · ')}</span>}
+                </span>
+                {item.pending && <span class="shrink-0 whitespace-nowrap rounded-full bg-brand-green/15 px-2 py-0.5 text-xs font-medium text-brand-green">{t('about.pending')}</span>}
+              </li>
+            );
+          })}
+        </ul>
+      </section>
     </div>
   </div>
 </section>

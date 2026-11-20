@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync, readdirSync } from 'fs';
 import { resolve } from 'path';
 import cvData from '../../data/cv.json';
 
@@ -86,5 +86,49 @@ describe('build output validation', () => {
       expect(html).not.toContain('OPTIMIZR');
       expect(html).not.toMatch(/\b(?:Remoto|Remote)\b/);
     }
+  });
+
+  it.skipIf(!hasBuild)('separates About overview from responsive education and certification grids', () => {
+    const html = readFileSync(resolve(distDir, 'pt/index.html'), 'utf-8');
+    const overviewStart = html.indexOf('data-about-overview');
+    const learningStart = html.indexOf('data-about-learning');
+    expect(overviewStart).toBeGreaterThan(-1);
+    expect(learningStart).toBeGreaterThan(overviewStart);
+
+    const overview = html.slice(overviewStart, learningStart);
+    expect(overview).toContain('id="about-summary"');
+    expect(overview).not.toContain('data-education-grid');
+    expect(overview).not.toContain('data-certifications-grid');
+    const aboutEnd = html.indexOf('id="services"');
+    const about = html.slice(overviewStart, aboutEnd);
+    const educationGridStart = about.indexOf('data-education-grid');
+    const certificationGridStart = about.indexOf('data-certifications-grid');
+    expect(educationGridStart).toBeGreaterThan(-1);
+    expect(educationGridStart).toBeLessThan(certificationGridStart);
+    expect(about.indexOf('Formação')).toBeLessThan(about.indexOf('Certificações'));
+
+    expect(about).toContain('xl:grid-cols-[3fr_2fr]');
+    const educationGrid = about.slice(educationGridStart, about.indexOf('>', educationGridStart));
+    const certificationGrid = about.slice(certificationGridStart, about.indexOf('>', certificationGridStart));
+    for (const grid of [educationGrid, certificationGrid]) {
+      expect(grid).toContain('grid-cols-1');
+      expect(grid).toContain('md:grid-cols-2');
+      expect(grid).toContain('xl:grid-cols-3');
+    }
+    expect(about).toContain('bg-bg-page');
+    expect(about).not.toContain('bg-white');
+
+    const astroAssets = resolve(distDir, '_astro');
+    const css = readdirSync(astroAssets)
+      .filter(file => file.endsWith('.css'))
+      .map(file => readFileSync(resolve(astroAssets, file), 'utf-8'))
+      .join('\n');
+    expect(css).toContain('.dark');
+    expect(css).toContain('--color-bg-page:#0f172a');
+    expect(css).toContain('@media (width>=48rem)');
+    expect(css).toContain('@media (width>=80rem)');
+    expect(css).toMatch(/\.md\\:grid-cols-2\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)\}/);
+    expect(css).toMatch(/\.xl\\:grid-cols-3\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)\}/);
+    expect(css).toMatch(/\.xl\\:grid-cols-\\\[3fr_2fr\\\]\{grid-template-columns:3fr 2fr\}/);
   });
 });
