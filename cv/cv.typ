@@ -18,7 +18,7 @@
   let month = month-name(int(value.slice(5, 7)))
   if lang == "en" { month + " " + value.slice(0, 4) } else { month + " de " + value.slice(0, 4) }
 }
-#let date-range(period) = date(period.start) + " – " + date(period.end)
+#let date-range(period) = if period.end == none { date(period.start) + " – " + date(none) } else if period.start.slice(0, 7) == period.end.slice(0, 7) { date(period.start) } else { date(period.start) + " – " + date(period.end) }
 #let section-labels = (
   summary: (pt: "SUMÁRIO", en: "SUMMARY", es: "RESUMEN"),
   education: (pt: "FORMAÇÃO", en: "EDUCATION", es: "FORMACIÓN"),
@@ -129,13 +129,23 @@
   #let provider = item.at("providerByLanguage", default: (:)).at(lang, default: item.at("provider", default: none))
   #let provider = if (provider == none or ("Não informado", "Not specified", "No especificado").contains(provider)) { none } else { provider }
   #let status = item.at("status", default: none)
+  #let hours = item.at("hours", default: none)
+  #let credential = item.at("credentialUrl", default: none)
+  #let period = item.at("period", default: none)
   #block(width: 100%, above: 0.65em, breakable: false)[
     #grid(
       columns: (1fr, auto),
       column-gutter: 8pt,
       align: (left + top, right + top),
-      [*#localized(item.name)*#if provider != none [#text(" · " + provider)]#if status == "in-progress" [#text(" · " + status-labels.at(lang))]],
-      [#if item.at("date", default: none) != none [#date(item.date)]],
+      [
+        *#localized(item.name)*
+        #if provider != none [
+          #if credential != none [#link(credential)[#text(" · " + provider)]] else [#text(" · " + provider)]
+        ]
+        #if hours != none [#text(" · " + str(hours) + "h")]
+        #if status == "in-progress" [#text(" · " + status-labels.at(lang))]
+      ],
+      [#if period != none [#date-range(period)] else if item.at("date", default: none) != none [#date(item.date)]],
     )
   ]
 ]

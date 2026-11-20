@@ -50,6 +50,8 @@ def source_texts(language):
                 texts.extend(tokens(value))
     for item in DATA["certifications"]:
         texts.append(localized(item["name"], language))
+        if item.get("hours"):
+            texts.append(f'{item["hours"]}h')
         provider = item.get("providerByLanguage", {}).get(language, item.get("provider"))
         if provider and provider not in ("Não informado", "Not specified", "No especificado"):
             texts.append(provider)
@@ -88,6 +90,11 @@ def formatted_dates(language):
     for item in DATA["certifications"]:
         if item.get("date"):
             values.append(format_date(item["date"], language))
+        if item.get("period"):
+            period = item["period"]
+            values.append(format_date(period["start"], language))
+            if period["end"][:7] != period["start"][:7]:
+                values.append(format_date(period["end"], language))
     return values
 
 
@@ -261,6 +268,7 @@ class GeneratedPdfTests(unittest.TestCase):
             "mailto:" + DATA["personal"]["email"],
             "https://" + DATA["personal"]["linkedin"],
             "https://" + DATA["personal"]["github"],
+            *(item["credentialUrl"] for item in DATA["certifications"] if item.get("credentialUrl")),
         )
         for language, filename in OUTPUTS.items():
             with self.subTest(language=language):
@@ -312,13 +320,69 @@ class GeneratedPdfTests(unittest.TestCase):
                     encoding="utf-8",
                 ).stdout.splitlines()
                 for item in DATA["certifications"]:
-                    if not item.get("date"):
+                    if not item.get("date") and not item.get("period"):
                         continue
                     name = localized(item["name"], language)
-                    expected_date = " ".join(tokens(format_date(item["date"], language)))
+                    dates = [item["date"]] if item.get("date") else [item["period"]["start"]]
+                    if item.get("period") and item["period"]["end"][:7] != item["period"]["start"][:7]:
+                        dates.append(item["period"]["end"])
+                    expected_dates = [" ".join(tokens(format_date(value, language))) for value in dates]
                     matching = [" ".join(tokens(line)) for line in lines if name in line]
                     self.assertTrue(matching, f"Missing certification line: {name}")
-                    self.assertTrue(any(expected_date in line for line in matching), f"Date not on item line: {name}")
+                    self.assertTrue(any(all(expected_date in line for expected_date in expected_dates) for line in matching), f"Dates not on item line: {name}")
+
+    def test_alura_groups_are_lines_with_hours_and_periods_not_course_lists(self):
+        groups = [item for item in DATA["certifications"] if item.get("provider") == "Alura"]
+        self.assertEqual(len(groups), 9)
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                lines = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", "-raw", str(self.output_dir / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout.splitlines()
+                for group in groups:
+                    name = localized(group["name"], language)
+                    matching = [" ".join(tokens(line)) for line in lines if name in line]
+                    self.assertTrue(matching, f"Missing Alura group: {name}")
+                    self.assertTrue(any("alura" in line and f'{group["hours"]}h' in line for line in matching), f"Group provider/hours not on line: {name}")
+                extracted = " ".join(
+                    subprocess.run(
+                        ["pdftotext", "-enc", "UTF-8", str(self.output_dir / filename), "-"],
+                        check=True,
+                        capture_output=True,
+                        text=True,
+                        encoding="utf-8",
+                    ).stdout.split()
+                )
+                for course in (
+                    "Django REST Framework: crie APIs com Python",
+                    "Excel: cenários, análise, PROCV, tabelas dinâmicas, macros e VBA (5 cursos)",
+                    "Figma: Conhecendo o programa",
+                ):
+                    self.assertNotIn(" ".join(tokens(course)), " ".join(tokens(extracted)), course)
+
+    def test_lattes_is_omitted_from_pdf_when_it_wraps_the_contact_row(self):
+        target = "lattes.cnpq.br/9042504768658064"
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                extracted = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", "-layout", str(self.output_dir / filename), "-"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                ).stdout
+                self.assertNotIn(target, extracted)
+                urls = subprocess.run(
+                    ["pdfinfo", "-url", str(self.output_dir / filename)],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                ).stdout
+                self.assertNotIn(target, urls)
 
     def test_senai_courses_share_one_institution_heading(self):
         for language, filename in OUTPUTS.items():
