@@ -14,7 +14,7 @@
   total
 }
 #let other-certifications = data.certifications.filter(item => not is-alura(item)).sorted(
-  key: item => (if item.at("status", default: none) == "in-progress" { "1" } else { "0" }) + item.at("date", default: ""),
+  key: item => (if item.at("status", default: none) == "in-progress" { "1" } else { "0" }) + (if item.at("period", default: none) != none { item.period.end } else { item.at("date", default: "") }),
   by: (left, right) => left >= right,
 )
 #let item-spacing = 1.25em
@@ -141,6 +141,7 @@
 ]
 
 == #section("certifications")
+#set text(size: 9.5pt)
  #block(width: 100%, above: certification-spacing, breakable: false)[
   #link(alura-items.at(0).credentialUrl)[*Alura · #str(alura-hours)h*] \
   #for item in alura-items [
@@ -185,6 +186,7 @@
   ]
 ]
 
+#set text(size: 10pt)
 == #section("languages")
 #for item in data.languages [
   *#localized(item.language):* #localized(item.level)#if item.at("detail", default: none) != none [ — #localized(item.detail)] \

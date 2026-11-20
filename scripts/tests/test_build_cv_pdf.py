@@ -298,8 +298,8 @@ class GeneratedPdfTests(unittest.TestCase):
             "AWS Academy Graduate – Cloud Foundations",
             "Latinoware",
             "Techstars Startup Weekend Videira 2025",
-            "Red Hat OpenShift (Containers/Podman) DO188",
-            "Red Hat Enterprise Linux Automation with Ansible RH294",
+            "Red Hat OpenShift Development I: Introduction to Containers with Podman 4.12 DO188",
+            "Red Hat Enterprise Linux Automation with Ansible 9.0 RH294",
         ]
         self.assertEqual(sum(item["hours"] for item in DATA["certifications"] if item.get("provider") == "Alura"), 403)
         for language, filename in OUTPUTS.items():
@@ -310,7 +310,29 @@ class GeneratedPdfTests(unittest.TestCase):
                 ).stdout
                 positions = [extracted.index(name) for name in expected]
                 self.assertEqual(positions, sorted(positions), extracted)
+                self.assertLess(extracted.index("Techstars Startup Weekend Videira 2025"), positions[-2])
                 self.assertLess(extracted.index("Alura"), positions[0])
+
+    def test_red_hat_periods_are_printed_and_drive_recent_first_order(self):
+        expected = {
+            "Red Hat OpenShift Development I: Introduction to Containers with Podman 4.12 DO188": ("2024-02", "2024-07"),
+            "Red Hat Enterprise Linux Automation with Ansible 9.0 RH294": ("2024-04", "2024-07"),
+        }
+        items = {item["name"]["pt"]: item for item in DATA["certifications"] if item.get("provider") == "Red Hat"}
+        for name, period in expected.items():
+            self.assertEqual(items[name]["period"], {"start": period[0], "end": period[1]})
+
+        for language, filename in OUTPUTS.items():
+            with self.subTest(language=language):
+                extracted = subprocess.run(
+                    ["pdftotext", "-enc", "UTF-8", "-layout", str(self.output_dir / filename), "-"],
+                    check=True, capture_output=True, text=True, encoding="utf-8",
+                ).stdout
+                for name, (start, end) in expected.items():
+                    self.assertIn(name, extracted)
+                    self.assertIn("julho de 2024" if language == "pt" else "July 2024" if language == "en" else "julio de 2024", extracted)
+                positions = [extracted.index(name) for name in expected]
+                self.assertEqual(positions, sorted(positions), extracted)
 
     def test_each_language_contains_all_selected_content_without_invented_text(self):
         section_labels = {
@@ -399,13 +421,8 @@ class GeneratedPdfTests(unittest.TestCase):
     def test_certification_dates_share_their_item_line(self):
         for language, filename in OUTPUTS.items():
             with self.subTest(language=language):
-                lines = subprocess.run(
-                    ["pdftotext", "-enc", "UTF-8", "-raw", str(self.output_dir / filename), "-"],
-                    check=True,
-                    capture_output=True,
-                    text=True,
-                    encoding="utf-8",
-                ).stdout.splitlines()
+                _, page = bbox_lines(self.output_dir / filename, 2)
+                lines = [" ".join(tokens(row["text"])) for row in visual_rows(page)]
                 for item in DATA["certifications"]:
                     if not item.get("date") and not item.get("period"):
                         continue
@@ -413,8 +430,9 @@ class GeneratedPdfTests(unittest.TestCase):
                     dates = [item["date"]] if item.get("date") else [item["period"]["start"]]
                     if item.get("period") and item["period"]["end"][:7] != item["period"]["start"][:7]:
                         dates.append(item["period"]["end"])
+                    name_tokens = " ".join(tokens(name))
                     expected_dates = [" ".join(tokens(format_date(value, language))) for value in dates]
-                    matching = [" ".join(tokens(line)) for line in lines if name in line]
+                    matching = [line for line in lines if name_tokens in line]
                     self.assertTrue(matching, f"Missing certification line: {name}")
                     self.assertTrue(any(all(expected_date in line for expected_date in expected_dates) for line in matching), f"Dates not on item line: {name}")
 

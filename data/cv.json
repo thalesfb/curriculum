@@ -1458,11 +1458,15 @@
     },
     {
       "name": {
-        "pt": "Red Hat OpenShift (Containers/Podman) DO188",
-        "en": "Red Hat OpenShift (Containers/Podman) DO188",
-        "es": "Red Hat OpenShift (Containers/Podman) DO188"
+        "pt": "Red Hat OpenShift Development I: Introduction to Containers with Podman 4.12 DO188",
+        "en": "Red Hat OpenShift Development I: Introduction to Containers with Podman 4.12 DO188",
+        "es": "Red Hat OpenShift Development I: Introduction to Containers with Podman 4.12 DO188"
       },
       "provider": "Red Hat",
+      "period": {
+        "start": "2024-02",
+        "end": "2024-07"
+      },
       "roles": [
         "devops",
         "backend"
@@ -1470,11 +1474,15 @@
     },
     {
       "name": {
-        "pt": "Red Hat Enterprise Linux Automation with Ansible RH294",
-        "en": "Red Hat Enterprise Linux Automation with Ansible RH294",
-        "es": "Red Hat Enterprise Linux Automation with Ansible RH294"
+        "pt": "Red Hat Enterprise Linux Automation with Ansible 9.0 RH294",
+        "en": "Red Hat Enterprise Linux Automation with Ansible 9.0 RH294",
+        "es": "Red Hat Enterprise Linux Automation with Ansible 9.0 RH294"
       },
       "provider": "Red Hat",
+      "period": {
+        "start": "2024-04",
+        "end": "2024-07"
+      },
       "roles": [
         "devops"
       ]

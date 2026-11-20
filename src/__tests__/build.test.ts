@@ -195,8 +195,8 @@ describe('build output validation', () => {
     expect(certifications.indexOf('AWS Academy Cloud Architecting')).toBeLessThan(certifications.indexOf('AWS Academy Graduate – Cloud Foundations'));
     expect(certifications.indexOf('AWS Academy Graduate – Cloud Foundations')).toBeLessThan(certifications.indexOf('Latinoware'));
     expect(certifications.indexOf('Latinoware')).toBeLessThan(certifications.indexOf('Techstars Startup Weekend Videira 2025'));
-    expect(certifications.indexOf('Techstars Startup Weekend Videira 2025')).toBeLessThan(certifications.indexOf('Red Hat OpenShift'));
-    expect(certifications.indexOf('Red Hat OpenShift')).toBeLessThan(certifications.indexOf('Red Hat Enterprise Linux Automation'));
+    expect(certifications.indexOf('Techstars Startup Weekend Videira 2025')).toBeLessThan(certifications.indexOf('Red Hat OpenShift Development I'));
+    expect(certifications.indexOf('Red Hat OpenShift Development I')).toBeLessThan(certifications.indexOf('Red Hat Enterprise Linux Automation'));
   });
 
 

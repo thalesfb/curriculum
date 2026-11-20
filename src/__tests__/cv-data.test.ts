@@ -93,16 +93,16 @@ describe('cv.json schema validation', () => {
     });
   });
 
-  it('keeps Red Hat certificate dates unspecified', () => {
+  it('records the official Red Hat course names and attendance periods', () => {
     const redHat = cvData.certifications.filter(certification => certification.provider === 'Red Hat');
     expect(redHat.map(certification => certification.name.pt)).toEqual([
-      'Red Hat OpenShift (Containers/Podman) DO188',
-      'Red Hat Enterprise Linux Automation with Ansible RH294',
+      'Red Hat OpenShift Development I: Introduction to Containers with Podman 4.12 DO188',
+      'Red Hat Enterprise Linux Automation with Ansible 9.0 RH294',
     ]);
-    for (const certification of redHat) {
-      expect(certification).not.toHaveProperty('date');
-      expect(certification).not.toHaveProperty('period');
-    }
+    expect(redHat.map(certification => certification.period)).toEqual([
+      { start: '2024-02', end: '2024-07' },
+      { start: '2024-04', end: '2024-07' },
+    ]);
   });
 
   it('groups all Alura certificates beneath one 403-hour total and localizes English', () => {
