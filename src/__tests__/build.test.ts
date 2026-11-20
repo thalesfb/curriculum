@@ -157,6 +157,7 @@ describe('build output validation', () => {
       expect(certifications).toContain(pendingLabels[lang]);
       expect(education).toContain('data-education-period="2012"');
       expect(education).not.toContain('2012–2012');
+      expect(education).toContain('/logos/mater-salvatoris.webp');
     }
 
     const html = decodeHtml(readFileSync(resolve(distDir, 'pt/index.html'), 'utf-8'));
@@ -171,8 +172,20 @@ describe('build output validation', () => {
     expect(certifications).toContain('Modelagem de banco');
     expect(certifications).toContain('href="https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8"');
     expect(certifications).toContain('Latinoware 2014');
+    expect(certifications).toContain('/logos/latinoware.webp');
+    const aluraCourses = cvData.certifications
+      .filter(certification => certification.provider === 'Alura')
+      .flatMap(group => group.courses);
+    expect((certifications.match(/data-alura-course/g) ?? []).length).toBe(aluraCourses.length);
+    for (const course of aluraCourses) {
+      expect(certifications).toContain(course.pt);
+      expect(certifications).toContain(`data-course-hours="${course.hours}"`);
+      if (course.period) {
+        expect(certifications).toContain(`data-course-period="${course.period.start}–${course.period.end}"`);
+      }
+    }
     expect(certifications.indexOf('AWS Academy Cloud Architecting')).toBeLessThan(certifications.indexOf('Imersão Engenharia de Software: Dev na Era da IA'));
-    expect(certifications.indexOf('AWS Academy Graduate – Cloud Foundations')).toBeLessThan(certifications.indexOf('Imersão Engenharia de Software: Dev na Era da IA'));
+    expect(certifications.indexOf('Imersão Engenharia de Software: Dev na Era da IA')).toBeLessThan(certifications.indexOf('AWS Academy Graduate – Cloud Foundations'));
     expect(certifications.lastIndexOf('Latinoware 2014')).toBeGreaterThan(certifications.indexOf('AWS Academy Graduate – Cloud Foundations'));
     expect(certifications.indexOf('AWS Academy Graduate – Cloud Foundations')).toBeLessThan(certifications.indexOf('UX & Design'));
     expect(certifications.indexOf('UX & Design')).toBeLessThan(certifications.indexOf('Latinoware 2025 (28h)'));

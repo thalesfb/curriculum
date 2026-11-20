@@ -782,9 +782,44 @@
       "hours": 30,
       "courses": [
         {
-          "pt": "Django REST Framework: crie APIs com Python",
-          "en": "Django REST Framework: crie APIs com Python",
-          "es": "Django REST Framework: crie APIs com Python"
+          "pt": "Django REST Framework: construindo APIs RESTful do Zero",
+          "en": "Django REST Framework: construindo APIs RESTful do Zero",
+          "es": "Django REST Framework: construindo APIs RESTful do Zero",
+          "hours": 8,
+          "period": {
+            "start": "2024-07",
+            "end": "2024-08"
+          }
+        },
+        {
+          "pt": "Django REST Framework: trabalhando com validações, paginação, filtros e versionamento em uma API",
+          "en": "Django REST Framework: trabalhando com validações, paginação, filtros e versionamento em uma API",
+          "es": "Django REST Framework: trabalhando com validações, paginação, filtros e versionamento em uma API",
+          "hours": 6,
+          "period": {
+            "start": "2024-07",
+            "end": "2025-05"
+          }
+        },
+        {
+          "pt": "Django REST Framework: trabalhando com permissões, documentação, limitações, CORS e deploy na AWS",
+          "en": "Django REST Framework: trabalhando com permissões, documentação, limitações, CORS e deploy na AWS",
+          "es": "Django REST Framework: trabalhando com permissões, documentação, limitações, CORS e deploy na AWS",
+          "hours": 8,
+          "period": {
+            "start": "2025-05",
+            "end": "2025-05"
+          }
+        },
+        {
+          "pt": "Django REST Framework: trabalhando com testes unitários e de integração",
+          "en": "Django REST Framework: trabalhando com testes unitários e de integração",
+          "es": "Django REST Framework: trabalhando com testes unitários e de integração",
+          "hours": 8,
+          "period": {
+            "start": "2025-05",
+            "end": "2025-09"
+          }
         }
       ],
       "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
@@ -810,39 +845,144 @@
       "hours": 127,
       "courses": [
         {
-          "pt": "Python",
-          "en": "Python",
-          "es": "Python"
+          "pt": "Python: começando com a linguagem",
+          "en": "Python: começando com a linguagem",
+          "es": "Python: começando com a linguagem",
+          "hours": 12,
+          "period": {
+            "start": "2023-05",
+            "end": "2023-06"
+          }
         },
         {
-          "pt": "OO",
-          "en": "OO",
-          "es": "OO"
+          "pt": "Python: avançando na linguagem",
+          "en": "Python: avançando na linguagem",
+          "es": "Python: avançando na linguagem",
+          "hours": 12,
+          "period": {
+            "start": "2023-06",
+            "end": "2023-07"
+          }
         },
         {
-          "pt": "Collections",
-          "en": "Collections",
-          "es": "Collections"
+          "pt": "Python: avançando na orientação a objetos",
+          "en": "Python: avançando na orientação a objetos",
+          "es": "Python: avançando na orientação a objetos",
+          "hours": 10,
+          "period": {
+            "start": "2023-07",
+            "end": "2023-08"
+          }
         },
         {
-          "pt": "API com Django 3 x3",
-          "en": "API com Django 3 x3",
-          "es": "API com Django 3 x3"
+          "pt": "Python Collections parte 1: listas e tuplas",
+          "en": "Python Collections parte 1: listas e tuplas",
+          "es": "Python Collections parte 1: listas e tuplas",
+          "hours": 8,
+          "period": {
+            "start": "2023-08",
+            "end": "2023-08"
+          }
         },
         {
-          "pt": "TDD",
-          "en": "TDD",
-          "es": "TDD"
+          "pt": "Python Collections parte 2: conjuntos e dicionários",
+          "en": "Python Collections parte 2: conjuntos e dicionários",
+          "es": "Python Collections parte 2: conjuntos e dicionários",
+          "hours": 9,
+          "period": {
+            "start": "2023-08",
+            "end": "2023-08"
+          }
         },
         {
-          "pt": "Django templates/persistência",
-          "en": "Django templates/persistência",
-          "es": "Django templates/persistência"
+          "pt": "API com Django 3: Django Rest Framework",
+          "en": "API com Django 3: Django Rest Framework",
+          "es": "API com Django 3: Django Rest Framework",
+          "hours": 8,
+          "period": {
+            "start": "2024-03",
+            "end": "2024-04"
+          }
         },
         {
-          "pt": "Git e GitHub",
-          "en": "Git e GitHub",
-          "es": "Git e GitHub"
+          "pt": "API com Django 3: Validações, buscas, filtros e deploy",
+          "en": "API com Django 3: Validações, buscas, filtros e deploy",
+          "es": "API com Django 3: Validações, buscas, filtros e deploy",
+          "hours": 8,
+          "period": {
+            "start": "2024-04",
+            "end": "2024-06"
+          }
+        },
+        {
+          "pt": "API com Django 3: Versionamento, cabeçalhos e CORS",
+          "en": "API com Django 3: Versionamento, cabeçalhos e CORS",
+          "es": "API com Django 3: Versionamento, cabeçalhos e CORS",
+          "hours": 6,
+          "period": {
+            "start": "2024-06",
+            "end": "2024-06"
+          }
+        },
+        {
+          "pt": "String em Python: extraindo informações de uma URL",
+          "en": "String em Python: extraindo informações de uma URL",
+          "es": "String em Python: extraindo informações de uma URL",
+          "hours": 8,
+          "period": {
+            "start": "2023-08",
+            "end": "2023-08"
+          }
+        },
+        {
+          "pt": "Python e TDD: explorando testes unitários",
+          "en": "Python e TDD: explorando testes unitários",
+          "es": "Python e TDD: explorando testes unitários",
+          "hours": 8,
+          "period": {
+            "start": "2023-11",
+            "end": "2024-04"
+          }
+        },
+        {
+          "pt": "Django: templates e boas práticas",
+          "en": "Django: templates e boas práticas",
+          "es": "Django: templates e boas práticas",
+          "hours": 8,
+          "period": {
+            "start": "2024-02",
+            "end": "2024-02"
+          }
+        },
+        {
+          "pt": "Django: persistência de dados e Admin",
+          "en": "Django: persistência de dados e Admin",
+          "es": "Django: persistência de dados e Admin",
+          "hours": 10,
+          "period": {
+            "start": "2024-02",
+            "end": "2024-05"
+          }
+        },
+        {
+          "pt": "Python: entendendo a Orientação a Objetos",
+          "en": "Python: entendendo a Orientação a Objetos",
+          "es": "Python: entendendo a Orientação a Objetos",
+          "hours": 12,
+          "period": {
+            "start": "2023-06",
+            "end": "2023-07"
+          }
+        },
+        {
+          "pt": "Git e GitHub: dominando controle de versão de código",
+          "en": "Git e GitHub: dominando controle de versão de código",
+          "es": "Git e GitHub: dominando controle de versão de código",
+          "hours": 8,
+          "period": {
+            "start": "2025-09",
+            "end": "2025-09"
+          }
         }
       ],
       "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
@@ -852,7 +992,11 @@
         "devops",
         "management",
         "frontend"
-      ]
+      ],
+      "period": {
+        "start": "2023-05",
+        "end": "2025-09"
+      }
     },
     {
       "name": {
@@ -864,44 +1008,234 @@
       "hours": 198,
       "courses": [
         {
-          "pt": "BI Data Warehouse",
-          "en": "BI Data Warehouse",
-          "es": "BI Data Warehouse"
+          "pt": "Business Intelligence: trabalhando com Data Warehouse",
+          "en": "Business Intelligence: trabalhando com Data Warehouse",
+          "es": "Business Intelligence: trabalhando com Data Warehouse",
+          "hours": 12,
+          "period": {
+            "start": "2022-10",
+            "end": "2023-05"
+          }
         },
         {
-          "pt": "Excel: cenários, análise, PROCV, tabelas dinâmicas, macros e VBA (5 cursos)",
-          "en": "Excel: cenários, análise, PROCV, tabelas dinâmicas, macros e VBA (5 cursos)",
-          "es": "Excel: cenários, análise, PROCV, tabelas dinâmicas, macros e VBA (5 cursos)"
+          "pt": "Excel: simulação e análise de cenários",
+          "en": "Excel: simulação e análise de cenários",
+          "es": "Excel: simulação e análise de cenários",
+          "hours": 6,
+          "period": {
+            "start": "2022-09",
+            "end": "2022-09"
+          }
         },
         {
-          "pt": "Power BI (3 cursos)",
-          "en": "Power BI (3 cursos)",
-          "es": "Power BI (3 cursos)"
+          "pt": "Análise de dados: cálculos, padrões e estratégias com Excel",
+          "en": "Análise de dados: cálculos, padrões e estratégias com Excel",
+          "es": "Análise de dados: cálculos, padrões e estratégias com Excel",
+          "hours": 6,
+          "period": {
+            "start": "2022-09",
+            "end": "2022-09"
+          }
         },
         {
-          "pt": "Modelagem de banco de dados (3 cursos)",
-          "en": "Modelagem de banco de dados (3 cursos)",
-          "es": "Modelagem de banco de dados (3 cursos)"
+          "pt": "Excel procv: lógica booleana e busca por valores",
+          "en": "Excel procv: lógica booleana e busca por valores",
+          "es": "Excel procv: lógica booleana e busca por valores",
+          "hours": 12,
+          "period": {
+            "start": "2022-09",
+            "end": "2022-09"
+          }
         },
         {
-          "pt": "Python para Dados (2 cursos)",
-          "en": "Python para Dados (2 cursos)",
-          "es": "Python para Dados (2 cursos)"
+          "pt": "Excel: tabelas dinâmicas e dashboards",
+          "en": "Excel: tabelas dinâmicas e dashboards",
+          "es": "Excel: tabelas dinâmicas e dashboards",
+          "hours": 10,
+          "period": {
+            "start": "2022-09",
+            "end": "2022-09"
+          }
         },
         {
-          "pt": "Pandas (2 cursos)",
-          "en": "Pandas (2 cursos)",
-          "es": "Pandas (2 cursos)"
+          "pt": "Excel: criação de macros e automatização de tarefas",
+          "en": "Excel: criação de macros e automatização de tarefas",
+          "es": "Excel: criação de macros e automatização de tarefas",
+          "hours": 12,
+          "period": {
+            "start": "2022-09",
+            "end": "2022-09"
+          }
         },
         {
-          "pt": "XGBoost",
-          "en": "XGBoost",
-          "es": "XGBoost"
+          "pt": "Excel: personalizando e automatizando tarefas com VBA",
+          "en": "Excel: personalizando e automatizando tarefas com VBA",
+          "es": "Excel: personalizando e automatizando tarefas com VBA",
+          "hours": 8,
+          "period": {
+            "start": "2022-08",
+            "end": "2022-08"
+          }
         },
         {
-          "pt": "Machine Learning: classificação com Scikit-learn",
-          "en": "Machine Learning: classificação com Scikit-learn",
-          "es": "Machine Learning: classificação com Scikit-learn"
+          "pt": "Power BI Desktop: tratamento de dados no Power Query",
+          "en": "Power BI Desktop: tratamento de dados no Power Query",
+          "es": "Power BI Desktop: tratamento de dados no Power Query",
+          "hours": 8,
+          "period": {
+            "start": "2022-10",
+            "end": "2023-01"
+          }
+        },
+        {
+          "pt": "Excel VBA: automatize tarefas diárias mesmo não sendo programador",
+          "en": "Excel VBA: automatize tarefas diárias mesmo não sendo programador",
+          "es": "Excel VBA: automatize tarefas diárias mesmo não sendo programador",
+          "hours": 8,
+          "period": {
+            "start": "2022-09",
+            "end": "2022-09"
+          }
+        },
+        {
+          "pt": "Excel VBA: criando Formulários para facilitar a entrada de dados nas planilhas",
+          "en": "Excel VBA: criando Formulários para facilitar a entrada de dados nas planilhas",
+          "es": "Excel VBA: criando Formulários para facilitar a entrada de dados nas planilhas",
+          "hours": 8,
+          "period": {
+            "start": "2022-08",
+            "end": "2022-09"
+          }
+        },
+        {
+          "pt": "Excel VBA 3: criando conexão com o Outlook Application",
+          "en": "Excel VBA 3: criando conexão com o Outlook Application",
+          "es": "Excel VBA 3: criando conexão com o Outlook Application",
+          "hours": 10,
+          "period": {
+            "start": "2022-09",
+            "end": "2022-09"
+          }
+        },
+        {
+          "pt": "Excel VBA 4: criando conexão com Access",
+          "en": "Excel VBA 4: criando conexão com Access",
+          "es": "Excel VBA 4: criando conexão com Access",
+          "hours": 10,
+          "period": {
+            "start": "2022-09",
+            "end": "2022-09"
+          }
+        },
+        {
+          "pt": "Power BI Desktop: construindo meu primeiro dashboard",
+          "en": "Power BI Desktop: construindo meu primeiro dashboard",
+          "es": "Power BI Desktop: construindo meu primeiro dashboard",
+          "hours": 8,
+          "period": {
+            "start": "2022-09",
+            "end": "2022-10"
+          }
+        },
+        {
+          "pt": "Dashboard com Power BI: visualizando dados",
+          "en": "Dashboard com Power BI: visualizando dados",
+          "es": "Dashboard com Power BI: visualizando dados",
+          "hours": 8,
+          "period": {
+            "start": "2022-10",
+            "end": "2022-12"
+          }
+        },
+        {
+          "pt": "Modelagem de banco de dados: entidades, relacionamentos e atributos",
+          "en": "Modelagem de banco de dados: entidades, relacionamentos e atributos",
+          "es": "Modelagem de banco de dados: entidades, relacionamentos e atributos",
+          "hours": 8,
+          "period": {
+            "start": "2023-04",
+            "end": "2023-07"
+          }
+        },
+        {
+          "pt": "Modelagem de banco de dados relacional: modelagem lógica e física",
+          "en": "Modelagem de banco de dados relacional: modelagem lógica e física",
+          "es": "Modelagem de banco de dados relacional: modelagem lógica e física",
+          "hours": 8,
+          "period": {
+            "start": "2023-07",
+            "end": "2023-08"
+          }
+        },
+        {
+          "pt": "Modelagem de banco de dados relacional: normalização",
+          "en": "Modelagem de banco de dados relacional: normalização",
+          "es": "Modelagem de banco de dados relacional: normalização",
+          "hours": 6,
+          "period": {
+            "start": "2023-08",
+            "end": "2023-08"
+          }
+        },
+        {
+          "pt": "Python para Dados: primeiros passos",
+          "en": "Python para Dados: primeiros passos",
+          "es": "Python para Dados: primeiros passos",
+          "hours": 10,
+          "period": {
+            "start": "2023-07",
+            "end": "2023-09"
+          }
+        },
+        {
+          "pt": "Python para Dados: trabalhando com funções, estruturas de dados e exceções",
+          "en": "Python para Dados: trabalhando com funções, estruturas de dados e exceções",
+          "es": "Python para Dados: trabalhando com funções, estruturas de dados e exceções",
+          "hours": 8,
+          "period": {
+            "start": "2023-07",
+            "end": "2023-10"
+          }
+        },
+        {
+          "pt": "Pandas: conhecendo a biblioteca",
+          "en": "Pandas: conhecendo a biblioteca",
+          "es": "Pandas: conhecendo a biblioteca",
+          "hours": 8,
+          "period": {
+            "start": "2023-07",
+            "end": "2023-11"
+          }
+        },
+        {
+          "pt": "Pandas I/O: trabalhando com diferentes formatos de arquivos",
+          "en": "Pandas I/O: trabalhando com diferentes formatos de arquivos",
+          "es": "Pandas I/O: trabalhando com diferentes formatos de arquivos",
+          "hours": 8,
+          "period": {
+            "start": "2023-07",
+            "end": "2024-02"
+          }
+        },
+        {
+          "pt": "Regressão: aprimorando os resultados com XGBoost",
+          "en": "Regressão: aprimorando os resultados com XGBoost",
+          "es": "Regressão: aprimorando os resultados com XGBoost",
+          "hours": 8,
+          "period": {
+            "start": "2025-05",
+            "end": "2025-05"
+          }
+        },
+        {
+          "pt": "Machine Learning: classificação com SKLearn",
+          "en": "Machine Learning: classificação com SKLearn",
+          "es": "Machine Learning: classificação com SKLearn",
+          "hours": 8,
+          "period": {
+            "start": "2025-04",
+            "end": "2025-04"
+          }
         }
       ],
       "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
@@ -910,7 +1244,7 @@
         "management"
       ],
       "period": {
-        "start": "2023-04",
+        "start": "2022-08",
         "end": "2025-05"
       }
     },
@@ -924,14 +1258,24 @@
       "hours": 14,
       "courses": [
         {
-          "pt": "NGINX servidor Web, Proxy Reverso e API Gateway",
-          "en": "NGINX servidor Web, Proxy Reverso e API Gateway",
-          "es": "NGINX servidor Web, Proxy Reverso e API Gateway"
+          "pt": "NGINX: servidor Web, Proxy Reverso e API Gateway",
+          "en": "NGINX: servidor Web, Proxy Reverso e API Gateway",
+          "es": "NGINX: servidor Web, Proxy Reverso e API Gateway",
+          "hours": 6,
+          "period": {
+            "start": "2024-07",
+            "end": "2024-07"
+          }
         },
         {
           "pt": "NGINX Parte 2: performance, FastCGI e HTTPS",
           "en": "NGINX Parte 2: performance, FastCGI e HTTPS",
-          "es": "NGINX Parte 2: performance, FastCGI e HTTPS"
+          "es": "NGINX Parte 2: performance, FastCGI e HTTPS",
+          "hours": 8,
+          "period": {
+            "start": "2024-07",
+            "end": "2024-07"
+          }
         }
       ],
       "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
@@ -954,14 +1298,24 @@
       "hours": 16,
       "courses": [
         {
-          "pt": "GitHub Copilot e ChatGPT",
-          "en": "GitHub Copilot e ChatGPT",
-          "es": "GitHub Copilot e ChatGPT"
+          "pt": "GitHub Copilot e ChatGPT: impulsionando seu desenvolvimento com IA",
+          "en": "GitHub Copilot e ChatGPT: impulsionando seu desenvolvimento com IA",
+          "es": "GitHub Copilot e ChatGPT: impulsionando seu desenvolvimento com IA",
+          "hours": 8,
+          "period": {
+            "start": "2023-06",
+            "end": "2023-08"
+          }
         },
         {
           "pt": "Excel com IA: mapeando e evoluindo processos",
           "en": "Excel com IA: mapeando e evoluindo processos",
-          "es": "Excel com IA: mapeando e evoluindo processos"
+          "es": "Excel com IA: mapeando e evoluindo processos",
+          "hours": 8,
+          "period": {
+            "start": "2023-08",
+            "end": "2023-09"
+          }
         }
       ],
       "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
@@ -989,7 +1343,12 @@
         {
           "pt": "Figma: Conhecendo o programa",
           "en": "Figma: Conhecendo o programa",
-          "es": "Figma: Conhecendo o programa"
+          "es": "Figma: Conhecendo o programa",
+          "hours": 8,
+          "period": {
+            "start": "2025-12",
+            "end": "2025-12"
+          }
         }
       ],
       "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
@@ -1013,7 +1372,18 @@
       },
       "provider": "Alura",
       "hours": 2,
-      "courses": [],
+      "courses": [
+        {
+          "pt": "Carreira Desenvolvedor(a) Front-end React: boas-vindas e primeiros passos",
+          "en": "Carreira Desenvolvedor(a) Front-end React: boas-vindas e primeiros passos",
+          "es": "Carreira Desenvolvedor(a) Front-end React: boas-vindas e primeiros passos",
+          "hours": 2,
+          "period": {
+            "start": "2025-10",
+            "end": "2025-11"
+          }
+        }
+      ],
       "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
       "roles": [
         "data-engineer",
@@ -1021,7 +1391,11 @@
         "devops",
         "management",
         "frontend"
-      ]
+      ],
+      "period": {
+        "start": "2025-10",
+        "end": "2025-11"
+      }
     },
     {
       "name": {
@@ -1033,9 +1407,14 @@
       "hours": 4,
       "courses": [
         {
-          "pt": "Inglês para devs: Meeting",
-          "en": "Inglês para devs: Meeting",
-          "es": "Inglês para devs: Meeting"
+          "pt": "Inglês para devs: Meeting - Creating and embedding contact forms for a client",
+          "en": "Inglês para devs: Meeting - Creating and embedding contact forms for a client",
+          "es": "Inglês para devs: Meeting - Creating and embedding contact forms for a client",
+          "hours": 4,
+          "period": {
+            "start": "2022-09",
+            "end": "2022-10"
+          }
         }
       ],
       "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
@@ -1063,7 +1442,8 @@
         {
           "pt": "Imersão Engenharia de Software: Dev na Era da IA",
           "en": "Imersão Engenharia de Software: Dev na Era da IA",
-          "es": "Imersão Engenharia de Software: Dev na Era da IA"
+          "es": "Imersão Engenharia de Software: Dev na Era da IA",
+          "hours": 4
         }
       ],
       "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
@@ -1073,7 +1453,8 @@
         "devops",
         "management",
         "frontend"
-      ]
+      ],
+      "date": "2026-11"
     },
     {
       "name": {

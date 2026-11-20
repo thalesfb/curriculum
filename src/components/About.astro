@@ -14,6 +14,7 @@ const logoBySource: Record<string, string> = {
   Alura: '/logos/alura.svg',
   'Red Hat': '/logos/redhat.svg',
   'AWS Academy': '/logos/aws.svg',
+  'Escola de Educação Básica Mater Salvatoris': '/logos/mater-salvatoris.webp',
 };
 const monthNames = {
   pt: ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'],
@@ -45,7 +46,10 @@ const certificationItems = cvData.certifications
     return {
       title: localized(entry.name),
       source,
-      logo: entry.provider ? logoBySource[entry.provider] : undefined,
+      logo: entry.name.pt.startsWith('Latinoware')
+        ? '/logos/latinoware.webp'
+        : entry.provider ? logoBySource[entry.provider] : undefined,
+      logoAlt: entry.name.pt.startsWith('Latinoware') ? 'Latinoware' : source,
       period: entry.period ? formatPeriod(entry.period) : entry.date?.slice(0, 4) ?? '',
       date: entry.period?.end ?? entry.date ?? '',
       pending: entry.status === 'in-progress',
@@ -120,7 +124,7 @@ const certificationItems = cvData.certifications
               <details class="group">
                 <summary class="flex cursor-pointer list-none items-center gap-3">
                   <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg-card shadow-sm">
-                    <img src={item.logo} alt={item.source} width="32" height="32" class="max-h-8 max-w-8 object-contain" loading="lazy">
+                    <img src={item.logo} alt={item.logoAlt} width="32" height="32" class="max-h-8 max-w-8 object-contain" loading="lazy">
                   </span>
                   <span class="min-w-0 flex-1">
                     <span class="block font-medium text-text-primary">{item.title}</span>
@@ -132,8 +136,20 @@ const certificationItems = cvData.certifications
                   </svg>
                 </summary>
                 {item.courses.length > 0 && (
-                  <ul class="mt-3 list-inside list-disc space-y-1 pl-1 text-sm text-text-secondary">
-                    {item.courses.map((course) => <li>{localized(course)}</li>)}
+                  <ul class="mt-3 space-y-2 pl-1 text-sm text-text-secondary">
+                    {item.courses.map((course) => (
+                      <li
+                        data-alura-course
+                        data-course-hours={course.hours}
+                        data-course-period={course.period ? `${course.period.start}–${course.period.end}` : undefined}
+                        class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1"
+                      >
+                        <span>{localized(course)}</span>
+                        <span class="shrink-0 text-xs text-text-secondary/80">
+                          {course.hours}h{course.period && ` · ${formatPeriod(course.period)}`}
+                        </span>
+                      </li>
+                    ))}
                   </ul>
                 )}
                 {item.credentialUrl && <a class="mt-3 inline-block text-sm font-medium text-brand-green underline decoration-current/40 underline-offset-2" href={item.credentialUrl} target="_blank" rel="noopener noreferrer">{t('about.fullCertificate')}</a>}
@@ -143,7 +159,7 @@ const certificationItems = cvData.certifications
             <li data-certification-item class="flex items-center gap-3 text-text-secondary">
               <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg-page shadow-sm">
                 {item.logo ? (
-                  <img src={item.logo} alt={item.source} width="32" height="32" class="max-h-8 max-w-8 object-contain" loading="lazy">
+                  <img src={item.logo} alt={item.logoAlt} width="32" height="32" class="max-h-8 max-w-8 object-contain" loading="lazy">
                 ) : (
                   <svg aria-hidden="true" class="h-5 w-5 text-text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />

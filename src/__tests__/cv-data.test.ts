@@ -108,50 +108,109 @@ describe('cv.json schema validation', () => {
     ]);
   });
 
-  it('groups Alura certifications as shown in the official full certificate', () => {
-    const names = cvData.certifications.map(certification => certification.name.pt);
+  it('includes every dated Alura course and matches group hours and periods', () => {
+    type CourseExpectation = [string, number, string | null, string | null];
+    const expectedGroups: Array<{ name: string; hours: number; courses: CourseExpectation[]; date?: string }> = [
+      {
+        name: 'Trilha Django REST Framework', hours: 30, courses: [
+          ['Django REST Framework: construindo APIs RESTful do Zero', 8, '2024-07', '2024-08'],
+          ['Django REST Framework: trabalhando com validações, paginação, filtros e versionamento em uma API', 6, '2024-07', '2025-05'],
+          ['Django REST Framework: trabalhando com permissões, documentação, limitações, CORS e deploy na AWS', 8, '2025-05', '2025-05'],
+          ['Django REST Framework: trabalhando com testes unitários e de integração', 8, '2025-05', '2025-09'],
+        ],
+      },
+      {
+        name: 'Back-end', hours: 127, courses: [
+          ['Python: começando com a linguagem', 12, '2023-05', '2023-06'],
+          ['Python: avançando na linguagem', 12, '2023-06', '2023-07'],
+          ['Python: avançando na orientação a objetos', 10, '2023-07', '2023-08'],
+          ['Python Collections parte 1: listas e tuplas', 8, '2023-08', '2023-08'],
+          ['Python Collections parte 2: conjuntos e dicionários', 9, '2023-08', '2023-08'],
+          ['API com Django 3: Django Rest Framework', 8, '2024-03', '2024-04'],
+          ['API com Django 3: Validações, buscas, filtros e deploy', 8, '2024-04', '2024-06'],
+          ['API com Django 3: Versionamento, cabeçalhos e CORS', 6, '2024-06', '2024-06'],
+          ['String em Python: extraindo informações de uma URL', 8, '2023-08', '2023-08'],
+          ['Python e TDD: explorando testes unitários', 8, '2023-11', '2024-04'],
+          ['Django: templates e boas práticas', 8, '2024-02', '2024-02'],
+          ['Django: persistência de dados e Admin', 10, '2024-02', '2024-05'],
+          ['Python: entendendo a Orientação a Objetos', 12, '2023-06', '2023-07'],
+          ['Git e GitHub: dominando controle de versão de código', 8, '2025-09', '2025-09'],
+        ],
+      },
+      { name: 'Dados', hours: 198, courses: [
+        ['Business Intelligence: trabalhando com Data Warehouse', 12, '2022-10', '2023-05'],
+        ['Excel: simulação e análise de cenários', 6, '2022-09', '2022-09'],
+        ['Análise de dados: cálculos, padrões e estratégias com Excel', 6, '2022-09', '2022-09'],
+        ['Excel procv: lógica booleana e busca por valores', 12, '2022-09', '2022-09'],
+        ['Excel: tabelas dinâmicas e dashboards', 10, '2022-09', '2022-09'],
+        ['Excel: criação de macros e automatização de tarefas', 12, '2022-09', '2022-09'],
+        ['Excel: personalizando e automatizando tarefas com VBA', 8, '2022-08', '2022-08'],
+        ['Power BI Desktop: tratamento de dados no Power Query', 8, '2022-10', '2023-01'],
+        ['Excel VBA: automatize tarefas diárias mesmo não sendo programador', 8, '2022-09', '2022-09'],
+        ['Excel VBA: criando Formulários para facilitar a entrada de dados nas planilhas', 8, '2022-08', '2022-09'],
+        ['Excel VBA 3: criando conexão com o Outlook Application', 10, '2022-09', '2022-09'],
+        ['Excel VBA 4: criando conexão com Access', 10, '2022-09', '2022-09'],
+        ['Power BI Desktop: construindo meu primeiro dashboard', 8, '2022-09', '2022-10'],
+        ['Dashboard com Power BI: visualizando dados', 8, '2022-10', '2022-12'],
+        ['Modelagem de banco de dados: entidades, relacionamentos e atributos', 8, '2023-04', '2023-07'],
+        ['Modelagem de banco de dados relacional: modelagem lógica e física', 8, '2023-07', '2023-08'],
+        ['Modelagem de banco de dados relacional: normalização', 6, '2023-08', '2023-08'],
+        ['Python para Dados: primeiros passos', 10, '2023-07', '2023-09'],
+        ['Python para Dados: trabalhando com funções, estruturas de dados e exceções', 8, '2023-07', '2023-10'],
+        ['Pandas: conhecendo a biblioteca', 8, '2023-07', '2023-11'],
+        ['Pandas I/O: trabalhando com diferentes formatos de arquivos', 8, '2023-07', '2024-02'],
+        ['Regressão: aprimorando os resultados com XGBoost', 8, '2025-05', '2025-05'],
+        ['Machine Learning: classificação com SKLearn', 8, '2025-04', '2025-04'],
+      ] },
+      { name: 'DevOps', hours: 14, courses: [
+        ['NGINX: servidor Web, Proxy Reverso e API Gateway', 6, '2024-07', '2024-07'],
+        ['NGINX Parte 2: performance, FastCGI e HTTPS', 8, '2024-07', '2024-07'],
+      ] },
+      { name: 'Inteligência Artificial', hours: 16, courses: [
+        ['GitHub Copilot e ChatGPT: impulsionando seu desenvolvimento com IA', 8, '2023-06', '2023-08'],
+        ['Excel com IA: mapeando e evoluindo processos', 8, '2023-08', '2023-09'],
+      ] },
+      { name: 'UX & Design', hours: 8, courses: [
+        ['Figma: Conhecendo o programa', 8, '2025-12', '2025-12'],
+      ] },
+      { name: 'Front-end', hours: 2, courses: [
+        ['Carreira Desenvolvedor(a) Front-end React: boas-vindas e primeiros passos', 2, '2025-10', '2025-11'],
+      ] },
+      { name: 'Inglês', hours: 4, courses: [
+        ['Inglês para devs: Meeting - Creating and embedding contact forms for a client', 4, '2022-09', '2022-10'],
+      ] },
+      { name: 'Imersão Engenharia de Software: Dev na Era da IA', hours: 4, date: '2026-11', courses: [
+        ['Imersão Engenharia de Software: Dev na Era da IA', 4, null, null],
+      ] },
+    ];
+    const expectedNames = expectedGroups.map(group => group.name);
     const alura = cvData.certifications.filter(certification => certification.provider === 'Alura');
-    expect(alura.map(certification => certification.name.pt)).toEqual([
-      'Trilha Django REST Framework', 'Back-end', 'Dados', 'DevOps', 'Inteligência Artificial',
-      'UX & Design', 'Front-end', 'Inglês', 'Imersão Engenharia de Software: Dev na Era da IA',
-    ]);
-    expect(alura.map(certification => certification.hours)).toEqual([30, 127, 198, 14, 16, 8, 2, 4, 4]);
-    for (const group of alura) {
-      expect(group.credentialUrl).toBe('https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8');
-      if (group.name.pt === 'Front-end') expect(group.courses).toEqual([]);
-      else expect(group.courses?.length).toBeGreaterThan(0);
-      for (const lang of LANGUAGES) expect(group.name[lang]).toBeTruthy();
-    }
-    expect(alura.find(group => group.name.pt === 'Trilha Django REST Framework')?.period).toEqual({ start: '2024-07', end: '2025-09' });
-    expect(alura.find(group => group.name.pt === 'Dados')?.period).toEqual({ start: '2023-04', end: '2025-05' });
-    expect(alura.find(group => group.name.pt === 'DevOps')?.period).toEqual({ start: '2024-07', end: '2024-07' });
-    expect(alura.find(group => group.name.pt === 'Inteligência Artificial')?.period).toEqual({ start: '2023-06', end: '2023-09' });
-    expect(alura.find(group => group.name.pt === 'UX & Design')?.period).toEqual({ start: '2025-12', end: '2025-12' });
-    expect(alura.find(group => group.name.pt === 'Inglês')?.period).toEqual({ start: '2022-09', end: '2022-10' });
-    expect(alura.find(group => group.name.pt === 'Back-end')?.period).toBeUndefined();
-    expect(alura.find(group => group.name.pt === 'Front-end')?.period).toBeUndefined();
-    expect(alura.find(group => group.name.pt.startsWith('Imersão'))?.period).toBeUndefined();
+    expect(alura.map(group => group.name.pt)).toEqual(expectedNames);
+    const certificateUrl = 'https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8';
 
-    const courseNames = alura.flatMap(group => group.courses?.map(course => course.pt) ?? []);
-    for (const name of ['Excel com IA: mapeando e evoluindo processos', 'Figma: Conhecendo o programa', 'NGINX servidor Web, Proxy Reverso e API Gateway']) {
-      expect(courseNames).toContain(name);
-    }
-    expect(Object.fromEntries(alura.map(group => [group.name.pt, group.courses?.map(course => course.pt)]))).toEqual({
-      'Trilha Django REST Framework': ['Django REST Framework: crie APIs com Python'],
-      'Back-end': ['Python', 'OO', 'Collections', 'API com Django 3 x3', 'TDD', 'Django templates/persistência', 'Git e GitHub'],
-      'Dados': ['BI Data Warehouse', 'Excel: cenários, análise, PROCV, tabelas dinâmicas, macros e VBA (5 cursos)', 'Power BI (3 cursos)', 'Modelagem de banco de dados (3 cursos)', 'Python para Dados (2 cursos)', 'Pandas (2 cursos)', 'XGBoost', 'Machine Learning: classificação com Scikit-learn'],
-      'DevOps': ['NGINX servidor Web, Proxy Reverso e API Gateway', 'NGINX Parte 2: performance, FastCGI e HTTPS'],
-      'Inteligência Artificial': ['GitHub Copilot e ChatGPT', 'Excel com IA: mapeando e evoluindo processos'],
-      'UX & Design': ['Figma: Conhecendo o programa'],
-      'Front-end': [],
-      'Inglês': ['Inglês para devs: Meeting'],
-      'Imersão Engenharia de Software: Dev na Era da IA': ['Imersão Engenharia de Software: Dev na Era da IA'],
-    });
-    for (const name of ['Data Science & Machine Learning (198h)', 'Python & Django REST Framework (157h)', 'Excel com IA', 'Git e GitHub']) {
-      expect(names).not.toContain(name);
-    }
-    for (const name of ['Red Hat OpenShift (Containers/Podman) DO188', 'Red Hat Enterprise Linux Automation with Ansible RH294', 'AWS Academy Cloud Architecting', 'Latinoware 2014', 'Latinoware 2025 (28h)', 'Techstars Startup Weekend Videira 2025']) {
-      expect(names).toContain(name);
+    for (const expected of expectedGroups) {
+      const group = alura.find(item => item.name.pt === expected.name)!;
+      expect(group.credentialUrl).toBe(certificateUrl);
+      expect(group.hours).toBe(expected.hours);
+      expect(group.courses).toHaveLength(expected.courses.length);
+      expect(group.courses.map(course => course.pt)).toEqual(expected.courses.map(([name]) => name));
+      expect(group.courses.reduce((sum, course) => sum + course.hours, 0)).toBe(group.hours);
+      expect(group.date).toBe(expected.date);
+
+      const expectedCoursePeriods = expected.courses.map(([, , start, end]) => start && end ? { start, end } : undefined);
+      expect(group.courses.map(course => course.period)).toEqual(expectedCoursePeriods);
+      const datedCourses = expected.courses.filter(([, , start, end]) => start && end);
+      if (datedCourses.length) {
+        const starts = datedCourses.map(([, , start]) => start!).sort();
+        const ends = datedCourses.map(([, , , end]) => end!).sort();
+        expect(group.period).toEqual({ start: starts[0], end: ends.at(-1) });
+      } else {
+        expect(group.period).toBeUndefined();
+      }
+      for (const course of group.courses) {
+        expect(course.en).toBe(course.pt);
+        expect(course.es).toBe(course.pt);
+      }
     }
   });
 
@@ -347,8 +406,7 @@ describe('cv.json schema validation', () => {
   it('has localized, grouped Alura course lists with official Portuguese names', () => {
     const alura = cvData.certifications.filter(certification => certification.provider === 'Alura');
     for (const group of alura) {
-      if (group.name.pt === 'Front-end') expect(group.courses).toEqual([]);
-      else expect(group.courses?.length).toBeGreaterThan(0);
+      expect(group.courses?.length).toBeGreaterThan(0);
       for (const course of group.courses ?? []) {
         expect(course.pt).toBeTruthy();
         expect(course.en).toBeTruthy();
