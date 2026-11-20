@@ -56,9 +56,9 @@
   },
   "summary": {
     "data-engineer": {
-      "pt": "Solucionador de problemas com atuação de ponta a ponta em dados, backend, DevOps e gestão de tecnologia. Founder & CEO da Optimizr, onde entrego automação, BI e software sob medida para empresas; antes, por três anos e meio na CPEL, automatizei processos industriais com Python, Power BI e VBA. Trabalho com Python, Django, Java/Spring Boot, React/TypeScript, Docker, NGINX e Ansible, sempre ligando a necessidade do negócio à solução técnica.",
-      "en": "End-to-end problem solver across data, backend, DevOps, and technology management. Founder & CEO at Optimizr, where I deliver automation, BI, and custom software for businesses; previously, during three and a half years at CPEL, I automated industrial processes with Python, Power BI, and VBA. I work with Python, Django, Java/Spring Boot, React/TypeScript, Docker, NGINX, and Ansible, connecting business needs to technical solutions.",
-      "es": "Solucionador de problemas de punta a punta en datos, backend, DevOps y gestión de tecnología. Founder & CEO de Optimizr, donde entrego automatización, BI y software a medida para empresas; antes, durante tres años y medio en CPEL, automaticé procesos industriales con Python, Power BI y VBA. Trabajo con Python, Django, Java/Spring Boot, React/TypeScript, Docker, NGINX y Ansible, conectando las necesidades del negocio con soluciones técnicas."
+      "pt": "Profissional com ampla experiência em análise de dados, engenharia de software e automação industrial. Especializado no uso de Python, Power BI, SQL, Django, NGINX e práticas DevOps, com foco na otimização de processos, eficiência operacional e entrega de soluções estratégicas. Proativo, com sólida capacidade de liderança e trabalho em equipe, busca contribuir para projetos inovadores e desafiadores.",
+      "en": "Professional with extensive experience in data analysis, software engineering, and industrial automation. Specialized in Python, Power BI, SQL, Django, NGINX, and DevOps practices, with a focus on process optimization, operational efficiency, and delivering strategic solutions. Proactive with solid leadership capabilities and teamwork skills, seeking to contribute to innovative and challenging projects.",
+      "es": "Full Stack Data Engineer y Founder con historial de entrega de soluciones tecnológicas end-to-end. Especialista en combinar ingeniería de software (Python, Django, NGINX), automatización DevOps e inteligencia de datos para resolver cuellos de botella de negocios. Redujo costos operacionales industriales en hasta un 70% al diseñar sistemas de control automatizados. Sólida experiencia en la construcción de pipelines de Machine Learning reproducibles, aprovechando la visión de negocios para crear arquitecturas escalables que generan impacto financiero y operacional directo."
     },
     "backend": {
       "pt": "Desenvolvedor backend com atuação em soluções de software para empresas e automação de processos industriais. Trabalho com Python, Django REST Framework, Java e Spring Boot, além de React, TypeScript e Docker, conectando necessidades de negócio à implementação técnica.",
@@ -321,9 +321,9 @@
           ]
         },
         {
-          "pt": "Atendi diretamente a 4 clientes corporativos e zerei o tempo de espera na geração de relatórios por meio do desenvolvimento de soluções de dados integradas.",
-          "en": "Served 4 corporate clients directly and eliminated report generation wait time by developing integrated data solutions.",
-          "es": "Atendí directamente a 4 clientes corporativos y eliminé el tiempo de espera en la generación de informes mediante el desarrollo de soluciones de datos integradas.",
+          "pt": "Atendi diretamente clientes corporativos e zerei o tempo de espera na geração de relatórios por meio do desenvolvimento de soluções de dados integradas.",
+          "en": "Served corporate clients directly and eliminated report generation wait time by developing integrated data solutions.",
+          "es": "Atendí directamente a clientes corporativos y eliminé el tiempo de espera en la generación de informes mediante el desarrollo de soluciones de datos integradas.",
           "roles": [
             "data-engineer",
             "backend",
@@ -331,9 +331,9 @@
           ]
         },
         {
-          "pt": "Desenvolvi e coloquei em produção a plataforma de delivery da Baianos Conveniência, com catálogo de mais de 200 produtos, ofertas e mapa de entrega.",
-          "en": "Developed and launched the Baianos Conveniência delivery platform, with a catalog of more than 200 products, offers, and a delivery map.",
-          "es": "Desarrollé y puse en producción la plataforma de delivery de Baianos Conveniência, con un catálogo de más de 200 productos, ofertas y mapa de entrega.",
+          "pt": "Desenvolvi e coloquei em produção uma plataforma de delivery para um cliente do varejo de conveniência, com catálogo de mais de 200 produtos, ofertas e mapa de entrega.",
+          "en": "Developed and launched a delivery platform for a convenience retail client, with a catalog of more than 200 products, offers, and a delivery map.",
+          "es": "Desarrollé y puse en producción una plataforma de delivery para un cliente del comercio minorista de conveniencia, con un catálogo de más de 200 productos, ofertas y mapa de entrega.",
           "roles": [
             "data-engineer",
             "backend"
@@ -538,9 +538,32 @@
         "XGBoost"
       ],
       "description": {
-        "pt": "Pipelines completos de ML e DL (ANN, CNN, RNN, PINNs, SVM, XGBoost), com reprodutibilidade via requirements.txt e environment.yml.",
-        "en": "Complete ML and DL pipelines (ANN, CNN, RNN, PINNs, SVM, XGBoost) with reproducibility via requirements.txt and environment.yml.",
-        "es": "Pipelines completos de ML y DL (ANN, CNN, RNN, PINNs, SVM, XGBoost), con reproducibilidad mediante requirements.txt y environment.yml."
+        "pt": "Pipelines completos de ML e DL (ANN, CNN, RNN, PINNs, SVM, XGBoost).",
+        "en": "Complete ML and DL pipelines (ANN, CNN, RNN, PINNs, SVM, XGBoost).",
+        "es": "Pipelines completos de ML y DL (ANN, CNN, RNN, PINNs, SVM, XGBoost)."
+      }
+    },
+    {
+      "name": "Implementações de Inteligência Artificial",
+      "nameByLanguage": {
+        "pt": "Implementações de Inteligência Artificial",
+        "en": "Artificial Intelligence Implementations",
+        "es": "Implementaciones de Inteligencia Artificial"
+      },
+      "repo": "github.com/thalesfb/AI",
+      "roles": [
+        "data-engineer",
+        "backend"
+      ],
+      "technologies": [
+        "BFS",
+        "UCS",
+        "DFS"
+      ],
+      "description": {
+        "pt": "Esboços e implementações didáticas de IA no IFC Videira, com buscas BFS, UCS e DFS e jogos como o puzzle de 8 e jogo da velha.",
+        "en": "Educational AI sketches and implementations for IFC Videira, with BFS, UCS, and DFS searches and games such as the 8-puzzle and tic-tac-toe.",
+        "es": "Bocetos e implementaciones didácticas de IA en IFC Videira, con búsquedas BFS, UCS y DFS y juegos como el puzzle de 8 y el tres en raya."
       }
     },
     {

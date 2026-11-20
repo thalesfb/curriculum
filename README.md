@@ -60,8 +60,8 @@
 
 - Node.js `^22.23.4 || >=24.10.0`
 - npm
-- Microsoft Word on Windows (only when regenerating the downloadable PDFs)
-- Python 3.10+ and PowerShell 7 (only when regenerating the downloadable PDFs)
+- Python 3.12+ and Typst 0.15.1 (only when regenerating the downloadable PDFs)
+- Poppler tools (`pdfinfo`, `pdffonts`, `pdftotext`) for local PDF validation
 
 ### Development
 
@@ -79,13 +79,11 @@ npm run dev        # http://localhost:4321
 | `npm run dev` | Dev server with hot reload |
 | `npm run build` | Static build → `dist/` |
 | `npm run preview` | Preview production build |
-| `npm test` | Run 37 Vitest tests |
+| `npm test` | Run Vitest tests |
 | `npm run test:watch` | Tests in watch mode |
-| `npm run generate:pdfs` | Generate three local PDF drafts from `data/cv.json` |
+| `npm run cv:pdf` | Generate three local PDF drafts from `data/cv.json` |
 
-The PDF generator fills the DOCX template and exports through Microsoft Word on Windows. It writes to a temporary folder by default and is not run by CI or the site build. The published PDFs are the approved artifacts; the DOCX and `data/cv.json` do not currently reproduce their approved content. To intentionally replace `public/refs`, pass both `--output-dir public/refs` and `--publish-public-refs` after content review. To inspect an overflow preview without changing published PDFs, run `npm run generate:pdfs -- --preview --output-dir <folder>`.
-
-There is no Markdown CV generator in the current repository.
+The Typst generator writes to a temporary folder by default. After reviewing all three PDFs (two pages each in the current release), replace `public/refs` only with `npm run cv:pdf -- --publish-public-refs`. The site build and CI never publish or commit generated PDFs. See [ADR-0011](docs/adr/0011-geracao-pdf-cv-typst.md) for fidelity criteria and the [PDF proposal](docs/proposals/0001-cv-pdf.md) for the decision rationale. Historical DOCX templates remain in `refs/template/` but are not used by the generator.
 
 ---
 
@@ -139,11 +137,12 @@ curriculum/
 ├── .github/workflows/     CI/CD pipelines (ci, build, release)
 ├── data/cv.json           Single source of truth for CV content
 ├── docs/
-│   ├── adr/               10 Architecture Decision Records
+│   ├── adr/               11 Architecture Decision Records
 │   ├── guides/            Figma design system guide
 │   ├── DEPLOYMENT.md      Deploy & NGINX docs
 │   ├── DEVELOPMENT.md     Dev setup & workflows
 │   └── SECURITY.md        Security practices
+├── cv/                    Typst CV template, vendored imprecv, and Libertinus Serif fonts
 ├── public/
 │   ├── icons/             Tech skill icons (SVG)
 │   ├── img/               UI icons + profile photo
@@ -157,6 +156,7 @@ curriculum/
 │   ├── middleware.ts      Security headers
 │   ├── pages/             index + /pt/ /en/ /es/
 │   └── styles/            Design tokens + global CSS
+├── scripts/build_cv_pdf.py Explicit local PDF generation and validation
 ├── AGENTS.md              AI agent governance
 ├── astro.config.mjs       Astro + sitemap config
 └── package.json           Scripts + dependencies
@@ -169,7 +169,7 @@ curriculum/
 | Doc | Content |
 | --- | ------- |
 | [AGENTS.md](AGENTS.md) | AI agent governance & project rules |
-| [docs/adr/](docs/adr/) | 10 Architecture Decision Records |
+| [docs/adr/](docs/adr/) | 11 Architecture Decision Records |
 | [docs/guides/figma-design-system.md](docs/guides/figma-design-system.md) | Figma design system guide |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Dev setup & workflows |
 | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | CI/CD & NGINX config |
@@ -180,16 +180,12 @@ curriculum/
 ## 🧪 Testing
 
 ```bash
-npm test             # 37 tests across 4 files
+npm test
 npm run test:watch   # Watch mode
+python -m unittest discover -s scripts/tests -v
 ```
 
-| Test File | Tests | Coverage |
-| --------- | ----- | -------- |
-| `i18n/utils.test.ts` | 15 | getLangFromUrl, useTranslations, useTranslatedPath |
-| `i18n/ui.test.ts` | 6 | Key parity PT/EN/ES, no empty strings |
-| `cv-data.test.ts` | 7 | Schema validation, meta, roles, languages |
-| `build.test.ts` | 9 | Page generation, lang attrs, OG tags, sitemap |
+The Python PDF tests validate two-page output, embedded Libertinus Serif fonts, extracted content, accents, and active links in all three languages. Install Typst 0.15.1 and Poppler locally to run the PDF checks; CI installs both automatically. Without those tools, only the integration tests skip with an explicit reason.
 
 ---
 
@@ -206,3 +202,5 @@ npm run test:watch   # Watch mode
 ## 📄 License
 
 Copyright 2026 Thales Ferreira. All rights reserved.
+
+The vendored CV template is licensed under Apache-2.0 (see `cv/vendor/imprecv/LICENSE` and `NOTICE`). Libertinus Serif is licensed under SIL OFL 1.1 (see `cv/fonts/OFL.txt`).
