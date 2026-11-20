@@ -33,4 +33,27 @@ describe('ui.ts data integrity', () => {
   it('has at least 20 translation keys', () => {
     expect(Object.keys(ui.pt).length).toBeGreaterThanOrEqual(20);
   });
+
+  it('localizes formal education and certification subsection headings', () => {
+    expect([
+      ui.pt['about.education.formal'],
+      ui.en['about.education.formal'],
+      ui.es['about.education.formal'],
+    ]).toEqual(['Formação', 'Education', 'Formación']);
+    expect([
+      ui.pt['about.certifications'],
+      ui.en['about.certifications'],
+      ui.es['about.certifications'],
+    ]).toEqual(['Certificações', 'Certifications', 'Certificaciones']);
+  });
+
+  it('localizes the Lattes contact label and removes the combined education heading', () => {
+    expect([ui.pt['contact.lattes'], ui.en['contact.lattes'], ui.es['contact.lattes']]).toEqual(['Lattes', 'Lattes', 'Lattes']);
+    expect(ui.pt).not.toHaveProperty('about.education');
+    expect(ui.en).not.toHaveProperty('about.education');
+    expect(ui.es).not.toHaveProperty('about.education');
+    expect([ui.pt['about.fullCertificate'], ui.en['about.fullCertificate'], ui.es['about.fullCertificate']]).toEqual([
+      'Certificado completo', 'Full certificate', 'Certificado completo',
+    ]);
+  });
 });

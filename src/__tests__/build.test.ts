@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync, readdirSync } from 'fs';
 import { resolve } from 'path';
 import cvData from '../../data/cv.json';
 
@@ -87,4 +87,120 @@ describe('build output validation', () => {
       expect(html).not.toMatch(/\b(?:Remoto|Remote)\b/);
     }
   });
+
+  it.skipIf(!hasBuild)('separates About overview from responsive education and certification grids', () => {
+    const html = readFileSync(resolve(distDir, 'pt/index.html'), 'utf-8');
+    const overviewStart = html.indexOf('data-about-overview');
+    const learningStart = html.indexOf('data-about-learning');
+    expect(overviewStart).toBeGreaterThan(-1);
+    expect(learningStart).toBeGreaterThan(overviewStart);
+
+    const overview = html.slice(overviewStart, learningStart);
+    expect(overview).toContain('id="about-summary"');
+    expect(overview).not.toContain('data-education-grid');
+    expect(overview).not.toContain('data-certifications-grid');
+    const aboutEnd = html.indexOf('id="services"');
+    const about = html.slice(overviewStart, aboutEnd);
+    const educationGridStart = about.indexOf('data-education-grid');
+    const certificationGridStart = about.indexOf('data-certifications-grid');
+    expect(educationGridStart).toBeGreaterThan(-1);
+    expect(educationGridStart).toBeLessThan(certificationGridStart);
+    expect(about.indexOf('Formação')).toBeLessThan(about.indexOf('Certificações'));
+
+    expect(about).toContain('xl:grid-cols-[3fr_2fr]');
+    const educationGrid = about.slice(educationGridStart, about.indexOf('>', educationGridStart));
+    const certificationGrid = about.slice(certificationGridStart, about.indexOf('>', certificationGridStart));
+    for (const grid of [educationGrid, certificationGrid]) {
+      expect(grid).toContain('grid-cols-1');
+      expect(grid).toContain('md:grid-cols-2');
+      expect(grid).toContain('xl:grid-cols-3');
+    }
+    expect(about).toContain('bg-bg-page');
+    expect(about).not.toContain('bg-white');
+
+    const astroAssets = resolve(distDir, '_astro');
+    const css = readdirSync(astroAssets)
+      .filter(file => file.endsWith('.css'))
+      .map(file => readFileSync(resolve(astroAssets, file), 'utf-8'))
+      .join('\n');
+    expect(css).toContain('.dark');
+    expect(css).toContain('--color-bg-page:#0f172a');
+    expect(css).toContain('@media (width>=48rem)');
+    expect(css).toContain('@media (width>=80rem)');
+    expect(css).toMatch(/\.md\\:grid-cols-2\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)\}/);
+    expect(css).toMatch(/\.xl\\:grid-cols-3\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)\}/);
+    expect(css).toMatch(/\.xl\\:grid-cols-\\\[3fr_2fr\\\]\{grid-template-columns:3fr 2fr\}/);
+  });
+
+  it.skipIf(!hasBuild)('renders grouped Alura cards and education without certification status', () => {
+    const expectedHeadings = {
+      pt: ['Formação', 'Certificações'],
+      en: ['Education', 'Certifications'],
+      es: ['Formación', 'Certificaciones'],
+    } as const;
+    const combinedHeadings = ['Educação & Certs', 'Education & Certs', 'Educación y Certs'];
+    const pendingLabels = { pt: 'Em curso', en: 'In progress', es: 'En curso' } as const;
+
+    for (const lang of ['pt', 'en', 'es'] as const) {
+      const html = decodeHtml(readFileSync(resolve(distDir, lang, 'index.html'), 'utf-8'));
+      const learningStart = html.indexOf('data-about-learning');
+      const learning = html.slice(learningStart, html.indexOf('id="services"', learningStart));
+      const educationStart = learning.indexOf('data-education-grid');
+      const certificationsStart = learning.indexOf('data-certifications-grid');
+      const education = learning.slice(educationStart, certificationsStart);
+      const certifications = learning.slice(certificationsStart);
+      expect(learning.indexOf(expectedHeadings[lang][0])).toBeLessThan(learning.indexOf(expectedHeadings[lang][1]));
+      for (const heading of combinedHeadings) expect(learning).not.toContain(heading);
+      expect(html).not.toMatch(/Não informado|Not specified|No especificado|NÃ/);
+      expect(education).not.toContain(pendingLabels[lang]);
+      expect(certifications).toContain('AWS Academy Cloud Architecting');
+      expect(certifications).toContain(pendingLabels[lang]);
+      expect(education).toContain('data-education-period="2012"');
+      expect(education).not.toContain('2012–2012');
+      expect(education).toContain('/logos/mater-salvatoris.webp');
+    }
+
+    const html = decodeHtml(readFileSync(resolve(distDir, 'pt/index.html'), 'utf-8'));
+    const aboutStart = html.indexOf('data-about-learning');
+    const aboutEnd = html.indexOf('id="services"', aboutStart);
+    const certifications = html.slice(aboutStart, aboutEnd).split('data-certifications-grid')[1];
+    expect(certifications).toContain('<details');
+    expect(certifications).toContain('<summary');
+    expect(certifications).toContain('data-alura-group');
+    expect(certifications).toContain('Dados');
+    expect(certifications).toContain('198h');
+    expect(certifications).toContain('Modelagem de banco');
+    expect(certifications).toContain('href="https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8"');
+    expect(certifications).toContain('Latinoware 2014');
+    expect(certifications).toContain('/logos/latinoware.webp');
+    const aluraCourses = cvData.certifications
+      .filter(certification => certification.provider === 'Alura')
+      .flatMap(group => group.courses);
+    expect((certifications.match(/data-alura-course/g) ?? []).length).toBe(aluraCourses.length);
+    for (const course of aluraCourses) {
+      expect(certifications).toContain(course.pt);
+      expect(certifications).toContain(`data-course-hours="${course.hours}"`);
+      if (course.period) {
+        expect(certifications).toContain(`data-course-period="${course.period.start}–${course.period.end}"`);
+      }
+    }
+    expect(certifications.indexOf('AWS Academy Cloud Architecting')).toBeLessThan(certifications.indexOf('Imersão Engenharia de Software: Dev na Era da IA'));
+    expect(certifications.indexOf('Imersão Engenharia de Software: Dev na Era da IA')).toBeLessThan(certifications.indexOf('AWS Academy Graduate – Cloud Foundations'));
+    expect(certifications.lastIndexOf('Latinoware 2014')).toBeGreaterThan(certifications.indexOf('AWS Academy Graduate – Cloud Foundations'));
+    expect(certifications.indexOf('AWS Academy Graduate – Cloud Foundations')).toBeLessThan(certifications.indexOf('UX & Design'));
+    expect(certifications.indexOf('UX & Design')).toBeLessThan(certifications.indexOf('Latinoware 2025 (28h)'));
+    expect(certifications.indexOf('Latinoware 2025 (28h)')).toBeLessThan(certifications.indexOf('Trilha Django REST Framework'));
+    expect(certifications.indexOf('Trilha Django REST Framework')).toBeLessThan(certifications.indexOf('Dados'));
+    expect(certifications.indexOf('Dados')).toBeLessThan(certifications.indexOf('Techstars Startup Weekend Videira 2025'));
+  });
+
+
+  it.skipIf(!hasBuild)('shows the Lattes profile link in every locale', () => {
+    for (const lang of ['pt', 'en', 'es']) {
+      const html = decodeHtml(readFileSync(resolve(distDir, lang, 'index.html'), 'utf-8'));
+      expect(html).toContain('href="http://lattes.cnpq.br/9042504768658064"');
+      expect(html).toContain('>Lattes</a>');
+    }
+  });
+
 });
