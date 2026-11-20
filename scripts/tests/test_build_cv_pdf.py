@@ -310,6 +310,19 @@ class GeneratedPdfTests(unittest.TestCase):
 
 
 class OutputProtectionTests(unittest.TestCase):
+    def test_major_cv_entries_share_one_vertical_spacing_constant(self):
+        template = (ROOT / "cv" / "cv.typ").read_text(encoding="utf-8")
+        self.assertIn("#let item-spacing = 1.25em", template)
+        for section, next_section in (
+            ('== #section("education")', '== #section("experience")'),
+            ('== #section("experience")', '== #section("projects")'),
+            ('== #section("projects")', '== #section("skills")'),
+        ):
+            segment = template[template.index(section):template.index(next_section)]
+            self.assertIn("above: item-spacing", segment, section)
+        self.assertIn("#let course-spacing = 0.25em", template)
+        self.assertIn("#v(course-spacing)", template)
+
     def test_default_output_is_outside_public_refs(self):
         output = resolve_output_dir(None, publish_public_refs=False)
         try:

@@ -6,6 +6,8 @@
 #let localized(value) = if type(value) == dictionary { value.at(lang, default: value.at("pt", default: "")) } else { value }
 #let has-role(item) = item.roles.contains(role)
 #let selected(items) = items.filter(item => has-role(item))
+#let item-spacing = 1.25em
+#let course-spacing = 0.25em
 #let month-name(number) = {
   let pt = ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
   let en = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
@@ -70,30 +72,29 @@
 #let institutions = education-items.map(item => item.institution).dedup()
 #for institution in institutions [
   #let items = education-items.filter(item => item.institution == institution)
-  #block(width: 100%, above: 0.6em, breakable: false)[
+  #block(width: 100%, above: item-spacing, breakable: false)[
     *#institution* #h(1fr) *#localized(items.at(0).location)* \
-    #for item in items [
+    #for (index, item) in items.enumerate() [
+      #if index > 0 [#v(course-spacing)]
       #text(localized(item.degree), style: "italic") #h(1fr) #date-range(item.period) \
-      #v(1pt)
     ]
   ]
 ]
 
 == #section("experience")
 #for item in selected(data.experience) [
-  #block(width: 100%, above: 0.8em, breakable: false)[
+  #block(width: 100%, above: item-spacing, breakable: false)[
     *#item.company* #h(1fr) *#localized(item.location)* \
     #text(localized(item.role), style: "italic") #h(1fr) #date-range(item.period) \
     #for bullet in item.bullets.filter(bullet => has-role(bullet)) [
       - #localized(bullet)
     ]
   ]
-  #v(0.45em)
 ]
 
 == #section("projects")
 #for item in selected(data.projects) [
-  #block(width: 100%, above: 0.6em, breakable: false)[
+  #block(width: 100%, above: item-spacing, breakable: false)[
     #if item.at("repo", default: none) != none [
       *#link("https://" + item.repo)[#localized(item.at("nameByLanguage", default: item.name))]* #h(1fr) #link("https://" + item.repo)[#item.repo]
     ] else [
