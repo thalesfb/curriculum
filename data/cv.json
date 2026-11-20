@@ -52,7 +52,8 @@
         "en": "Frontend Developer | React & Astro | TypeScript & Design Systems",
         "es": "Desarrollador Frontend | React & Astro | TypeScript y Design Systems"
       }
-    }
+    },
+    "lattes": "http://lattes.cnpq.br/9042504768658064"
   },
   "summary": {
     "data-engineer": {
@@ -773,31 +774,305 @@
   "certifications": [
     {
       "name": {
-        "pt": "Data Science & Machine Learning (198h)",
-        "en": "Data Science & Machine Learning (198h)",
-        "es": "Data Science & Machine Learning (198h)"
+        "pt": "Trilha Django REST Framework",
+        "en": "Django REST Framework Learning Path",
+        "es": "Ruta de aprendizaje de Django REST Framework"
       },
       "provider": "Alura",
-      "details": "Scikit-learn, XGBoost, Pandas, pipelines",
+      "hours": 30,
+      "courses": [
+        {
+          "pt": "Django REST Framework: crie APIs com Python",
+          "en": "Django REST Framework: crie APIs com Python",
+          "es": "Django REST Framework: crie APIs com Python"
+        }
+      ],
+      "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
       "roles": [
-        "data-engineer"
+        "data-engineer",
+        "backend",
+        "devops",
+        "management",
+        "frontend"
+      ],
+      "period": {
+        "start": "2024-07",
+        "end": "2025-09"
+      }
+    },
+    {
+      "name": {
+        "pt": "Back-end",
+        "en": "Back-end",
+        "es": "Back-end"
+      },
+      "provider": "Alura",
+      "hours": 127,
+      "courses": [
+        {
+          "pt": "Python",
+          "en": "Python",
+          "es": "Python"
+        },
+        {
+          "pt": "OO",
+          "en": "OO",
+          "es": "OO"
+        },
+        {
+          "pt": "Collections",
+          "en": "Collections",
+          "es": "Collections"
+        },
+        {
+          "pt": "API com Django 3 x3",
+          "en": "API com Django 3 x3",
+          "es": "API com Django 3 x3"
+        },
+        {
+          "pt": "TDD",
+          "en": "TDD",
+          "es": "TDD"
+        },
+        {
+          "pt": "Django templates/persistência",
+          "en": "Django templates/persistência",
+          "es": "Django templates/persistência"
+        },
+        {
+          "pt": "Git e GitHub",
+          "en": "Git e GitHub",
+          "es": "Git e GitHub"
+        }
+      ],
+      "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
+      "roles": [
+        "data-engineer",
+        "backend",
+        "devops",
+        "management",
+        "frontend"
       ]
     },
     {
       "name": {
-        "pt": "Python & Django REST Framework (157h)",
-        "en": "Python & Django REST Framework (157h)",
-        "es": "Python & Django REST Framework (157h)"
+        "pt": "Dados",
+        "en": "Data",
+        "es": "Datos"
       },
       "provider": "Alura",
-      "details": "TDD, validações, implantação na AWS",
-      "detailsByLanguage": {
-        "en": "TDD, validations, AWS deployment",
-        "es": "TDD, validaciones, despliegue en AWS"
-      },
+      "hours": 198,
+      "courses": [
+        {
+          "pt": "BI Data Warehouse",
+          "en": "BI Data Warehouse",
+          "es": "BI Data Warehouse"
+        },
+        {
+          "pt": "Excel: cenários, análise, PROCV, tabelas dinâmicas, macros e VBA (5 cursos)",
+          "en": "Excel: cenários, análise, PROCV, tabelas dinâmicas, macros e VBA (5 cursos)",
+          "es": "Excel: cenários, análise, PROCV, tabelas dinâmicas, macros e VBA (5 cursos)"
+        },
+        {
+          "pt": "Power BI (3 cursos)",
+          "en": "Power BI (3 cursos)",
+          "es": "Power BI (3 cursos)"
+        },
+        {
+          "pt": "Modelagem de banco de dados (3 cursos)",
+          "en": "Modelagem de banco de dados (3 cursos)",
+          "es": "Modelagem de banco de dados (3 cursos)"
+        },
+        {
+          "pt": "Python para Dados (2 cursos)",
+          "en": "Python para Dados (2 cursos)",
+          "es": "Python para Dados (2 cursos)"
+        },
+        {
+          "pt": "Pandas (2 cursos)",
+          "en": "Pandas (2 cursos)",
+          "es": "Pandas (2 cursos)"
+        },
+        {
+          "pt": "XGBoost",
+          "en": "XGBoost",
+          "es": "XGBoost"
+        },
+        {
+          "pt": "Machine Learning: classificação com Scikit-learn",
+          "en": "Machine Learning: classificação com Scikit-learn",
+          "es": "Machine Learning: classificação com Scikit-learn"
+        }
+      ],
+      "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
       "roles": [
         "data-engineer",
+        "management"
+      ],
+      "period": {
+        "start": "2023-04",
+        "end": "2025-05"
+      }
+    },
+    {
+      "name": {
+        "pt": "DevOps",
+        "en": "DevOps",
+        "es": "DevOps"
+      },
+      "provider": "Alura",
+      "hours": 14,
+      "courses": [
+        {
+          "pt": "NGINX servidor Web, Proxy Reverso e API Gateway",
+          "en": "NGINX servidor Web, Proxy Reverso e API Gateway",
+          "es": "NGINX servidor Web, Proxy Reverso e API Gateway"
+        },
+        {
+          "pt": "NGINX Parte 2: performance, FastCGI e HTTPS",
+          "en": "NGINX Parte 2: performance, FastCGI e HTTPS",
+          "es": "NGINX Parte 2: performance, FastCGI e HTTPS"
+        }
+      ],
+      "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
+      "roles": [
+        "devops",
         "backend"
+      ],
+      "period": {
+        "start": "2024-07",
+        "end": "2024-07"
+      }
+    },
+    {
+      "name": {
+        "pt": "Inteligência Artificial",
+        "en": "Artificial Intelligence",
+        "es": "Inteligencia Artificial"
+      },
+      "provider": "Alura",
+      "hours": 16,
+      "courses": [
+        {
+          "pt": "GitHub Copilot e ChatGPT",
+          "en": "GitHub Copilot e ChatGPT",
+          "es": "GitHub Copilot e ChatGPT"
+        },
+        {
+          "pt": "Excel com IA: mapeando e evoluindo processos",
+          "en": "Excel com IA: mapeando e evoluindo processos",
+          "es": "Excel com IA: mapeando e evoluindo processos"
+        }
+      ],
+      "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
+      "roles": [
+        "data-engineer",
+        "backend",
+        "devops",
+        "management",
+        "frontend"
+      ],
+      "period": {
+        "start": "2023-06",
+        "end": "2023-09"
+      }
+    },
+    {
+      "name": {
+        "pt": "UX & Design",
+        "en": "UX & Design",
+        "es": "UX & Diseño"
+      },
+      "provider": "Alura",
+      "hours": 8,
+      "courses": [
+        {
+          "pt": "Figma: Conhecendo o programa",
+          "en": "Figma: Conhecendo o programa",
+          "es": "Figma: Conhecendo o programa"
+        }
+      ],
+      "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
+      "roles": [
+        "data-engineer",
+        "backend",
+        "devops",
+        "management",
+        "frontend"
+      ],
+      "period": {
+        "start": "2025-12",
+        "end": "2025-12"
+      }
+    },
+    {
+      "name": {
+        "pt": "Front-end",
+        "en": "Front-end",
+        "es": "Front-end"
+      },
+      "provider": "Alura",
+      "hours": 2,
+      "courses": [],
+      "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
+      "roles": [
+        "data-engineer",
+        "backend",
+        "devops",
+        "management",
+        "frontend"
+      ]
+    },
+    {
+      "name": {
+        "pt": "Inglês",
+        "en": "English",
+        "es": "Inglés"
+      },
+      "provider": "Alura",
+      "hours": 4,
+      "courses": [
+        {
+          "pt": "Inglês para devs: Meeting",
+          "en": "Inglês para devs: Meeting",
+          "es": "Inglês para devs: Meeting"
+        }
+      ],
+      "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
+      "roles": [
+        "data-engineer",
+        "backend",
+        "devops",
+        "management",
+        "frontend"
+      ],
+      "period": {
+        "start": "2022-09",
+        "end": "2022-10"
+      }
+    },
+    {
+      "name": {
+        "pt": "Imersão Engenharia de Software: Dev na Era da IA",
+        "en": "Software Engineering Immersion: Dev in the Age of AI",
+        "es": "Inmersión en Ingeniería de Software: Desarrollo en la Era de la IA"
+      },
+      "provider": "Alura",
+      "hours": 4,
+      "courses": [
+        {
+          "pt": "Imersão Engenharia de Software: Dev na Era da IA",
+          "en": "Imersão Engenharia de Software: Dev na Era da IA",
+          "es": "Imersão Engenharia de Software: Dev na Era da IA"
+        }
+      ],
+      "credentialUrl": "https://cursos.alura.com.br/user/thalesfb/fullCertificate/1ec4275c873ec751eabead5b304ef7f8",
+      "roles": [
+        "data-engineer",
+        "backend",
+        "devops",
+        "management",
+        "frontend"
       ]
     },
     {
@@ -825,146 +1100,12 @@
     },
     {
       "name": {
-        "pt": "NGINX Web Server, Reverse Proxy e API Gateway",
-        "en": "NGINX Web Server, Reverse Proxy and API Gateway",
-        "es": "NGINX Web Server, Reverse Proxy y API Gateway"
-      },
-      "provider": "Alura",
-      "roles": [
-        "devops",
-        "backend"
-      ]
-    },
-    {
-      "name": {
-        "pt": "Modelagem de Banco de Dados",
-        "en": "Database Modeling",
-        "es": "Modelado de Bases de Datos"
-      },
-      "provider": "Alura",
-      "roles": [
-        "data-engineer",
-        "backend"
-      ]
-    },
-    {
-      "name": {
-        "pt": "Excel e VBA avançado",
-        "en": "Advanced Excel & VBA",
-        "es": "Excel y VBA Avanzado"
-      },
-      "provider": "Alura",
-      "roles": [
-        "data-engineer",
-        "management"
-      ]
-    },
-    {
-      "name": {
-        "pt": "Power BI (Dashboards, Análise de Tendências)",
-        "en": "Power BI (Dashboards, Trend Analysis)",
-        "es": "Power BI (Dashboards, Análisis de Tendencias)"
-      },
-      "provider": "Alura",
-      "roles": [
-        "data-engineer",
-        "management"
-      ]
-    },
-    {
-      "name": {
-        "pt": "GitHub Copilot & ChatGPT para automação",
-        "en": "GitHub Copilot & ChatGPT for automation",
-        "es": "GitHub Copilot & ChatGPT para automatización"
-      },
-      "provider": "Alura",
-      "roles": [
-        "data-engineer",
-        "backend",
-        "devops",
-        "management"
-      ]
-    },
-    {
-      "name": {
-        "pt": "Excel com IA",
-        "en": "Excel with AI",
-        "es": "Excel con IA"
-      },
-      "provider": "Não informado",
-      "details": "Aplicação de IA em Excel para otimização de processos.",
-      "roles": [
-        "data-engineer",
-        "backend",
-        "devops",
-        "management",
-        "frontend"
-      ],
-      "detailsByLanguage": {
-        "en": "Applying AI in Excel to optimize processes.",
-        "es": "Aplicación de IA en Excel para optimizar procesos."
-      },
-      "providerByLanguage": {
-        "en": "Not specified",
-        "es": "No especificado"
-      }
-    },
-    {
-      "name": {
-        "pt": "Imersão Engenharia de Software: Dev na Era da IA",
-        "en": "Software Engineering Immersion: Dev in the Age of AI",
-        "es": "Inmersión en Ingeniería de Software: Desarrollo en la Era de la IA"
-      },
-      "provider": "Alura",
-      "date": "2026-11",
-      "roles": [
-        "data-engineer",
-        "backend",
-        "devops",
-        "management",
-        "frontend"
-      ]
-    },
-    {
-      "name": {
         "pt": "AWS Academy Graduate – Cloud Foundations",
         "en": "AWS Academy Graduate – Cloud Foundations",
         "es": "AWS Academy Graduate – Cloud Foundations"
       },
       "provider": "AWS Academy",
       "date": "2026-09",
-      "roles": [
-        "data-engineer",
-        "backend",
-        "devops",
-        "management",
-        "frontend"
-      ]
-    },
-    {
-      "name": {
-        "pt": "Django REST Framework",
-        "en": "Django REST Framework",
-        "es": "Django REST Framework"
-      },
-      "provider": "Alura",
-      "date": "2025-09",
-      "roles": [
-        "data-engineer",
-        "backend",
-        "devops",
-        "management",
-        "frontend"
-      ]
-    },
-    {
-      "name": {
-        "pt": "Git e GitHub",
-        "en": "Git and GitHub",
-        "es": "Git y GitHub"
-      },
-      "provider": "Alura",
-      "date": "2025-09",
       "roles": [
         "data-engineer",
         "backend",
