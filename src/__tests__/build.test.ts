@@ -68,8 +68,8 @@ describe('build output validation', () => {
       expect(html).toContain('2023–2026');
       expect(html).toContain('AWS Academy Cloud Architecting');
       expect(html).toContain(({ pt: 'Em curso', en: 'In progress', es: 'En curso' } as const)[lang as 'pt' | 'en' | 'es']);
-      expect(html).toContain('data-roles=');
-      expect(html).toContain('cv:role-change');
+      expect(html).not.toContain('cv:role-change');
+      expect(html).not.toContain('id="role-selector"');
       for (const project of cvData.projects.filter(entry => [
         'Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais',
         'Infraestrutura de comunicação industrial: implantação e integração de redes e protocolos para automação de processos',
@@ -80,10 +80,11 @@ describe('build output validation', () => {
     }
   });
 
-  it.skipIf(!hasBuild)('does not expose an Optimizr location in the built locale pages', () => {
+  it.skipIf(!hasBuild)('renders OPTIMIZR and CPEL in Experience without exposing an empty or remote location', () => {
     for (const lang of ['pt', 'en', 'es']) {
       const html = decodeHtml(readFileSync(resolve(distDir, lang, 'index.html'), 'utf-8'));
-      expect(html).not.toContain('OPTIMIZR');
+      expect(html).toContain('OPTIMIZR');
+      expect(html).toContain('CPEL');
       expect(html).not.toMatch(/\b(?:Remoto|Remote)\b/);
     }
   });
@@ -99,7 +100,7 @@ describe('build output validation', () => {
     expect(overview).toContain('id="about-summary"');
     expect(overview).not.toContain('data-education-grid');
     expect(overview).not.toContain('data-certifications-grid');
-    const aboutEnd = html.indexOf('id="services"');
+    const aboutEnd = html.indexOf('id="experience"') > -1 ? html.indexOf('id="experience"') : html.indexOf('id="services"');
     const about = html.slice(overviewStart, aboutEnd);
     const educationGridStart = about.indexOf('data-education-grid');
     const certificationGridStart = about.indexOf('data-certifications-grid');
@@ -144,7 +145,8 @@ describe('build output validation', () => {
     for (const lang of ['pt', 'en', 'es'] as const) {
       const html = decodeHtml(readFileSync(resolve(distDir, lang, 'index.html'), 'utf-8'));
       const learningStart = html.indexOf('data-about-learning');
-      const learning = html.slice(learningStart, html.indexOf('id="services"', learningStart));
+      const sectionEnd = html.indexOf('id="experience"') > -1 ? html.indexOf('id="experience"') : html.indexOf('id="services"');
+      const learning = html.slice(learningStart, sectionEnd);
       const educationStart = learning.indexOf('data-education-grid');
       const certificationsStart = learning.indexOf('data-certifications-grid');
       const education = learning.slice(educationStart, certificationsStart);
@@ -162,7 +164,7 @@ describe('build output validation', () => {
 
     const html = decodeHtml(readFileSync(resolve(distDir, 'pt/index.html'), 'utf-8'));
     const aboutStart = html.indexOf('data-about-learning');
-    const aboutEnd = html.indexOf('id="services"', aboutStart);
+    const aboutEnd = html.indexOf('id="experience"') > -1 ? html.indexOf('id="experience"', aboutStart) : html.indexOf('id="services"', aboutStart);
     const certifications = html.slice(aboutStart, aboutEnd).split('data-certifications-grid')[1];
     expect(certifications).toContain('<details');
     expect(certifications).toContain('<summary');

@@ -34,7 +34,7 @@ Manter a linguagem visual atual e aplicar as seguintes mudanças aprovadas:
 - Exibir Projetos e Serviços em grades, sem carrossel e sem filtro por cargo. Os textos de Serviços permanecem em `data/cv.json` nas três línguas. O site usa a role fixa `data-engineer`; não há seletor de role.
 - Manter Google Analytics conforme ADR-0010.
 - Usar a união dos projetos selecionados no Figma anterior com os projetos de `data/cv.json`, ordenada por evidência de atividade (commits) e qualidade/completude do README no GitHub. A ordem aprovada é: (1) TCC `ccw` — 257 commits; (2) `machine_learning` — 107; (3) `library` — 91, Java/Spring; (4) `digital-image-processing` — 40, README detalhado e CI; (5) `AI`; (6–7) os dois projetos de pesquisa do IFC. `infra_web` (9 commits e README vazio) e `Data-Structure` (README vazio) ficam fora. Conteúdo e descrições publicados continuam sujeitos ao JSON e às evidências dos repositórios.
-- Incluir Lattes no contato, nos ícones sociais com o rótulo visual “L” e no rodapé.
+- Incluir Lattes somente como ícone social com o glifo visual “L” (junto a LinkedIn, GitHub e Instagram) e no rodapé, sem linha separada no contato.
 - Remover busca do header e rotação automática de cargo.
 - Criar os tokens Theme `text/on-brand: #0F172A` nos dois temas e `focus-ring: #1D4ED8` no tema claro / `#60A5FA` no escuro. O Figma é a fonte dos tokens; mapear para CSS e Tailwind conforme ADR-0004.
 - Usar `https://thalesfb.curriculum.optimizr.site` como domínio canônico documentado. `thales.optimizr.site` não resolve.

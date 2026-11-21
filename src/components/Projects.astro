@@ -4,14 +4,21 @@ import cvData from '../../data/cv.json';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const projects = cvData.projects as Array<{
-  name: string;
-  nameByLanguage?: Record<string, string>;
-  description: Record<string, string>;
-  roles: string[];
-  technologies: string[];
-  repo?: string;
-}>;
+
+const projectOrder = [
+  'github.com/thalesfb/ccw',
+  'github.com/thalesfb/machine_learning',
+  'github.com/thalesfb/library',
+  'github.com/thalesfb/digital-image-processing',
+  'github.com/thalesfb/AI',
+  'Infraestrutura de comunicação industrial: implantação e integração de redes e protocolos para automação de processos',
+  'Plataforma de Decisão Compartilhada Humano-Máquina para Processos Industriais',
+];
+
+const projects = projectOrder
+  .map((identifier) => cvData.projects.find((p) => p.repo === identifier || p.name === identifier))
+  .filter((p): p is (typeof cvData.projects)[number] => Boolean(p));
+
 const iconByTechnology: Record<string, string> = {
   python: '/icons/python.svg',
   'scikit-learn': '/icons/scikitlearn.svg',
@@ -21,6 +28,8 @@ const iconByTechnology: Record<string, string> = {
   'spring boot': '/icons/java.svg',
   mysql: '/icons/mysql.svg',
   'jpa/hibernate': '/icons/backend.svg',
+  'spring data jpa': '/icons/backend.svg',
+  hibernate: '/icons/backend.svg',
   shell: '/icons/shell.svg',
   linux: '/icons/linux.svg',
   nginx: '/icons/nginx.svg',
@@ -28,67 +37,57 @@ const iconByTechnology: Record<string, string> = {
   ansible: '/icons/devops.svg',
   c: '/icons/c-lang.svg',
   algorithms: '/icons/algorithms.svg',
+  ci: '/icons/devops.svg',
+  'learning analytics': '/icons/data-analysis.svg',
 };
+
 const iconFor = (technology: string) => iconByTechnology[technology.toLowerCase()];
 const repositoryUrl = (repo: string) => repo.startsWith('http') ? repo : `https://${repo}`;
 ---
 
 <section class="bg-bg-card py-20 max-md:py-12" id="projects">
-  <h2 class="mb-12 px-20 text-center font-display text-4xl font-semibold text-text-primary max-xl:px-12 max-md:px-6 max-md:text-3xl max-md:mb-8">{t('section.projects')}</h2>
+  <div class="mx-auto max-w-[1440px] px-20 max-xl:px-12 max-md:px-6">
+    <h2 class="mb-12 text-center font-display text-4xl font-semibold text-text-primary max-md:text-3xl max-md:mb-8">{t('section.projects')}</h2>
 
-  <div class="flex justify-end gap-3 px-20 mb-8 max-xl:px-12 max-md:hidden">
-    <button class="carousel-prev h-[50px] w-[50px] rounded-full border border-border-line bg-bg-card text-text-secondary opacity-40 flex items-center justify-center" disabled>
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 5L7 10L12 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <button class="carousel-next h-[50px] w-[50px] rounded-full border border-brand-green bg-bg-card text-text-primary flex items-center justify-center hover:bg-brand-green hover:text-text-on-brand transition-all">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 5L13 10L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-  </div>
-
-  <div class="carousel-track flex gap-6 overflow-x-auto scroll-snap-x-mandatory px-20 pb-4 max-xl:px-12 max-md:gap-4 max-md:px-6 scrollbar-none" style="scroll-padding-left: 80px;">
-    {projects.map((project) => (
-      <article
-        class="project-card flex-none w-[380px] scroll-snap-start rounded-xl border border-brand-green bg-bg-card p-8 flex flex-col gap-4 max-md:w-[280px] max-md:p-6"
-        data-roles={JSON.stringify(project.roles)}
-        hidden={!project.roles.includes('data-engineer')}
-      >
-        <h3 class="font-display text-xl font-semibold text-text-primary">{project.nameByLanguage?.[lang] ?? project.name}</h3>
-        <p class="flex-1 text-text-secondary leading-relaxed">{project.description[lang]}</p>
-        <div class="flex flex-wrap gap-2">
-          {project.technologies.map((technology) => {
-            const icon = iconFor(technology);
-            return (
-              <span class="inline-flex items-center gap-1.5 rounded-md border border-text-primary bg-bg-section-alt px-3 py-1.5 font-code text-xs font-medium uppercase tracking-wider text-text-primary">
-                {icon && <span class="inline-block h-3.5 w-3.5 shrink-0 bg-brand-green" style={`-webkit-mask: url(${icon}) no-repeat center; mask: url(${icon}) no-repeat center; -webkit-mask-size: contain; mask-size: contain;`}></span>}
-                {technology}
-              </span>
-            );
-          })}
-        </div>
-        {project.repo && <a class="mt-auto inline-flex w-fit items-center gap-2 text-sm font-medium text-brand-green hover:underline" href={repositoryUrl(project.repo)} target="_blank" rel="noopener noreferrer">{t('projects.repository')}</a>}
-      </article>
-    ))}
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {projects.map((project) => (
+        <article class="project-card rounded-xl border border-brand-green bg-bg-card p-8 flex flex-col gap-4 max-md:p-6 shadow-sm">
+          <h3 class="font-display text-xl font-semibold text-text-primary leading-snug">
+            {project.nameByLanguage?.[lang as 'pt' | 'en' | 'es'] ?? project.name}
+          </h3>
+          <p class="flex-1 text-text-secondary leading-relaxed">
+            {project.description[lang as 'pt' | 'en' | 'es']}
+          </p>
+          {project.technologies && project.technologies.length > 0 && (
+            <div class="flex flex-wrap gap-2">
+              {project.technologies.map((technology) => {
+                const icon = iconFor(technology);
+                return (
+                  <span class="inline-flex items-center gap-1.5 rounded-md border border-text-primary bg-bg-section-alt px-3 py-1.5 font-code text-xs font-medium uppercase tracking-wider text-text-primary">
+                    {icon && (
+                      <span
+                        class="inline-block h-3.5 w-3.5 shrink-0 bg-brand-green"
+                        style={`-webkit-mask: url(${icon}) no-repeat center; mask: url(${icon}) no-repeat center; -webkit-mask-size: contain; mask-size: contain;`}
+                      ></span>
+                    )}
+                    {technology}
+                  </span>
+                );
+              })}
+            </div>
+          )}
+          {project.repo && (
+            <a
+              class="mt-auto inline-flex w-fit items-center gap-2 text-sm font-medium text-brand-green hover:underline"
+              href={repositoryUrl(project.repo)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('projects.repository')}
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
   </div>
 </section>
-
-<style>
-  .project-card[hidden] { display: none; }
-</style>
-
-<script>
-  const roleSelector = document.getElementById('role-selector') as HTMLSelectElement | null;
-  const projectCards = Array.from(document.querySelectorAll<HTMLElement>('.project-card'));
-  const filterProjects = (role: string) => {
-    for (const card of projectCards) {
-      const roles = JSON.parse(card.dataset.roles || '[]') as string[];
-      card.hidden = !roles.includes(role);
-    }
-    window.dispatchEvent(new Event('resize'));
-  };
-
-  filterProjects(roleSelector?.value || 'data-engineer');
-  document.addEventListener('cv:role-change', (event) => {
-    const role = (event as CustomEvent<{ role: string }>).detail?.role;
-    if (role) filterProjects(role);
-  });
-</script>

@@ -16,25 +16,17 @@ const translatePath = useTranslatedPath(lang);
 
     <!-- Desktop/Tablet nav links (gap-4 on tablet, gap-8 on xl+) -->
     <div class="hidden lg:flex items-center gap-4 xl:gap-8">
-      <a href="#hero" class="text-sm xl:text-base text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.home')}</a>
       <a href="#about" class="text-sm xl:text-base text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.about')}</a>
+      <a href="#education" class="text-sm xl:text-base text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.education')}</a>
+      <a href="#experience" class="text-sm xl:text-base text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.experience')}</a>
+      <a href="#projects" class="text-sm xl:text-base text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.projects')}</a>
       <a href="#services" class="text-sm xl:text-base text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.services')}</a>
-      <a href="#projects" class="text-sm xl:text-base text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.portfolio')}</a>
       <a href="#contact" class="text-sm xl:text-base text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.contact')}</a>
     </div>
 
     <!-- Desktop/Tablet actions -->
     <div class="ml-auto hidden lg:flex shrink-0 items-center gap-3 xl:gap-6">
-      <!-- Search: always visible on desktop/tablet -->
-      <div class="flex w-40 xl:w-56 items-center gap-2 rounded-full border border-border-line bg-bg-input px-3 py-2 xl:py-2.5">
-        <svg class="shrink-0" width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" class="text-text-secondary" stroke-width="2"/><path d="M14 14L18 18" stroke="currentColor" class="text-text-secondary" stroke-width="2" stroke-linecap="round"/></svg>
-        <input type="text" id="search-input" placeholder={t('search.placeholder')} class="min-w-0 flex-1 border-none bg-transparent text-sm text-text-secondary placeholder:text-text-placeholder">
-        <button id="search-clear" class="hidden shrink-0 text-text-secondary hover:text-text-primary" aria-label="Clear search">
-          <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><line x1="4" y1="4" x2="14" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="4" x2="4" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-      </div>
-
-      <button class="shrink-0" id="theme-toggle" aria-label="Toggle theme">
+      <button class="shrink-0" id="theme-toggle" aria-label={t('header.themeToggle')}>
         <span class="theme-track block relative h-6 w-12 rounded-full bg-border-line transition-colors">
           <span class="theme-knob absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform"></span>
         </span>
@@ -42,7 +34,7 @@ const translatePath = useTranslatedPath(lang);
 
       <div class="flex shrink-0 items-center gap-1.5 text-xs xl:text-sm font-medium text-text-secondary">
         <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.5"/><ellipse cx="9" cy="9" rx="3.5" ry="7.5" stroke="currentColor" stroke-width="1.5"/><line x1="1.5" y1="9" x2="16.5" y2="9" stroke="currentColor" stroke-width="1.5"/></svg>
-        <select class="bg-transparent text-text-secondary cursor-pointer" id="lang-selector">
+        <select class="bg-transparent text-text-secondary cursor-pointer" id="lang-selector" aria-label={t('header.languageSelect')}>
           {Object.entries(languages).map(([code, label]) => (
             <option value={code} selected={code === lang}>{code.toUpperCase()}</option>
           ))}
@@ -56,34 +48,22 @@ const translatePath = useTranslatedPath(lang);
 
     <!-- Mobile/Tablet controls -->
     <div class="ml-auto flex lg:hidden items-center gap-3">
-      <!-- Default state: lupa + toggle + lang + hamburger -->
       <div id="mobile-controls" class="flex items-center gap-3">
-        <button id="search-toggle-mobile" class="shrink-0 text-text-secondary hover:text-brand-green transition-colors" aria-label="Search">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/><path d="M14 14L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-        <button class="shrink-0" id="theme-toggle-mobile" aria-label="Toggle theme">
+        <button class="shrink-0" id="theme-toggle-mobile" aria-label={t('header.themeToggle')}>
           <span class="theme-track block relative h-6 w-12 rounded-full bg-border-line transition-colors">
             <span class="theme-knob absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform"></span>
           </span>
         </button>
         <div class="flex items-center gap-1 text-xs font-medium text-text-secondary">
           <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.5"/><ellipse cx="9" cy="9" rx="3.5" ry="7.5" stroke="currentColor" stroke-width="1.5"/><line x1="1.5" y1="9" x2="16.5" y2="9" stroke="currentColor" stroke-width="1.5"/></svg>
-          <select class="bg-transparent text-text-secondary cursor-pointer text-xs" id="lang-selector-mobile">
+          <select class="bg-transparent text-text-secondary cursor-pointer text-xs" id="lang-selector-mobile" aria-label={t('header.languageSelect')}>
             {Object.entries(languages).map(([code, label]) => (
               <option value={code} selected={code === lang}>{code.toUpperCase()}</option>
             ))}
           </select>
         </div>
       </div>
-      <!-- Expanded state: search bar replaces lupa/toggle/lang -->
-      <div id="mobile-search-bar" class="hidden w-44 items-center gap-2 rounded-full border border-border-line bg-bg-input px-3 py-1.5">
-        <svg class="shrink-0" width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" class="text-text-secondary" stroke-width="2"/><path d="M14 14L18 18" stroke="currentColor" class="text-text-secondary" stroke-width="2" stroke-linecap="round"/></svg>
-        <input type="text" id="search-input-mobile" placeholder={t('search.placeholder')} class="flex-1 min-w-0 border-none bg-transparent text-xs text-text-secondary placeholder:text-text-placeholder">
-        <button id="search-clear-mobile" class="hidden shrink-0 text-text-secondary hover:text-text-primary" aria-label="Clear search">
-          <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><line x1="4" y1="4" x2="14" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="4" x2="4" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-      </div>
-      <button class="flex flex-col gap-1.5 p-1" id="hamburger" aria-label="Open menu">
+      <button class="flex flex-col gap-1.5 p-1" id="hamburger" aria-label={t('header.openMenu')} aria-expanded="false" aria-controls="mobile-menu">
         <span class="block h-0.5 w-5 rounded bg-text-secondary"></span>
         <span class="block h-0.5 w-5 rounded bg-text-secondary"></span>
         <span class="block h-0.5 w-5 rounded bg-text-secondary"></span>
@@ -97,7 +77,7 @@ const translatePath = useTranslatedPath(lang);
   <div class="flex items-center gap-2.5 px-6 py-4">
     <img src="/logos/logo.svg" alt=">_" width="28" height="24">
     <span class="flex-1 font-display text-base font-semibold leading-none">ThalesFB</span>
-    <button id="menu-close" aria-label="Close menu">
+    <button id="menu-close" aria-label={t('header.closeMenu')}>
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
         <line x1="8" y1="8" x2="20" y2="20" stroke="currentColor" class="text-text-secondary" stroke-width="2" stroke-linecap="round"/>
         <line x1="20" y1="8" x2="8" y2="20" stroke="currentColor" class="text-text-secondary" stroke-width="2" stroke-linecap="round"/>
@@ -105,10 +85,11 @@ const translatePath = useTranslatedPath(lang);
     </button>
   </div>
   <nav class="flex flex-col px-6 pt-4 gap-0">
-    <a href="#hero" class="mobile-link py-3 border-b border-border-line text-text-primary">{t('nav.home')}</a>
     <a href="#about" class="mobile-link py-3 border-b border-border-line text-text-primary">{t('nav.about')}</a>
+    <a href="#education" class="mobile-link py-3 border-b border-border-line text-text-primary">{t('nav.education')}</a>
+    <a href="#experience" class="mobile-link py-3 border-b border-border-line text-text-primary">{t('nav.experience')}</a>
+    <a href="#projects" class="mobile-link py-3 border-b border-border-line text-text-primary">{t('nav.projects')}</a>
     <a href="#services" class="mobile-link py-3 border-b border-border-line text-text-primary">{t('nav.services')}</a>
-    <a href="#projects" class="mobile-link py-3 border-b border-border-line text-text-primary">{t('nav.portfolio')}</a>
     <a href="#contact" class="mobile-link py-3 border-b border-border-line text-text-primary">{t('nav.contact')}</a>
   </nav>
   <div class="px-6 pt-4 pb-6">
@@ -128,119 +109,37 @@ const translatePath = useTranslatedPath(lang);
     });
   });
 
-  // Language selector (desktop + mobile)
+  // Language selector (desktop + mobile) — preserves anchor (#hash)
   document.querySelectorAll('#lang-selector, #lang-selector-mobile').forEach(select => {
     select.addEventListener('change', (e) => {
-      const lang = (e.target as HTMLSelectElement).value;
-      window.location.href = `/${lang}/`;
+      const targetLang = (e.target as HTMLSelectElement).value;
+      const hash = window.location.hash || '';
+      window.location.href = `/${targetLang}/${hash}`;
     });
   });
 
-  // Hamburger menu
+  // Hamburger menu with aria-expanded and aria-controls
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   const menuClose = document.getElementById('menu-close');
 
-  hamburger?.addEventListener('click', () => {
+  function openMenu() {
     mobileMenu?.classList.remove('hidden');
     mobileMenu?.classList.add('flex');
-  });
+    hamburger?.setAttribute('aria-expanded', 'true');
+  }
 
-  menuClose?.addEventListener('click', () => {
+  function closeMenu() {
     mobileMenu?.classList.add('hidden');
     mobileMenu?.classList.remove('flex');
-  });
+    hamburger?.setAttribute('aria-expanded', 'false');
+  }
+
+  hamburger?.addEventListener('click', openMenu);
+  menuClose?.addEventListener('click', closeMenu);
 
   // Close menu on link click
   document.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu?.classList.add('hidden');
-      mobileMenu?.classList.remove('flex');
-    });
-  });
-
-  // Elements
-  const searchToggleMob = document.getElementById('search-toggle-mobile');
-  const mobileControls = document.getElementById('mobile-controls');
-  const mobileSearchBar = document.getElementById('mobile-search-bar');
-  const searchClearMob = document.getElementById('search-clear-mobile');
-  const searchInputMob = document.getElementById('search-input-mobile') as HTMLInputElement;
-  const searchInput = document.getElementById('search-input') as HTMLInputElement;
-  const searchClear = document.getElementById('search-clear');
-
-  // Filter logic — X only shows when there's text (both desktop and mobile)
-  function filterCards(query: string) {
-    const q = query.toLowerCase().trim();
-    searchClear?.classList.toggle('hidden', !q);
-    searchClearMob?.classList.toggle('hidden', !q);
-    let matches = 0;
-    document.querySelectorAll('article').forEach(card => {
-      const el = card as HTMLElement;
-      el.style.transition = 'opacity 0.2s, transform 0.2s';
-      if (!q || (el.textContent?.toLowerCase() || '').includes(q)) {
-        el.style.opacity = '1'; el.style.transform = 'scale(1)';
-        if (q) matches++;
-      } else {
-        el.style.opacity = '0.2'; el.style.transform = 'scale(0.97)';
-      }
-    });
-    // Visual feedback: green = found, red = not found
-    [searchInput?.parentElement, mobileSearchBar].forEach(el => {
-      if (!el) return;
-      if (!q) {
-        el.style.borderColor = '';
-      } else if (matches > 0) {
-        el.style.borderColor = 'var(--color-brand-green)';
-      } else {
-        el.style.borderColor = '#ef4444';
-      }
-    });
-  }
-
-  // Mobile: lupa opens search bar, click outside closes it
-  searchToggleMob?.addEventListener('click', () => {
-    mobileControls?.classList.add('hidden');
-    mobileSearchBar?.classList.remove('hidden');
-    mobileSearchBar?.classList.add('flex');
-    searchInputMob?.focus();
-  });
-
-  function closeMobileSearch() {
-    mobileSearchBar?.classList.add('hidden');
-    mobileSearchBar?.classList.remove('flex');
-    mobileControls?.classList.remove('hidden');
-    if (searchInputMob) { searchInputMob.value = ''; filterCards(''); }
-  }
-
-  // Mobile X: clear text, if empty close bar
-  searchClearMob?.addEventListener('click', () => {
-    if (searchInputMob?.value) {
-      searchInputMob.value = '';
-      searchInputMob.focus();
-      filterCards('');
-    } else {
-      closeMobileSearch();
-    }
-  });
-
-  // Close mobile search on click outside
-  document.addEventListener('click', (e) => {
-    if (!mobileSearchBar?.classList.contains('hidden') &&
-        !mobileSearchBar?.contains(e.target as Node) &&
-        !searchToggleMob?.contains(e.target as Node)) {
-      closeMobileSearch();
-    }
-  });
-
-  // Desktop X: clear text
-  searchClear?.addEventListener('click', () => {
-    if (searchInput) { searchInput.value = ''; searchInput.focus(); }
-    filterCards('');
-  });
-
-  // Input listeners
-  document.addEventListener('DOMContentLoaded', () => {
-    searchInput?.addEventListener('input', () => filterCards(searchInput.value));
-    searchInputMob?.addEventListener('input', () => filterCards(searchInputMob.value));
+    link.addEventListener('click', closeMenu);
   });
 </script>
