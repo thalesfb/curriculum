@@ -29,6 +29,7 @@
   --color-bg-section-alt: #F8FAFC;
   --color-bg-dark: #334155;
   --color-bg-input: #F8FAFC;
+  --color-bg-logo: #FFFFFF;
   /* Text */
   --color-text-primary: #0F172A;
   --color-text-secondary: #64748B;
@@ -59,6 +60,7 @@
   --color-bg-section-alt: #142032;
   --color-bg-dark: #081020;
   --color-bg-input: #1E293B;
+  --color-bg-logo: #FFFFFF;
   --color-text-primary: #F1F5F9;
   --color-text-secondary: #94A3B8;
   --color-text-inverse: #F1F5F9;

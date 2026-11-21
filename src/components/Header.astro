@@ -8,9 +8,9 @@ const translatePath = useTranslatedPath(lang);
 ---
 
 <header class="fixed top-0 left-0 right-0 z-100 border-b border-border-line bg-bg-card/90 backdrop-blur-sm">
-  <nav class="mx-auto flex max-w-[1440px] items-center gap-6 px-20 py-4 max-xl:px-10 max-md:px-6">
+  <nav aria-label={t('nav.main')} class="mx-auto flex max-w-[1440px] items-center gap-6 px-20 py-4 max-xl:px-10 max-md:px-6">
     <a href={translatePath('/')} class="flex shrink-0 items-center gap-2.5">
-      <img src="/logos/logo.svg" alt=">_" width="28" height="24">
+      <img src="/logos/logo.svg" alt={t('site.logoAlt')} width="28" height="24">
       <span class="font-display text-4xl font-semibold leading-none whitespace-nowrap max-md:text-base">ThalesFB</span>
     </a>
 
@@ -75,7 +75,7 @@ const translatePath = useTranslatedPath(lang);
 <!-- Mobile Menu: compact, semi-transparent, doesn't cover full screen -->
 <div id="mobile-menu" class="fixed top-0 left-0 right-0 z-200 hidden flex-col bg-bg-card/90 backdrop-blur-lg border-b border-border-line shadow-lg">
   <div class="flex items-center gap-2.5 px-6 py-4">
-    <img src="/logos/logo.svg" alt=">_" width="28" height="24">
+    <img src="/logos/logo.svg" alt={t('site.logoAlt')} width="28" height="24">
     <span class="flex-1 font-display text-base font-semibold leading-none">ThalesFB</span>
     <button id="menu-close" aria-label={t('header.closeMenu')}>
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -84,7 +84,7 @@ const translatePath = useTranslatedPath(lang);
       </svg>
     </button>
   </div>
-  <nav class="flex flex-col px-6 pt-4 gap-0">
+  <nav aria-label={t('nav.mobile')} class="flex flex-col px-6 pt-4 gap-0">
     <a href="#about" class="mobile-link py-3 border-b border-border-line text-text-primary">{t('nav.about')}</a>
     <a href="#education" class="mobile-link py-3 border-b border-border-line text-text-primary">{t('nav.education')}</a>
     <a href="#experience" class="mobile-link py-3 border-b border-border-line text-text-primary">{t('nav.experience')}</a>

@@ -8,6 +8,11 @@
 - Docker (para devcontainer)
 - GitHub CLI (`gh`)
 
+## Tipografia e Ativos
+
+- **Tipografia:** Fontes 100% self-hosted em `/fonts/` sob licença SIL OFL (Libertinus Serif e Fira Code). O projeto não utiliza Google Fonts externas nem CDNs para fontes.
+- **Imagens:** Foto de perfil em WebP (`/img/profile_hero.webp`, 1024x1024) e Open Graph em JPEG (`/img/profile_hero_og.jpg`, 600x600). Fotos legadas em PNG foram removidas.
+
 ## Quick Start
 
 ```bash

@@ -63,7 +63,7 @@ O projeto usa **3 coleções** de variáveis, cada uma representando uma **dimen
 | **i18n** | STRING | PT / EN / ES | Textos da interface traduzidos |
 | **Role** | STRING | Data Engineer / Backend / DevOps / Management | Variantes de cargo profissional |
 
-### Theme — Variáveis de Cor (19 variáveis após S5)
+### Theme — Variáveis de Cor (20 variáveis após S5)
 
 #### Backgrounds
 
@@ -74,6 +74,7 @@ O projeto usa **3 coleções** de variáveis, cada uma representando uma **dimen
 | `bg/section-alt` | `#F8FAFC` | `#142032` | Seções alternadas |
 | `bg/dark` | `#334155` | `#081020` | Seções escuras (contato) |
 | `bg/input` | `#F8FAFC` | `#1E293B` | Campos de formulário |
+| `bg/logo` | `#FFFFFF` | `#FFFFFF` | Badges de logo de marcas (`VariableID:657:111`), aprovado no S5 |
 
 #### Textos
 
@@ -443,6 +444,7 @@ Logos PNG de Mater Salvatoris e Latinoware: `651:111` e `651:112`.
 - Libertinus Serif self-hosted (SIL OFL) nos títulos H1/H2/H3: H1 Display 60, H2 Section 40 e H3 Card Title 22. Corpo em stack `system-ui`; tags em Fira Code self-hosted (SIL OFL). Não usar Google Fonts.
 - `text/on-brand: #0F172A` em Light e Dark. Contraste sobre `brand/green #059669` em Light: **4.74:1**; sobre `#34D399` em Dark: **9.29:1**.
 - `focus-ring: #1D4ED8` em Light e `#60A5FA` em Dark. Contraste em Light: **6.41:1** sobre `bg/page #F8FAFC`, **6.70:1** sobre `bg/card #FFFFFF`; em Dark: **7.02:1** sobre `bg/page #0F172A`, **5.75:1** sobre `bg/card #1E293B`.
+- Variável `bg/logo = #FFFFFF` nos dois modos (`VariableID:657:111`), aplicada aos badges de logo nos frames S5.
 - Mapear os valores Figma para CSS custom properties e Tailwind conforme ADR-0004.
 
 ### Navegação e seções

@@ -56,4 +56,42 @@ describe('ui.ts data integrity', () => {
       'Certificado completo', 'Full certificate', 'Certificado completo',
     ]);
   });
+
+  it('localizes accessibility and metadata keys across all languages', () => {
+    expect([
+      ui.pt['a11y.skipToContent'],
+      ui.en['a11y.skipToContent'],
+      ui.es['a11y.skipToContent'],
+    ]).toEqual(['Pular para o conteúdo', 'Skip to content', 'Saltar al contenido']);
+
+    expect([
+      ui.pt['site.logoAlt'],
+      ui.en['site.logoAlt'],
+      ui.es['site.logoAlt'],
+    ]).toEqual(['Thales Ferreira — início', 'Thales Ferreira — home', 'Thales Ferreira — inicio']);
+
+    expect([
+      ui.pt['nav.main'],
+      ui.en['nav.main'],
+      ui.es['nav.main'],
+    ]).toEqual(['Navegação principal', 'Main navigation', 'Navegación principal']);
+
+    expect([
+      ui.pt['nav.mobile'],
+      ui.en['nav.mobile'],
+      ui.es['nav.mobile'],
+    ]).toEqual(['Navegação mobile', 'Mobile navigation', 'Navegación móvil']);
+
+    expect([
+      ui.pt['nav.footer'],
+      ui.en['nav.footer'],
+      ui.es['nav.footer'],
+    ]).toEqual(['Navegação do rodapé', 'Footer navigation', 'Navegación del pie de página']);
+
+    expect([
+      ui.pt['og.imageAlt'],
+      ui.en['og.imageAlt'],
+      ui.es['og.imageAlt'],
+    ]).toEqual(['Foto de perfil de Thales Ferreira', 'Profile photo of Thales Ferreira', 'Foto de perfil de Thales Ferreira']);
+  });
 });

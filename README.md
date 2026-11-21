@@ -50,7 +50,7 @@
 - 🔒 **Secure** — CSP, HSTS, X-Content-Type-Options, Referrer-Policy
 - 📊 **SEO** — Open Graph, hreflang, JSON-LD, sitemap, canonical URLs
 - 📈 **Analytics** — Google Analytics 4 (production only, CSP-protected)
-- ⚡ **Performance** — Zero JS default, lazy loading, optimized images
+- ⚡ **Performance** — Zero JS default, optimized WebP/JPEG images, self-hosted fonts (no Google Fonts)
 
 ---
 
@@ -145,7 +145,7 @@ curriculum/
 ├── cv/                    Typst CV template, vendored imprecv, and Libertinus Serif fonts
 ├── public/
 │   ├── icons/             Tech skill icons (SVG)
-│   ├── img/               UI icons + profile photo
+│   ├── img/               UI icons + profile photo (WebP/JPEG)
 │   ├── logos/             Brand logos (IFC, SENAI, Alura, Red Hat, AWS, Cisco)
 │   └── refs/              CV PDFs (PT, EN, ES)
 ├── src/
