@@ -15,7 +15,7 @@ const translatePath = useTranslatedPath(lang);
     </a>
 
     <!-- Desktop/Tablet nav links (gap-4 on tablet, gap-8 on xl+) -->
-    <div class="hidden lg:flex items-center gap-4 xl:gap-8">
+    <div class="hidden lg:flex flex-1 justify-center items-center gap-4 xl:gap-8">
       <a href="#about" class="text-sm xl:text-base text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.about')}</a>
       <a href="#education" class="text-sm xl:text-base text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.education')}</a>
       <a href="#experience" class="text-sm xl:text-base text-text-primary hover:text-brand-green transition-colors whitespace-nowrap">{t('nav.experience')}</a>
@@ -25,7 +25,7 @@ const translatePath = useTranslatedPath(lang);
     </div>
 
     <!-- Desktop/Tablet actions -->
-    <div class="ml-auto hidden lg:flex shrink-0 items-center gap-3 xl:gap-6">
+    <div class="hidden lg:flex shrink-0 items-center gap-3 xl:gap-6">
       <button class="shrink-0" id="theme-toggle" aria-label={t('header.themeToggle')}>
         <span class="theme-track block relative h-6 w-12 rounded-full bg-border-line transition-colors">
           <span class="theme-knob absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform"></span>
