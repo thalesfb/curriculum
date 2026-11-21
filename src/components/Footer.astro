@@ -16,7 +16,7 @@ const waMsg = encodeURIComponent(whatsappMessages[lang]);
 <footer class="bg-bg-dark py-10 text-center text-sm text-text-inverse">
   <div class="mx-auto flex max-w-[1440px] flex-col items-center justify-center gap-2 px-6">
     <p>{t('footer.rights')}</p>
-    <p>
+    <nav aria-label={t('nav.footer')}>
       <a
         href={cvData.personal.lattes}
         target="_blank"
@@ -26,7 +26,7 @@ const waMsg = encodeURIComponent(whatsappMessages[lang]);
       >
         Lattes
       </a>
-    </p>
+    </nav>
   </div>
 </footer>
 

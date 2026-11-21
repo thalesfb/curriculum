@@ -103,9 +103,9 @@ const certificationItems = allCertificationItems
         <ul data-education-grid class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {educationItems.map((item) => (
             <li data-education-item data-education-period={item.period} class="flex items-center gap-3 text-text-secondary">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg-page shadow-sm">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border-line bg-bg-logo shadow-sm">
                 {item.logo ? (
-                  <img src={item.logo} alt={item.source} width="32" height="32" class="max-h-8 max-w-8 object-contain" loading="lazy">
+                  <img src={item.logo} alt={item.source} width="28" height="28" class="max-h-7 max-w-7 object-contain" loading="lazy">
                 ) : (
                   <svg aria-hidden="true" class="h-5 w-5 text-text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
@@ -133,8 +133,8 @@ const certificationItems = allCertificationItems
                   <li data-alura-group class="rounded-xl border border-border-line bg-bg-card p-4 text-text-secondary">
                     <details class="group">
                       <summary class="flex cursor-pointer list-none items-center gap-3">
-                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg-card shadow-sm">
-                          <img src={item.logo} alt="" width="32" height="32" class="max-h-8 max-w-8 object-contain" loading="lazy">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border-line bg-bg-logo shadow-sm">
+                          <img src={item.logo} alt="" width="28" height="28" class="max-h-7 max-w-7 object-contain" loading="lazy">
                         </span>
                         <span class="min-w-0 flex-1">
                           <span class="block font-medium text-text-primary">{item.title}</span>
@@ -170,9 +170,16 @@ const certificationItems = allCertificationItems
           )}
           {certificationItems.map((item) => (
             <li data-certification-item class="flex items-center gap-3 text-text-secondary">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg-page shadow-sm">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border-line bg-bg-logo shadow-sm">
                 {item.logo ? (
-                  <img src={item.logo} alt={item.logoAlt} width="32" height="32" class="max-h-8 max-w-8 object-contain" loading="lazy">
+                  <img
+                    src={item.logo}
+                    alt={item.logoAlt}
+                    width={item.logo.includes('latinoware') ? "34" : "28"}
+                    height="28"
+                    class={`max-h-7 ${item.logo.includes('latinoware') ? 'max-w-[34px]' : 'max-w-7'} object-contain`}
+                    loading="lazy"
+                  >
                 ) : (
                   <svg aria-hidden="true" class="h-5 w-5 text-text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
