@@ -76,8 +76,34 @@ git worktree remove ../curriculum-feat-dark-mode
 | `npm run lint` | ESLint |
 | `npm run format` | Prettier |
 | `npm run cv:pdf` | Gera rascunhos PDF em pasta temporária; não substitui `public/refs` |
+| `python scripts/linkedin_diff.py <export.zip>` | Compara export oficial do LinkedIn com `data/cv.json` (somente leitura) |
 
 O gerador usa `data/cv.json` e `cv/cv.typ`; os arquivos DOCX são referências históricas. A saída padrão é temporária e os PDFs públicos não são regenerados no build nem publicados pela CI. Substituir `public/refs` exige revisão visual e a flag `--publish-public-refs`. Veja a [ADR-0011](adr/0011-geracao-pdf-cv-typst.md) e a [proposta do PDF](proposals/0001-cv-pdf.md).
+
+## Comparar com o LinkedIn
+
+O script `scripts/linkedin_diff.py` compara deterministicamente o arquivo de exportação oficial do LinkedIn com `data/cv.json`.
+
+> [!IMPORTANT]
+> A ferramenta é estritamente **somente leitura** (não altera `data/cv.json`). O arquivo ZIP exportado contém dados pessoais sensíveis e **nunca deve ser commitado** no repositório (está protegido no `.gitignore`).
+
+### Como obter o export do LinkedIn:
+1. Acesse o LinkedIn no navegador.
+2. Vá em **Configurações e privacidade** > **Privacidade de dados** > **Obter uma cópia dos seus dados**.
+3. Selecione a opção para obter seus dados e aguarde o link para baixar o arquivo `.zip`.
+
+### Como executar:
+```bash
+# Imprime o relatório Markdown no terminal (stdout)
+python scripts/linkedin_diff.py <export.zip>
+
+# Salva o relatório em arquivo markdown
+python scripts/linkedin_diff.py <export.zip> --out linkedin-diff.md
+
+# Executar a suíte de testes do script
+python -m unittest scripts/tests/test_linkedin_diff.py
+```
+
 
 ## Conventional Commits
 

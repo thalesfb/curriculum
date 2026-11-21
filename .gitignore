@@ -31,3 +31,9 @@ Thumbs.db
 # Internal context files (not for public repo)
 CONTEXT.md
 QUICKSTART.md
+
+# LinkedIn export & diff artifacts (contain personal data)
+*linkedin*.zip
+Basic_LinkedInDataExport*
+Complete_LinkedInDataExport*
+linkedin-diff.md
