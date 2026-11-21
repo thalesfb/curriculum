@@ -1,0 +1,77 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import cvData from '../../data/cv.json';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const role = 'data-engineer';
+const localized = (value: Record<string, string> | undefined | null) => value?.[lang] ?? value?.pt ?? '';
+
+const monthNames = {
+  pt: ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'],
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+};
+
+const presentLabels = {
+  pt: 'Atual',
+  en: 'Present',
+  es: 'Actualidad',
+};
+
+function formatMonthYear(val: string | null): string {
+  if (!val) return presentLabels[lang];
+  const monthIdx = Number(val.slice(5, 7)) - 1;
+  const month = monthNames[lang][monthIdx];
+  const year = val.slice(0, 4);
+  return lang === 'en' ? `${month} ${year}` : `${month} de ${year}`;
+}
+
+function formatPeriod(period: { start: string; end: string | null }): string {
+  return `${formatMonthYear(period.start)} – ${formatMonthYear(period.end)}`;
+}
+
+const experiences = cvData.experience
+  .filter((entry) => entry.roles.includes(role))
+  .map((entry) => {
+    const loc = localized(entry.location);
+    return {
+      company: entry.company,
+      roleTitle: localized(entry.role),
+      period: formatPeriod(entry.period),
+      location: loc && loc.trim() !== '' ? loc : null,
+      bullets: entry.bullets
+        .filter((b) => b.roles.includes(role))
+        .map((b) => localized(b)),
+    };
+  });
+---
+
+<section class="bg-bg-card py-20 max-md:py-12" id="experience">
+  <div class="mx-auto max-w-[1440px] px-20 max-xl:px-12 max-md:px-6">
+    <h2 class="mb-12 text-center font-display text-4xl font-semibold text-text-primary max-md:text-3xl max-md:mb-8">{t('section.experience')}</h2>
+
+    <div class="flex flex-col gap-8">
+      {experiences.map((exp) => (
+        <article class="rounded-xl border border-brand-green bg-bg-card p-8 flex flex-col gap-4 max-md:p-6 shadow-sm">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 border-b border-border-line pb-4">
+            <div>
+              <h3 class="font-display text-2xl font-semibold text-text-primary max-md:text-xl">{exp.company}</h3>
+              <p class="font-medium text-brand-green text-base">{exp.roleTitle}</p>
+            </div>
+            <div class="text-sm text-text-secondary font-medium">
+              <span>{exp.period}</span>
+              {exp.location && <span> · {exp.location}</span>}
+            </div>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-text-secondary leading-relaxed">
+            {exp.bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

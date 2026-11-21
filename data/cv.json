@@ -574,21 +574,53 @@
       }
     },
     {
-      "name": "Library Management System",
-      "repo": "github.com/thalesfb/library-management-system",
+      "name": "Sistema de Gerenciamento de Biblioteca",
+      "nameByLanguage": {
+        "pt": "Sistema de Gerenciamento de Biblioteca",
+        "en": "Library Management System",
+        "es": "Sistema de Gestión de Biblioteca"
+      },
+      "repo": "github.com/thalesfb/library",
+      "pdf": false,
       "roles": [
         "backend"
       ],
       "technologies": [
         "Java",
         "Spring Boot",
-        "MySQL",
-        "JPA/Hibernate"
+        "Spring Data JPA",
+        "Hibernate",
+        "MySQL"
       ],
       "description": {
-        "pt": "Aplicação back-end em Java (Spring Boot) com padrão Observer para notificações por e-mail. Princípios SOLID e injeção de dependência.",
-        "en": "Java back-end application (Spring Boot) with Observer pattern for email notifications. SOLID principles and dependency injection.",
-        "es": "Aplicación back-end en Java (Spring Boot) con patrón Observer para notificaciones por correo. Principios SOLID e inyección de dependencias."
+        "pt": "Sistema de gerenciamento de biblioteca em Java com Spring Boot, Spring Data JPA/Hibernate e MySQL, com padrão Observer para notificações de empréstimos por e-mail.",
+        "en": "Library management system in Java with Spring Boot, Spring Data JPA/Hibernate, and MySQL, featuring the Observer pattern for email loan notifications.",
+        "es": "Sistema de gestión de biblioteca en Java con Spring Boot, Spring Data JPA/Hibernate y MySQL, con patrón Observer para notificaciones de préstamos por correo electrónico."
+      }
+    },
+    {
+      "name": "Processamento Digital de Imagens",
+      "nameByLanguage": {
+        "pt": "Processamento Digital de Imagens",
+        "en": "Digital Image Processing",
+        "es": "Procesamiento Digital de Imágenes"
+      },
+      "repo": "github.com/thalesfb/digital-image-processing",
+      "pdf": false,
+      "roles": [
+        "data-engineer",
+        "backend"
+      ],
+      "technologies": [
+        "Python",
+        "OpenCV",
+        "Jupyter",
+        "CI"
+      ],
+      "description": {
+        "pt": "Repositório de experimentos práticos e roteiros pedagógicos de Processamento Digital de Imagens (PDI) com pipelines no OpenCV, Jupyter e validação automatizada em CI.",
+        "en": "Repository of practical experiments and pedagogical guides for Digital Image Processing (DIP) with OpenCV pipelines, Jupyter, and automated CI validation.",
+        "es": "Repositorio de experimentos prácticos y guías pedagógicas de Procesamiento Digital de Imágenes (PDI) con pipelines en OpenCV, Jupyter y validación automatizada en CI."
       }
     },
     {
@@ -1604,6 +1636,50 @@
         "pt": "Leitura fluente e conversação prática",
         "en": "Fluent reading and practical conversation",
         "es": "Lectura fluida y conversación práctica"
+      }
+    }
+  ],
+  "services": [
+    {
+      "id": "data-engineering",
+      "icon": "/img/icon-database.svg",
+      "title": {
+        "pt": "Engenharia de Dados, BI e Machine Learning",
+        "en": "Data Engineering, BI & Machine Learning",
+        "es": "Ingeniería de Datos, BI y Machine Learning"
+      },
+      "description": {
+        "pt": "Desenvolvimento de soluções de Business Intelligence, incluindo modelagem de dados, tratamento de dados no Power Query, e criação de dashboards avançados para análise de tendências e suporte executivo. Implementação de pipelines analíticos para Machine Learning (ML) e Deep Learning (DL) em ambientes reprodutíveis.",
+        "en": "Development of Business Intelligence solutions, including data modeling, data processing in Power Query, and creation of advanced dashboards for trend analysis and executive support. Implementation of analytical pipelines for Machine Learning (ML) and Deep Learning (DL) in reproducible environments.",
+        "es": "Desarrollo de soluciones de Business Intelligence, incluyendo modelado de datos, tratamiento de datos en Power Query, y creación de dashboards avanzados para análisis de tendencias y soporte ejecutivo."
+      }
+    },
+    {
+      "id": "software-engineering",
+      "icon": "/img/icon-stack.svg",
+      "title": {
+        "pt": "Engenharia de Software (Python/Java) e APIs Confiáveis",
+        "en": "Software Engineering (Python/Java) & Reliable APIs",
+        "es": "Ingeniería de Software (Python/Java) y APIs Confiables"
+      },
+      "description": {
+        "pt": "Construção de APIs RESTful utilizando Python (Django REST Framework), com foco em Desenvolvimento Orientado a Testes (TDD) e testes unitários/de integração. Experiência em arquitetura back-end modular, incluindo Spring Boot/Java para sistemas de gestão.",
+        "en": "Building RESTful APIs using Python (Django REST Framework), focused on Test-Driven Development (TDD) and unit/integration testing. Experience in modular back-end architecture, including Spring Boot/Java for management systems.",
+        "es": "Construcción de APIs RESTful utilizando Python (Django REST Framework), con enfoque en Desarrollo Orientado a Tests (TDD) y tests unitarios/de integración."
+      }
+    },
+    {
+      "id": "devops-automation",
+      "icon": "/img/icon-gear.svg",
+      "title": {
+        "pt": "DevOps, Automação e Otimização Operacional",
+        "en": "DevOps, Automation & Operational Optimization",
+        "es": "DevOps, Automatización y Optimización Operacional"
+      },
+      "description": {
+        "pt": "Implementação de práticas de automação com Docker/Podman e configuração de servidores web (NGINX) como Proxy Reverso e API Gateway. Entrega de pipelines CI/CD e setup de observabilidade para redução de riscos técnicos e aceleração da entrega. Aplicação de automação industrial e otimização de processos.",
+        "en": "Implementation of automation practices with Docker/Podman and web server configuration (NGINX) as Reverse Proxy and API Gateway. Delivery of CI/CD pipelines and observability setup for reducing technical risks and accelerating delivery.",
+        "es": "Implementación de prácticas de automatización con Docker/Podman y configuración de servidores web (NGINX) como Proxy Reverso y API Gateway."
       }
     }
   ]

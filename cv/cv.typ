@@ -4,7 +4,7 @@
 #let lang = sys.inputs.at("lang", default: "pt")
 #let role = sys.inputs.at("role", default: "data-engineer")
 #let localized(value) = if value == none { "" } else if type(value) == dictionary { value.at(lang, default: value.at("pt", default: "")) } else { value }
-#let has-role(item) = item.roles.contains(role)
+#let has-role(item) = item.roles.contains(role) and item.at("pdf", default: true)
 #let selected(items) = items.filter(item => has-role(item))
 #let is-alura(item) = item.at("provider", default: none) == "Alura"
 #let alura-items = data.certifications.filter(is-alura)

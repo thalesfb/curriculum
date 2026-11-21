@@ -68,7 +68,7 @@ const certificationItems = allCertificationItems
   .sort((a, b) => Number(b.pending) - Number(a.pending) || b.date.localeCompare(a.date));
 ---
 
-<section class="bg-bg-card py-20 max-md:py-12" id="about" data-role-summaries={JSON.stringify(summaries)}>
+<section class="bg-bg-card py-20 max-md:py-12" id="about">
   <div class="mx-auto max-w-[1440px] px-20 max-xl:px-12 max-md:px-6">
     <h2 class="mb-12 text-center font-display text-4xl font-semibold text-text-primary max-md:text-3xl max-md:mb-8">{t('section.about')}</h2>
 
@@ -98,7 +98,7 @@ const certificationItems = allCertificationItems
     </div>
 
     <div data-about-learning class="mt-12">
-      <section aria-labelledby="about-formal-education-heading">
+      <section id="education" aria-labelledby="about-formal-education-heading">
         <h3 id="about-formal-education-heading" class="mb-4 font-display text-lg font-semibold text-text-primary">{t('about.education.formal')}</h3>
         <ul data-education-grid class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {educationItems.map((item) => (
@@ -196,23 +196,3 @@ const certificationItems = allCertificationItems
     </div>
   </div>
 </section>
-
-<script>
-  const about = document.getElementById('about');
-  const summary = document.getElementById('about-summary');
-  const roleSelector = document.getElementById('role-selector') as HTMLSelectElement | null;
-
-  if (about && summary) {
-    const summaries = JSON.parse(about.dataset.roleSummaries || '{}') as Record<string, Record<string, string>>;
-    const updateSummary = (role: string) => {
-      if (summaries[role]?.[document.documentElement.lang.split('-')[0]]) {
-        summary.textContent = summaries[role][document.documentElement.lang.split('-')[0]];
-      }
-    };
-    updateSummary(roleSelector?.value || 'data-engineer');
-    document.addEventListener('cv:role-change', (event) => {
-      const role = (event as CustomEvent<{ role: string }>).detail?.role;
-      if (role) updateSummary(role);
-    });
-  }
-</script>

@@ -20,34 +20,6 @@ const roles: Record<string, Record<string, string>> = {
     en: 'Full Stack Data Engineer | Python & ML | DevOps Specialist',
     es: 'Full Stack Data Engineer | Python & ML | Especialista DevOps',
   },
-  'backend': {
-    pt: 'Backend Engineer | Python & Java | APIs & Microsserviços',
-    en: 'Backend Engineer | Python & Java | APIs & Microservices',
-    es: 'Backend Engineer | Python & Java | APIs y Microservicios',
-  },
-  'devops': {
-    pt: 'DevOps Engineer | CI/CD | Docker & NGINX | Automação',
-    en: 'DevOps Engineer | CI/CD | Docker & NGINX | Automation',
-    es: 'DevOps Engineer | CI/CD | Docker & NGINX | Automatización',
-  },
-  'management': {
-    pt: 'Tech Lead | Gestão de Projetos | Kanban & Scrum',
-    en: 'Tech Lead | Project Management | Kanban & Scrum',
-    es: 'Tech Lead | Gestión de Proyectos | Kanban y Scrum',
-  },
-  'frontend': {
-    pt: 'Desenvolvedor Frontend | React & Astro | Design Systems',
-    en: 'Frontend Developer | React & Astro | Design Systems',
-    es: 'Desarrollador Frontend | React & Astro | Design Systems',
-  },
-};
-
-const roleLabels: Record<string, string> = {
-  'data-engineer': 'Data Engineer',
-  'backend': 'Backend',
-  'devops': 'DevOps',
-  'management': 'Management',
-  'frontend': 'Frontend',
 };
 ---
 
@@ -59,23 +31,11 @@ const roleLabels: Record<string, string> = {
       </span>
     </div>
 
-    <h1 id="hero-title" class="mb-6 font-display text-5xl font-semibold leading-tight text-text-primary max-xl:text-4xl max-md:text-2xl max-md:leading-snug max-md:break-words"
-        data-roles={JSON.stringify(Object.fromEntries(Object.entries(roles).map(([k, v]) => [k, v[lang]])))}>
+    <h1 id="hero-title" class="mb-6 font-display text-5xl font-semibold leading-tight text-text-primary max-xl:text-4xl max-md:text-2xl max-md:leading-snug max-md:break-words">
       {roles['data-engineer'][lang]}
     </h1>
 
-    <!-- Role selector -->
-    <div class="mb-6 flex items-center gap-2 max-md:justify-center">
-      <span class="text-xs text-text-secondary uppercase tracking-wider font-code">{lang === 'en' ? 'Role:' : lang === 'es' ? 'Cargo:' : 'Cargo:'}</span>
-      <select id="role-selector" class="rounded-full border border-border-line bg-bg-input px-3 py-1 text-sm text-text-primary cursor-pointer font-medium">
-        {Object.entries(roleLabels).map(([value, label]) => (
-          <option value={value}>{label}</option>
-        ))}
-      </select>
-    </div>
-
-    <p id="hero-description" class="mb-8 font-body text-xl font-semibold leading-relaxed text-text-secondary max-md:text-base max-md:font-normal"
-       data-descriptions={JSON.stringify(Object.fromEntries(Object.entries(roleDescriptions).map(([k, v]) => [k, (v as any)[lang]])))}>
+    <p id="hero-description" class="mb-8 font-body text-xl font-semibold leading-relaxed text-text-secondary max-md:text-base max-md:font-normal">
       {roleDescriptions['data-engineer'][lang as keyof typeof roleDescriptions['data-engineer']]}
     </p>
     <div class="flex gap-4 flex-wrap max-md:w-full max-md:flex-col max-md:items-stretch">
@@ -94,45 +54,3 @@ const roleLabels: Record<string, string> = {
     </div>
   </div>
 </section>
-
-<script>
-  const titleEl = document.getElementById('hero-title');
-  const descEl = document.getElementById('hero-description');
-  const roleSelector = document.getElementById('role-selector') as HTMLSelectElement;
-
-  if (titleEl && descEl && roleSelector) {
-    const rolesData = JSON.parse(titleEl.dataset.roles || '{}');
-    const descsData = JSON.parse(descEl.dataset.descriptions || '{}');
-    const roleKeys = Object.keys(rolesData);
-
-    function updateRole(key: string) {
-      titleEl.textContent = rolesData[key];
-      descEl.textContent = descsData[key];
-      roleSelector.value = key;
-      document.dispatchEvent(new CustomEvent('cv:role-change', { detail: { role: key } }));
-    }
-
-    // Auto-rotate: 10s default, 20s after manual selection
-    let idx = 0;
-    let delay = 10000;
-    let timer: ReturnType<typeof setTimeout>;
-
-    function rotateRole() {
-      idx = (idx + 1) % roleKeys.length;
-      updateRole(roleKeys[idx]);
-      timer = setTimeout(rotateRole, delay);
-    }
-
-    timer = setTimeout(rotateRole, delay);
-
-    roleSelector.addEventListener('change', () => {
-      if (rolesData[roleSelector.value]) {
-        updateRole(roleSelector.value);
-        idx = roleKeys.indexOf(roleSelector.value);
-        clearTimeout(timer);
-        delay = 20000;
-        timer = setTimeout(rotateRole, delay);
-      }
-    });
-  }
-</script>

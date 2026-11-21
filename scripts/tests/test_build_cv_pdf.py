@@ -43,6 +43,8 @@ def source_texts(language):
     for item in DATA["projects"]:
         if ROLE not in item.get("roles", []):
             continue
+        if item.get("pdf") is False:
+            continue
         texts += [localized(item.get("nameByLanguage", item["name"]), language)]
         texts += [item[key] for key in ("repo", "institution", "coordinator") if item.get(key)]
         texts += [localized(item[key], language) for key in ("period", "participation", "description", "supervision") if item.get(key)]
