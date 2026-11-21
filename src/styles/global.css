@@ -85,7 +85,12 @@ body {
   background: var(--color-bg-page);
   line-height: 1.7;
   overflow-x: hidden;
+  /* system-ui varies per OS; keep a consistent x-height across platforms. */
+  font-size-adjust: 0.53;
 }
+
+/* Libertinus has a small x-height; match the visual size of the previous display face. */
+.font-display { font-size-adjust: 0.5; }
 
 @layer base {
   :focus-visible {
