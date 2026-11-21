@@ -82,6 +82,7 @@ npm run dev        # http://localhost:4321
 | `npm test` | Run Vitest tests |
 | `npm run test:watch` | Tests in watch mode |
 | `npm run cv:pdf` | Generate three local PDF drafts from `data/cv.json` |
+| `python scripts/linkedin_diff.py <export.zip>` | Compare LinkedIn export ZIP with `data/cv.json` (read-only) |
 
 The Typst generator writes to a temporary folder by default. After reviewing all three PDFs (two pages each in the current release), replace `public/refs` only with `npm run cv:pdf -- --publish-public-refs`. The site build and CI never publish or commit generated PDFs. See [ADR-0011](docs/adr/0011-geracao-pdf-cv-typst.md) for fidelity criteria and the [PDF proposal](docs/proposals/0001-cv-pdf.md) for the decision rationale. Historical DOCX templates remain in `refs/template/` but are not used by the generator.
 
@@ -157,6 +158,7 @@ curriculum/
 │   ├── pages/             index + /pt/ /en/ /es/
 │   └── styles/            Design tokens + global CSS
 ├── scripts/build_cv_pdf.py Explicit local PDF generation and validation
+├── scripts/linkedin_diff.py Deterministic read-only LinkedIn export vs cv.json diff
 ├── AGENTS.md              AI agent governance
 ├── astro.config.mjs       Astro + sitemap config
 └── package.json           Scripts + dependencies
